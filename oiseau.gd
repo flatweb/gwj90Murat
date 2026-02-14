@@ -25,5 +25,5 @@ func _physics_process(delta: float) -> void:
 		else:
 			self.rotate_y(-sign(rotation.z)*ROTBACKSPEED*delta)
 	
-	var moving : Vector3 = Vector3(change*speedlat*delta,0,-speed*delta)
+	var moving : Vector3 = Vector3(-change*speedlat*delta,0,-speed*delta)
 	move_and_collide(moving)
