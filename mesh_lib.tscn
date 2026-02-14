@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b7eflg2pn88p4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6g0g"]
+albedo_color = Color(0.02494518, 0.3812039, 9.62615e-07, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u6g0g"]
+material = SubResource("StandardMaterial3D_u6g0g")
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxx8f"]
+albedo_color = Color(1, 1, 0.20392157, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_axt2h"]
+material = SubResource("StandardMaterial3D_dxx8f")
+size = Vector2(1, 1)
+
+[node name="MeshLib" type="Node3D" unique_id=792053995]
+
+[node name="Foret" type="MeshInstance3D" parent="." unique_id=1472255540]
+mesh = SubResource("PlaneMesh_u6g0g")
+
+[node name="Prairie" type="MeshInstance3D" parent="." unique_id=790158792]
+mesh = SubResource("PlaneMesh_axt2h")
