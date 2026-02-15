@@ -7,14 +7,19 @@ const ROTBACKSPEED = 2.0
 # angle de rotation par seconde lors d'un virage
 const ANGLE_VIRAGE = 1.2
 # facteur de rotation pour ne pas sortir de la zone
-const FACTEUR_CORRECTION = 5.0
+const FACTEUR_CORRECTION = 4.0
 
 # Vitesse de vol horizontal
-var speedfront : float = 4.0
+var speedfront : float = 4.0 / 2
 # Vitesse de vol latéral
 var speedlat : float = 2.0
 # limite en +X ou -X de la position de l'oiseau
 var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
+# de quel côté on a atteint la limite ?
+var angle_correction = 0
+# indicateur de correction de trajectoire.
+# On perd le contrôle tant qu'on est pas revenu dans la zone et de face
+var encorrection : bool = false
 
 var speedVect : Vector3
 
@@ -27,7 +32,14 @@ func set_limite_x(value):
 
 func virage(change : float, delta : float):
 	var angle : float = change*ANGLE_VIRAGE*delta
-	self.rotate_y(angle)
+	if encorrection:
+		#print (rotation.y)
+		if rotation.y == 0.0:
+			angle = 0.0
+		elif sign (rotation.y+angle) != sign(rotation.y):
+			# on a dépassé la remise dans l'axe
+			angle = -rotation.y
+	if angle != 0.0: self.rotate_y(angle)
 	speedVect = speedVect.rotated(Vector3.UP, angle)
 	
 	# changement d'inclinaison (axe Z)
@@ -41,22 +53,31 @@ func virage(change : float, delta : float):
 func _physics_process(delta: float) -> void:
 	var change = Input.get_axis("droite","gauche")
 	
-	if change:
-		# changement de direction
-		virage(change,delta)
-	else:
-		# retour naturel à une inclinaison normale sans action
-		if abs($Forme.rotation.z) < ROTBACKSPEED*delta :
-			$Forme.rotation.z = 0
+	if not encorrection:
+		if change != 0:
+			# changement de direction
+			virage(change,delta)
 		else:
-			$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
+			#print("roty=",rotation.y)
+			# retour naturel à une inclinaison normale sans action
+			if abs($Forme.rotation.z) < ROTBACKSPEED*delta :
+				$Forme.rotation.z = 0
+			else:
+				$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
+	elif encorrection:
+		print ("",speedVect.z," angle ",angle_correction)
+		virage(angle_correction,delta)
+		if abs(rotation.y) <= 0.01 :
+			encorrection = false
+			angle_correction = 0.0
 	
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
-	if abs(speedVect.x * 3.0 + position.x) > limite_x :
+	if not encorrection and abs(speedVect.x * 3.0 + position.x) > limite_x :
 		# on approche trop du bord
 		# on force un virage
-		var cote_ecart = sign(speedVect.x * 3.0 + position.x - limite_x)
-		virage(-sign(speedVect.z)*cote_ecart*FACTEUR_CORRECTION,delta)
+		angle_correction = -sign(speedVect.z)* sign(position.x)*FACTEUR_CORRECTION
+		virage(angle_correction,delta)
+		encorrection = true
 	
 	# On pourrait aussi tester par rapport à des CollisionShapes latérales sur le game
 	#move_and_collide(speedVect*???, true)
