@@ -7,7 +7,9 @@ const ROTBACKSPEED = 2.0
 # angle de rotation par seconde lors d'un virage
 const ANGLE_VIRAGE = 1.2
 # facteur de rotation pour ne pas sortir de la zone
-const FACTEUR_CORRECTION = 4.0
+const FACTEUR_CORRECTION = 3.0
+# facteur de rotation pour l'attente en boucle, rotation lente
+const FACTEUR_ATTENTE = 0.7
 
 # Vitesse de vol horizontal
 var speedfront : float = 4.0 / 2
@@ -16,7 +18,7 @@ var speedlat : float = 2.0
 # limite en +X ou -X de la position de l'oiseau
 var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
 # de quel côté on a atteint la limite ?
-var angle_correction = 0
+var autorotspeed = 0
 
 enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING }
 
@@ -57,17 +59,49 @@ func virage(change : float, delta : float):
 func looping():
 	pass
 
+func calc_rot_speed(act : action, facteur : float) -> float :
+		var signx : int
+		if position.x == 0:
+			signx = randi_range(0,1)*2-1
+		else :
+			signx = sign(position.x)
+		var signz = -1
+		if speedVect.z != 0 :
+			signz = sign(speedVect.z)
+		var rotspeed : float = -signz*signx*facteur
+		#print ("rotspeed auto=", rotspeed)
+		return rotspeed
+	
 func attente():
-	enaction = true
-	actionencours == action.CORRECTION
-	pass
+	if enaction == false :
+		enaction = true
+		actionencours = action.ATTENTE
+		var ecartx : int
+		if position.x == 0:
+			ecartx = randi_range(0,1)*2-1
+		else :
+			ecartx = sign(position.x)
+		autorotspeed = calc_rot_speed(actionencours,FACTEUR_ATTENTE)
+		#print ("angle auto=", angle_correction)
+
+func correction():
+	if enaction == false :
+		enaction = true
+		actionencours = action.CORRECTION
+		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
+		#print ("angle auto=", angle_correction)
 
 func _process(_delta):
-	if Input.is_action_just_pressed("attente"):
+	if Input.is_action_just_pressed("attente",true):
 		attente()
 		
 func _physics_process(delta: float) -> void:
 	var change = Input.get_axis("droite","gauche")
+	
+	if enaction and actionencours == action.ATTENTE and change != 0:
+		# sortie du mode attente, pour se remettre dans l'axe
+		enaction = false
+		correction()
 	
 	if not enaction:
 		if change != 0:
@@ -80,21 +114,24 @@ func _physics_process(delta: float) -> void:
 				$Forme.rotation.z = 0
 			else:
 				$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
-	elif enaction and actionencours == action.CORRECTION:
-		#print ("",speedVect.z," angle ",angle_correction)
-		virage(angle_correction,delta)
-		if abs(rotation.y) <= 0.01 :
-			enaction = false
-			angle_correction = 0.0
+	elif enaction:
+		virage(autorotspeed,delta)
+		if actionencours == action.CORRECTION:
+			#print ("",speedVect.z," angle ",angle_correction)
+			if abs(rotation.y) <= 0.01 :
+				enaction = false
+				# on repart tout droit
+				autorotspeed = 0.0
+		elif actionencours == action.ATTENTE:
+			# on laisse tourner
+			pass
 	
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
 	if not enaction and abs(speedVect.x * 3.0 + position.x) > limite_x :
 		# on approche trop du bord
 		# on force un virage
-		angle_correction = -sign(speedVect.z)* sign(position.x)*FACTEUR_CORRECTION
-		virage(angle_correction,delta)
-		enaction = true
-		actionencours = action.CORRECTION
+		correction()
+		virage(autorotspeed,delta)
 	
 	# On pourrait aussi tester par rapport à des CollisionShapes latérales sur le game
 	#move_and_collide(speedVect*???, true)
