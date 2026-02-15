@@ -23,7 +23,7 @@ var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
 # de quel côté on a atteint la limite ?
 var autorotspeed = 0
 
-enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING }
+enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATTERRISSAGE, ATTERRI, DECOLLAGE }
 
 # indicateur de correction de trajectoire.
 # On perd le contrôle tant qu'on est pas revenu dans la zone et de face
@@ -37,6 +37,7 @@ var startpos : Vector3
 
 func _ready():
 	speedVect = Vector3(0,0,-speedfront)
+	self.rotation = Vector3.ZERO
 	startpos = self.position
 	pass
 
@@ -121,7 +122,24 @@ func remonte(delta : float):
 	# changement d'inclinaison (axe X)
 	if $Forme.rotation.x < PI/6 :
 		$Forme.rotate_x(1.0*ROTSPEED*delta)
+
+const FORCE_FREINAGE = 0.5
+var forcefreinage : float = FORCE_FREINAGE
+func freinage(delta : float):
+	forcefreinage *= (1+delta)
+	speedVect.z *=  forcefreinage*(1-delta)
+	speedVect.x *=  forcefreinage*(1-delta)
+	if speedVect.length() <= 0.5 : # TODO : une constante à régler
+		# s'arrête
+		speedVect = Vector3.ZERO
 	
+func atterrissage():
+	enaction = true
+	actionencours = action.ATTERRISSAGE
+	speedVect.y = 0.0
+	self.position.y = 0.5 # FIXME
+	self.rotation.x = 0.0
+	forcefreinage = FORCE_FREINAGE
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("attente",true):
@@ -136,7 +154,11 @@ func _physics_process(delta: float) -> void:
 		# sortie du mode attente, pour se remettre dans l'axe
 		enaction = false
 		correction()
-	
+	if enaction and actionencours== action.ATTERRI \
+		and Input.is_action_pressed("decolle"):
+			enaction = false
+			speedVect.z = -speedfront
+			self.rotation = Vector3.ZERO
 	if not enaction:
 		if pique :
 			descente(delta)
@@ -169,6 +191,14 @@ func _physics_process(delta: float) -> void:
 				enaction = false
 				# on repart tout droit
 				autorotspeed = 0.0
+		elif actionencours == action.ATTERRISSAGE:
+			if speedVect != Vector3.ZERO :
+				freinage(delta)
+			else:
+				# on est arrêté
+				enaction = true
+				actionencours = action.ATTERRI
+			
 		elif actionencours == action.ATTENTE:
 			# on laisse tourner
 			pass
@@ -184,7 +214,15 @@ func _physics_process(delta: float) -> void:
 	# On pourrait aussi tester par rapport à des CollisionShapes latérales sur le game
 	#move_and_collide(speedVect*???, true)
 	
-	move_and_collide(speedVect*delta)
+	var collisions : KinematicCollision3D
+	collisions = move_and_collide(speedVect*delta)
+	if (collisions != null):
+		for i in range(0,collisions.get_collision_count()):
+			var obj = collisions.get_collider(i)
+			print(obj.name)
+			if obj.name == "Ground":
+				# atterrissage (surement violent)
+				atterrissage()
 
 	if not enaction and self.position.y > startpos.y:
 		speedVect.y = 0
