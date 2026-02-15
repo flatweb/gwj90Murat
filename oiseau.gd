@@ -59,7 +59,7 @@ func virage(change : float, delta : float):
 func looping():
 	pass
 
-func calc_rot_speed(act : action, facteur : float) -> float :
+func calc_rot_speed(_act : action, facteur : float) -> float :
 		var signx : int
 		if position.x == 0:
 			signx = randi_range(0,1)*2-1
@@ -76,11 +76,6 @@ func attente():
 	if enaction == false :
 		enaction = true
 		actionencours = action.ATTENTE
-		var ecartx : int
-		if position.x == 0:
-			ecartx = randi_range(0,1)*2-1
-		else :
-			ecartx = sign(position.x)
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_ATTENTE)
 		#print ("angle auto=", angle_correction)
 
