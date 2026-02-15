@@ -2,8 +2,8 @@ extends Node3D
 
 class_name Boid
 
-@export var maxVelocity: float = 2
-@export var maxAcceleration: float = 5
+@export var maxVelocity: float = 4
+@export var maxAcceleration: float = 10
 @export var rotationOffset: Vector3 = Vector3(0,PI/2,0)
 
 @export var baseColor: Color

@@ -52,9 +52,11 @@ script = ExtResource("6_eow3j")
 boidScene = ExtResource("7_j5wjh")
 numberOfBoids = 200
 visualRange = 20.0
-separationDistance = 5.0
+separationDistance = 10.0
 predator = NodePath("../Oiseau")
 predatorMinDist = 5.0
+cohesionWeight = 0.415
+separationWeight = 41.22
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1621687425 groups=["Repulsor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1623354, 0)

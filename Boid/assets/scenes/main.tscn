@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://ua0jf1opxuj4"]
+
+[ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="1"]
+[ext_resource type="Script" uid="uid://bu7v2vlkd3uxv" path="res://Boid/assets/scripts/repulsor.gd" id="1_6rsl6"]
+[ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://ktrp3827wg2f" path="res://oiseau.tscn" id="2_vesw4"]
+[ext_resource type="Script" uid="uid://j5tjytpfa1g1" path="res://Boid/assets/scripts/Cursor.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://ck5os1dgt7y2p" path="res://Boid/assets/sprites/cursor.png" id="6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_272bh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vesw4"]
+
+[sub_resource type="Sky" id="Sky_xplbd"]
+sky_material = SubResource("ProceduralSkyMaterial_vesw4")
+
+[sub_resource type="Environment" id="Environment_6rsl6"]
+background_mode = 2
+background_energy_multiplier = 4.05
+sky = SubResource("Sky_xplbd")
+sky_custom_fov = 51.2
+ambient_light_color = Color(0.8732984, 0.8732984, 0.8732984, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vesw4"]
+
+[node name="Main" type="Node3D" unique_id=282379335]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1378754638]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 1946, 1524.0001, 348)
+
+[node name="Repulsor" type="Node3D" parent="." unique_id=2127826800 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 621, 0, 348)
+script = ExtResource("1_6rsl6")
+
+[node name="MeshInstance2D" type="MeshInstance3D" parent="Repulsor" unique_id=1100383476]
+transform = Transform3D(42, 0, 0, 0, -42, -3.6717565e-06, 0, 3.6717565e-06, -42, 1, 1, 0)
+mesh = SubResource("BoxMesh_272bh")
+
+[node name="Repulsor2" type="Node3D" parent="." unique_id=976668064 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 271.95758)
+script = ExtResource("1_6rsl6")
+
+[node name="MeshInstance2D" type="MeshInstance3D" parent="Repulsor2" unique_id=211571736]
+transform = Transform3D(42, 0, 0, 0, -42, -3.6717565e-06, 0, 3.6717565e-06, -42, 1, 1, 0)
+mesh = SubResource("BoxMesh_272bh")
+
+[node name="Repulsor3" type="Node3D" parent="." unique_id=1261841086 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 800, 0, 600)
+script = ExtResource("1_6rsl6")
+
+[node name="MeshInstance2D" type="MeshInstance3D" parent="Repulsor3" unique_id=1379981077]
+transform = Transform3D(42, 0, 0, 0, -42, -3.6717565e-06, 0, 3.6717565e-06, -42, 1, 1, 0)
+mesh = SubResource("BoxMesh_272bh")
+
+[node name="Character2" parent="." unique_id=274740939 instance=ExtResource("2_vesw4")]
+
+[node name="Camera3D" type="Camera3D" parent="Character2" unique_id=137828251]
+transform = Transform3D(-0.99026805, -0.13044453, 0.048511866, 0, 0.348572, 0.937282, -0.13917318, 0.9281605, -0.34517968, 27.816895, 248.4858, 72.448)
+fov = 43.4
+near = 0.03
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Character2/Camera3D" unique_id=460234282]
+environment = SubResource("Environment_6rsl6")
+
+[node name="Flock" type="Node3D" parent="." unique_id=706107885]
+script = ExtResource("1")
+boidScene = ExtResource("2")
+predator = NodePath("../Character2")
+
+[node name="Cursor" type="Sprite2D" parent="." unique_id=1132925763]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("6")
+script = ExtResource("5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1513769097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 200)
+mesh = SubResource("PlaneMesh_vesw4")
+
+[node name="Node3D" type="Node3D" parent="MeshInstance3D" unique_id=520795776]

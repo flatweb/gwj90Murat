@@ -8,7 +8,7 @@ var zones = [zoneforet, zoneprairie]
 var ids : Array
 
 func _ready():
-	gridmapSize = $Ground/MeshGround.mesh.size
+	gridmapSize = $MeshGround.mesh.size
 	$Oiseau.set_limite_x(gridmapSize.x*0.75)
 	#populategridmap()
 	startintro()

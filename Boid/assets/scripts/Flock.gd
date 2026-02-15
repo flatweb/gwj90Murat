@@ -103,7 +103,7 @@ func _borders(delta):
 		var _envDims = Vector4(-12,12,-100,100)
 		if (pos.x < _envDims.x or pos.x > _envDims.w or pos.y < _envDims.z or pos.y > _envDims.y):
 			boid.timeOutOfBorders += delta
-			var midPoint = Vector3(_envDims.x / 2,5,_envDims.y / 2)
+			var midPoint = Vector3(0,5,0)
 			var dir = (midPoint - boid.get_position()).normalized()
 			boid.acceleration += dir * boid.timeOutOfBorders * bordersWeight
 		else:
