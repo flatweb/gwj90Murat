@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://c235fg52wmv15" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="Script" uid="uid://ylyqmprsbdh7" path="res://camera_3d.gd" id="4_7jktm"]
 [ext_resource type="AudioStream" uid="uid://dhnyo55ieglxv" path="res://res/sons/main_amb.mp3" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
+[ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
 albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
@@ -12,6 +14,8 @@ albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_e2o6t"]
 material = SubResource("StandardMaterial3D_80nbo")
 size = Vector2(25, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eow3j"]
 
 [node name="Game" type="Node3D" unique_id=1608575864]
 script = ExtResource("1_feb5d")
@@ -35,10 +39,51 @@ transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881907, 0, -0.25881907, 0.965
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 100)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=295921986]
-transform = Transform3D(0.6710024, 0.51733565, -0.5311494, 0.3565425, 0.40296745, 0.8429085, 0.6501025, -0.7549709, 0.08593998, -18.463003, 33.607548, 104.61913)
+transform = Transform3D(0.6710024, 0.51733565, -0.5311494, 0.3565425, 0.40296745, 0.8429085, 0.6501025, -0.7549709, 0.085939996, -19.762136, 33.607548, 98.74295)
 fov = 20.0
 far = 1000.0
 script = ExtResource("4_7jktm")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1714319163]
 stream = ExtResource("4_fc0e3")
+
+[node name="Flock" type="Node3D" parent="." unique_id=1544621110]
+script = ExtResource("6_eow3j")
+boidScene = ExtResource("7_j5wjh")
+numberOfBoids = 200
+visualRange = 20.0
+separationDistance = 5.0
+predator = NodePath("../Oiseau")
+predatorMinDist = 5.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1621687425 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1623354, 0)
+mesh = SubResource("BoxMesh_eow3j")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=496682682 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1623354, 21.734934)
+mesh = SubResource("BoxMesh_eow3j")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=589841745 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1623354, 27.9503)
+mesh = SubResource("BoxMesh_eow3j")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1906923455 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1623354, 66.93769)
+mesh = SubResource("BoxMesh_eow3j")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=360981181 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1623354, 83.75903)
+mesh = SubResource("BoxMesh_eow3j")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=698804320 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1623354, 96.15507)
+mesh = SubResource("BoxMesh_eow3j")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=1111363801 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.49678, 5.1623354, 86.908875)
+mesh = SubResource("BoxMesh_eow3j")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=1720856868 groups=["Repulsor"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.427185, 5.1623354, 86.908875)
+mesh = SubResource("BoxMesh_eow3j")

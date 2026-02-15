@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dp5b0utxqij4u"]
+
+[ext_resource type="Texture2D" uid="uid://cmo1mv0y5atk1" path="res://Boid/assets/sprites/boid.png" id="1"]
+[ext_resource type="Script" uid="uid://kcs5tq84kiag" path="res://Boid/assets/scripts/Boid.gd" id="3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gb1f"]
+albedo_color = Color(0.35020828, 0.5185973, 0.2650662, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pihgk"]
+material = SubResource("StandardMaterial3D_5gb1f")
+radius = 0.2
+height = 0.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ffqxe"]
+radius = 0.1
+height = 0.4
+
+[node name="Boid" type="Node3D" unique_id=825531383]
+script = ExtResource("3")
+baseColor = Color(0.870588, 0.415686, 0.964706, 1)
+specialColor = Color(0.372549, 0.121569, 0.815686, 1)
+
+[node name="Sprite2D" type="Sprite3D" parent="." unique_id=818722345]
+transform = Transform3D(-1.3113417e-08, 0.3, -1.3113417e-08, 0, -1.3113417e-08, -0.3, -0.3, -1.3113417e-08, 5.7320567e-16, 0, 0, 0)
+visible = false
+texture = ExtResource("1")
+
+[node name="Forme" type="Node3D" parent="." unique_id=657047081]
+transform = Transform3D(-3.4969112e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.4969112e-08, 0, 0, 0)
+
+[node name="Corps" type="MeshInstance3D" parent="Forme" unique_id=492219359]
+transform = Transform3D(1, 0, 0, 0, -0.08917245, 0.99601614, 0, -0.99601614, -0.08917245, 0, 0, -0.015925169)
+mesh = SubResource("CapsuleMesh_pihgk")
+
+[node name="AileD" type="MeshInstance3D" parent="Forme" unique_id=906438421]
+transform = Transform3D(-0.017558845, -0.9111622, -0.4116734, 0.99981433, -0.019267242, 0, -0.007931813, -0.411597, 0.9113314, 0.3, -0.094, 0.1)
+mesh = SubResource("CapsuleMesh_ffqxe")
+
+[node name="AileG" type="MeshInstance3D" parent="Forme" unique_id=443649642]
+transform = Transform3D(-0.017496575, -0.9112353, 0.4115143, 0.9998157, -0.019197399, 0, 0.007900006, 0.41143847, 0.91140324, -0.3, -0.094, 0.1)
+mesh = SubResource("CapsuleMesh_ffqxe")

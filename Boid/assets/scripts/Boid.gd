@@ -1,0 +1,42 @@
+extends Node3D
+
+class_name Boid
+
+@export var maxVelocity: float = 2
+@export var maxAcceleration: float = 5
+@export var rotationOffset: Vector3 = Vector3(0,PI/2,0)
+
+@export var baseColor: Color
+@export var specialColor: Color
+@export var colorTransitionSpeed: float = 1
+
+@export var syncTrail: bool = true
+@export var trail: NodePath
+
+
+var velocity := Vector3.ZERO
+var acceleration := Vector3.ZERO
+
+var neighbors := []
+var neighborsDistances := []
+var timeOutOfBorders := 0.0
+
+
+func _ready():
+
+	
+	velocity = Vector3(randf_range(-maxVelocity, maxVelocity),
+						0,
+						randf_range(-maxVelocity, maxVelocity))
+	
+func _process(delta):
+	velocity += acceleration.limit_length(maxAcceleration * delta)
+	velocity = velocity.limit_length(maxVelocity)
+	acceleration.x = 0
+	acceleration.z = 0
+	velocity.y=0
+	
+	position += velocity * delta
+	
+	look_at(position + velocity)
+	rotation += rotationOffset

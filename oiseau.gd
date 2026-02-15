@@ -127,6 +127,7 @@ func _physics_process(delta: float) -> void:
 		# on force un virage
 		correction()
 		virage(autorotspeed,delta)
+
 	
 	# On pourrait aussi tester par rapport à des CollisionShapes latérales sur le game
 	#move_and_collide(speedVect*???, true)
