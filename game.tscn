@@ -32,11 +32,11 @@ mesh = SubResource("PlaneMesh_e2o6t")
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881907, 0, -0.25881907, 0.9659258, 0, 3, 0)
 
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6835592, 98.66545)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 100)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=295921986]
-transform = Transform3D(0.74359906, 0.3245612, -0.5845686, 0.28791574, 0.63364524, 0.7180518, 0.6034608, -0.70224917, 0.37773168, -16.058771, 16.338177, 107.78908)
-fov = 23.4
+transform = Transform3D(0.6710024, 0.51733565, -0.5311494, 0.3565425, 0.40296745, 0.8429085, 0.6501025, -0.7549709, 0.08593998, -18.463003, 33.607548, 104.61913)
+fov = 20.0
 far = 1000.0
 script = ExtResource("4_7jktm")
 

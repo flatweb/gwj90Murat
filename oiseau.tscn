@@ -21,14 +21,16 @@ script = ExtResource("1_pmcpw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13647461, 0)
 shape = SubResource("CylinderShape3D_fk3fv")
 
-[node name="Corps" type="MeshInstance3D" parent="." unique_id=1016398366]
-transform = Transform3D(1, 0, 0, 0, 0.33829448, 0.9410403, 0, -0.9410403, 0.33829448, 0, 0, -0.015925169)
+[node name="Forme" type="Node3D" parent="." unique_id=119927184]
+
+[node name="Corps" type="MeshInstance3D" parent="Forme" unique_id=1016398366]
+transform = Transform3D(1, 0, 0, 0, -0.08917245, 0.99601614, 0, -0.99601614, -0.08917245, 0, 0, -0.015925169)
 mesh = SubResource("CapsuleMesh_aa81o")
 
-[node name="AileD" type="MeshInstance3D" parent="." unique_id=1169078593]
+[node name="AileD" type="MeshInstance3D" parent="Forme" unique_id=1169078593]
 transform = Transform3D(-0.017558845, -0.9111622, -0.4116734, 0.99981433, -0.019267242, 0, -0.007931813, -0.411597, 0.9113314, 0.3, -0.094, 0.1)
 mesh = SubResource("CapsuleMesh_pmcpw")
 
-[node name="AileG" type="MeshInstance3D" parent="." unique_id=474476359]
+[node name="AileG" type="MeshInstance3D" parent="Forme" unique_id=474476359]
 transform = Transform3D(-0.017496575, -0.9112353, 0.4115143, 0.9998157, -0.019197399, 0, 0.007900006, 0.41143847, 0.91140324, -0.3, -0.094, 0.1)
 mesh = SubResource("CapsuleMesh_pmcpw")

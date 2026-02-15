@@ -1,7 +1,7 @@
 extends Node3D
 
 #Par défaut, on considère que le gridmap sera de la même size que le $MeshGround
-var gridmapSize
+var gridmapSize : Vector2
 var zoneforet = Vector2(0,20)
 var zoneprairie = Vector2(21,40)
 var zones = [zoneforet, zoneprairie]
@@ -9,6 +9,7 @@ var ids : Array
 
 func _ready():
 	gridmapSize = $MeshGround.mesh.size
+	$Oiseau.set_limite_x(gridmapSize.x*0.75)
 	#populategridmap()
 	startintro()
 	pass
