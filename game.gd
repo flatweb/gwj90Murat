@@ -10,7 +10,17 @@ var ids : Array
 func _ready():
 	gridmapSize = $MeshGround.mesh.size
 	#populategridmap()
+	startintro()
 	pass
+
+func startintro():
+	pass
+	start()
+
+func start():
+	# Repositionner la camera ?
+	$Camera3D.followed = $Oiseau
+	$AudioStreamPlayer.play()
 
 func populategridmap():
 	var foretsid : Array

@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ktrp3827wg2f" path="res://oiseau.tscn" id="1_80nbo"]
 [ext_resource type="MeshLibrary" uid="uid://ckdxgi2w3j4m8" path="res://res/meshlib-ground.tres" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://c235fg52wmv15" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="Script" uid="uid://ylyqmprsbdh7" path="res://camera_3d.gd" id="4_7jktm"]
+[ext_resource type="AudioStream" uid="uid://dhnyo55ieglxv" path="res://res/sons/main_amb.mp3" id="4_fc0e3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
 albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
@@ -32,7 +34,11 @@ transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881907, 0, -0.25881907, 0.965
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6835592, 98.66545)
 
-[node name="Camera3D" type="Camera3D" parent="Oiseau" unique_id=295921986]
-transform = Transform3D(0.74359906, 0.3245612, -0.5845686, 0.28791574, 0.63364524, 0.7180518, 0.6034608, -0.70224917, 0.37773168, -16.058771, 13.654617, 9.123627)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=295921986]
+transform = Transform3D(0.74359906, 0.3245612, -0.5845686, 0.28791574, 0.63364524, 0.7180518, 0.6034608, -0.70224917, 0.37773168, -16.058771, 16.338177, 107.78908)
 fov = 23.4
 far = 1000.0
+script = ExtResource("4_7jktm")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1714319163]
+stream = ExtResource("4_fc0e3")
