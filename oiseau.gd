@@ -12,9 +12,12 @@ const FACTEUR_CORRECTION = 3.0
 const FACTEUR_ATTENTE = 0.7
 
 # Vitesse de vol horizontal
-var speedfront : float = 4.0 / 2
+var speedfront : float = 4.0
 # Vitesse de vol latéral
 var speedlat : float = 2.0
+# Vitesse de vol en piqué
+var speeddown : float = speedfront * 1.5
+
 # limite en +X ou -X de la position de l'oiseau
 var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
 # de quel côté on a atteint la limite ?
@@ -27,10 +30,14 @@ enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING }
 var enaction : bool = false
 var actionencours : action = action.AUCUNE
 
+# Vitesse de croisière
 var speedVect : Vector3
+# position de départ, notamment pour remonter à l'altitude Y
+var startpos : Vector3
 
 func _ready():
 	speedVect = Vector3(0,0,-speedfront)
+	startpos = self.position
 	pass
 
 func set_limite_x(value):
@@ -86,29 +93,74 @@ func correction():
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
 		#print ("angle auto=", angle_correction)
 
+func descente(delta : float):
+	if speedVect.y > -speeddown:
+		speedVect.y -= delta * (0.5)*speeddown
+		if speedVect.y < -speeddown :
+			speedVect.y = speeddown
+	# changement d'inclinaison (axe X)
+	if abs($Forme.rotation.x) < PI/4 :
+		#print("vire from ",$Forme.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
+		$Forme.rotate_x(-0.1*ROTSPEED*delta)
+
+func remonte(delta : float):
+	if speedVect.y < 0:
+		# on est toujours en descente, on commence par freiner, assez fort
+		speedVect.y += delta * (0.75)*speeddown
+		if speedVect.y > 0 :
+			# on se stabilise
+			speedVect.y = 0
+	elif speedVect.y < speeddown/2:
+		# on commence à remonter, lentement
+		speedVect.y += delta * (0.25)*speeddown
+		if speedVect.y > -speeddown :
+			speedVect.y = speeddown
+		print("altitude=",self.position.y,",vers=",startpos.y)
+		if self.position.y >= startpos.y:
+			speedVect.y = 0.0
+	# changement d'inclinaison (axe X)
+	if $Forme.rotation.x < PI/6 :
+		$Forme.rotate_x(1.0*ROTSPEED*delta)
+	
+	
 func _process(_delta):
 	if Input.is_action_just_pressed("attente",true):
 		attente()
 		
 func _physics_process(delta: float) -> void:
 	var change = Input.get_axis("droite","gauche")
+	var pique = Input.is_action_pressed("bas")
 	
-	if enaction and actionencours == action.ATTENTE and change != 0:
+	if enaction and actionencours == action.ATTENTE \
+				and (change != 0 or pique):
 		# sortie du mode attente, pour se remettre dans l'axe
 		enaction = false
 		correction()
 	
 	if not enaction:
-		if change != 0:
+		if pique :
+			descente(delta)
+			# on ne combine pas pique et changement de direction
+		elif change != 0:
 			# changement de direction
 			virage(change,delta)
 		else:
-			#print("roty=",rotation.y)
-			# retour naturel à une inclinaison normale sans action
+			# Pas d'interaction
+			
+			# 1. retour naturel à une inclinaison normale sans action
 			if abs($Forme.rotation.z) < ROTBACKSPEED*delta :
 				$Forme.rotation.z = 0
 			else:
 				$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
+
+			# 2. remontée suite à un piqué
+			if self.position.y < startpos.y:
+				remonte(delta)
+			if $Forme.rotation.x <0 :
+				$Forme.rotate_x(min(0.2*ROTSPEED*delta,-$Forme.rotation.x))
+			if $Forme.rotation.x >0 :
+				$Forme.rotate_x(-min(0.5*ROTSPEED*delta,$Forme.rotation.x))
+
 	elif enaction:
 		virage(autorotspeed,delta)
 		if actionencours == action.CORRECTION:
@@ -120,7 +172,8 @@ func _physics_process(delta: float) -> void:
 		elif actionencours == action.ATTENTE:
 			# on laisse tourner
 			pass
-	
+
+
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
 	if not enaction and abs(speedVect.x * 3.0 + position.x) > limite_x :
 		# on approche trop du bord
@@ -132,3 +185,8 @@ func _physics_process(delta: float) -> void:
 	#move_and_collide(speedVect*???, true)
 	
 	move_and_collide(speedVect*delta)
+
+	if not enaction and self.position.y > startpos.y:
+		speedVect.y = 0
+		position.y = startpos.y
+		$Forme.rotation.x = 0.0 #TODO redressement à améliorer
