@@ -16,18 +16,31 @@ var distancez : float
 var distancex : float
 # écart absolu max toléré pour le suivi sur l'axe des x
 const ECART_MAX_X = 5.0
+const ECART_MAX_Z = 4.0
+# indicateur d'être trop près du sujet
+var troppres : bool = false
+# durée max pour rattraper son retard de calage de la caméra trop près
+const TEMPS_RECALAGE = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var ecart : float = self.position.z - followed.position.z
 	# Si la caméra est trop loin derrière, on avance la caméra
-	if self.position.z - followed.position.z > distancez:
+	if ecart > distancez:
 		self.position.z = followed.position.z + distancez
-	# Si on est trop près on ne fait rien
+	# Si on est trop près en avant on recule 
+	elif ecart < distancez - ECART_MAX_Z :
+		self.position.z = followed.position.z + distancez - ECART_MAX_Z
+		troppres = true
+	# Si on est un peu près en avant, on va reculer progressivement
+	elif troppres and ecart < distancez :
+		self.position.z = followed.position.z + distancez - ECART_MAX_Z*delta*TEMPS_RECALAGE
+	else:
+		troppres = false
 	
 	# Si la caméra est trop décalé en X, on va suivre
 	if abs(self.position.x - followed.position.x - distancex) > ECART_MAX_X:
@@ -35,5 +48,4 @@ func _process(delta: float) -> void:
 		var sign_ecart = sign(self.position.x - followed.position.x - distancex)
 		# on recale la caméra sur l'écartmax
 		self.position.x = followed.position.x + distancex + ECART_MAX_X * sign_ecart
-	# TODO : gérer aussi le latéral
 	

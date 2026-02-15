@@ -32,10 +32,11 @@ func virage(change : float, delta : float):
 	
 	# changement d'inclinaison (axe Z)
 	if abs($Forme.rotation.z) < PI*3/8 :
-		print("vire from ",$Forme.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
+		#print("vire from ",$Forme.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
 		$Forme.rotate_z(min(max(change,-1),1)*ROTSPEED*delta)
 	else:
-		print($Forme.rotation.z)
+		#print($Forme.rotation.z)
+		pass
 	
 func _physics_process(delta: float) -> void:
 	var change = Input.get_axis("droite","gauche")
@@ -49,13 +50,11 @@ func _physics_process(delta: float) -> void:
 			$Forme.rotation.z = 0
 		else:
 			$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
-			#$Forme.rotation.z = 0
 	
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
 	if abs(speedVect.x * 3.0 + position.x) > limite_x :
 		# on approche trop du bord
 		# on force un virage
-		#speedVect = speedVect.rotated(Vector3.UP, -sign(speedVect.z)*5*ANGLE_VIRAGE*delta)
 		var cote_ecart = sign(speedVect.x * 3.0 + position.x - limite_x)
 		virage(-sign(speedVect.z)*cote_ecart*FACTEUR_CORRECTION,delta)
 	
