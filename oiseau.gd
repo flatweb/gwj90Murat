@@ -17,9 +17,13 @@ var speedlat : float = 2.0
 var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
 # de quel côté on a atteint la limite ?
 var angle_correction = 0
+
+enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING }
+
 # indicateur de correction de trajectoire.
 # On perd le contrôle tant qu'on est pas revenu dans la zone et de face
-var encorrection : bool = false
+var enaction : bool = false
+var actionencours : action = action.AUCUNE
 
 var speedVect : Vector3
 
@@ -32,7 +36,7 @@ func set_limite_x(value):
 
 func virage(change : float, delta : float):
 	var angle : float = change*ANGLE_VIRAGE*delta
-	if encorrection:
+	if enaction and actionencours == action.CORRECTION:
 		#print (rotation.y)
 		if rotation.y == 0.0:
 			angle = 0.0
@@ -49,11 +53,23 @@ func virage(change : float, delta : float):
 	else:
 		#print($Forme.rotation.z)
 		pass
-	
+
+func looping():
+	pass
+
+func attente():
+	enaction = true
+	actionencours == action.CORRECTION
+	pass
+
+func _process(_delta):
+	if Input.is_action_just_pressed("attente"):
+		attente()
+		
 func _physics_process(delta: float) -> void:
 	var change = Input.get_axis("droite","gauche")
 	
-	if not encorrection:
+	if not enaction:
 		if change != 0:
 			# changement de direction
 			virage(change,delta)
@@ -64,20 +80,21 @@ func _physics_process(delta: float) -> void:
 				$Forme.rotation.z = 0
 			else:
 				$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
-	elif encorrection:
-		print ("",speedVect.z," angle ",angle_correction)
+	elif enaction and actionencours == action.CORRECTION:
+		#print ("",speedVect.z," angle ",angle_correction)
 		virage(angle_correction,delta)
 		if abs(rotation.y) <= 0.01 :
-			encorrection = false
+			enaction = false
 			angle_correction = 0.0
 	
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
-	if not encorrection and abs(speedVect.x * 3.0 + position.x) > limite_x :
+	if not enaction and abs(speedVect.x * 3.0 + position.x) > limite_x :
 		# on approche trop du bord
 		# on force un virage
 		angle_correction = -sign(speedVect.z)* sign(position.x)*FACTEUR_CORRECTION
 		virage(angle_correction,delta)
-		encorrection = true
+		enaction = true
+		actionencours = action.CORRECTION
 	
 	# On pourrait aussi tester par rapport à des CollisionShapes latérales sur le game
 	#move_and_collide(speedVect*???, true)
