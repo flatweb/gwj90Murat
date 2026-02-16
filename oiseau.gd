@@ -162,7 +162,7 @@ func remonte(delta : float):
 		speedVect.y += delta * (0.25)*speeddown
 		if speedVect.y > -speeddown :
 			speedVect.y = speeddown
-		print("altitude=",self.position.y,",vers=",startpos.y)
+		#print("altitude=",self.position.y,",vers=",startpos.y)
 		if self.position.y >= startpos.y:
 			speedVect.y = 0.0
 	# changement d'inclinaison (axe X), un peu lente
@@ -175,7 +175,6 @@ func remonte(delta : float):
 		else:
 			$Forme.rotate_x(min(0.2*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $Forme.rotation.x))
 		#print ("--> rot X=",$Forme.rotation.x)
-
 
 const FORCE_FREINAGE = 0.2
 var forcefreinage : float = FORCE_FREINAGE
