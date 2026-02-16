@@ -21,6 +21,7 @@ func startintro():
 func start():
 	# Repositionner la camera ?
 	$Camera3D.followed = $Oiseau
+	$Camera3D.make_current()
 	$AudioStreamPlayer.play()
 
 func populategridmap():

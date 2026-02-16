@@ -17,6 +17,10 @@ var speedfront : float = 4.0
 var speedlat : float = 2.0
 # Vitesse de vol en piqué
 var speeddown : float = speedfront * 1.5
+# Altitude où on commence à freiner le piqué pour atterrir
+var altitudefreinage : float = 5.0
+# vitesse de descente sous laquelle on ne passe pas en descente
+const VITESSE_Y_MIN = 3.0
 
 # limite en +X ou -X de la position de l'oiseau
 var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
@@ -30,6 +34,9 @@ enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATTERRISSAGE, ATTERRI, DECOL
 var enaction : bool = false
 var actionencours : action = action.AUCUNE
 
+# autre camera 
+var prevcam : Camera3D
+
 # Vitesse de croisière
 var speedVect : Vector3
 # position de départ, notamment pour remonter à l'altitude Y
@@ -39,6 +46,7 @@ func _ready():
 	speedVect = Vector3(0,0,-speedfront)
 	self.rotation = Vector3.ZERO
 	startpos = self.position
+	$Indicateurs.hide()
 	pass
 
 func set_limite_x(value):
@@ -70,6 +78,7 @@ func looping():
 func calc_rot_speed(_act : action, facteur : float) -> float :
 		var signx : int
 		if position.x == 0:
+			# si on est vraiment dans l'axe, on choisit le côté au hasard
 			signx = randi_range(0,1)*2-1
 		else :
 			signx = sign(position.x)
@@ -95,15 +104,34 @@ func correction():
 		#print ("angle auto=", angle_correction)
 
 func descente(delta : float):
+	# Note : comme on descend la vitesse en Y est négative
+	# si on est trop bas, on freine en Y, mais aussi en front
+	if position.y < altitudefreinage:
+		var newspeedY = speedVect.y * position.y/altitudefreinage*(1-delta)
+		newspeedY = min(-VITESSE_Y_MIN,newspeedY)
+		# on risque de remonter ?
+		if newspeedY >= 0:  # mais avec la formule, ça ne risque pas
+			# donc on se contente d'un décélération lente
+			newspeedY = min(-VITESSE_Y_MIN,speedVect.y * 0.9*(1-delta))
+		# Si on est déjà très bas, 
+		if position.y < 1.0: # FIXME : constante ou calcul
+			newspeedY = VITESSE_Y_MIN #FIXME ? C'est un peu brutal
+		speedVect.y=newspeedY
+		print("en freinage à ",position.y,", speedY=",speedVect.y)
+		# changement progressif d'inclinaison (axe X vers le haut)
+		$Forme.rotation.x *= position.y/altitudefreinage
+	# accélération :
 	if speedVect.y > -speeddown:
+		# on accélère un peu
 		speedVect.y -= delta * (0.5)*speeddown
 		if speedVect.y < -speeddown :
 			speedVect.y = speeddown
-	# changement d'inclinaison (axe X)
-	if abs($Forme.rotation.x) < PI/4 :
-		#print("vire from ",$Forme.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
-		$Forme.rotate_x(-0.1*ROTSPEED*delta)
-
+		# changement progressif d'inclinaison (axe X vers le bas)
+		if abs($Forme.rotation.x) < PI/4 :
+			#print("vire from ",$Forme.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
+			$Forme.rotate_x(-0.1*ROTSPEED*delta)
+	print ("vit descente Y=",speedVect.y)
+	
 func remonte(delta : float):
 	if speedVect.y < 0:
 		# on est toujours en descente, on commence par freiner, assez fort
@@ -144,6 +172,15 @@ func atterrissage():
 func _process(_delta):
 	if Input.is_action_just_pressed("attente",true):
 		attente()
+	elif Input.is_action_just_pressed("camera",true):
+		# changement de caméra (pour tests surtout)
+		if prevcam != null :
+			prevcam.make_current()
+			prevcam = null
+		else:
+			prevcam = get_viewport().get_camera_3d()
+			$Camera3D.make_current()
+			$Indicateurs.show()
 		
 func _physics_process(delta: float) -> void:
 	var change = Input.get_axis("droite","gauche")
@@ -211,12 +248,12 @@ func _physics_process(delta: float) -> void:
 		correction()
 		virage(autorotspeed,delta)
 
-	
-	# On pourrait aussi tester par rapport à des CollisionShapes latérales sur le game
-	#move_and_collide(speedVect*???, true)
-	
+	if $Indicateurs.visible :
+		$Indicateurs/Altitude.text = "%d" % roundi(position.y)
+		$Indicateurs/Vitesses.text = "(%2.1f,%2.1f)" % [speedVect.y,Vector2(speedVect.x,speedVect.z).length()]
 	var collisions : KinematicCollision3D
 	collisions = move_and_collide(speedVect*delta)
+	
 	if (collisions != null):
 		for i in range(0,collisions.get_collision_count()):
 			var obj = collisions.get_collider(i)
