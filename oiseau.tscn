@@ -41,9 +41,13 @@ transform = Transform3D(-4.3362395e-08, 0.1261124, -0.99201596, 5.512548e-09, 0.
 [node name="Indicateurs" type="Node3D" parent="." unique_id=1226209583]
 
 [node name="Altitude" type="Label3D" parent="Indicateurs" unique_id=690172657]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5246535, -0.30429298)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5246535, -0.72263104)
 text = "0.0"
 
 [node name="Vitesses" type="Label3D" parent="Indicateurs" unique_id=56208281]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5246535, 0.47910708)
-text = "(0.00,0.00)"
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5246535, 0.025057137)
+text = "(-0.0,-0.0)"
+
+[node name="AngleX" type="Label3D" parent="Indicateurs" unique_id=471543012]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5246535, 0.6525642)
+text = "-0°"

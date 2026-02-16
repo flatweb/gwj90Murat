@@ -6,6 +6,14 @@ const ROTSPEED = 5.0
 const ROTBACKSPEED = 2.0
 # angle de rotation par seconde lors d'un virage
 const ANGLE_VIRAGE = 1.2
+# inclinaison maximale sur X en piqué
+const INCLINAISON_MAX_PIQUE = PI*3/8
+# altitude à partir de laquelle on se cabre pour freiner
+const ALTITUDE_MIN_CABRAGE = 2.0
+# angle de rotation par seconde lors d'un virage
+const INCLINAISON_MAX_VIRAGE = PI*3/8
+# inclinaison maximale sur X en remontée
+const INCLINAISON_MAX_MONTEE = PI/6
 # facteur de rotation pour ne pas sortir de la zone
 const FACTEUR_CORRECTION = 3.0
 # facteur de rotation pour l'attente en boucle, rotation lente
@@ -41,12 +49,17 @@ var prevcam : Camera3D
 var speedVect : Vector3
 # position de départ, notamment pour remonter à l'altitude Y
 var startpos : Vector3
+# taille de l'oiseau en hauteur
+var tailleY : float
 
 func _ready():
 	speedVect = Vector3(0,0,-speedfront)
 	self.rotation = Vector3.ZERO
 	startpos = self.position
 	$Indicateurs.hide()
+	# FIXME, par défaut on considère que c'est la taille de la collisionShape
+	# FIXME, mais ça pourrait plutôt se basé sur le Mesh
+	tailleY=$CollisionShape3D.shape.height
 	pass
 
 func set_limite_x(value):
@@ -65,7 +78,7 @@ func virage(change : float, delta : float):
 	speedVect = speedVect.rotated(Vector3.UP, angle)
 	
 	# changement d'inclinaison (axe Z)
-	if abs($Forme.rotation.z) < PI*3/8 :
+	if abs($Forme.rotation.z) < INCLINAISON_MAX_VIRAGE :
 		#print("vire from ",$Forme.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
 		$Forme.rotate_z(min(max(change,-1),1)*ROTSPEED*delta)
 	else:
@@ -109,17 +122,15 @@ func descente(delta : float):
 	if position.y < altitudefreinage:
 		var newspeedY = speedVect.y * position.y/altitudefreinage*(1-delta)
 		newspeedY = min(-VITESSE_Y_MIN,newspeedY)
-		# on risque de remonter ?
-		if newspeedY >= 0:  # mais avec la formule, ça ne risque pas
-			# donc on se contente d'un décélération lente
-			newspeedY = min(-VITESSE_Y_MIN,speedVect.y * 0.9*(1-delta))
 		# Si on est déjà très bas, 
 		if position.y < 1.0: # FIXME : constante ou calcul
-			newspeedY = VITESSE_Y_MIN #FIXME ? C'est un peu brutal
+			newspeedY = -VITESSE_Y_MIN #FIXME ? C'est un peu brutal
 		speedVect.y=newspeedY
-		print("en freinage à ",position.y,", speedY=",speedVect.y)
+		#print("en freinage à ",position.y,", speedY=",speedVect.y)
 		# changement progressif d'inclinaison (axe X vers le haut)
-		$Forme.rotation.x *= position.y/altitudefreinage
+		$Forme.rotation.x = max($Forme.rotation.x,-INCLINAISON_MAX_PIQUE*(position.y-ALTITUDE_MIN_CABRAGE)/altitudefreinage) # FIXME : intégrer la taille de l'oiseau ?
+		# correction de l'assiette
+		redresse(delta)
 	# accélération :
 	if speedVect.y > -speeddown:
 		# on accélère un peu
@@ -127,19 +138,24 @@ func descente(delta : float):
 		if speedVect.y < -speeddown :
 			speedVect.y = speeddown
 		# changement progressif d'inclinaison (axe X vers le bas)
-		if abs($Forme.rotation.x) < PI/4 :
-			#print("vire from ",$Forme.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
+		if abs($Forme.rotation.x) < INCLINAISON_MAX_PIQUE :
 			$Forme.rotate_x(-0.1*ROTSPEED*delta)
-	print ("vit descente Y=",speedVect.y)
-	
+
+func redresse(delta : float):
+	if abs($Forme.rotation.z) < ROTBACKSPEED*delta :
+		$Forme.rotation.z = 0
+	else:
+		$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
+
+
 func remonte(delta : float):
 	if speedVect.y < 0:
 		# on est toujours en descente, on commence par freiner, assez fort
-		speedVect.y += delta * (0.75)*speeddown
+		speedVect.y += delta * (0.9)*speeddown
 		if speedVect.y > 0 :
 			# on se stabilise
 			speedVect.y = 0
-	elif speedVect.y < speeddown/2:
+	elif speedVect.y < speeddown/2: #FIXME constante à régler
 		# on commence à remonter, lentement
 		speedVect.y += delta * (0.25)*speeddown
 		if speedVect.y > -speeddown :
@@ -147,26 +163,36 @@ func remonte(delta : float):
 		print("altitude=",self.position.y,",vers=",startpos.y)
 		if self.position.y >= startpos.y:
 			speedVect.y = 0.0
-	# changement d'inclinaison (axe X)
-	if $Forme.rotation.x < PI/6 :
-		$Forme.rotate_x(1.0*ROTSPEED*delta)
+	# changement d'inclinaison (axe X), un peu lente
+	if $Forme.rotation.x < INCLINAISON_MAX_MONTEE :
+		$Forme.rotate_x(0.5*ROTSPEED*delta)
 
-const FORCE_FREINAGE = 0.5
+const FORCE_FREINAGE = 0.2
 var forcefreinage : float = FORCE_FREINAGE
 func freinage(delta : float):
-	forcefreinage *= (1+delta)
-	speedVect.z *=  forcefreinage*(1-delta)
-	speedVect.x *=  forcefreinage*(1-delta)
-	if speedVect.length() <= 0.5 : # TODO : une constante à régler
-		# s'arrête
+	if speedVect.length() <= 0.2 : # TODO : une constante à régler
+		# on s'arrête
 		speedVect = Vector3.ZERO
+		rotation.y = 0.0
+		position.y = tailleY # FIXME
+		return
+
+	forcefreinage *= (1+delta)
+	#print("freinage avant=",speedVect.length()," * ",(1-forcefreinage)*(1-delta))
+	speedVect.y =  0.0
+	speedVect.rotated(Vector3.UP,-rotation.y /3)
+	speedVect.x *=  (1-forcefreinage)*(1-delta)
+	speedVect.z *=  (1-forcefreinage)*(1-delta)
+	rotate_y(-rotation.y /2) #FIXME constante à régler
+	#print("freinage final=",speedVect.length())
 	
 func atterrissage():
 	enaction = true
 	actionencours = action.ATTERRISSAGE
 	speedVect.y = 0.0
-	self.position.y = 0.5 # FIXME
-	self.rotation.x = 0.0
+	position.y = tailleY/2
+	$Forme.rotation.x = 0.0
+	$Forme.rotation.y = 0.0 # FIXME
 	forcefreinage = FORCE_FREINAGE
 	
 func _process(_delta):
@@ -191,9 +217,11 @@ func _physics_process(delta: float) -> void:
 		# sortie du mode attente, pour se remettre dans l'axe
 		enaction = false
 		correction()
-	if enaction and actionencours== action.ATTERRI \
+	if enaction and actionencours == action.ATTERRI \
 		and Input.is_action_pressed("decolle"):
-			enaction = false
+			enaction = true
+			actionencours = action.DECOLLAGE
+			
 			speedVect.z = -speedfront
 			self.rotation = Vector3.ZERO
 	if not enaction:
@@ -207,15 +235,12 @@ func _physics_process(delta: float) -> void:
 			# Pas d'interaction
 			
 			# 1. retour naturel à une inclinaison normale sans action
-			if abs($Forme.rotation.z) < ROTBACKSPEED*delta :
-				$Forme.rotation.z = 0
-			else:
-				$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
+			redresse(delta)
 
-			# 2. remontée suite à un piqué
+			# 2. remontée suite à un piqué ou en décollage
 			if self.position.y < startpos.y:
 				remonte(delta)
-			if $Forme.rotation.x <0 :
+			if $Forme.rotation.x <=0 :
 				$Forme.rotate_x(min(0.2*ROTSPEED*delta,-$Forme.rotation.x))
 			if $Forme.rotation.x >0 :
 				$Forme.rotate_x(-min(0.5*ROTSPEED*delta,$Forme.rotation.x))
@@ -235,7 +260,10 @@ func _physics_process(delta: float) -> void:
 				# on est arrêté
 				enaction = true
 				actionencours = action.ATTERRI
-			
+		elif actionencours == action.DECOLLAGE:
+			remonte(delta)
+			if position.y > tailleY*4 : #TODO pourrait être affiné
+				enaction = false
 		elif actionencours == action.ATTENTE:
 			# on laisse tourner
 			pass
@@ -249,18 +277,23 @@ func _physics_process(delta: float) -> void:
 		virage(autorotspeed,delta)
 
 	if $Indicateurs.visible :
-		$Indicateurs/Altitude.text = "%d" % roundi(position.y)
+		$Indicateurs/Altitude.text = "\u2191%d" % roundi(position.y)
 		$Indicateurs/Vitesses.text = "(%2.1f,%2.1f)" % [speedVect.y,Vector2(speedVect.x,speedVect.z).length()]
+		$Indicateurs/AngleX.text = "(\u03B1:%d)" % [roundi(rad_to_deg($Forme.rotation.x))]
 	var collisions : KinematicCollision3D
 	collisions = move_and_collide(speedVect*delta)
 	
 	if (collisions != null):
 		for i in range(0,collisions.get_collision_count()):
-			var obj = collisions.get_collider(i)
+			var obj : Node3D = collisions.get_collider(i)
 			print(obj.name)
-			if obj.name == "Ground":
-				# atterrissage (surement violent)
-				atterrissage()
+			if obj.name.contains("Ground"):
+				if enaction and actionencours == action.DECOLLAGE :
+					#on ignore la collision résiduelle
+					pass
+				else:
+					# atterrissage
+					atterrissage()
 
 	if not enaction and self.position.y > startpos.y:
 		speedVect.y = 0
