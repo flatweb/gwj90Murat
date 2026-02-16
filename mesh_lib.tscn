@@ -1,23 +1,29 @@
 [gd_scene format=3 uid="uid://b7eflg2pn88p4"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_og50n"]
+albedo_color = Color(0.07462705, 0.43152946, 0.06284237, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_u6g0g"]
+material = SubResource("StandardMaterial3D_og50n")
+size = Vector3(1, 0.2, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6g0g"]
-albedo_color = Color(0.02494518, 0.3812039, 9.62615e-07, 1)
+albedo_color = Color(1, 1, 0.2901961, 1)
+emission = Color(0.4509804, 0.5647059, 0, 1)
+emission_energy_multiplier = 0.0
+anisotropy_enabled = true
+anisotropy = 0.1
+refraction_enabled = true
+refraction_scale = 0.28
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_u6g0g"]
+[sub_resource type="BoxMesh" id="BoxMesh_dxx8f"]
 material = SubResource("StandardMaterial3D_u6g0g")
-size = Vector2(1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxx8f"]
-albedo_color = Color(1, 1, 0.20392157, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_axt2h"]
-material = SubResource("StandardMaterial3D_dxx8f")
-size = Vector2(1, 1)
 
 [node name="MeshLib" type="Node3D" unique_id=792053995]
 
 [node name="Foret" type="MeshInstance3D" parent="." unique_id=1472255540]
-mesh = SubResource("PlaneMesh_u6g0g")
+mesh = SubResource("PrismMesh_u6g0g")
 
 [node name="Prairie" type="MeshInstance3D" parent="." unique_id=790158792]
-mesh = SubResource("PlaneMesh_axt2h")
+transform = Transform3D(0.71195364, 0.3436888, 0.61237246, 0.29883623, 0.6408563, -0.70710677, -0.63546747, 0.6864263, 0.35355335, 0, 0, 0)
+mesh = SubResource("BoxMesh_dxx8f")

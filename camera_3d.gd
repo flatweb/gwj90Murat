@@ -35,12 +35,6 @@ func _process(delta: float) -> void:
 	# Si on est trop près en avant on recule 
 	elif ecart < distancez - ECART_MAX_Z :
 		self.position.z = followed.position.z + distancez - ECART_MAX_Z
-		troppres = true
-	# Si on est un peu près en avant, on va reculer progressivement
-	elif troppres and ecart < distancez :
-		self.position.z = followed.position.z + distancez - ECART_MAX_Z*delta*TEMPS_RECALAGE
-	else:
-		troppres = false
 	
 	# Si la caméra est trop décalé en X, on va suivre
 	if abs(self.position.x - followed.position.x - distancex) > ECART_MAX_X:
