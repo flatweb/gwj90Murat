@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cr0ssyssyj0mo"]
 
-[ext_resource type="PackedScene" uid="uid://buuoo3lsof2jq" path="res://modeles/Fields.glb" id="1_ue3ki"]
+[ext_resource type="PackedScene" uid="uid://buuoo3lsof2jq" path="res://res/modeles/Fields.glb" id="1_ue3ki"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ue3ki"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,7 +24,7 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=336755514]
 environment = SubResource("Environment_fxjpk")
 
-[node name="Fields" parent="." unique_id=688642412 instance=ExtResource("1_ue3ki")]
+[node name="Fields" parent="." unique_id=86867860 instance=ExtResource("1_ue3ki")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1268485501]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 6.107171, 6.2522855)
