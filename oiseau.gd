@@ -67,6 +67,7 @@ func _ready():
 	# FIXME, par défaut on considère que c'est la taille de la collisionShape
 	# FIXME, mais ça pourrait plutôt se basé sur le Mesh
 	tailleY=$CollisionShape3D.shape.height
+	$OIE/AnimationPlayer.play("Vol_normal")
 	pass
 
 func set_limite_x(value):
