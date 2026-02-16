@@ -3,6 +3,9 @@ extends Node3D
 #Par défaut, on considère que le gridmap sera de la même size que le $MeshGround
 var gridmapSize : Vector2
 
+# signal émis à la fin du jeu pour prévenir le noeud off-play
+signal fini(score : int)
+
 func _ready():
 	gridmapSize = $Ground/MeshGround.mesh.size
 	populategridmap()
@@ -11,8 +14,12 @@ func _ready():
 	$Ground/CollisionGround.shape.size.z = gridmapSize.y
 	
 	$Oiseau.set_limite_x(gridmapSize.x*0.75)
+	$Oiseau.arrive.connect(fin.bind())
 	
 	startintro()
+	pass
+
+func init():
 	pass
 
 func startintro():
@@ -24,6 +31,10 @@ func start():
 	$Camera3D.followed = $Oiseau
 	$Camera3D.make_current()
 	$AudioStreamPlayer.play()
+
+func fin(distance,nb):
+	# fin de partie, on renvoie la distance parcourue comme score
+	fini.emit(distance)
 
 func populategridmap():
 	var zones : Dictionary[String,Vector2]

@@ -51,8 +51,13 @@ var prevcam : Camera3D
 var speedVect : Vector3
 # position de départ, notamment pour remonter à l'altitude Y
 var startpos : Vector3
-# taille de l'oiseau en hauteur
+# taille de l'oiseau en hauteur (pour gérer l'atterrisage)
 var tailleY : float
+
+# signal à émettre quand l'oiseau est arrivé, avec nb autres
+signal arrive(dist : float, nb : int)
+# distance parcourue au total
+var distance : float
 
 func _ready():
 	speedVect = Vector3(0,0,-speedfront)
@@ -203,6 +208,10 @@ func atterrissage():
 	$Forme.rotation.x = 0.0
 	$Forme.rotation.y = 0.0 # FIXME
 	forcefreinage = FORCE_FREINAGE
+
+# fin de partie
+func fin():
+	arrive.emit(distance,0)
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("attente",true):
@@ -216,7 +225,11 @@ func _process(_delta):
 			prevcam = get_viewport().get_camera_3d()
 			$Camera3D.make_current()
 			$Indicateurs.show()
-		
+	
+	# fin de partie ?  FIXME
+	if position.z < 0.0 : #(pour l'instant c'est le milieu)
+		fin()
+	
 func _physics_process(delta: float) -> void:
 	var vire = Input.get_axis("droite","gauche")
 	var pique = Input.is_action_pressed("bas")
@@ -312,6 +325,8 @@ func _physics_process(delta: float) -> void:
 		$Indicateurs/Vitesses.text = "(%2.1f,%2.1f)" % [speedVect.y,Vector2(speedVect.x,speedVect.z).length()]
 		$Indicateurs/AngleX.text = "(\u03B1:%d)" % [roundi(rad_to_deg($Forme.rotation.x))]
 
+	var positionavant = self.position
+	
 	var collisions : KinematicCollision3D
 	collisions = move_and_collide(speedVect*delta)
 	
@@ -326,3 +341,6 @@ func _physics_process(delta: float) -> void:
 				else:
 					# atterrissage
 					atterrissage()
+	# la distance parcourue se cumule
+	distance += (self.position - positionavant).length()
+	#print ("dist=",distance)
