@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cr0ssyssyj0mo"]
+
+[ext_resource type="PackedScene" uid="uid://buuoo3lsof2jq" path="res://modeles/Fields.glb" id="1_ue3ki"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ue3ki"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6ej1s"]
+sky_material = SubResource("ProceduralSkyMaterial_ue3ki")
+
+[sub_resource type="Environment" id="Environment_fxjpk"]
+background_mode = 2
+sky = SubResource("Sky_6ej1s")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="ALEX_scene-test_00" type="Node3D" unique_id=359381090]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1223088337]
+transform = Transform3D(-0.49769977, -0.6294306, 0.59675133, 0.102697276, 0.64041257, 0.7611341, -0.8612479, 0.44010103, -0.2540924, 2.8593621, 6.0961103, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=336755514]
+environment = SubResource("Environment_fxjpk")
+
+[node name="Fields" parent="." unique_id=688642412 instance=ExtResource("1_ue3ki")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1268485501]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 6.107171, 6.2522855)
+projection = 1
+size = 6.0
