@@ -15,6 +15,10 @@ run/main_scene="uid://c88tyonahc3cv"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/Plouf/Documents/GameJam/Export1.avi"
+
 [input]
 
 droite={
