@@ -8,9 +8,11 @@ var zones = [zoneforet, zoneprairie]
 var ids : Array
 
 func _ready():
-	gridmapSize = $MeshGround.mesh.size
+	gridmapSize = $Ground/MeshGround.mesh.size
 	$Oiseau.set_limite_x(gridmapSize.x*0.75)
 	#populategridmap()
+	$Ground/CollisionGround.shape.size.x = gridmapSize.x
+	$Ground/CollisionGround.shape.size.z = gridmapSize.y
 	startintro()
 	pass
 
@@ -21,6 +23,7 @@ func startintro():
 func start():
 	# Repositionner la camera ?
 	$Camera3D.followed = $Oiseau
+	$Camera3D.make_current()
 	$AudioStreamPlayer.play()
 
 func populategridmap():

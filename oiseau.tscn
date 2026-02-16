@@ -34,3 +34,20 @@ mesh = SubResource("CapsuleMesh_pmcpw")
 [node name="AileG" type="MeshInstance3D" parent="Forme" unique_id=474476359]
 transform = Transform3D(-0.017496575, -0.9112353, 0.4115143, 0.9998157, -0.019197399, 0, 0.007900006, 0.41143847, 0.91140324, -0.3, -0.094, 0.1)
 mesh = SubResource("CapsuleMesh_pmcpw")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1608969010]
+transform = Transform3D(-4.3362395e-08, 0.1261124, -0.99201596, 5.512548e-09, 0.99201596, 0.1261124, 1, 0, -4.371139e-08, -1.7310467, 0.3388319, 0)
+
+[node name="Indicateurs" type="Node3D" parent="." unique_id=1226209583]
+
+[node name="Altitude" type="Label3D" parent="Indicateurs" unique_id=690172657]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5246535, -0.72263104)
+text = "0.0"
+
+[node name="Vitesses" type="Label3D" parent="Indicateurs" unique_id=56208281]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5246535, 0.025057137)
+text = "(-0.0,-0.0)"
+
+[node name="AngleX" type="Label3D" parent="Indicateurs" unique_id=471543012]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5246535, 0.6525642)
+text = "-0°"
