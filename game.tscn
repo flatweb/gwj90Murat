@@ -47,16 +47,19 @@ script = ExtResource("4_7jktm")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1714319163]
 stream = ExtResource("4_fc0e3")
 
+[node name="Node3D" type="Node3D" parent="." unique_id=1517858812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.593393, 0, -99.15094)
+
 [node name="Flock" type="Node3D" parent="." unique_id=1544621110]
 script = ExtResource("6_eow3j")
 boidScene = ExtResource("7_j5wjh")
 numberOfBoids = 200
-visualRange = 20.0
-separationDistance = 10.0
+visualRange = 15.0
+separationDistance = 8.0
 predator = NodePath("../Oiseau")
 predatorMinDist = 5.0
-cohesionWeight = 0.415
-separationWeight = 41.22
+cohesionWeight = 0.5
+separationWeight = 3.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1621687425 groups=["Repulsor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1623354, 0)

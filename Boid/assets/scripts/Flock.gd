@@ -101,13 +101,15 @@ func _borders(delta):
 	for boid in _boids:
 		var pos = boid.get_position()
 		var _envDims = Vector4(-12,12,-100,100)
-		if (pos.x < _envDims.x or pos.x > _envDims.w or pos.y < _envDims.z or pos.y > _envDims.y):
+		if (pos.x > 50 or pos.x < -50 or pos.z > 100 or pos.z < -100):
 			boid.timeOutOfBorders += delta
 			var midPoint = Vector3(0,5,0)
 			var dir = (midPoint - boid.get_position()).normalized()
 			boid.acceleration += dir * boid.timeOutOfBorders * bordersWeight
 		else:
 			boid.timeOutOfBorders = 0
+			if boid == _boids[1]:
+				print("entre bordure")
 			
 			
 func _alignment():
