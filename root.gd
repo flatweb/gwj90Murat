@@ -97,11 +97,11 @@ func runlevel():
 	game.process_mode = Node.PROCESS_MODE_PAUSABLE
 	$PanelContainer.add_sibling(game)
 
-func endofgame(score : int):
+func endofgame(_score : int):
 	$Musique.play()
 	game.call_deferred("queue_free")
 	
-	%Label.text = "Distance parcourue : %d" % score
+	%Label.text = "Distance parcourue : %d" % _score
 	%Label.show()
 	
 	# Ménage dans la VBoxScore FIXME
