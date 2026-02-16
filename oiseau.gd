@@ -25,6 +25,8 @@ var speedfront : float = 4.0
 var speedlat : float = 2.0
 # Vitesse de vol en piqué
 var speeddown : float = speedfront * 1.5
+# Vitesse de remontée
+var speedup : float = speeddown / 3
 # Altitude où on commence à freiner le piqué pour atterrir
 var altitudefreinage : float = 5.0
 # vitesse de descente sous laquelle on ne passe pas en descente
@@ -155,7 +157,7 @@ func remonte(delta : float):
 		if speedVect.y > 0 :
 			# on se stabilise
 			speedVect.y = 0
-	elif speedVect.y < speeddown/2: #FIXME constante à régler
+	elif speedVect.y < speedup :
 		# on commence à remonter, lentement
 		speedVect.y += delta * (0.25)*speeddown
 		if speedVect.y > -speeddown :
@@ -165,7 +167,15 @@ func remonte(delta : float):
 			speedVect.y = 0.0
 	# changement d'inclinaison (axe X), un peu lente
 	if $Forme.rotation.x < INCLINAISON_MAX_MONTEE :
-		$Forme.rotate_x(0.5*ROTSPEED*delta)
+		#print ("rot X=",$Forme.rotation.x)
+		#print ("max ",INCLINAISON_MAX_MONTEE - $Forme.rotation.x)
+		#print ("min ",0.2*ROTSPEED*delta)
+		if $Forme.rotation.x <0 :
+			$Forme.rotate_x(min(0.5*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $Forme.rotation.x))
+		else:
+			$Forme.rotate_x(min(0.2*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $Forme.rotation.x))
+		#print ("--> rot X=",$Forme.rotation.x)
+
 
 const FORCE_FREINAGE = 0.2
 var forcefreinage : float = FORCE_FREINAGE
@@ -209,11 +219,12 @@ func _process(_delta):
 			$Indicateurs.show()
 		
 func _physics_process(delta: float) -> void:
-	var change = Input.get_axis("droite","gauche")
+	var vire = Input.get_axis("droite","gauche")
 	var pique = Input.is_action_pressed("bas")
+	var mouvement :bool = false
 	
 	if enaction and actionencours == action.ATTENTE \
-				and (change != 0 or pique):
+				and (vire != 0 or pique):
 		# sortie du mode attente, pour se remettre dans l'axe
 		enaction = false
 		correction()
@@ -227,24 +238,23 @@ func _physics_process(delta: float) -> void:
 	if not enaction:
 		if pique :
 			descente(delta)
+			mouvement = true
 			# on ne combine pas pique et changement de direction
-		elif change != 0:
+		elif vire != 0:
 			# changement de direction
-			virage(change,delta)
+			virage(vire,delta)
+			mouvement = true
 		else:
 			# Pas d'interaction
 			
-			# 1. retour naturel à une inclinaison normale sans action
+			# 1. retour naturel à une inclinaison normale latérale sans action
 			redresse(delta)
 
 			# 2. remontée suite à un piqué ou en décollage
 			if self.position.y < startpos.y:
 				remonte(delta)
-			if $Forme.rotation.x <=0 :
-				$Forme.rotate_x(min(0.2*ROTSPEED*delta,-$Forme.rotation.x))
-			if $Forme.rotation.x >0 :
-				$Forme.rotate_x(-min(0.5*ROTSPEED*delta,$Forme.rotation.x))
-
+				mouvement = true
+				
 	elif enaction:
 		virage(autorotspeed,delta)
 		if actionencours == action.CORRECTION:
@@ -276,10 +286,30 @@ func _physics_process(delta: float) -> void:
 		correction()
 		virage(autorotspeed,delta)
 
+
+	# Equilibrage vertical
+	if not enaction and not mouvement:
+		if self.position.y > startpos.y:
+			speedVect.y = -(self.position.y - startpos.y)*delta
+		else:
+			speedVect.y = 0.0
+		
+	# Equilibrage assiette
+	if not enaction and not mouvement and $Forme.rotation.x != 0 :
+		# changement d'inclinaison (axe X), un peu lente
+		#print("Avant chg rotX=",$Forme.rotation.x)
+		if $Forme.rotation.x != 0 :
+			if $Forme.rotation.x <0 :
+				$Forme.rotate_x(min(0.25*ROTSPEED*delta,-$Forme.rotation.x))
+			else:
+				$Forme.rotate_x(-min(0.25*ROTSPEED*delta,$Forme.rotation.x))
+		#print("Après chg rotX=",$Forme.rotation.x)
+
 	if $Indicateurs.visible :
 		$Indicateurs/Altitude.text = "\u2191%d" % roundi(position.y)
 		$Indicateurs/Vitesses.text = "(%2.1f,%2.1f)" % [speedVect.y,Vector2(speedVect.x,speedVect.z).length()]
 		$Indicateurs/AngleX.text = "(\u03B1:%d)" % [roundi(rad_to_deg($Forme.rotation.x))]
+
 	var collisions : KinematicCollision3D
 	collisions = move_and_collide(speedVect*delta)
 	
@@ -294,8 +324,3 @@ func _physics_process(delta: float) -> void:
 				else:
 					# atterrissage
 					atterrissage()
-
-	if not enaction and self.position.y > startpos.y:
-		speedVect.y = 0
-		position.y = startpos.y
-		$Forme.rotation.x = 0.0 #TODO redressement à améliorer
