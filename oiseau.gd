@@ -279,7 +279,10 @@ func _physics_process(delta: float) -> void:
 
 
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
-	if not enaction and abs(speedVect.x * 3.0 + position.x) > limite_x :
+	if not enaction and \
+		( abs(speedVect.x*1.0 + position.x) > limite_x \
+		   or speedVect.z*1.0 + position.z > startpos.z \
+		):
 		# on approche trop du bord
 		# on force un virage
 		correction()
