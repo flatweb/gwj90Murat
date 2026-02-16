@@ -637,3 +637,4 @@ skeleton = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OIE" unique_id=1701530717]
 libraries/ = SubResource("AnimationLibrary_hgp2k")
+autoplay = &"Vol_normal"
