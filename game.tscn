@@ -8,7 +8,22 @@
 [ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuage.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
-[ext_resource type="PackedScene" uid="uid://7he4yxqk453h" path="res://mission.tscn" id="9_vef74"]
+[ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="9_vef74"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vef74"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_hve3p"]
+sky_material = SubResource("ProceduralSkyMaterial_vef74")
+
+[sub_resource type="Environment" id="Environment_mfdv2"]
+background_mode = 2
+sky = SubResource("Sky_hve3p")
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
 albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
@@ -23,6 +38,9 @@ size = Vector3(25, 1, 100)
 
 [node name="Game" type="Node3D" unique_id=1608575864]
 script = ExtResource("1_feb5d")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=281235296]
+environment = SubResource("Environment_mfdv2")
 
 [node name="GridMap" type="GridMap" parent="." unique_id=63597688]
 mesh_library = ExtResource("1_e2o6t")
@@ -45,6 +63,7 @@ debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2107808653]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881907, 0, -0.25881907, 0.9659258, 0, 3, 0)
+shadow_enabled = true
 
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
@@ -64,6 +83,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.593393, 0, -99.15094)
 
 [node name="Nuage" parent="." unique_id=1496051760 instance=ExtResource("6_j5wjh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.090391, 84.24133)
+script = null
 
 [node name="Flock" type="Node3D" parent="." unique_id=1544621110]
 script = ExtResource("6_eow3j")
@@ -76,5 +96,8 @@ predatorMinDist = 5.0
 cohesionWeight = 0.5
 separationWeight = 3.0
 
-[node name="Mission" parent="." unique_id=1311107278 instance=ExtResource("9_vef74")]
+[node name="Mission" parent="." unique_id=1311107278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.36499, 0, 42.86743)
+
+[node name="00_game-area-size" parent="." unique_id=1305118972 instance=ExtResource("9_vef74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 80.734)
