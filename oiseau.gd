@@ -70,15 +70,20 @@ var distance : float
 var nodeoie : Node3D
 
 func _ready():
-	nodeoie=nodeoie
-	speedVect = Vector3(0,0,-speedfront)
-	self.rotation = Vector3.ZERO
-	startpos = self.position
-	$Indicateurs.hide()
+	nodeoie=$OIE
+	demarre()
 	# FIXME, par défaut on considère que c'est la taille de la collisionShape
 	# FIXME, mais ça pourrait plutôt se basé sur le Mesh
 	tailleY=$CollisionShape3D.shape.height
 	pass
+
+func demarre():
+	$Indicateurs.hide()
+	speedVect = Vector3(0,0,-speedfront)
+	self.rotation = Vector3.ZERO
+	startpos = self.position
+	en_vol = true
+	anim_vol()
 
 func set_limite_x(value):
 	limite_x = value
@@ -87,12 +92,12 @@ func set_limite_x(value):
 var en_vol : bool
 func anim_vol():
 	$OIE/AnimationPlayer.play("Vol_normal")
-	$AudioPlayer.play()
+	$AudioPlayerAiles.play()
 
-func _on_loop_sound(player):
+func _on_loop_sound():
 	# Ne relance pas le son si on n'est plus en vol
 	if en_vol :
-		player.play()
+		$AudioPlayerAiles.play()
 
 func stop_anim_vol():
 	en_vol = false
@@ -289,7 +294,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Si il y a une action automatique en cours, on privilégie l'action
 	if enaction and actionencours == action.ATTENTE \
-				and (vire != 0 or pique):
+				and (vire != 0 or pique or monte):
 		# sortie du mode attente, pour se remettre dans l'axe
 		enaction = false
 		correction()

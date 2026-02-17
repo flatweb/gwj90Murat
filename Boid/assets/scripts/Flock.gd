@@ -109,7 +109,8 @@ func _borders(delta):
 		else:
 			boid.timeOutOfBorders = 0
 			if boid == _boids[1]:
-				print("entre bordure")
+				#print("entre bordure")
+				pass
 			
 			
 func _alignment():
