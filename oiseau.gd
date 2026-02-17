@@ -232,7 +232,7 @@ func _process(_delta):
 	
 func _physics_process(delta: float) -> void:
 	var vire = Input.get_axis("droite","gauche")
-	var pique = Input.is_action_pressed("bas")
+	var pique = Input.is_action_pressed("descend")
 	var mouvement :bool = false
 	
 	if enaction and actionencours == action.ATTENTE \
