@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuage.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
-[ext_resource type="PackedScene" uid="uid://7he4yxqk453h" path="res://mission.tscn" id="9_vef74"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
 albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
@@ -64,17 +63,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.593393, 0, -99.15094)
 
 [node name="Nuage" parent="." unique_id=1496051760 instance=ExtResource("6_j5wjh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.090391, 84.24133)
+script = null
 
 [node name="Flock" type="Node3D" parent="." unique_id=1544621110]
 script = ExtResource("6_eow3j")
 boidScene = ExtResource("7_j5wjh")
 numberOfBoids = 200
-visualRange = 15.0
-separationDistance = 8.0
+visualRange = 20.0
 predator = NodePath("../Oiseau")
 predatorMinDist = 12.0
 repulsorMinDIst = 3.0
-cohesionWeight = 0.5
+cohesionWeight = 20.0
+separationWeight = 30.0
+alignmentWeight = 3.0
 
-[node name="Mission" parent="." unique_id=1311107278 instance=ExtResource("9_vef74")]
+[node name="Mission" parent="." unique_id=1311107278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.36499, 0, 42.86743)
