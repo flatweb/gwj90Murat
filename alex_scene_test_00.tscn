@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cr0ssyssyj0mo"]
+
+[ext_resource type="Shader" uid="uid://dxoam2gxv7m22" path="res://res/shaders/palette_quantization.gdshader" id="1_6ej1s"]
+[ext_resource type="PackedScene" uid="uid://buuoo3lsof2jq" path="res://res/modeles/Fields.glb" id="1_ue3ki"]
+[ext_resource type="Texture2D" uid="uid://dwhn7l570tbsk" path="res://res/palettes/twilioquest-76-1x.png" id="2_fxjpk"]
+[ext_resource type="PackedScene" uid="uid://lhp7pp4gimp0" path="res://res/modeles/route-foret.glb" id="4_ca8gt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ue3ki"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6ej1s"]
+sky_material = SubResource("ProceduralSkyMaterial_ue3ki")
+
+[sub_resource type="Environment" id="Environment_fxjpk"]
+background_mode = 2
+sky = SubResource("Sky_6ej1s")
+tonemap_mode = 3
+tonemap_exposure = 0.81
+ssao_enabled = true
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxjpk"]
+shader = ExtResource("1_6ej1s")
+shader_parameter/palette = ExtResource("2_fxjpk")
+
+[node name="ALEX_scene-test_00" type="Node3D" unique_id=359381090]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=259772945]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1438840524]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" unique_id=1223088337]
+transform = Transform3D(-0.49769986, -0.6294306, 0.5967513, 0.10269729, 0.64041257, 0.76113397, -0.8612481, 0.44010103, -0.25409243, 2.8593621, 6.0961103, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=336755514]
+environment = SubResource("Environment_fxjpk")
+
+[node name="PaletteShader" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=423009126]
+material = SubResource("ShaderMaterial_fxjpk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -285.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fields" parent="SubViewportContainer/SubViewport" unique_id=86867860 instance=ExtResource("1_ue3ki")]
+visible = false
+
+[node name="route-foret" parent="SubViewportContainer/SubViewport" unique_id=1725506893 instance=ExtResource("4_ca8gt")]
+
+[node name="CameraRig" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=209147343]
+transform = Transform3D(0.73845536, 0, 0.6743024, 0, 1, 0, -0.6743024, 0, 0.73845536, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/CameraRig" unique_id=1268485501]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 1.695, 14.747, 13.652)
+projection = 1
+size = 15.0

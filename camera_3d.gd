@@ -6,17 +6,24 @@ var followed : Node3D :
 		followed = value
 		distancez = self.position.z - followed.position.z
 		distancex = self.position.x - followed.position.x
-		pass
+		distancey = self.position.y - followed.position.y
+		yminimum = self.position.y / 2
 	get():
 		return followed
+
 # distance sur l'axe z à respecter
 # Note : la caméra a un Z > followed, distancez > 0
 var distancez : float
 # distance sur l'axe x à respecter (à l'écart ECART_MAX_X près)
 var distancex : float
 # écart absolu max toléré pour le suivi sur l'axe des x
+var distancey : float
+# écart absolu max toléré pour le suivi sur l'axe des x
 const ECART_MAX_X = 5.0
 const ECART_MAX_Z = 4.0
+const ECART_MAX_Y = 2.0
+# hauteur du followed en dessous laquelle on ne le suivra plus
+var yminimum : float
 # indicateur d'être trop près du sujet
 var troppres : bool = false
 # durée max pour rattraper son retard de calage de la caméra trop près
@@ -42,4 +49,12 @@ func _process(delta: float) -> void:
 		var sign_ecart = sign(self.position.x - followed.position.x - distancex)
 		# on recale la caméra sur l'écartmax
 		self.position.x = followed.position.x + distancex + ECART_MAX_X * sign_ecart
+	
+	if followed.position.y >= yminimum :
+		# Si la caméra est trop haute, on monte la caméra
+		if ecart > distancey:
+			self.position.y = followed.position.y + distancey
+		# Si on est trop bas en hauteur on remonte 
+		elif ecart < distancez - ECART_MAX_Y :
+			self.position.y = followed.position.y + distancey - ECART_MAX_Y
 	
