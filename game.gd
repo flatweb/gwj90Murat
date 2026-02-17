@@ -8,7 +8,7 @@ signal fini(score : int)
 
 func _ready():
 	gridmapSize = $Ground/MeshGround.mesh.size
-	populategridmap()
+	#populategridmap()
 	populatenuages()
 	
 	$Ground/CollisionGround.shape.size.x = gridmapSize.x
