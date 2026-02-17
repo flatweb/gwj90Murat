@@ -713,18 +713,3 @@ mesh = SubResource("ArrayMesh_iprb2")
 
 [node name="00_game-area-size2" parent="." unique_id=1131885053 instance=ExtResource("11_mfdv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
-sizeOfSpawn = Vector2(20, 20)
-
-[node name="Border" type="Area3D" parent="." unique_id=1575355589]
-transform = Transform3D(0.009145446, 0, 0.99995816, 0, 1, 0, -0.99995816, 0, 0.009145446, -25.675598, 4.4433594, 11.758484)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Border" unique_id=122546611]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3047485, 3.3799438, -0.024658203)
-shape = SubResource("BoxShape3D_j5wjh")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Border" unique_id=392866519]
-transform = Transform3D(200, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -3.8590698)
-mesh = SubResource("BoxMesh_vef74")
-
-[connection signal="body_entered" from="Border" to="Flock" method="_on_border_entered"]
-[connection signal="body_exited" from="Border" to="Flock" method="_on_border_exited"]
