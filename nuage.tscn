@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cfttkqdijd15r"]
 
+[ext_resource type="Script" uid="uid://csg8m06xeex1" path="res://nuage.gd" id="1_jcwyk"]
 [ext_resource type="Material" uid="uid://dalsu6p60tnr6" path="res://res/palettes/material_nuage.tres" id="1_v1xst"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v1xst"]
@@ -10,6 +11,7 @@ material = ExtResource("1_v1xst")
 [node name="Nuage" type="Area3D" unique_id=1496051760]
 collision_layer = 3
 collision_mask = 3
+script = ExtResource("1_jcwyk")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1128010245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41649175, 0, 0)
@@ -25,3 +27,5 @@ mesh = SubResource("SphereMesh_v1xst")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=197283345]
 transform = Transform3D(-0.19005513, -0.98177344, 0, 0.98177344, -0.19005513, 0, 0, 0, 1, -0.052546144, 0, 0)
 shape = SubResource("CapsuleShape3D_jcwyk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

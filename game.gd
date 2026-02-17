@@ -100,7 +100,7 @@ func populatenuages():
 	var instance : Node
 	for i in range(0,15):  #FIXME
 		instance = scene.instantiate()
-		instance.position.y = randf_range(5.0,8.0) #FIXME
+		instance.position.y = randf_range(5.0,12.0) #FIXME
 		instance.position.z = randf_range(40,82) #FIXME
 		instance.position.x = randf_range(-10,10) #FIXME : en fonction de la géométie
 		instance.scale = ECHELLE_1 * randf_range(1.0,2.0)

@@ -69,6 +69,14 @@ var distance : float
 # node de la forme OIE pour éviter de trop invoquer $OIE
 var nodeoie : Node3D
 
+# étapes et limite max de retour possible en arrière
+var stepsnoback : Array = [80.0, 60.0, 40.0, 20.0, 10.0] #TODO
+var maximumz : float
+const MARGE_MAXIMUMZ = 5.0
+
+func _init():
+	stepsnoback.sort()
+	
 func _ready():
 	nodeoie=$OIE
 	demarre()
@@ -80,6 +88,7 @@ func demarre():
 	speedVect = Vector3(0,0,-speedfront)
 	self.rotation = Vector3.ZERO
 	startpos = self.position
+	maximumz = startpos.z + MARGE_MAXIMUMZ 
 	en_vol = true
 	anim_start_vol()
 
@@ -255,15 +264,19 @@ func attente():
 		enaction = true
 		actionencours = action.ATTENTE
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_ATTENTE)
-		#print ("angle auto=", angle_correction)
 
 func correction():
 	if enaction == false :
 		enaction = true
 		actionencours = action.CORRECTION
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
-		#print ("angle auto=", angle_correction)
 		$AudioPlayerCri.play(4.0)
+
+func decroche():
+	# perturbation liée à un contact avec un nuage
+	var angle = randf_range(-PI/4,PI/4)
+	speedVect = speedVect.rotated(Vector3.UP, angle)
+	self.rotate_y(angle)
 
 func descendre(delta : float):
 	# Note : comme on descend la vitesse en Y est négative
@@ -374,6 +387,14 @@ func atterrissage():
 	queue_next_anim(ANIM_RESET)
 	$AudioPlayerCri.play(3.0)
 
+#---------------------------------------------------------------
+# Evénements liés à la mission
+#---------------------------------------------------------------
+func mission_remplie(node : Node):
+	if node.name == "Mission":
+		print ("Mission 1 terminée")
+		
+	
 # fin de partie
 func fin():
 	arrive.emit(distance,0)
@@ -470,7 +491,7 @@ func _physics_process(delta: float) -> void:
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
 	if not enaction and \
 		( abs(speedVect.x*1.0 + position.x) > limite_x \
-		   or speedVect.z*1.0 + position.z > startpos.z \
+		   or speedVect.z*1.0 + position.z > maximumz \
 		):
 		# on approche trop du bord
 		# on force un virage
@@ -529,6 +550,21 @@ func _physics_process(delta: float) -> void:
 				else:
 					# atterrissage
 					atterrissage()
+			elif obj.name.contains("Static"):
+				# on vient de rentrer dans un mur
+				self.position -= speedVect
+				correction()
+				virage(autorotspeed,delta)
+				# on verra le résultat au prochain cycle
+				
 	# la distance parcourue se cumule
 	distance += (self.position - positionavant).length()
-	#print ("dist=",distance)
+	
+	for stepz in stepsnoback :
+		if self.position.z < stepz :
+			var newmaxz = stepz + MARGE_MAXIMUMZ
+			if newmaxz < maximumz :
+				# Il faudra aussi tenir compte des missions non réalisées ? #TODO
+				print("On a franchi une nouvelle étape à ", stepz)
+				maximumz = newmaxz
+				break
