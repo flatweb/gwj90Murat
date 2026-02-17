@@ -114,3 +114,7 @@ func _process(_delta):
 	#print ($Camera3D.rotation.z)
 	#print ("^^^^^^^^")
 	pass
+
+
+func _on_border_exited(body: Node3D) -> void:
+	pass # Replace with function body.

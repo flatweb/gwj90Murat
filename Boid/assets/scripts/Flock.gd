@@ -19,9 +19,10 @@ var _predatorRef
 @export var bordersWeight: float = 300
 @export var predatorWeight: float = 2000
 @export var repulsorWeight: float = 1000
-
+@export var sizeOfSpawn: Vector2 = Vector2(10,10)
 var _boids = []
 var _repulsors = []
+var isOutBorder = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,9 +36,11 @@ func _ready():
 		add_child(instance)
 		_boids.append(instance)
 		
-		var x = randf_range(-12, 12)
-		var z = randf_range(-100, 100)
+		var x = randf_range(self.position.x - sizeOfSpawn.x,self.position.x + sizeOfSpawn.x)
+		var z = randf_range(self.position.z - sizeOfSpawn.y, self.position.z + sizeOfSpawn.y)
+		print(Vector2($".".global_position.x , global_position.z ))
 		instance.set_position(Vector3(x, 5 ,z))
+		print(Vector2(x,z))
 	_repulsors = get_tree().get_nodes_in_group("Repulsor")
 
 func _process(delta):
@@ -99,18 +102,14 @@ func _separation():
 			
 func _borders(delta):
 	for boid in _boids:
-		var pos = boid.get_position()
-		var _envDims = Vector4(-12,12,-100,100)
-		if (pos.x > 50 or pos.x < -50 or pos.z > 100 or pos.z < -100):
+
+		if (isOutBorder):
 			boid.timeOutOfBorders += delta
-			var midPoint = Vector3(0,5,0)
-			var dir = (midPoint - boid.get_position()).normalized()
+			var dir = (self.position - boid.get_position()).normalized()
 			boid.acceleration += dir * boid.timeOutOfBorders * bordersWeight
 		else:
 			boid.timeOutOfBorders = 0
-			if boid == _boids[1]:
-				#print("entre bordure")
-				pass
+
 			
 			
 func _alignment():
@@ -143,3 +142,12 @@ func _repulsor():
 				var dir = (boid.get_position() - repulsor.get_position()).normalized()
 				var multiplier = sqrt( (1 - dist / repulsorMinDIst))
 				boid.acceleration += dir * multiplier * repulsorWeight
+
+
+func _on_border_entered(body: Node3D) -> void:
+	isOutBorder = true
+
+
+
+func _on_bordery_exited(body: Node3D) -> void:
+	isOutBorder = false
