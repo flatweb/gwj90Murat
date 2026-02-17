@@ -7,14 +7,6 @@
 height = 0.79833984
 radius = 2.182129
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_aa81o"]
-radius = 0.2
-height = 0.6
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pmcpw"]
-radius = 0.1
-height = 0.4
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6s105"]
 resource_name = "Material.001"
 cull_mode = 2
@@ -446,21 +438,6 @@ script = ExtResource("1_pmcpw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1303361586]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13647461, 0)
 shape = SubResource("CylinderShape3D_fk3fv")
-
-[node name="Forme" type="Node3D" parent="." unique_id=119927184]
-visible = false
-
-[node name="Corps" type="MeshInstance3D" parent="Forme" unique_id=1016398366]
-transform = Transform3D(1, 0, 0, 0, -0.08917245, 0.99601614, 0, -0.99601614, -0.08917245, 0, 0, -0.015925169)
-mesh = SubResource("CapsuleMesh_aa81o")
-
-[node name="AileD" type="MeshInstance3D" parent="Forme" unique_id=1169078593]
-transform = Transform3D(-0.017558845, -0.9111622, -0.4116734, 0.99981433, -0.019267242, 0, -0.007931813, -0.411597, 0.9113314, 0.3, -0.094, 0.1)
-mesh = SubResource("CapsuleMesh_pmcpw")
-
-[node name="AileG" type="MeshInstance3D" parent="Forme" unique_id=474476359]
-transform = Transform3D(-0.017496575, -0.9112353, 0.4115143, 0.9998157, -0.019197399, 0, 0.007900006, 0.41143847, 0.91140324, -0.3, -0.094, 0.1)
-mesh = SubResource("CapsuleMesh_pmcpw")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1608969010]
 transform = Transform3D(-4.3362395e-08, 0.1261124, -0.99201596, 5.512548e-09, 0.99201596, 0.1261124, 1, 0, -4.371139e-08, -1.7310467, 0.3388319, 0)

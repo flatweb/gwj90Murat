@@ -85,11 +85,11 @@ func virage(change : float, delta : float):
 	speedVect = speedVect.rotated(Vector3.UP, angle)
 	
 	# changement d'inclinaison (axe Z)
-	if abs($Forme.rotation.z) < INCLINAISON_MAX_VIRAGE :
-		#print("vire from ",$Forme.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
-		$Forme.rotate_z(min(max(change,-1),1)*ROTSPEED*delta)
+	if abs($OIE.rotation.z) < INCLINAISON_MAX_VIRAGE :
+		#print("vire from ",$OIE.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
+		$OIE.rotate_z(min(max(change,-1),1)*ROTSPEED*delta)
 	else:
-		#print($Forme.rotation.z)
+		#print($OIE.rotation.z)
 		pass
 
 func looping():
@@ -135,7 +135,7 @@ func descente(delta : float):
 		speedVect.y=newspeedY
 		#print("en freinage à ",position.y,", speedY=",speedVect.y)
 		# changement progressif d'inclinaison (axe X vers le haut)
-		$Forme.rotation.x = max($Forme.rotation.x,-INCLINAISON_MAX_PIQUE*(position.y-ALTITUDE_MIN_CABRAGE)/altitudefreinage) # FIXME : intégrer la taille de l'oiseau ?
+		$OIE.rotation.x = max($OIE.rotation.x,-INCLINAISON_MAX_PIQUE*(position.y-ALTITUDE_MIN_CABRAGE)/altitudefreinage) # FIXME : intégrer la taille de l'oiseau ?
 		# correction de l'assiette
 		redresse(delta)
 	# accélération :
@@ -145,14 +145,14 @@ func descente(delta : float):
 		if speedVect.y < -speeddown :
 			speedVect.y = speeddown
 		# changement progressif d'inclinaison (axe X vers le bas)
-		if abs($Forme.rotation.x) < INCLINAISON_MAX_PIQUE :
-			$Forme.rotate_x(-0.1*ROTSPEED*delta)
+		if abs($OIE.rotation.x) < INCLINAISON_MAX_PIQUE :
+			$OIE.rotate_x(-0.1*ROTSPEED*delta)
 
 func redresse(delta : float):
-	if abs($Forme.rotation.z) < ROTBACKSPEED*delta :
-		$Forme.rotation.z = 0
+	if abs($OIE.rotation.z) < ROTBACKSPEED*delta :
+		$OIE.rotation.z = 0
 	else:
-		$Forme.rotate_z(-sign($Forme.rotation.z)*ROTBACKSPEED*delta)
+		$OIE.rotate_z(-sign($OIE.rotation.z)*ROTBACKSPEED*delta)
 
 
 func remonte(delta : float):
@@ -171,15 +171,15 @@ func remonte(delta : float):
 		if self.position.y >= startpos.y:
 			speedVect.y = 0.0
 	# changement d'inclinaison (axe X), un peu lente
-	if $Forme.rotation.x < INCLINAISON_MAX_MONTEE :
-		#print ("rot X=",$Forme.rotation.x)
-		#print ("max ",INCLINAISON_MAX_MONTEE - $Forme.rotation.x)
+	if $OIE.rotation.x < INCLINAISON_MAX_MONTEE :
+		#print ("rot X=",$OIE.rotation.x)
+		#print ("max ",INCLINAISON_MAX_MONTEE - $OIE.rotation.x)
 		#print ("min ",0.2*ROTSPEED*delta)
-		if $Forme.rotation.x <0 :
-			$Forme.rotate_x(min(0.5*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $Forme.rotation.x))
+		if $OIE.rotation.x <0 :
+			$OIE.rotate_x(min(0.5*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
 		else:
-			$Forme.rotate_x(min(0.2*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $Forme.rotation.x))
-		#print ("--> rot X=",$Forme.rotation.x)
+			$OIE.rotate_x(min(0.2*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
+		#print ("--> rot X=",$OIE.rotation.x)
 
 const FORCE_FREINAGE = 0.2
 var forcefreinage : float = FORCE_FREINAGE
@@ -205,8 +205,8 @@ func atterrissage():
 	actionencours = action.ATTERRISSAGE
 	speedVect.y = 0.0
 	position.y = tailleY/2
-	$Forme.rotation.x = 0.0
-	$Forme.rotation.y = 0.0 # FIXME
+	$OIE.rotation.x = 0.0
+	$OIE.rotation.y = 0.0 # FIXME
 	forcefreinage = FORCE_FREINAGE
 
 # fin de partie
@@ -310,20 +310,20 @@ func _physics_process(delta: float) -> void:
 			speedVect.y = 0.0
 		
 	# Equilibrage assiette
-	if not enaction and not mouvement and $Forme.rotation.x != 0 :
+	if not enaction and not mouvement and $OIE.rotation.x != 0 :
 		# changement d'inclinaison (axe X), un peu lente
-		#print("Avant chg rotX=",$Forme.rotation.x)
-		if $Forme.rotation.x != 0 :
-			if $Forme.rotation.x <0 :
-				$Forme.rotate_x(min(0.25*ROTSPEED*delta,-$Forme.rotation.x))
+		#print("Avant chg rotX=",$OIE.rotation.x)
+		if $OIE.rotation.x != 0 :
+			if $OIE.rotation.x <0 :
+				$OIE.rotate_x(min(0.25*ROTSPEED*delta,-$OIE.rotation.x))
 			else:
-				$Forme.rotate_x(-min(0.25*ROTSPEED*delta,$Forme.rotation.x))
-		#print("Après chg rotX=",$Forme.rotation.x)
+				$OIE.rotate_x(-min(0.25*ROTSPEED*delta,$OIE.rotation.x))
+		#print("Après chg rotX=",$OIE.rotation.x)
 
 	if $Indicateurs.visible :
 		$Indicateurs/Altitude.text = "\u2191%d" % roundi(position.y)
 		$Indicateurs/Vitesses.text = "(%2.1f,%2.1f)" % [speedVect.y,Vector2(speedVect.x,speedVect.z).length()]
-		$Indicateurs/AngleX.text = "(\u03B1:%d)" % [roundi(rad_to_deg($Forme.rotation.x))]
+		$Indicateurs/AngleX.text = "(\u03B1:%d)" % [roundi(rad_to_deg($OIE.rotation.x))]
 
 	var positionavant = self.position
 	
