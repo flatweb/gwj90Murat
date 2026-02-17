@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
 [ext_resource type="Texture2D" uid="uid://dm611xunoe140" path="res://res/modeles/00_game-area-size_Untitled.png" id="9_hve3p"]
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="10_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="11_mfdv2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -556,6 +557,7 @@ sizeOfSpawn = Vector2(15, 15)
 
 [node name="00_game-area-size" type="Node3D" parent="." unique_id=720039802]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.22202)
+visible = false
 
 [node name="couloir" type="MeshInstance3D" parent="00_game-area-size" unique_id=712372706]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, -236.4315)
@@ -708,3 +710,6 @@ mesh = SubResource("ArrayMesh_iprb2")
 [node name="ARBRE_clone_026" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=2488579]
 transform = Transform3D(0.008889724, 0, 0, 0, 0.008889724, 0, 0, 0, 0.008889724, -0.04397583, -0.0031163953, 0.052396357)
 mesh = SubResource("ArrayMesh_iprb2")
+
+[node name="00_game-area-size2" parent="." unique_id=1131885053 instance=ExtResource("11_mfdv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
