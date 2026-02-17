@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfttkqdijd15r"]
 
-[ext_resource type="Script" uid="uid://csg8m06xeex1" path="res://nuage.gd" id="1_jcwyk"]
+[ext_resource type="Script" uid="uid://coritl5gtw7s1" path="res://nuage.gd" id="1_jcwyk"]
 [ext_resource type="Material" uid="uid://dalsu6p60tnr6" path="res://res/palettes/material_nuage.tres" id="1_v1xst"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v1xst"]

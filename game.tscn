@@ -38,6 +38,7 @@ size = Vector2(25, 200)
 margin = 0.2
 size = Vector3(25, 1, 100)
 
+<<<<<<< Updated upstream
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
 cull_mode = 2
@@ -490,6 +491,12 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7p74h")
+=======
+[sub_resource type="BoxShape3D" id="BoxShape3D_j5wjh"]
+size = Vector3(200.4873, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vef74"]
+>>>>>>> Stashed changes
 
 [node name="Game" type="Node3D" unique_id=1608575864]
 script = ExtResource("1_feb5d")
@@ -542,7 +549,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.090391, 84.24133)
 script = null
 
 [node name="Flock" type="Node3D" parent="." unique_id=1544621110]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 66.992035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.391117)
 script = ExtResource("6_eow3j")
 boidScene = ExtResource("7_j5wjh")
 numberOfBoids = 50
@@ -553,6 +560,7 @@ repulsorMinDIst = 3.0
 cohesionWeight = 20.0
 separationWeight = 30.0
 alignmentWeight = 3.0
+<<<<<<< Updated upstream
 sizeOfSpawn = Vector2(15, 15)
 
 [node name="00_game-area-size" type="Node3D" parent="." unique_id=720039802]
@@ -713,3 +721,20 @@ mesh = SubResource("ArrayMesh_iprb2")
 
 [node name="00_game-area-size2" parent="." unique_id=1131885053 instance=ExtResource("11_mfdv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
+=======
+sizeOfSpawn = Vector2(20, 20)
+
+[node name="Border" type="Area3D" parent="." unique_id=1575355589]
+transform = Transform3D(0.009145446, 0, 0.99995816, 0, 1, 0, -0.99995816, 0, 0.009145446, -25.675598, 4.4433594, 11.758484)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border" unique_id=122546611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3047485, 3.3799438, -0.024658203)
+shape = SubResource("BoxShape3D_j5wjh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border" unique_id=392866519]
+transform = Transform3D(200, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -3.8590698)
+mesh = SubResource("BoxMesh_vef74")
+
+[connection signal="body_entered" from="Border" to="Flock" method="_on_border_entered"]
+[connection signal="body_exited" from="Border" to="Flock" method="_on_border_exited"]
+>>>>>>> Stashed changes

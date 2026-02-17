@@ -79,9 +79,8 @@ visualRange = 20.0
 predator = NodePath("../Oiseau")
 predatorMinDist = 12.0
 repulsorMinDIst = 3.0
-cohesionWeight = 1.0
-separationWeight = 2.0
-alignmentWeight = 2.0
+cohesionWeight = 20.0
+separationWeight = 30.0
 sizeOfSpawn = Vector2(50, 50)
 
 [node name="Area3D" type="Area3D" parent="." unique_id=315052396]

@@ -22,8 +22,6 @@ var _predatorRef
 @export var sizeOfSpawn: Vector2 = Vector2(10,10)
 var _boids = []
 var _repulsors = []
-var isOutBorder = false
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -36,23 +34,20 @@ func _ready():
 		add_child(instance)
 		_boids.append(instance)
 		
-		var x = randf_range(self.position.x - sizeOfSpawn.x,self.position.x + sizeOfSpawn.x)
-		var z = randf_range(self.position.z - sizeOfSpawn.y, self.position.z + sizeOfSpawn.y)
-		print(Vector2($".".global_position.x , global_position.z ))
-		instance.set_position(Vector3(x, 5 ,z))
-		print(Vector2(x,z))
+		var x = randf_range(global_position.x - sizeOfSpawn.x,global_position.x + sizeOfSpawn.x)
+		var z = randf_range(global_position.z - sizeOfSpawn.y, global_position.z + sizeOfSpawn.y)
+		instance.set_position(Vector3(x, _predatorRef.position.y ,z))
 	_repulsors = get_tree().get_nodes_in_group("Repulsor")
 
 func _process(delta):
 	_detectNeighbors()
-	
-	_cohesion()	
+	_cohesion()
 	_separation()
 	_alignment()
 	_borders(delta)
-	
 	_repulsor()
 	_attractor()
+
 
 func _detectNeighbors():
 	for i in range(_boids.size()):
@@ -103,7 +98,7 @@ func _separation():
 func _borders(delta):
 	for boid in _boids:
 
-		if (isOutBorder):
+		if (boid.isOutOfBorder):
 			boid.timeOutOfBorders += delta
 			var dir = (self.position - boid.get_position()).normalized()
 			boid.acceleration += dir * boid.timeOutOfBorders * bordersWeight
@@ -128,9 +123,9 @@ func _alignment():
 
 func _attractor():
 	for boid in _boids:
-		var dist = boid.get_position().distance_to(_predatorRef.get_position())
+		var dist = boid.get_global_position().distance_to(_predatorRef.get_global_position())
 		if (dist < predatorMinDist):
-			var dir =  (_predatorRef.get_position() - boid.get_position()).normalized()
+			var dir =  (_predatorRef.get_global_position() - boid.get_global_position()).normalized()
 			var multiplier = sqrt( (1 - dist / predatorMinDist))
 			boid.acceleration += Vector3(dir.x,0,dir.z) * multiplier * predatorWeight
 			
@@ -145,9 +140,13 @@ func _repulsor():
 
 
 func _on_border_entered(body: Node3D) -> void:
-	isOutBorder = true
+	var node = body.get_parent()
+	if node.is_in_group("isBoid"):
+		node.isOutOfBorder = true
 
 
 
-func _on_bordery_exited(body: Node3D) -> void:
-	isOutBorder = false
+func _on_border_exited(body: Node3D) -> void:
+	var node = body.get_parent()
+	if node.is_in_group("isBoid"):
+		body.get_parent().isOutOfBorder = false

@@ -539,7 +539,7 @@ func _physics_process(delta: float) -> void:
 	var collisions : KinematicCollision3D
 	collisions = move_and_collide(speedVect*delta)
 	
-	if (collisions != null):
+	if (collisions != null && collisions.get_collider(0).get_parent().is_in_group("isBoid") ):
 		for i in range(0,collisions.get_collision_count()):
 			var obj : Node3D = collisions.get_collider(i)
 			print(obj.name)

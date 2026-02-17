@@ -20,7 +20,7 @@ var acceleration := Vector3.ZERO
 var neighbors := []
 var neighborsDistances := []
 var timeOutOfBorders := 0.0
-
+var isOutOfBorder = false
 
 func _ready():
 
@@ -35,8 +35,6 @@ func _process(delta):
 	acceleration.x = 0
 	acceleration.z = 0
 	velocity.y=0
-	
 	position += velocity * delta
-	
-	look_at(position + velocity)
+	look_at(global_position + velocity)
 	rotation += rotationOffset
