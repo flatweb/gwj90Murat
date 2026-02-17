@@ -90,7 +90,7 @@ func populategridmap():
 						index = tabindex[zone][randi_range(0,tabindex[zone].size()-1)]
 						# on positionne
 						gmap.set_cell_item(vect3, index, rotations[randi_range(0,3)])
-					
+		
 		gmap.show()
 	
 	
