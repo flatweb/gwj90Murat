@@ -13,7 +13,7 @@ const ALTITUDE_MIN_CABRAGE = 2.0
 # angle de rotation par seconde lors d'un virage
 const INCLINAISON_MAX_VIRAGE = PI*3/8
 # inclinaison maximale sur X en remontée
-const INCLINAISON_MAX_MONTEE = PI/6
+const INCLINAISON_MAX_MONTEE = PI/8
 # facteur de rotation pour ne pas sortir de la zone
 const FACTEUR_CORRECTION = 3.0
 # facteur de rotation pour l'attente en boucle, rotation lente
@@ -25,10 +25,14 @@ var speedfront : float = 4.0
 var speedlat : float = 2.0
 # Vitesse de vol en piqué
 var speeddown : float = speedfront * 1.5
+# Vitesse de vol en descente planée
+var speeddownslow : float = speedfront / 8
 # Vitesse de remontée
-var speedup : float = speeddown / 3
+var speedup : float = speedfront / 2
 # Altitude où on commence à freiner le piqué pour atterrir
 var altitudefreinage : float = 5.0
+# Altitude au delà de laquelle on cesse de monter
+var altitudemax : float = 50.0
 # vitesse de descente sous laquelle on ne passe pas en descente
 const VITESSE_Y_MIN = 3.0
 
@@ -51,6 +55,9 @@ var prevcam : Camera3D
 var speedVect : Vector3
 # position de départ, notamment pour remonter à l'altitude Y
 var startpos : Vector3
+# écart d'altitude toléré par rapport à la startpos avant de décider de corriger
+const ECART_ALTITUDE = 1.0
+
 # taille de l'oiseau en hauteur (pour gérer l'atterrisage)
 var tailleY : float
 
@@ -59,7 +66,11 @@ signal arrive(dist : float, nb : int)
 # distance parcourue au total
 var distance : float
 
+# node de la forme OIE pour éviter de trop invoquer $OIE
+var nodeoie : Node3D
+
 func _ready():
+	nodeoie=nodeoie
 	speedVect = Vector3(0,0,-speedfront)
 	self.rotation = Vector3.ZERO
 	startpos = self.position
@@ -71,6 +82,21 @@ func _ready():
 
 func set_limite_x(value):
 	limite_x = value
+
+# indicateur de vol en cours, avec battement d'ailes
+var en_vol : bool
+func anim_vol():
+	$OIE/AnimationPlayer.play("Vol_normal")
+	$AudioPlayer.play()
+
+func _on_loop_sound(player):
+	# Ne relance pas le son si on n'est plus en vol
+	if en_vol :
+		player.play()
+
+func stop_anim_vol():
+	en_vol = false
+	$OIE/AnimationPlayer.play("RESET")
 
 func virage(change : float, delta : float):
 	var angle : float = change*ANGLE_VIRAGE*delta
@@ -123,7 +149,7 @@ func correction():
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
 		#print ("angle auto=", angle_correction)
 
-func descente(delta : float):
+func descendre(delta : float):
 	# Note : comme on descend la vitesse en Y est négative
 	# si on est trop bas, on freine en Y, mais aussi en front
 	if position.y < altitudefreinage:
@@ -154,23 +180,25 @@ func redresse(delta : float):
 	else:
 		$OIE.rotate_z(-sign($OIE.rotation.z)*ROTBACKSPEED*delta)
 
-
+func monter(delta):
+	remonte(delta)
+	
 func remonte(delta : float):
+	# 1. changement de la vitesse verticale
 	if speedVect.y < 0:
 		# on est toujours en descente, on commence par freiner, assez fort
-		speedVect.y += delta * (0.9)*speeddown
+		speedVect.y += delta / 0.5 * speeddown  #(en 0.5 s)
 		if speedVect.y > 0 :
 			# on se stabilise
 			speedVect.y = 0
 	elif speedVect.y < speedup :
-		# on commence à remonter, lentement
-		speedVect.y += delta * (0.25)*speeddown
-		if speedVect.y > -speeddown :
-			speedVect.y = speeddown
+		# on va commencer à remonter, lentement
+		speedVect.y += delta / 1.0 * speedup  # il faut 1s pour atteindre la vitesse normale de montée
+		if speedVect.y > speedup :
+			speedVect.y = speedup
 		#print ("altitude=",self.position.y,",vers=",startpos.y)
-		if self.position.y >= startpos.y:
-			speedVect.y = 0.0
-	# changement d'inclinaison (axe X), un peu lente
+
+	# 2. changement d'inclinaison (axe X), un peu lente
 	if $OIE.rotation.x < INCLINAISON_MAX_MONTEE :
 		#print ("rot X=",$OIE.rotation.x)
 		#print ("max ",INCLINAISON_MAX_MONTEE - $OIE.rotation.x)
@@ -178,8 +206,25 @@ func remonte(delta : float):
 		if $OIE.rotation.x <0 :
 			$OIE.rotate_x(min(0.5*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
 		else:
-			$OIE.rotate_x(min(0.2*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
-		#print ("--> rot X=",$OIE.rotation.x)
+			#print ("  rot delta=",0.2*ROTSPEED*delta)
+			#print ("  rot max  =",INCLINAISON_MAX_MONTEE - $OIE.rotation.x)
+			$OIE.rotate_x(min(0.1*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
+			#print ("--> rot X=",$OIE.rotation.x)
+
+func plane(delta):
+	if speedVect.y > 0:
+		# on est toujours en montée, on commence par freiner, assez fort
+		speedVect.y -= delta * (0.8)*speeddown
+		if speedVect.y < 0 :
+			# on se stabilise
+			speedVect.y = 0
+	elif speedVect.y < speeddownslow :
+		# on va commencer à descendre, lentement
+		speedVect.y -= delta / 1.0 * speeddownslow  # il faut 1s pour atteindre la vitesse normale
+		if speedVect.y < -speeddownslow :
+			speedVect.y = -speeddownslow
+		#print ("altitude=",self.position.y,",vers=",startpos.y)
+	# on ne change pas d'inclinaison
 
 const FORCE_FREINAGE = 0.2
 var forcefreinage : float = FORCE_FREINAGE
@@ -229,12 +274,20 @@ func _process(_delta):
 	# fin de partie ?  FIXME
 	if position.z < 0.0 : #(pour l'instant c'est le milieu)
 		fin()
+
+func do_action():
+	pass
+
+func do_no_action():
+	pass
 	
 func _physics_process(delta: float) -> void:
 	var vire = Input.get_axis("droite","gauche")
 	var pique = Input.is_action_pressed("descend")
+	var monte = Input.is_action_pressed("monte")
 	var mouvement :bool = false
 	
+	# Si il y a une action automatique en cours, on privilégie l'action
 	if enaction and actionencours == action.ATTENTE \
 				and (vire != 0 or pique):
 		# sortie du mode attente, pour se remettre dans l'axe
@@ -247,11 +300,17 @@ func _physics_process(delta: float) -> void:
 			
 			speedVect.z = -speedfront
 			self.rotation = Vector3.ZERO
+	
+	# Si pas d'action automatique, on 
 	if not enaction:
 		if pique :
-			descente(delta)
+			descendre(delta)
 			mouvement = true
 			# on ne combine pas pique et changement de direction
+		elif monte :
+			monter(delta)
+			mouvement = true
+		# on ne combine pas montée et changement de direction ?!?: TODO: a faire
 		elif vire != 0:
 			# changement de direction
 			virage(vire,delta)
@@ -262,11 +321,6 @@ func _physics_process(delta: float) -> void:
 			# 1. retour naturel à une inclinaison normale latérale sans action
 			redresse(delta)
 
-			# 2. remontée suite à un piqué ou en décollage
-			if self.position.y < startpos.y:
-				remonte(delta)
-				mouvement = true
-				
 	elif enaction:
 		virage(autorotspeed,delta)
 		if actionencours == action.CORRECTION:
@@ -301,24 +355,35 @@ func _physics_process(delta: float) -> void:
 		correction()
 		virage(autorotspeed,delta)
 
-
-	# Equilibrage vertical
+	# Quand on est en vol régulier
 	if not enaction and not mouvement:
-		if self.position.y > startpos.y:
-			speedVect.y = -(self.position.y - startpos.y)*delta
-		else:
-			speedVect.y = 0.0
+		# 1. on remonte si on est trop bas
+		if self.position.y < startpos.y - ECART_ALTITUDE:
+			remonte(delta)
+			# on considère qu'on est quand même en mouvement (pour ne pas corriger 
+			mouvement = true
 		
-	# Equilibrage assiette
-	if not enaction and not mouvement and $OIE.rotation.x != 0 :
-		# changement d'inclinaison (axe X), un peu lente
-		#print("Avant chg rotX=",$OIE.rotation.x)
+	# Quand on est VRAIMENT en vol régulier
+	if not enaction and not mouvement:
+		# 2. Equilibrage vertical, pour se remettre à plat
 		if $OIE.rotation.x != 0 :
-			if $OIE.rotation.x <0 :
-				$OIE.rotate_x(min(0.25*ROTSPEED*delta,-$OIE.rotation.x))
-			else:
-				$OIE.rotate_x(-min(0.25*ROTSPEED*delta,$OIE.rotation.x))
-		#print("Après chg rotX=",$OIE.rotation.x)
+			# changement d'inclinaison (axe X), un peu lente
+			#print("Avant chg rotX=",$OIE.rotation.x)
+			if $OIE.rotation.x != 0 :
+				if $OIE.rotation.x <0 :
+					$OIE.rotate_x(min(0.1*ROTSPEED*delta,-$OIE.rotation.x))
+				else:
+					$OIE.rotate_x(-min(0.1*ROTSPEED*delta,$OIE.rotation.x))
+			#print("Après chg rotX=",$OIE.rotation.x)
+
+		# 4. on plane en descente si on est trop haut
+		if self.position.y > startpos.y + ECART_ALTITUDE:
+			plane(delta)
+
+		# 5 Quand on revient vers l'altitude d'origine, on se stabilise
+		if abs(self.position.y - startpos.y) <= ECART_ALTITUDE:
+			speedVect.y = 0.0
+
 
 	if $Indicateurs.visible :
 		$Indicateurs/Altitude.text = "\u2191%d" % roundi(position.y)
