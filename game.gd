@@ -9,6 +9,7 @@ signal fini(score : int)
 func _ready():
 	gridmapSize = $Ground/MeshGround.mesh.size
 	populategridmap()
+	populatenuages()
 	
 	$Ground/CollisionGround.shape.size.x = gridmapSize.x
 	$Ground/CollisionGround.shape.size.z = gridmapSize.y
@@ -93,7 +94,19 @@ func populategridmap():
 		
 		gmap.show()
 	
-	
+func populatenuages():
+	var scene = preload("res://nuage.tscn") 
+	const ECHELLE_1 : Vector3 = Vector3(1.0,1.0,1.0)
+	var instance : Node
+	for i in range(0,15):  #FIXME
+		instance = scene.instantiate()
+		instance.position.y = randf_range(5.0,8.0) #FIXME
+		instance.position.z = randf_range(40,82) #FIXME
+		instance.position.x = randf_range(-10,10) #FIXME : en fonction de la géométie
+		instance.scale = ECHELLE_1 * randf_range(1.0,2.0)
+		
+		add_child(instance)
+		instance.show()
 	
 func _process(_delta):
 	#print ("vvvvvvv")
