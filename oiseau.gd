@@ -72,10 +72,8 @@ var nodeoie : Node3D
 func _ready():
 	nodeoie=$OIE
 	demarre()
-	# FIXME, par défaut on considère que c'est la taille de la collisionShape
-	# FIXME, mais ça pourrait plutôt se basé sur le Mesh
+	# Par défaut on considère que c'est la taille de la collisionShape
 	tailleY=$CollisionShape3D.shape.height
-	pass
 
 func demarre():
 	$Indicateurs.hide()
@@ -83,25 +81,137 @@ func demarre():
 	self.rotation = Vector3.ZERO
 	startpos = self.position
 	en_vol = true
-	anim_vol()
+	anim_start_vol()
 
 func set_limite_x(value):
 	limite_x = value
 
+
+# -----------------------------------------------------------------
+#   GESTION DE L'ANIMATION
+# -----------------------------------------------------------------
+# Note : j'ai supprimé le bouclage auto de l'animation, pour pouvoir enchainer des animations
+
+const ANIM_PLANE = "Vol_plane"
+const ANIM_VOL = "Vol_normal"
+const ANIM_RESET = "RESET"
+
 # indicateur de vol en cours, avec battement d'ailes
 var en_vol : bool
-func anim_vol():
-	$OIE/AnimationPlayer.play("Vol_normal")
+# enchainement des animations
+var nextanim : String
+var prevanim : String
+
+# On va gérer notre queue d'animation nous-mêmes TODO
+func queue_next_anim(anim:String):
+	#TODO : il faudra peut-être être plus malin à terme, quoique...
+	nextanim = anim
+	# Si une animation est déjà en cours, on attend la fin
+	if $OIE/AnimationPlayer.is_playing() : return
+	# Si le timer est en cours, on l'attend
+	if $TimerAttenteAnim.time_left > 0.0 : return
+	# sinon on le redémarre
+	$TimerAttenteAnim.start(1.0)
+	
+func _on_animation_finished(anim_name: StringName) -> void:
+	# Si le timer est en cours, on l'attend
+	if $TimerAttenteAnim.time_left > 0.0 :
+		prevanim = anim_name
+		return
+	if not en_vol : # FIXME : pourquoi ? pour l'atterrissage ?
+		# sinon on le redémarre
+		$TimerAttenteAnim.start(1.0)
+		return
+	change_anim(anim_name)
+
+# Pour les animations trop courtes, on préfère activer un timer
+func _on_timer_attente_anim_timeout() -> void:
+	print ("Changement sur timeout vers ", nextanim)
+	change_anim(prevanim)
+
+# Changement d'animation avec transition
+func change_anim(anim_name):
+	print ("Changement de ",anim_name," à ",nextanim)
+	match anim_name:
+		ANIM_VOL:
+			match nextanim:
+				ANIM_VOL:
+					anim_vol()
+				ANIM_PLANE:
+					anim_vol_to_plane()
+				_ :
+					anim_vol()
+		ANIM_PLANE:
+			match nextanim:
+				ANIM_VOL:
+					anim_plane_to_vol()
+				ANIM_PLANE:
+					anim_plane()
+				ANIM_RESET:
+					anim_reset()
+				_ :
+					anim_plane()
+		ANIM_RESET:
+			match nextanim:
+				ANIM_VOL:
+					anim_plane_to_vol()
+				ANIM_PLANE:
+					anim_plane()
+				ANIM_RESET:
+					anim_reset()
+				_ :
+					anim_reset()
+
+func anim_start_vol():
+	anim_vol()
 	$AudioPlayerAiles.play()
+	
+func anim_vol():
+	nextanim = ANIM_VOL
+	$OIE/AnimationPlayer.play(nextanim)
+
+func anim_plane_to_vol():
+	nextanim = ANIM_VOL
+	$OIE/AnimationPlayer.play_section(ANIM_VOL, 0.3, -1.0)
+	$AudioPlayerAiles.play()
+
+func anim_vol_to_plane():
+	nextanim = ANIM_PLANE
+	$OIE/AnimationPlayer.play_section(ANIM_PLANE, 0.0, 0.3)
+
+func anim_plane():
+	$TimerAttenteAnim.start(1.0)
+	nextanim = ANIM_PLANE
+	$OIE/AnimationPlayer.play_section(ANIM_PLANE, 0.29, 0.31)
+
+func anim_reset():
+	$TimerAttenteAnim.start(1.0)
+	nextanim = ANIM_RESET
+	$OIE/AnimationPlayer.play(ANIM_RESET)
+
+func anim_autoswitch():
+	if enaction : return
+	if nextanim == ANIM_RESET : return
+	if position.y > startpos.y : return # TODO : pas joli
+	
+	if randf() < 0.25 :
+		queue_next_anim(ANIM_PLANE)
+	else:
+		queue_next_anim(ANIM_VOL)
+
+func _on_timer_change_anim_timeout() -> void:
+	anim_autoswitch()
 
 func _on_loop_sound():
 	# Ne relance pas le son si on n'est plus en vol
 	if en_vol :
-		$AudioPlayerAiles.play()
+		pass
+		#$AudioPlayerAiles.play()
 
-func stop_anim_vol():
-	en_vol = false
-	$OIE/AnimationPlayer.play("RESET")
+
+# -----------------------------------------------------------------
+#   GESTION DES MOUVEMENTS
+# -----------------------------------------------------------------
 
 func virage(change : float, delta : float):
 	var angle : float = change*ANGLE_VIRAGE*delta
@@ -153,6 +263,7 @@ func correction():
 		actionencours = action.CORRECTION
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
 		#print ("angle auto=", angle_correction)
+		$AudioPlayerCri.play(4.0)
 
 func descendre(delta : float):
 	# Note : comme on descend la vitesse en Y est négative
@@ -161,8 +272,8 @@ func descendre(delta : float):
 		var newspeedY = speedVect.y * position.y/altitudefreinage*(1-delta)
 		newspeedY = min(-VITESSE_Y_MIN,newspeedY)
 		# Si on est déjà très bas, 
-		if position.y < 1.0: # FIXME : constante ou calcul
-			newspeedY = -VITESSE_Y_MIN #FIXME ? C'est un peu brutal
+		if position.y < 1.0: # TODO : constante ou calcul
+			newspeedY = -VITESSE_Y_MIN # C'est un peu brutal, mais ça marche
 		speedVect.y=newspeedY
 		#print("en freinage à ",position.y,", speedY=",speedVect.y)
 		# changement progressif d'inclinaison (axe X vers le haut)
@@ -230,6 +341,7 @@ func plane(delta):
 			speedVect.y = -speeddownslow
 		#print ("altitude=",self.position.y,",vers=",startpos.y)
 	# on ne change pas d'inclinaison
+	queue_next_anim(ANIM_PLANE)
 
 const FORCE_FREINAGE = 0.2
 var forcefreinage : float = FORCE_FREINAGE
@@ -248,6 +360,7 @@ func freinage(delta : float):
 	speedVect.x *=  (1-forcefreinage)*(1-delta)
 	speedVect.z *=  (1-forcefreinage)*(1-delta)
 	rotate_y(-rotation.y /2) #FIXME constante à régler
+	queue_next_anim(ANIM_PLANE)
 	#print("freinage final=",speedVect.length())
 	
 func atterrissage():
@@ -258,6 +371,8 @@ func atterrissage():
 	$OIE.rotation.x = 0.0
 	$OIE.rotation.y = 0.0 # FIXME
 	forcefreinage = FORCE_FREINAGE
+	queue_next_anim(ANIM_RESET)
+	$AudioPlayerCri.play(3.0)
 
 # fin de partie
 func fin():
@@ -275,7 +390,9 @@ func _process(_delta):
 			prevcam = get_viewport().get_camera_3d()
 			$Camera3D.make_current()
 			$Indicateurs.show()
-	
+	elif Input.is_action_just_pressed("varieanim",true):
+		anim_autoswitch()
+
 	# fin de partie ?  FIXME
 	if position.z < 0.0 : #(pour l'instant c'est le milieu)
 		fin()
@@ -342,13 +459,13 @@ func _physics_process(delta: float) -> void:
 				enaction = true
 				actionencours = action.ATTERRI
 		elif actionencours == action.DECOLLAGE:
+			queue_next_anim(ANIM_VOL)
 			remonte(delta)
 			if position.y > tailleY*4 : #TODO pourrait être affiné
 				enaction = false
 		elif actionencours == action.ATTENTE:
 			# on laisse tourner
 			pass
-
 
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
 	if not enaction and \
@@ -383,6 +500,7 @@ func _physics_process(delta: float) -> void:
 
 		# 4. on plane en descente si on est trop haut
 		if self.position.y > startpos.y + ECART_ALTITUDE:
+			queue_next_anim(ANIM_VOL)
 			plane(delta)
 
 		# 5 Quand on revient vers l'altitude d'origine, on se stabilise
