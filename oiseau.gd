@@ -10,8 +10,6 @@ var prevcam : Camera3D
 
 # position de départ, notamment pour remonter à l'altitude Y
 var startpos : Vector3
-# écart d'altitude toléré par rapport à la startpos avant de décider de corriger
-const ECART_ALTITUDE = 1.0
 
 # signal à émettre quand l'oiseau est arrivé, avec nb autres
 signal arrive(dist : float, nb : int)
@@ -83,34 +81,6 @@ func descendre(delta : float):
 func monter(delta):
 	remonte(delta)
 	
-func remonte(delta : float):
-	# 1. changement de la vitesse verticale
-	if speedVect.y < 0:
-		# on est toujours en descente, on commence par freiner, assez fort
-		speedVect.y += delta / 0.5 * speeddown  #(en 0.5 s)
-		if speedVect.y > 0 :
-			# on se stabilise
-			speedVect.y = 0
-	elif speedVect.y < speedup :
-		# on va commencer à remonter, lentement
-		speedVect.y += delta / 1.0 * speedup  # il faut 1s pour atteindre la vitesse normale de montée
-		if speedVect.y > speedup :
-			speedVect.y = speedup
-		#print ("altitude=",self.position.y,",vers=",startpos.y)
-
-	# 2. changement d'inclinaison (axe X), un peu lente
-	if $OIE.rotation.x < INCLINAISON_MAX_MONTEE :
-		#print ("rot X=",$OIE.rotation.x)
-		#print ("max ",INCLINAISON_MAX_MONTEE - $OIE.rotation.x)
-		#print ("min ",0.2*ROTSPEED*delta)
-		if $OIE.rotation.x <0 :
-			$OIE.rotate_x(min(0.5*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
-		else:
-			#print ("  rot delta=",0.2*ROTSPEED*delta)
-			#print ("  rot max  =",INCLINAISON_MAX_MONTEE - $OIE.rotation.x)
-			$OIE.rotate_x(min(0.1*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
-			#print ("--> rot X=",$OIE.rotation.x)
-
 
 const FORCE_FREINAGE = 0.2
 var forcefreinage : float = FORCE_FREINAGE
@@ -297,10 +267,12 @@ func _physics_process(delta: float) -> void:
 	var collisions : KinematicCollision3D
 	collisions = move_and_collide(speedVect*delta)
 	
-	if (collisions != null && collisions.get_collider(0).get_parent().is_in_group("isBoid") ):
+	if (collisions != null):
 		for i in range(0,collisions.get_collision_count()):
 			var obj : Node3D = collisions.get_collider(i)
-			print(obj.name)
+			if obj.get_parent().is_in_group("isBoid"): #TODO/FIXME : comprendre
+				continue
+			print("Oiseau collides avec ",obj.name)
 			if obj.name.contains("Ground"):
 				if enaction and actionencours == action.DECOLLAGE :
 					#on ignore la collision résiduelle
@@ -314,15 +286,30 @@ func _physics_process(delta: float) -> void:
 				correction()
 				virage(autorotspeed,delta)
 				# on verra le résultat au prochain cycle
+			elif obj.name.contains("Oiseau"):
+				# on est rentré dans un autre oiseau (bonus), on va dévier simplement
+				if not (enaction and actionencours == action.CORRECTION):
+					correction()
+				virage(autorotspeed,delta)
+				pass
+				#obj.capture(self) # FIXME
 	
 	# la distance parcourue se cumule
 	distance += (self.position - positionavant).length()
-	
-	for stepz in stepsnoback :
-		if self.position.z < stepz :
-			var newmaxz = stepz + MARGE_MAXIMUMZ
-			if newmaxz < maximumz :
-				# Il faudra aussi tenir compte des missions non réalisées ? #TODO
-				print("On a franchi une nouvelle étape à ", stepz)
-				maximumz = newmaxz
-				break
+
+	# on empêche de revenir en arrière
+	#for stepz in stepsnoback :
+		#if self.position.z < stepz :
+			#var newmaxz = stepz + MARGE_MAXIMUMZ
+			#if newmaxz < maximumz :
+				## Il faudra aussi tenir compte des missions non réalisées ? #TODO
+				#print("On a franchi une nouvelle étape à ", stepz)
+				#maximumz = newmaxz
+				#break
+
+# Un élément vient de rentrer dans notre zone d'influence
+func _on_area_influence_body_entered(body: Node3D) -> void:
+	if body.name == "OiseauBonus" :
+		print("Un oiseau bonus capturé")
+		body.devient_suiveur_de(self)
+	pass # Replace with function body.

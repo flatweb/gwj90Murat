@@ -25,6 +25,8 @@ const INCLINAISON_MAX_MONTEE = PI/8
 const FACTEUR_CORRECTION = 3.0
 # facteur de rotation pour l'attente en boucle, rotation lente
 const FACTEUR_ATTENTE = 0.7
+# écart d'altitude toléré par rapport à la position de référence avant de décider de corriger
+const ECART_ALTITUDE = 1.0
 
 # Vitesse de vol horizontal
 var speedfront : float = 4.0
@@ -215,22 +217,6 @@ func attente():
 		actionencours = action.ATTENTE
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_ATTENTE)
 
-func plane(delta : float):
-	if speedVect.y > 0:
-		# on est toujours en montée, on commence par freiner, assez fort
-		speedVect.y -= delta * (0.8)*speeddown
-		if speedVect.y < 0 :
-			# on se stabilise
-			speedVect.y = 0
-	elif speedVect.y < speeddownslow :
-		# on va commencer à descendre, lentement
-		speedVect.y -= delta / 1.0 * speeddownslow  # il faut 1s pour atteindre la vitesse normale
-		if speedVect.y < -speeddownslow :
-			speedVect.y = -speeddownslow
-		#print ("altitude=",self.position.y,",vers=",startpos.y)
-	# on ne change pas d'inclinaison
-	queue_next_anim(ANIM_PLANE)
-
 ## Calcul de l'angle de virage, en fonction de l'action, modulé par un facteur
 func calc_rot_speed(_act : action, facteur : float) -> float :
 		var signx : int
@@ -250,6 +236,7 @@ func calc_rot_speed(_act : action, facteur : float) -> float :
 # Met à jour speedVect en conséquence, et modifie l'inclinaison de l'oie
 func virage(change : float, delta : float):
 	if change == 0:
+		print ("WARNING ! virage avec change = 0")
 		return
 	var angle : float = change*ANGLE_VIRAGE*delta
 	if enaction and actionencours == action.CORRECTION:
@@ -283,7 +270,53 @@ func correction():
 		enaction = true
 		actionencours = action.CORRECTION
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
-		$AudioPlayerCri.play(4.0)
+		if get_node_or_null("AudioPlayerCri") != null:
+			$AudioPlayerCri.play(4.0)
+
+func plane(delta : float):
+	if speedVect.y > 0:
+		# on est toujours en montée, on commence par freiner, assez fort
+		speedVect.y -= delta * (0.8)*speeddown
+		if speedVect.y < 0 :
+			# on se stabilise
+			speedVect.y = 0
+	elif speedVect.y < speeddownslow :
+		# on va commencer à descendre, lentement
+		speedVect.y -= delta / 1.0 * speeddownslow  # il faut 1s pour atteindre la vitesse normale
+		if speedVect.y < -speeddownslow :
+			speedVect.y = -speeddownslow
+		#print ("altitude=",self.position.y,",vers=",startpos.y)
+	# on ne change pas d'inclinaison
+	queue_next_anim(ANIM_PLANE)
+
+func remonte(delta : float, rotx = true):
+	# 1. changement de la vitesse verticale
+	if speedVect.y < 0:
+		# on est toujours en descente, on commence par freiner, assez fort
+		speedVect.y += delta / 0.5 * speeddown  #(en 0.5 s)
+		if speedVect.y > 0 :
+			# on se stabilise
+			speedVect.y = 0
+	elif speedVect.y < speedup :
+		# on va commencer à remonter, lentement
+		speedVect.y += delta / 1.0 * speedup  # il faut 1s pour atteindre la vitesse normale de montée
+		if speedVect.y > speedup :
+			speedVect.y = speedup
+		#print ("altitude=",self.position.y,",vers=",startpos.y)
+
+	# 2. changement d'inclinaison (axe X), un peu lente
+	if $OIE.rotation.x < INCLINAISON_MAX_MONTEE :
+		#print ("rot X=",$OIE.rotation.x)
+		#print ("max ",INCLINAISON_MAX_MONTEE - $OIE.rotation.x)
+		#print ("min ",0.2*ROTSPEED*delta)
+		if $OIE.rotation.x <0 :
+			$OIE.rotate_x(min(0.5*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
+		else:
+			#print ("  rot delta=",0.2*ROTSPEED*delta)
+			#print ("  rot max  =",INCLINAISON_MAX_MONTEE - $OIE.rotation.x)
+			$OIE.rotate_x(min(0.1*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
+			#print ("--> rot X=",$OIE.rotation.x)
+
 
 func decroche():
 	# perturbation liée à un contact avec un nuage
