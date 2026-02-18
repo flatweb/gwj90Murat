@@ -28,10 +28,13 @@ func startintro():
 	start()
 
 func start():
+	$Oiseau.start_atterri_at($Marker3DStart.position)
+
 	# Repositionner la camera ?
 	$Camera3D.followed = $Oiseau
 	$Camera3D.make_current()
 	$AudioStreamPlayer.play()
+	
 
 func fin(distance,nb):
 	# fin de partie, on renvoie la distance parcourue comme score

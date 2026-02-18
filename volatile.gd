@@ -78,6 +78,8 @@ func _ready() -> void:
 const ANIM_PLANE = "Vol_plane"
 const ANIM_VOL = "Vol_normal"
 const ANIM_RESET = "RESET"
+const ANIM_REPOS = "RESET"
+const ANIM_DECOLLAGE = "Vol_normal"
 
 # indicateur de vol en cours, avec battement d'ailes
 var en_vol : bool
@@ -186,6 +188,15 @@ func anim_reset():
 	$TimerAttenteAnim.start(1.0)
 	nextanim = ANIM_RESET
 	$OIE/AnimationPlayer.play(ANIM_RESET)
+
+func anim_repos():  # TODO
+	$TimerAttenteAnim.start(1.0)
+	nextanim = ANIM_RESET
+	$OIE/AnimationPlayer.play(ANIM_RESET)
+
+func anim_decollage():  # TODO
+	anim_start_vol()
+
 
 func anim_autoswitch():
 	if enaction : return

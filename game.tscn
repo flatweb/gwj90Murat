@@ -522,18 +522,43 @@ debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
 transform = Transform3D(1, 0, 0, 0, 0.29970688, 0.9540313, 0, -0.9540313, 0.29970688, 0, 20.078451, 80.2454)
 shadow_enabled = true
 
+[node name="Marker3DStart" type="Marker3D" parent="." unique_id=1720991345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8984642, 0.52928734, 83.53765)
+gizmo_extents = 4.0
+
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
 
-[node name="OiseauBonus" parent="." unique_id=1559759492 instance=ExtResource("4_iotsf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3944397, 13.099802, 86.10365)
-
 [node name="Camera3D" type="Camera3D" parent="." unique_id=295921986]
-transform = Transform3D(0.60181504, 0.6675055, -0.43846917, 0, 0.54902285, 0.83580744, 0.79863554, -0.50300145, 0.3304102, -19.177612, 38.955605, 107.79487)
+transform = Transform3D(0.60181504, 0.6675055, -0.43846914, 0, 0.54902285, 0.83580744, 0.79863554, -0.50300145, 0.33041018, -19.177612, 38.955605, 107.79487)
 current = true
 fov = 30.0
 far = 1000.0
 script = ExtResource("4_7jktm")
+
+[node name="OiseauBonus1" parent="." unique_id=1559759492 instance=ExtResource("4_iotsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.394, 10, 57.326)
+
+[node name="OiseauBonus2" parent="." unique_id=783500081 instance=ExtResource("4_iotsf")]
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -14.987, 15, -52.213)
+
+[node name="OiseauBonus3" parent="." unique_id=20151608 instance=ExtResource("4_iotsf")]
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0, 4, -134.393)
+
+[node name="OiseauBonus4" parent="." unique_id=692412367 instance=ExtResource("4_iotsf")]
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0, 10, -244.464)
+
+[node name="OiseauBonus5" parent="." unique_id=248780560 instance=ExtResource("4_iotsf")]
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0, 10, -214.819)
+
+[node name="OiseauBonus6" parent="." unique_id=1456902037 instance=ExtResource("4_iotsf")]
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 25.615, 10, -190.652)
+
+[node name="OiseauBonus7" parent="." unique_id=1446929511 instance=ExtResource("4_iotsf")]
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -40.314, 10, -232.831)
+
+[node name="OiseauBonus8" parent="." unique_id=1093410312 instance=ExtResource("4_iotsf")]
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -29.963, 10, -199.666)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1714319163]
 stream = ExtResource("4_fc0e3")

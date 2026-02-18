@@ -32,6 +32,13 @@ func _ready():
 	# Par défaut on considère que c'est la taille de la collisionShape
 	tailleY=$CollisionShape3D.shape.height
 
+func start_atterri_at(pos : Vector3):
+	anim_repos()
+	speedVect = Vector3.ZERO
+	self.position = pos
+	enaction = true
+	actionencours = action.ATTERRI
+	
 func demarre():
 	$Indicateurs.hide()
 	speedVect = Vector3(0,0,-speedfront)
@@ -99,7 +106,7 @@ func freinage(delta : float):
 	speedVect.x *=  (1-forcefreinage)*(1-delta)
 	speedVect.z *=  (1-forcefreinage)*(1-delta)
 	rotate_y(-rotation.y /2) #FIXME constante à régler
-	queue_next_anim(ANIM_PLANE)
+	queue_next_anim(ANIM_RESET)
 	#print("freinage final=",speedVect.length())
 	
 func atterrissage():
@@ -178,7 +185,7 @@ func _physics_process(delta: float) -> void:
 		enaction = false
 		correction()
 	if enaction and actionencours == action.ATTERRI \
-		and Input.is_action_pressed("decolle"):
+		and Input.is_action_pressed("decolle") or Input.is_action_pressed("monte"):
 			do_decolle()
 	
 	# Si pas d'action automatique, on cherche une commande
@@ -291,8 +298,6 @@ func _physics_process(delta: float) -> void:
 				if not (enaction and actionencours == action.CORRECTION):
 					correction()
 				virage(autorotspeed,delta)
-				pass
-				#obj.capture(self) # FIXME
 	
 	# la distance parcourue se cumule
 	distance += (self.position - positionavant).length()
