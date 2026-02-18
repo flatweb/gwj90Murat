@@ -105,7 +105,6 @@ func populategridmap():
 	
 func populatenuages():
 	var scene = preload("res://nuage.tscn") 
-	const ECHELLE_1 : Vector3 = Vector3(1.0,1.0,1.0)
 	var instance : Node
 	var vent : Vector3 = Vector3.ZERO
 	
@@ -115,13 +114,9 @@ func populatenuages():
 	
 	for i in range(0,100):  #FIXME constante ou réglage
 		instance = scene.instantiate()
-		instance.position.y = randf_range(nuage_area_size.position.y,nuage_area_size.end.y) #FIXME
-		instance.position.z = randf_range(nuage_area_size.position.z,nuage_area_size.end.z) #FIXME
-		instance.position.x = randf_range(nuage_area_size.position.x,nuage_area_size.end.x) #FIXME : en fonction de la géométie
-		instance.scale = ECHELLE_1 * randf_range(1.0,2.0)
-		instance.initlimites(nuage_area_size)
-		
+		instance.createin(nuage_area_size)
 		vent = instance.ajoutervent(vent)
+		# on va réutilser le vent pour les suivants
 		
 		add_child(instance)
 		instance.show()
@@ -168,3 +163,12 @@ func _process(_delta):
 	#print ($Camera3D.rotation.z)
 	#print ("^^^^^^^^")
 	pass
+
+
+func _on_area_porte1_body_entered(body: Node3D) -> void:
+	print ("collision avec ", body.name)
+	if body.name == "Oiseau" :
+		for child in $Porte1Nuages.get_children():
+			if child.name.begins_with("Nuage"):
+				child.endestruction = true
+		pass # Replace with function body.

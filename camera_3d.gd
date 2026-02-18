@@ -20,7 +20,7 @@ var distancex : float
 var distancey : float
 # écart absolu max toléré pour le suivi sur l'axe des x
 const ECART_MAX_X = 5.0
-const ECART_MAX_Z = 4.0
+const ECART_MAX_Z = 1.0
 const ECART_MAX_Y = 2.0
 # hauteur du followed en dessous laquelle on ne le suivra plus
 var yminimum : float

@@ -492,6 +492,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7p74h")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_iotsf"]
+size = Vector3(38.108, 30, 5)
+
 [node name="Game" type="Node3D" unique_id=1608575864]
 script = ExtResource("1_feb5d")
 
@@ -742,3 +745,32 @@ mesh = SubResource("ArrayMesh_iprb2")
 
 [node name="00_game-area-size2" parent="." unique_id=1131885053 instance=ExtResource("11_mfdv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
+
+[node name="Porte1Nuages" type="Node3D" parent="." unique_id=1127743841]
+
+[node name="Area3D" type="Area3D" parent="Porte1Nuages" unique_id=214566935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66999817, -9.40636, -90.43789)
+collision_layer = 130
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Porte1Nuages/Area3D" unique_id=670217028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5556927, 3.4970703, 26.059143)
+shape = SubResource("BoxShape3D_iotsf")
+
+[node name="Nuage1" parent="Porte1Nuages" unique_id=1748426639 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.0308895, 8.362883, -77.881905)
+
+[node name="Nuage2" parent="Porte1Nuages" unique_id=640783606 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0.57259226, 10.288874, -76.58059)
+
+[node name="Nuage4" parent="Porte1Nuages" unique_id=635482864 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.1927428, 6.006893, -76.58059)
+
+[node name="Nuage5" parent="Porte1Nuages" unique_id=91914079 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.6164527, 5.9303303, -76.58059)
+
+[node name="Nuage3" parent="Porte1Nuages" unique_id=1262863318 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.667706, 8.363131, -75.707344)
+
+[node name="Porte2Nuages" type="Node3D" parent="." unique_id=933710552]
+
+[connection signal="body_entered" from="Porte1Nuages/Area3D" to="." method="_on_area_porte1_body_entered"]
