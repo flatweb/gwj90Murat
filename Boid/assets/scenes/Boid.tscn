@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cmo1mv0y5atk1" path="res://Boid/assets/sprites/boid.png" id="1"]
 [ext_resource type="Script" uid="uid://kcs5tq84kiag" path="res://Boid/assets/scripts/Boid.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://douafp5k5u4o1" path="res://res/modeles/00_petit-oiseau.glb" id="3_ffqxe"]
 [ext_resource type="Texture2D" uid="uid://botpqctusx3k" path="res://res/modeles/OIE_ANIM+TEXTURE_actions_Cube Base Color.png" id="3_pihgk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gb1f"]
@@ -15,6 +16,9 @@ height = 0.6
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ffqxe"]
 radius = 0.1
 height = 0.4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pihgk"]
+height = 0.75
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6s105"]
 resource_name = "Material.001"
@@ -199,9 +203,6 @@ _data = {
 &"Vol_normal": SubResource("Animation_t0h7t")
 }
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_pihgk"]
-height = 0.75
-
 [node name="Boid" type="Node3D" unique_id=825531383]
 script = ExtResource("3")
 baseColor = Color(0.870588, 0.415686, 0.964706, 1)
@@ -228,8 +229,17 @@ mesh = SubResource("CapsuleMesh_ffqxe")
 transform = Transform3D(-0.017496575, -0.9112353, 0.4115143, 0.9998157, -0.019197399, 0, 0.007900006, 0.41143847, 0.91140324, -0.3, -0.094, 0.1)
 mesh = SubResource("CapsuleMesh_ffqxe")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1576396794]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1003833365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("CylinderShape3D_pihgk")
+
 [node name="OIE_ANIM+TEXTURE_actions" type="Node3D" parent="." unique_id=1966625850]
 transform = Transform3D(-6.5567085e-09, 0, -0.15, 0, 0.15, 0, 0.15, 0, -6.5567085e-09, 0, 0, 0)
+visible = false
+
+[node name="00_petit-oiseau" parent="OIE_ANIM+TEXTURE_actions" unique_id=1084631450 instance=ExtResource("3_ffqxe")]
 
 [node name="Armature" type="Node3D" parent="OIE_ANIM+TEXTURE_actions" unique_id=1764132846]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
@@ -308,8 +318,5 @@ skeleton = NodePath("..")
 libraries/ = SubResource("AnimationLibrary_jx77t")
 autoplay = &"Vol_normal"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1576396794]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1003833365]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
-shape = SubResource("CylinderShape3D_pihgk")
+[node name="00_petit-oiseau" parent="." unique_id=508736611 instance=ExtResource("3_ffqxe")]
+transform = Transform3D(-8.742278e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.742278e-09, 0, 0, 0)
