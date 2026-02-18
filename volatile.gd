@@ -245,8 +245,12 @@ func calc_rot_speed(_act : action, facteur : float) -> float :
 		var rotspeed : float = -signz*signx*facteur
 		#print ("rotspeed auto=", rotspeed)
 		return rotspeed
-	
+
+# Effectue un virage début de virage vers la droite ou la gauche
+# Met à jour speedVect en conséquence, et modifie l'inclinaison de l'oie
 func virage(change : float, delta : float):
+	if change == 0:
+		return
 	var angle : float = change*ANGLE_VIRAGE*delta
 	if enaction and actionencours == action.CORRECTION:
 		#print (rotation.y)
@@ -259,18 +263,20 @@ func virage(change : float, delta : float):
 	speedVect = speedVect.rotated(Vector3.UP, angle)
 	
 	# changement d'inclinaison (axe Z)
-	if abs($OIE.rotation.z) < INCLINAISON_MAX_VIRAGE :
+	if abs($OIE.rotation.z) < abs(change)*INCLINAISON_MAX_VIRAGE :
 		#print("vire from ",$OIE.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
 		$OIE.rotate_z(min(max(change,-1),1)*ROTSPEED*delta)
-	else:
-		#print($OIE.rotation.z)
-		pass
+	elif abs($OIE.rotation.z) > abs(change)*INCLINAISON_MAX_VIRAGE * 1.2:
+		# on peut commencer à redresser
+		redresse(delta, abs(change))
 
-func redresse(delta : float):
+func redresse(delta : float, force: float = 1.0):
+	if force != 1.0 :
+		pass
 	if abs($OIE.rotation.z) < ROTBACKSPEED*delta :
 		$OIE.rotation.z = 0
 	else:
-		$OIE.rotate_z(-sign($OIE.rotation.z)*ROTBACKSPEED*delta)
+		$OIE.rotate_z(-sign($OIE.rotation.z)*force*ROTBACKSPEED*delta)
 
 func correction():
 	if enaction == false :

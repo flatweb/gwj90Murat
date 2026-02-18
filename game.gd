@@ -107,7 +107,11 @@ func populatenuages():
 		
 		add_child(instance)
 		instance.show()
-	
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("decolle"):
+		$OiseauBonus.capture($Oiseau)
+
 func _process(_delta):
 	#print ("vvvvvvv")
 	#print ($Oiseau.rotation.z)
