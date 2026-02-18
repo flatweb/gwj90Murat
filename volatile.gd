@@ -1,8 +1,57 @@
 extends CharacterBody3D
 class_name VolatileBody3D
 
+# taille de l'oiseau en hauteur (pour gérer l'atterrisage)
+var tailleY : float
+
+#------------------------------------------------------------
+# paramètres du mouvement - à passer en @export var à terme
+#------------------------------------------------------------
+# Vitesse de rotation sur virage
+const  ROTSPEED = 5.0
+# Vitesse de rotation sur retour naturel à la position stable
+const ROTBACKSPEED = 2.0
+# angle de rotation par seconde lors d'un virage
+const ANGLE_VIRAGE = 1.2
+# inclinaison maximale sur X en piqué
+const INCLINAISON_MAX_PIQUE = PI*3/8
+# altitude à partir de laquelle on se cabre pour freiner
+const ALTITUDE_MIN_CABRAGE = 2.0
+# angle de rotation par seconde lors d'un virage
+const INCLINAISON_MAX_VIRAGE = PI*3/8
+# inclinaison maximale sur X en remontée
+const INCLINAISON_MAX_MONTEE = PI/8
+# facteur de rotation pour ne pas sortir de la zone
+const FACTEUR_CORRECTION = 3.0
+# facteur de rotation pour l'attente en boucle, rotation lente
+const FACTEUR_ATTENTE = 0.7
+
+# Vitesse de vol horizontal
+var speedfront : float = 4.0
+# Vitesse de vol latéral
+var speedlat : float = 2.0
+# Vitesse de vol en piqué
+var speeddown : float = speedfront * 1.5
+# Vitesse de vol en descente planée
+var speeddownslow : float = speedfront / 8
+# Vitesse de remontée
+var speedup : float = speedfront / 2
+# Altitude où on commence à freiner le piqué pour atterrir
+var altitudefreinage : float = 5.0
+# Altitude au delà de laquelle on cesse de monter
+var altitudemax : float = 50.0
+# vitesse de descente sous laquelle on ne passe pas en descente
+const VITESSE_Y_MIN = 3.0
+
+
 # Vitesse de croisière
 var speedVect : Vector3
+# angle de rotation en virage
+var autorotspeed = 0
+
+# node de la forme OIE (ou autre) pour éviter de trop invoquer $OIE
+var nodeoie : Node3D
+
 # Action/Etat automatiques possibles
 enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATTERRISSAGE, ATTERRI, DECOLLAGE }
 
@@ -34,6 +83,7 @@ var en_vol : bool
 var nextanim : String
 var prevanim : String
 
+# Inutile pour l'instant TODO
 var timer_change_anim : Timer
 var timer_attente_anim : Timer
 
@@ -158,6 +208,90 @@ func _on_loop_sound():
 # -----------------------------------------------------------------
 #   GESTION DES MOUVEMENTS
 # -----------------------------------------------------------------
+
+func attente():
+	if enaction == false :
+		enaction = true
+		actionencours = action.ATTENTE
+		autorotspeed = calc_rot_speed(actionencours,FACTEUR_ATTENTE)
+
+func plane(delta : float):
+	if speedVect.y > 0:
+		# on est toujours en montée, on commence par freiner, assez fort
+		speedVect.y -= delta * (0.8)*speeddown
+		if speedVect.y < 0 :
+			# on se stabilise
+			speedVect.y = 0
+	elif speedVect.y < speeddownslow :
+		# on va commencer à descendre, lentement
+		speedVect.y -= delta / 1.0 * speeddownslow  # il faut 1s pour atteindre la vitesse normale
+		if speedVect.y < -speeddownslow :
+			speedVect.y = -speeddownslow
+		#print ("altitude=",self.position.y,",vers=",startpos.y)
+	# on ne change pas d'inclinaison
+	queue_next_anim(ANIM_PLANE)
+
+## Calcul de l'angle de virage, en fonction de l'action, modulé par un facteur
+func calc_rot_speed(_act : action, facteur : float) -> float :
+		var signx : int
+		if position.x == 0:
+			# si on est vraiment dans l'axe, on choisit le côté au hasard
+			signx = randi_range(0,1)*2-1
+		else :
+			signx = sign(position.x)
+		var signz = -1
+		if speedVect.z != 0 :
+			signz = sign(speedVect.z)
+		var rotspeed : float = -signz*signx*facteur
+		#print ("rotspeed auto=", rotspeed)
+		return rotspeed
+	
+func virage(change : float, delta : float):
+	var angle : float = change*ANGLE_VIRAGE*delta
+	if enaction and actionencours == action.CORRECTION:
+		#print (rotation.y)
+		if rotation.y == 0.0:
+			angle = 0.0
+		elif sign (rotation.y+angle) != sign(rotation.y):
+			# on a dépassé la remise dans l'axe
+			angle = -rotation.y
+	if angle != 0.0: self.rotate_y(angle)
+	speedVect = speedVect.rotated(Vector3.UP, angle)
+	
+	# changement d'inclinaison (axe Z)
+	if abs($OIE.rotation.z) < INCLINAISON_MAX_VIRAGE :
+		#print("vire from ",$OIE.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
+		$OIE.rotate_z(min(max(change,-1),1)*ROTSPEED*delta)
+	else:
+		#print($OIE.rotation.z)
+		pass
+
+func redresse(delta : float):
+	if abs($OIE.rotation.z) < ROTBACKSPEED*delta :
+		$OIE.rotation.z = 0
+	else:
+		$OIE.rotate_z(-sign($OIE.rotation.z)*ROTBACKSPEED*delta)
+
+func correction():
+	if enaction == false :
+		enaction = true
+		actionencours = action.CORRECTION
+		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
+		$AudioPlayerCri.play(4.0)
+
+func decroche():
+	# perturbation liée à un contact avec un nuage
+	var angle = randf_range(-PI/4,PI/4)
+	speedVect = speedVect.rotated(Vector3.UP, angle)
+	self.rotate_y(angle)
+
+
+func do_decolle():
+	enaction = true
+	actionencours = action.DECOLLAGE
+	
+	speedVect.z = -speedfront
+	self.rotation = Vector3.ZERO
 
 
 func _physics_process(delta: float) -> void:

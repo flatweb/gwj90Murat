@@ -1,45 +1,9 @@
 extends VolatileBody3D
 
-# Vitesse de rotation sur virage
-const ROTSPEED = 5.0
-# Vitesse de rotation sur retour naturel à la position stable
-const ROTBACKSPEED = 2.0
-# angle de rotation par seconde lors d'un virage
-const ANGLE_VIRAGE = 1.2
-# inclinaison maximale sur X en piqué
-const INCLINAISON_MAX_PIQUE = PI*3/8
-# altitude à partir de laquelle on se cabre pour freiner
-const ALTITUDE_MIN_CABRAGE = 2.0
-# angle de rotation par seconde lors d'un virage
-const INCLINAISON_MAX_VIRAGE = PI*3/8
-# inclinaison maximale sur X en remontée
-const INCLINAISON_MAX_MONTEE = PI/8
-# facteur de rotation pour ne pas sortir de la zone
-const FACTEUR_CORRECTION = 3.0
-# facteur de rotation pour l'attente en boucle, rotation lente
-const FACTEUR_ATTENTE = 0.7
-
-# Vitesse de vol horizontal
-var speedfront : float = 4.0
-# Vitesse de vol latéral
-var speedlat : float = 2.0
-# Vitesse de vol en piqué
-var speeddown : float = speedfront * 1.5
-# Vitesse de vol en descente planée
-var speeddownslow : float = speedfront / 8
-# Vitesse de remontée
-var speedup : float = speedfront / 2
-# Altitude où on commence à freiner le piqué pour atterrir
-var altitudefreinage : float = 5.0
-# Altitude au delà de laquelle on cesse de monter
-var altitudemax : float = 50.0
-# vitesse de descente sous laquelle on ne passe pas en descente
-const VITESSE_Y_MIN = 3.0
 
 # limite en +X ou -X de la position de l'oiseau
 var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
 # de quel côté on a atteint la limite ?
-var autorotspeed = 0
 
 # autre camera 
 var prevcam : Camera3D
@@ -49,16 +13,10 @@ var startpos : Vector3
 # écart d'altitude toléré par rapport à la startpos avant de décider de corriger
 const ECART_ALTITUDE = 1.0
 
-# taille de l'oiseau en hauteur (pour gérer l'atterrisage)
-var tailleY : float
-
 # signal à émettre quand l'oiseau est arrivé, avec nb autres
 signal arrive(dist : float, nb : int)
 # distance parcourue au total
 var distance : float
-
-# node de la forme OIE pour éviter de trop invoquer $OIE
-var nodeoie : Node3D
 
 # étapes et limite max de retour possible en arrière
 var stepsnoback : Array = [80.0, 60.0, 40.0, 20.0, 10.0] #TODO
@@ -70,8 +28,8 @@ func _init():
 	stepsnoback.sort()
 	
 func _ready():
-	super._ready()
 	nodeoie=$OIE
+	super._ready()
 	demarre()
 	# Par défaut on considère que c'est la taille de la collisionShape
 	tailleY=$CollisionShape3D.shape.height
@@ -93,61 +51,9 @@ func set_limite_x(value):
 #   GESTION DES MOUVEMENTS
 # -----------------------------------------------------------------
 
-func virage(change : float, delta : float):
-	var angle : float = change*ANGLE_VIRAGE*delta
-	if enaction and actionencours == action.CORRECTION:
-		#print (rotation.y)
-		if rotation.y == 0.0:
-			angle = 0.0
-		elif sign (rotation.y+angle) != sign(rotation.y):
-			# on a dépassé la remise dans l'axe
-			angle = -rotation.y
-	if angle != 0.0: self.rotate_y(angle)
-	speedVect = speedVect.rotated(Vector3.UP, angle)
-	
-	# changement d'inclinaison (axe Z)
-	if abs($OIE.rotation.z) < INCLINAISON_MAX_VIRAGE :
-		#print("vire from ",$OIE.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
-		$OIE.rotate_z(min(max(change,-1),1)*ROTSPEED*delta)
-	else:
-		#print($OIE.rotation.z)
-		pass
 
 func looping():
 	pass
-
-func calc_rot_speed(_act : action, facteur : float) -> float :
-		var signx : int
-		if position.x == 0:
-			# si on est vraiment dans l'axe, on choisit le côté au hasard
-			signx = randi_range(0,1)*2-1
-		else :
-			signx = sign(position.x)
-		var signz = -1
-		if speedVect.z != 0 :
-			signz = sign(speedVect.z)
-		var rotspeed : float = -signz*signx*facteur
-		#print ("rotspeed auto=", rotspeed)
-		return rotspeed
-	
-func attente():
-	if enaction == false :
-		enaction = true
-		actionencours = action.ATTENTE
-		autorotspeed = calc_rot_speed(actionencours,FACTEUR_ATTENTE)
-
-func correction():
-	if enaction == false :
-		enaction = true
-		actionencours = action.CORRECTION
-		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
-		$AudioPlayerCri.play(4.0)
-
-func decroche():
-	# perturbation liée à un contact avec un nuage
-	var angle = randf_range(-PI/4,PI/4)
-	speedVect = speedVect.rotated(Vector3.UP, angle)
-	self.rotate_y(angle)
 
 func descendre(delta : float):
 	# Note : comme on descend la vitesse en Y est négative
@@ -155,7 +61,7 @@ func descendre(delta : float):
 	if position.y < altitudefreinage:
 		var newspeedY = speedVect.y * position.y/altitudefreinage*(1-delta)
 		newspeedY = min(-VITESSE_Y_MIN,newspeedY)
-		# Si on est déjà très bas, 
+		# Si on est déjà très bas,
 		if position.y < 1.0: # TODO : constante ou calcul
 			newspeedY = -VITESSE_Y_MIN # C'est un peu brutal, mais ça marche
 		speedVect.y=newspeedY
@@ -173,12 +79,6 @@ func descendre(delta : float):
 		# changement progressif d'inclinaison (axe X vers le bas)
 		if abs($OIE.rotation.x) < INCLINAISON_MAX_PIQUE :
 			$OIE.rotate_x(-0.1*ROTSPEED*delta)
-
-func redresse(delta : float):
-	if abs($OIE.rotation.z) < ROTBACKSPEED*delta :
-		$OIE.rotation.z = 0
-	else:
-		$OIE.rotate_z(-sign($OIE.rotation.z)*ROTBACKSPEED*delta)
 
 func monter(delta):
 	remonte(delta)
@@ -211,21 +111,6 @@ func remonte(delta : float):
 			$OIE.rotate_x(min(0.1*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
 			#print ("--> rot X=",$OIE.rotation.x)
 
-func plane(delta):
-	if speedVect.y > 0:
-		# on est toujours en montée, on commence par freiner, assez fort
-		speedVect.y -= delta * (0.8)*speeddown
-		if speedVect.y < 0 :
-			# on se stabilise
-			speedVect.y = 0
-	elif speedVect.y < speeddownslow :
-		# on va commencer à descendre, lentement
-		speedVect.y -= delta / 1.0 * speeddownslow  # il faut 1s pour atteindre la vitesse normale
-		if speedVect.y < -speeddownslow :
-			speedVect.y = -speeddownslow
-		#print ("altitude=",self.position.y,",vers=",startpos.y)
-	# on ne change pas d'inclinaison
-	queue_next_anim(ANIM_PLANE)
 
 const FORCE_FREINAGE = 0.2
 var forcefreinage : float = FORCE_FREINAGE
@@ -289,8 +174,22 @@ func _process(_delta):
 	if position.z < 0.0 : #(pour l'instant c'est le milieu)
 		fin()
 
-func do_action():
-	pass
+func do_action(delta : float):
+	var vire = Input.get_axis("droite","gauche")
+	var pique = Input.is_action_pressed("descend")
+	var monte = Input.is_action_pressed("monte")
+	if pique :
+		descendre(delta)
+		# on ne combine pas pique et changement de direction
+	elif monte :
+		monter(delta)
+	# on ne combine pas montée et changement de direction ?!?: TODO: a faire
+	elif vire != 0:
+		# changement de direction
+		virage(vire,delta)
+	else:
+		return false
+	return true
 
 func do_no_action():
 	pass
@@ -302,6 +201,7 @@ func _physics_process(delta: float) -> void:
 	var mouvement :bool = false
 	
 	# Si il y a une action automatique en cours, on privilégie l'action
+	# TODO : déplacer ça en résultat de do_action ?
 	if enaction and actionencours == action.ATTENTE \
 				and (vire != 0 or pique or monte):
 		# sortie du mode attente, pour se remettre dans l'axe
@@ -309,29 +209,16 @@ func _physics_process(delta: float) -> void:
 		correction()
 	if enaction and actionencours == action.ATTERRI \
 		and Input.is_action_pressed("decolle"):
-			enaction = true
-			actionencours = action.DECOLLAGE
-			
-			speedVect.z = -speedfront
-			self.rotation = Vector3.ZERO
+			do_decolle()
 	
-	# Si pas d'action automatique, on 
+	# Si pas d'action automatique, on cherche une commande
 	if not enaction:
-		if pique :
-			descendre(delta)
-			mouvement = true
-			# on ne combine pas pique et changement de direction
-		elif monte :
-			monter(delta)
-			mouvement = true
-		# on ne combine pas montée et changement de direction ?!?: TODO: a faire
-		elif vire != 0:
-			# changement de direction
-			virage(vire,delta)
-			mouvement = true
+		if do_action(delta) :
+			# il y a eu une action du joueur
+			mouvement = true  # TODO : vérifier si ça sert ensuite ?
+			pass
 		else:
 			# Pas d'interaction
-			
 			# 1. retour naturel à une inclinaison normale latérale sans action
 			redresse(delta)
 
@@ -427,7 +314,7 @@ func _physics_process(delta: float) -> void:
 				correction()
 				virage(autorotspeed,delta)
 				# on verra le résultat au prochain cycle
-				
+	
 	# la distance parcourue se cumule
 	distance += (self.position - positionavant).length()
 	
