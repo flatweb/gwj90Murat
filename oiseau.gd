@@ -290,14 +290,15 @@ func _physics_process(delta: float) -> void:
 			elif obj.name.contains("Static"):
 				# on vient de rentrer dans un mur
 				self.position -= speedVect
-				correction()
-				virage(autorotspeed,delta)
+				#correction()
+				#virage(autorotspeed,delta)
 				# on verra le résultat au prochain cycle
 			elif obj.name.contains("Oiseau"):
 				# on est rentré dans un autre oiseau (bonus), on va dévier simplement
 				if not (enaction and actionencours == action.CORRECTION):
-					correction()
-				virage(autorotspeed,delta)
+					pass
+					#correction()
+				#virage(autorotspeed,delta)
 	
 	# la distance parcourue se cumule
 	distance += (self.position - positionavant).length()
@@ -314,7 +315,7 @@ func _physics_process(delta: float) -> void:
 
 # Un élément vient de rentrer dans notre zone d'influence
 func _on_area_influence_body_entered(body: Node3D) -> void:
-	if body.name == "OiseauBonus" :
-		print("Un oiseau bonus capturé")
+	if body.name.contains( "OiseauBonus" ) :
+		print("Un oiseau bonus capturé : ", body.name)
 		body.devient_suiveur_de(self)
 	pass # Replace with function body.

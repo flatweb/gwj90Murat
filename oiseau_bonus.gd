@@ -31,8 +31,8 @@ func devient_suiveur_de(_leader : Node3D):
 	if enaction :
 		if actionencours == action.ATTENTE :
 			enaction = false
-			decroche() #FIXME sauf si on est trop bas ?!?
-	# On désactive les layers 2 et 3? pour ne plsu déclencher la capture
+			decroche(0.0)
+	# On désactive les layers 2 et 3? pour ne plus déclencher la capture
 	self.set_collision_layer_value(2, false)
 	self.set_collision_layer_value(3, false)
 		
@@ -110,14 +110,24 @@ func _physics_process(delta: float) -> void:
 					#atterrissage()  #TODO : est-ce bien raisonnable
 					pass
 			elif obj.name.contains("Static"):
-				# on vient de rentrer dans un mur, ce n'est pas normal
-				self.position -= speedVect
-				correction()
-				virage(autorotspeed,delta)
+				# on vient de rentrer dans un mur ou un boids, ce n'est pas normal
+				var groups = obj.get_groups()
+				#self.position -= speedVect
+				#correction()
+				#virage(autorotspeed,delta)
+				# on le fait plutôt disparaitre
+				print ("Choc contre un Static : free de ",obj.name, " dans ", obj.get_groups())
+				queue_free()
 				# on verra le résultat au prochain cycle
 			elif obj.name.contains("Oiseau"):
 				# on vient de rentrer dans un autre oiseau
-				decroche()
+				pass
+				decroche(delta)
 	elif enaction and actionencours == action.CORRECTION :
 		# plus de collision, on reprend son chemin
+		print ("fin des collisions pour Oiseau Bonus")
+		enaction = false
+	elif enaction and actionencours == action.DECROCHE :
+		# plus de collision, on reprend son chemin
+		print ("fin des collisions pour Oiseau Bonus")
 		enaction = false

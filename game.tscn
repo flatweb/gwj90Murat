@@ -537,7 +537,7 @@ far = 1000.0
 script = ExtResource("4_7jktm")
 
 [node name="OiseauBonus1" parent="." unique_id=1559759492 instance=ExtResource("4_iotsf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.394, 10, 57.326)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67743254, 10, 66.04686)
 
 [node name="OiseauBonus2" parent="." unique_id=783500081 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -14.987, 15, -52.213)

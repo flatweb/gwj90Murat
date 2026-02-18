@@ -2,12 +2,18 @@ extends Node3D
 
 #Par défaut, on considère que le gridmap sera de la même size que le $MeshGround
 var gridmapSize : Vector2
+var game_area_size : AABB
+@export var nbnuages : int = 50
 
 # signal émis à la fin du jeu pour prévenir le noeud off-play
 signal fini(score : int)
 
 func _ready():
 	gridmapSize = $Ground/MeshGround.mesh.size
+	game_area_size = get_node_aabb(get_node("00_game-area-size2"))
+	game_area_size.position.y = 0.0  # TODO constante ou autre ?
+	game_area_size.end.y = 40.0  # TODO constante ou autre ?
+	
 	#populategridmap()
 	populatenuages()
 	
@@ -101,19 +107,60 @@ func populatenuages():
 	var scene = preload("res://nuage.tscn") 
 	const ECHELLE_1 : Vector3 = Vector3(1.0,1.0,1.0)
 	var instance : Node
-	for i in range(0,15):  #FIXME
+	var vent : Vector3 = Vector3.ZERO
+	
+	var nuage_area_size : AABB = game_area_size
+	nuage_area_size.position.y = 5.0  # TODO constante ou réglage
+	nuage_area_size.end.y = 25.0  # TODO constante ou réglage
+	
+	for i in range(0,100):  #FIXME constante ou réglage
 		instance = scene.instantiate()
-		instance.position.y = randf_range(5.0,12.0) #FIXME
-		instance.position.z = randf_range(40,82) #FIXME
-		instance.position.x = randf_range(-10,10) #FIXME : en fonction de la géométie
+		instance.position.y = randf_range(nuage_area_size.position.y,nuage_area_size.end.y) #FIXME
+		instance.position.z = randf_range(nuage_area_size.position.z,nuage_area_size.end.z) #FIXME
+		instance.position.x = randf_range(nuage_area_size.position.x,nuage_area_size.end.x) #FIXME : en fonction de la géométie
 		instance.scale = ECHELLE_1 * randf_range(1.0,2.0)
+		instance.initlimites(nuage_area_size)
+		
+		vent = instance.ajoutervent(vent)
 		
 		add_child(instance)
 		instance.show()
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_released("decolle"):
-		$OiseauBonus.capture($Oiseau)
+# Code récupéré sur internet pour calculer la taille totale d'un noeud
+
+func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_transform : Transform3D = Transform3D()) -> AABB:
+	var box : AABB
+	var transform : Transform3D
+
+	# we are going down the child chain, we want the aabb of each subsequent node to be on the same axis as the parent
+	if bounds_transform.is_equal_approx(Transform3D()):
+		transform = node.global_transform
+	else:
+		transform = bounds_transform
+	
+	# no more nodes. return default aabb
+	if node == null:
+		return AABB(Vector3(-0.2, -0.2, -0.2), Vector3(0.4, 0.4, 0.4))
+	# makes sure the transform we get isn't distorted
+	var top_xform : Transform3D = transform.affine_inverse() * node.global_transform
+
+	# convert the node into visualinstance3D to access get_aabb() function.
+	var visual_result : VisualInstance3D = node as VisualInstance3D
+	if visual_result != null:
+		box = visual_result.get_aabb()
+	else:
+		box = AABB()
+	
+	# xforms the transform with the box aabb for proper alignment I believe?
+	box = top_xform * box
+	# recursion
+	for i : int in range(0,node.get_child_count()):
+		var child : Node3D = node.get_child(i) as Node3D
+		if child && !(ignore_top_level && child.top_level):
+			var child_box : AABB = get_node_aabb(child, ignore_top_level, transform)
+			box = box.merge(child_box)
+	
+	return box
 
 func _process(_delta):
 	#print ("vvvvvvv")

@@ -55,7 +55,7 @@ var autorotspeed = 0
 var nodeoie : Node3D
 
 # Action/Etat automatiques possibles
-enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATTERRISSAGE, ATTERRI, DECOLLAGE }
+enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATTERRISSAGE, ATTERRI, DECOLLAGE, DECROCHE }
 
 # indicateur de correction de trajectoire.
 # On perd le contrôle tant qu'on est pas revenu dans la zone et de face
@@ -247,7 +247,7 @@ func calc_rot_speed(_act : action, facteur : float) -> float :
 # Met à jour speedVect en conséquence, et modifie l'inclinaison de l'oie
 func virage(change : float, delta : float):
 	if change == 0:
-		print ("WARNING ! virage avec change = 0")
+		#print ("WARNING ! virage avec change = 0") #FIXME
 		return
 	var angle : float = change*ANGLE_VIRAGE*delta
 	if enaction and actionencours == action.CORRECTION:
@@ -329,11 +329,16 @@ func remonte(delta : float, rotx = true):
 			#print ("--> rot X=",$OIE.rotation.x)
 
 
-func decroche():
-	# perturbation liée à un contact avec un nuage
-	var angle = randf_range(-PI/4,PI/4)
-	speedVect = speedVect.rotated(Vector3.UP, angle)
-	self.rotate_y(angle)
+func decroche(delta : float):
+	if not enaction or actionencours != action.DECROCHE : #FIXME on peut avoir des cas plus particuliers
+		# perturbation directe unique liée à un contact avec un obstacle
+		var angle = randf_range(-PI/4,PI/4)
+		speedVect = speedVect.rotated(Vector3.UP, angle)
+		self.rotate_y(angle)
+	enaction = true
+	actionencours = action.DECROCHE
+	# on descend 
+	position.y -= speeddown * delta
 
 
 func do_decolle():
