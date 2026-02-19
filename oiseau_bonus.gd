@@ -32,7 +32,8 @@ func devient_suiveur_de(_leader : Node3D):
 	if enaction :
 		if actionencours == action.ATTENTE :
 			enaction = false
-			decroche(0.017) # on décroche sur 1/60 s
+			print(self.name," en décrochage")
+			decroche() # on décroche
 	# On désactive les layers 2 et 3? pour ne plus déclencher la capture
 	self.set_collision_layer_value(2, false)
 	self.set_collision_layer_value(3, false)
@@ -46,16 +47,19 @@ func _physics_process(delta: float) -> void:
 	
 	## On va faire simple :
 	if leader == null :
-		if enaction and actionencours == action.ATTERRI:
+		if enaction and actionencours == action.ATERRI:
 			# Si on est posé, on ne fait rien
 			pass
 		else:
 			# sinon on continue le mouvement en cours
-			virage(autorotspeed,delta)
+			if autorotspeed != 0.0 :
+				#on continue le virage en cours
+				virage(autorotspeed,delta)
 			# sauf si on est en correction...
 			if actionencours == action.CORRECTION:
 				#print ("",speedVect.z," angle ",angle_correction)
-				if abs(rotation.y) <= 0.01 : # FIXME : 
+				if abs(rotation.y) <= 0.01 : # FIXME :
+					print ("fin de correction pour ", self.name)
 					#Fin de correction
 					enaction = false
 					# on repart tout droit
@@ -97,14 +101,15 @@ func _physics_process(delta: float) -> void:
 			var obj : Node3D = collisions.get_collider(i)
 			if obj.get_parent().is_in_group("isBoid"):
 				break
-			print("OiseauBonus collides avec ",obj.name)
+			var normal : Vector3 = collisions.get_normal(i)
+			print("OiseauBonus collides avec ",obj.name," par ",normal)
 			if obj.is_in_group("sol"):
 				if enaction and actionencours == action.DECOLLAGE :
 					#on ignore la collision résiduelle
 					pass
 				else:
-					# atterrissage
-					#atterrissage()  #TODO : est-ce bien raisonnable
+					# aterrissage
+					#aterrissage()  #TODO : est-ce bien raisonnable
 					pass
 			elif obj.name.contains("Static"):
 				# on vient de rentrer dans un mur ou un boids, ce n'est pas normal
@@ -113,7 +118,7 @@ func _physics_process(delta: float) -> void:
 				#correction()
 				#virage(autorotspeed,delta)
 				# on le fait plutôt disparaitre
-				print ("Choc contre un Static : free de ",obj.name, " dans ", obj.get_groups())
+				print ("Choc de ",self.name," contre un Static : free de ",obj.name, " dans groupe ", obj.get_groups())
 				queue_free()
 				# on verra le résultat au prochain cycle
 			elif obj.is_in_group("Oiseau") or obj.is_in_group("Bonus"):
@@ -122,8 +127,4 @@ func _physics_process(delta: float) -> void:
 	elif enaction and actionencours == action.CORRECTION :
 		# plus de collision, on reprend son chemin
 		print ("fin de correction pour Oiseau Bonus")
-		enaction = false
-	elif enaction and actionencours == action.DECROCHE :
-		# plus de collision, on reprend son chemin
-		print ("fin du décrochage pour Oiseau Bonus")
 		enaction = false

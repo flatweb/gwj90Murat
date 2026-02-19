@@ -32,12 +32,12 @@ func _ready():
 	# Par défaut on considère que c'est la taille de la collisionShape
 	tailleY=$CollisionShape3D.shape.height
 
-func start_atterri_at(pos : Vector3):
+func start_aterri_at(pos : Vector3):
 	anim_repos()
 	speedVect = Vector3.ZERO
 	self.position = pos
 	enaction = true
-	actionencours = action.ATTERRI
+	actionencours = action.ATERRI
 	
 func demarre():
 	$Indicateurs.hide()
@@ -109,9 +109,9 @@ func freinage(delta : float):
 	queue_next_anim(ANIM_RESET)
 	#print("freinage final=",speedVect.length())
 	
-func atterrissage():
+func aterrissage():
 	enaction = true
-	actionencours = action.ATTERRISSAGE
+	actionencours = action.ATERRISSAGE
 	speedVect.y = 0.0
 	position.y = tailleY/2
 	$OIE.rotation.x = 0.0
@@ -151,30 +151,15 @@ func _process(_delta):
 	if position.z < 0.0 : #(pour l'instant c'est le milieu)
 		fin()
 
-func do_action(delta : float):
-	var vire = Input.get_axis("droite","gauche")
-	var pique = Input.is_action_pressed("descend")
-	var monte = Input.is_action_pressed("monte")
-	if pique :
-		descendre(delta)
-		# on ne combine pas pique et changement de direction
-	elif monte :
-		monter(delta)
-	# on ne combine pas montée et changement de direction ?!?: TODO: a faire
-	elif vire != 0:
-		# changement de direction
-		virage(vire,delta)
-	else:
-		return false
-	return true
-
 func do_no_action():
 	pass
 	
 func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	
 	var vire = Input.get_axis("droite","gauche")
-	var pique = Input.is_action_pressed("descend")
 	var monte = Input.is_action_pressed("monte")
+	var pique = Input.is_action_pressed("descend")
 	var mouvement :bool = false
 	
 	# Si il y a une action automatique en cours, on privilégie l'action
@@ -184,36 +169,46 @@ func _physics_process(delta: float) -> void:
 		# sortie du mode attente, pour se remettre dans l'axe
 		enaction = false
 		correction()
-	if enaction and actionencours == action.ATTERRI \
-		and Input.is_action_pressed("decolle") or Input.is_action_pressed("monte"):
+	if enaction and actionencours == action.ATERRI \
+		and (Input.is_action_pressed("decolle") or Input.is_action_pressed("monte")):
 			do_decolle()
 	
 	# Si pas d'action automatique, on cherche une commande
 	if not enaction:
-		if do_action(delta) :
-			# il y a eu une action du joueur
-			mouvement = true  # TODO : vérifier si ça sert ensuite ?
-			pass
+		if pique :
+			descendre(delta)
+			mouvement = true
+			# on ne combine pas pique et changement de direction
+		elif monte :
+			monter(delta)
+			mouvement = true
+		# on ne combine pas montée et changement de direction ?!?: TODO: a faire
+		elif vire != 0:
+			# changement de direction
+			virage(vire,delta)
+			mouvement = true
 		else:
 			# Pas d'interaction
 			# 1. retour naturel à une inclinaison normale latérale sans action
 			redresse(delta)
 
 	elif enaction:
-		virage(autorotspeed,delta)
+		if autorotspeed != 0.0 :
+			virage(autorotspeed,delta)
 		if actionencours == action.CORRECTION:
 			#print ("",speedVect.z," angle ",angle_correction)
 			if abs(rotation.y) <= 0.01 :
+				print("Fin de correction pour ", self.name)
 				enaction = false
 				# on repart tout droit
 				autorotspeed = 0.0
-		elif actionencours == action.ATTERRISSAGE:
+		elif actionencours == action.ATERRISSAGE:
 			if speedVect != Vector3.ZERO :
 				freinage(delta)
 			else:
 				# on est arrêté
 				enaction = true
-				actionencours = action.ATTERRI
+				actionencours = action.ATERRI
 		elif actionencours == action.DECOLLAGE:
 			queue_next_anim(ANIM_VOL)
 			remonte(delta)
@@ -279,21 +274,25 @@ func _physics_process(delta: float) -> void:
 			var obj : Node3D = collisions.get_collider(i)
 			if obj.get_parent().is_in_group("isBoid"): #TODO/FIXME : comprendre
 				continue
-			print("Oiseau collides avec ",obj.name)
+			var normal : Vector3 = collisions.get_normal(i)
 			if obj.is_in_group("sol"):
-				if enaction and actionencours == action.DECOLLAGE :
+				if enaction and \
+					  (actionencours == action.DECOLLAGE or \
+					   actionencours == action.ATERRI) :
 					#on ignore la collision résiduelle
 					pass
 				else:
-					# atterrissage
-					atterrissage()
+					# on finit l'aterrissage
+					aterrissage()
 			elif obj.name.contains("Static"):
+				print("Oiseau collides avec ",obj.name," par ",normal)
+
 				# on vient de rentrer dans un mur
 				self.position -= speedVect
 				#correction()
 				#virage(autorotspeed,delta)
 				# on verra le résultat au prochain cycle
-			elif obj.is_in_group("Oiseau"):
+			elif obj.is_in_group("Bonus"):
 				# on est rentré dans un autre oiseau (bonus), on va dévier simplement
 				if not (enaction and actionencours == action.CORRECTION):
 					pass

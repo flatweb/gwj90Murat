@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name VolatileBody3D
 
-# taille de l'oiseau en hauteur (pour gérer l'atterrisage)
+# taille de l'oiseau en hauteur (pour gérer l'aterrisage)
 var tailleY : float
 
 #------------------------------------------------------------
@@ -38,7 +38,7 @@ var speeddown : float = speedfront * 1.5
 var speeddownslow : float = speedfront / 8
 # Vitesse de remontée
 var speedup : float = speedfront / 2
-# Altitude où on commence à freiner le piqué pour atterrir
+# Altitude où on commence à freiner le piqué pour aterrir
 var altitudefreinage : float = 5.0
 # Altitude au delà de laquelle on cesse de monter
 var altitudemax : float = 50.0
@@ -55,12 +55,14 @@ var autorotspeed = 0
 var nodeoie : Node3D
 
 # Action/Etat automatiques possibles
-enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATTERRISSAGE, ATTERRI, DECOLLAGE, DECROCHE }
+enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATERRISSAGE, ATERRI, DECOLLAGE, DECROCHE }
 
 # indicateur de correction de trajectoire.
 # On perd le contrôle tant qu'on est pas revenu dans la zone et de face
 var enaction : bool = false
 var actionencours : action = action.AUCUNE
+var dureedecrochage : float = 0.0
+const DUREE_DECROCHAGE = 0.16
 
 func _init() -> void :
 	pass
@@ -118,7 +120,7 @@ func _on_animation_finished(anim_name: StringName) -> void:
 	if $TimerAttenteAnim.time_left > 0.0 :
 		prevanim = anim_name
 		return
-	if not en_vol : # FIXME : pourquoi ? pour l'atterrissage ?
+	if not en_vol : # FIXME : pourquoi ? pour l'aterrissage ?
 		# sinon on le redémarre
 		$TimerAttenteAnim.start(1.0)
 		return
@@ -276,11 +278,14 @@ func redresse(delta : float, force: float = 1.0):
 	else:
 		$OIE.rotate_z(-sign($OIE.rotation.z)*force*ROTBACKSPEED*delta)
 
-func correction():
+func correction(inverse : bool = false):
 	if enaction == false :
+		print("Début de correction pour ", self.name)
 		enaction = true
 		actionencours = action.CORRECTION
 		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
+		if inverse :
+			autorotspeed = -autorotspeed
 		if get_node_or_null("AudioPlayerCri") != null:
 			$AudioPlayerCri.play(4.0)
 
@@ -329,7 +334,9 @@ func remonte(delta : float, rotx = true):
 			#print ("--> rot X=",$OIE.rotation.x)
 
 
-func decroche(delta : float):
+func decroche(delta : float = 0.0, duree : float = 0.0):
+	if dureedecrochage == 0.0 :
+		dureedecrochage = duree if duree != 0 else DUREE_DECROCHAGE
 	if not enaction or actionencours != action.DECROCHE : #FIXME on peut avoir des cas plus particuliers
 		# perturbation directe unique liée à un contact avec un obstacle
 		var angle = randf_range(-PI/4,PI/4)
@@ -338,7 +345,13 @@ func decroche(delta : float):
 	enaction = true
 	actionencours = action.DECROCHE
 	# on descend 
-	position.y -= speeddown * delta
+	position.y -= speeddown * 2.0 * delta
+	
+	dureedecrochage -= delta
+	if dureedecrochage <= 0.0 :
+		print ("Fin du décrochage pour ", self.name)
+		dureedecrochage = 0.0
+		enaction = false
 
 
 func do_decolle():
@@ -350,7 +363,9 @@ func do_decolle():
 
 
 func _physics_process(delta: float) -> void:
-	pass
+	if enaction :
+		if actionencours == action.DECROCHE :
+			decroche(delta)
 	
 func _process(delta: float) -> void:
 	pass
