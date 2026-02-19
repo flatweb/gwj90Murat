@@ -27,6 +27,9 @@ const FACTEUR_CORRECTION = 3.0
 const FACTEUR_ATTENTE = 0.7
 # écart d'altitude toléré par rapport à la position de référence avant de décider de corriger
 const ECART_ALTITUDE = 1.0
+## altitude maximale au delà de laquelle on ne peut plus monter
+const ALTITUDE_MAX = 50.0
+
 
 # Vitesse de vol horizontal
 var speedfront : float = 4.0
@@ -336,7 +339,15 @@ func remonte(delta : float, rotx = true):
 		speedVect.y += delta / 1.0 * speedup  # il faut 1s pour atteindre la vitesse normale de montée
 		if speedVect.y > speedup :
 			speedVect.y = speedup
-		#print ("altitude=",self.position.y,",vers=",startpos.y)
+		
+	# Si on dépasse l'altitude max :
+	if position.y >= ALTITUDE_MAX :
+		speedVect.y -=  delta / 0.5 * speedup
+		if speedVect.y < 0 :
+			# on stabilise à l'altitude actuelle
+			speedVect.y = 0.0
+
+	#print ("altitude=",self.position.y,",vers=",startpos.y)
 
 	# 2. changement d'inclinaison (axe X), un peu lente
 	if $OIE.rotation.x < INCLINAISON_MAX_MONTEE :

@@ -230,15 +230,6 @@ func _physics_process(delta: float) -> void:
 		virage(autorotspeed,delta)
 		acorriger = false
 
-	#if not enaction and \
-		#( abs(speedVect.x*1.0 + position.x) > limite_x \
-		   #or speedVect.z*1.0 + position.z > maximumz \
-		#):
-		## on approche trop du bord
-		## on force un virage
-		#correction()
-		#virage(autorotspeed,delta)
-
 	# Quand on est en vol régulier
 	if not enaction and not mouvement:
 		# 1. on remonte si on est trop bas

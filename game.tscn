@@ -111,16 +111,16 @@ transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.98023
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0, 10, -244.464)
 
 [node name="OiseauBonus5" parent="." unique_id=248780560 instance=ExtResource("4_iotsf")]
-transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0, 10, -214.819)
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 45.779816, 10, -384.05914)
 
 [node name="OiseauBonus6" parent="." unique_id=1456902037 instance=ExtResource("4_iotsf")]
-transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 25.615, 10, -190.652)
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0.5727024, 10, -415.80695)
 
 [node name="OiseauBonus7" parent="." unique_id=1446929511 instance=ExtResource("4_iotsf")]
-transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -40.314, 10, -232.831)
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -40.314, 10, -363.81927)
 
 [node name="OiseauBonus8" parent="." unique_id=1093410312 instance=ExtResource("4_iotsf")]
-transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -29.963, 10, -199.666)
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -29.963, 10, -320.3542)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1714319163]
 stream = ExtResource("4_fc0e3")
