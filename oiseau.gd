@@ -12,6 +12,9 @@ var prevcam : Camera3D
 # position de départ, notamment pour remonter à l'altitude Y
 var startpos : Vector3
 
+
+# signal quand on fait une capture
+signal capture
 # signal à émettre quand l'oiseau est arrivé, avec nb autres
 signal arrive(dist : float, nb : int)
 # distance parcourue au total
@@ -42,6 +45,7 @@ func start_aterri_at(pos : Vector3):
 	
 func demarre():
 	$Indicateurs.hide()
+	hide_indice()
 	speedVect = Vector3(0,0,-speedfront)
 	self.rotation = Vector3.ZERO
 	startpos = self.position
@@ -52,6 +56,25 @@ func demarre():
 func set_limite_x(value):
 	limite_x = value
 
+var cibleindice : VolatileBody3D = null
+func hide_indice():
+	$SpriteIndice3D.hide()
+	cibleindice = null
+	$SpriteIndice3D/Timer.stop()  # au cas où on fait le hide manuel
+
+func refresh_indice():
+	if cibleindice != null :
+		var cible = cibleindice.position
+		#cible.y = self.position.y # on va reste à plat
+		$SpriteIndice3D.look_at(cible)
+		$SpriteIndice3D.rotation.x = -PI/2
+
+func show_indice(bonus : VolatileBody3D):
+	cibleindice = bonus
+	$SpriteIndice3D.show()
+	$SpriteIndice3D/Timer.start(5.0)
+	refresh_indice()
+	
 
 # -----------------------------------------------------------------
 #   GESTION DES MOUVEMENTS
@@ -147,6 +170,8 @@ func _process(_delta):
 			$Indicateurs.show()
 	elif Input.is_action_just_pressed("varieanim",true):
 		anim_autoswitch()
+	
+	refresh_indice()
 
 	# fin de partie ?  FIXME
 	if position.z < 0.0 : #(pour l'instant c'est le milieu)
@@ -158,7 +183,7 @@ func start_correction(normal):
 	
 func do_no_action():
 	pass
-	
+
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
@@ -324,6 +349,8 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 	if body.is_in_group( "Bonus" ) :
 		print("Un oiseau bonus capturé : ", body.name)
 		#body.queue_free() # code pour test
+		capture.emit()
+		hide_indice()
 		body.devient_suiveur_de(self)
 	pass # Replace with function body.
 

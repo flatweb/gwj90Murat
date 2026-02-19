@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dm611xunoe140" path="res://res/modeles/00_game-area-size_Untitled.png" id="2_wkftn"]
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="3_q4iis"]
 [ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="4_m3clv"]
-[ext_resource type="PackedScene" uid="uid://d1lkw7axh4gm6" path="res://res/modeles/Car.tscn" id="5_4eo0i"]
+[ext_resource type="PackedScene" uid="uid://d1lkw7axh4gm6" path="res://Scenes/Elements-mobiles/Car.tscn" id="5_4eo0i"]
 [ext_resource type="Script" uid="uid://ht17r2jck10x" path="res://Boid/assets/scripts/roadFollow.gd" id="5_86ljf"]
 [ext_resource type="Script" uid="uid://cxp2pkshliblx" path="res://limites_area_3d.gd" id="5_mxnmf"]
 [ext_resource type="Script" uid="uid://c8h7bwkygvtcg" path="res://limite_shape_3d.gd" id="6_m3clv"]

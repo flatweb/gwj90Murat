@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnoun2t5oj6a8"
-path.s3tc="res://.godot/imported/01_voiture_Bootstrap5-palette.png-449c0f8248ae437a777e9ebb961f00ce.s3tc.ctex"
+uid="uid://ptqnm02t5re5"
+path.s3tc="res://.godot/imported/direction.png-7dd7ca8649373f0248e61ec71c2b76b2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "9afb7427c5c6708f4fdff63ecb9a4256"
-}
 
 [deps]
 
-source_file="res://res/modeles/01_voiture_Bootstrap5-palette.png"
-dest_files=["res://.godot/imported/01_voiture_Bootstrap5-palette.png-449c0f8248ae437a777e9ebb961f00ce.s3tc.ctex"]
+source_file="res://res/sprites/direction.png"
+dest_files=["res://.godot/imported/direction.png-7dd7ca8649373f0248e61ec71c2b76b2.s3tc.ctex"]
 
 [params]
 
