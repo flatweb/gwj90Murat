@@ -1,0 +1,96 @@
+[gd_scene format=4 uid="uid://dbyhagdmbappc"]
+
+[ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="1_wrd21"]
+[ext_resource type="PackedScene" uid="uid://cq2pkih0vn1be" path="res://Scenes/Vegetation/palmier.tscn" id="2_7q6k8"]
+[ext_resource type="PackedScene" uid="uid://4c81vdoxgdgl" path="res://Scenes/Objets/ballon.tscn" id="3_bufsn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3ngq"]
+resource_name = "TEXTURE"
+cull_mode = 2
+albedo_texture = ExtResource("1_wrd21")
+roughness = 0.82307696
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ov0hh"]
+_surfaces = [{
+"aabb": AABB(-2.3036883, 0, -1.8987329, 3.312117, 1e-05, 2.84812),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAAQAAIAAgABAAMAAgAQAAEAEAAPAAEAEAARAA8AEQANAA8AAAASABAAEgARABAAEgAEABEAEQATAA0ABAATABEAEwAOAA0AEwAKAA4ABAALABMACwAKABMACwAMAAoAEgAFAAQAEgAUAAUAAAAUABIAFAAHAAUAAAAIABQAFAAGAAcACAAGABQACAAJAAYA"),
+"lods": [0.00035318686, PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAAAFAAQAAAAGAAUABgAHAAUAAAAIAAYACAAJAAYABAAKAAEABAALAAoACwAMAAoAAQAKAA0ACgAOAA0AAQANAA8A")],
+"name": "TEXTURE",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 21,
+"vertex_data": PackedByteArray("k2QAAF3/AAAE/AAAPKoAAHerAAD//wAAl+QAAGPnAABmXAAA9TsAAAk8AAABRAAAAAAAAKqPAADJFgAA21YAAKsnAAAb8gAA9AIAAAvPAAA4tgAAAAAAAFdsAAC3IgAAD4MAAFoHAAAh/gAA+C0AAGTpAABYDQAA//8AAERjAADksQAA3qoAAOuzAADeXQAA5GoAAGKkAADKtQAAmigAAG8xAABSmwAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_piqxo"]
+resource_name = "00_game-area-size_Mesh2"
+_surfaces = [{
+"aabb": AABB(-2.3036883, 0, -1.8987329, 3.312117, 1e-05, 2.84812),
+"attribute_data": PackedByteArray("z7fHp4TAbKMqvMenhMDHp8+3Ep/PtxKfz7dso8+3Ep/Pt8enz7fHpyq8Ep/PtxKfz7cSn4TAEp+EwBKfhMASn0m8i6MFuXSjMrxHoCq8MZ8FuXSj7rdsow=="),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AAAQAAIAAgABAAMAAgAQAAEAEAAPAAEAAAARABAAEAASAA8AEQASABAAEgANAA8AEQAEABIAEgATAA0ABAATABIAEwAOAA0AEwAKAA4ABAALABMACwAKABMACwAMAAoAFAAFAAQAFAAVAAUAAAAVABQAFQAHAAUAAAAIABUAFQAGAAcACAAGABUACAAJAAYA"),
+"lods": [0.00035318686, PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAAAFAAQAAAAGAAUABgAHAAUAAAAIAAYACAAJAAYABAAKAAEABAALAAoACwAMAAoAAQAKAA0ACgAOAA0AAQANAA8A")],
+"material": SubResource("StandardMaterial3D_e3ngq"),
+"name": "TEXTURE",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 22,
+"vertex_data": PackedByteArray("k2QAAF3/UwUE/AAAPKoCwHerAAD//wPAl+QAAGPnRMFmXAAA9TsPBgk8AAABRCjAAAAAAKqPZ8DJFgAA21ZnwKsnAAAb8mfA9AIAAAvP/784tgAAAAAIwFdsAAC3ItnGD4MAAFoH/78h/gAA+C1nGmTpAABYDX3A//8AAERjvMbksQAA3qoPwORqAABipAbA67MAAN5dWcDKtQAAmighwORqAABipCjAbzEAAFKbRMDVwqwFuv11e5/9QHsb7zdebIbIvLDxJoeZ6rKKmeqyipnqsor///9/c/zoeL3he0P///9/4szGGcjomovLwxmeofauhHX5RIPW6xOKZvnNcrbxI4f07QSJ")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ov0hh")
+
+[node name="08_ile-fin" type="Node3D" unique_id=39384781]
+
+[node name="ILE" type="MeshInstance3D" parent="." unique_id=821206395]
+transform = Transform3D(-2.0745406, 0, -4.5493164, 0, 4.9999995, 0, 4.5493164, 0, -2.0745406, -1.0082617, 0, 0.2520647)
+mesh = SubResource("ArrayMesh_piqxo")
+
+[node name="Palmier" parent="." unique_id=1750582748 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0013766, 0, -4.831763)
+
+[node name="Palmier2" parent="." unique_id=1933867182 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7587276, 0, 3.2157683)
+
+[node name="Palmier7" parent="." unique_id=1236622622 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.302861, 0, 4.043353)
+
+[node name="Palmier8" parent="." unique_id=547562938 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4384394, 0, 4.3212028)
+
+[node name="Palmier9" parent="." unique_id=1463381834 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3887854, 0, -7.2249913)
+
+[node name="Palmier10" parent="." unique_id=60993902 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(0.547461, 0, 0.8368312, 0, 1, 0, -0.8368312, 0, 0.547461, 5.3887854, 0, -3.2249913)
+
+[node name="Palmier11" parent="." unique_id=368240335 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(0.21701896, 0, -0.9761674, 0, 1, 0, 0.9761674, 0, 0.21701896, -1.7426863, 0, -4.645111)
+
+[node name="Palmier12" parent="." unique_id=1004394273 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(-0.8487872, 0, -0.52873456, 0, 1, 0, 0.52873456, 0, -0.8487872, -1.80443, 0, -5.355171)
+
+[node name="Palmier13" parent="." unique_id=1186384163 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(-0.56846136, 0, 0.82271, 0, 1, 0, -0.82271, 0, -0.56846136, -1.3413448, 0, -7.1148853)
+
+[node name="Palmier14" parent="." unique_id=405521982 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(0.4489135, 0, 0.8935752, 0, 1, 0, -0.8935752, 0, 0.4489135, 1.1284294, 0, -8.720238)
+
+[node name="Palmier3" parent="." unique_id=1689989815 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(0.8795489, 0, -0.47580844, 0, 1, 0, 0.47580844, 0, 0.8795489, -1.185722, -2.3841858e-07, 3.921167)
+
+[node name="Palmier4" parent="." unique_id=43156486 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(0.9970701, 0, 0.07649276, 0, 1, 0, -0.07649276, 0, 0.9970701, -1.0497204, -2.3841858e-07, 3.4069371)
+
+[node name="Palmier5" parent="." unique_id=901976979 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(0.56290585, 0, -0.826521, 0, 1, 0, 0.826521, 0, 0.56290585, -1.452947, -2.3841858e-07, 4.0630064)
+
+[node name="Palmier6" parent="." unique_id=802129739 instance=ExtResource("2_7q6k8")]
+transform = Transform3D(-0.51207286, 0, -0.85894203, 0, 1, 0, 0.85894203, 0, -0.51207286, -2.337431, -2.3841858e-07, 3.2564764)
+
+[node name="Ballon" parent="." unique_id=1873142024 instance=ExtResource("3_bufsn")]
+transform = Transform3D(0.8412951, 0.38810948, -0.3762889, -0.4188974, 0.90803355, 0, 0.341683, 0.1576265, 0.92650235, 2.552, 0, -1.901)

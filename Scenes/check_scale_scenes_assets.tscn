@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://duuy5uxrqk6xf"]
+
+[ext_resource type="PackedScene" uid="uid://bov0anh5q07bd" path="res://Scenes/Vegetation/buisson.tscn" id="1_uw4dl"]
+[ext_resource type="PackedScene" uid="uid://dpojd1ckyuhmt" path="res://Scenes/Vegetation/arbre_goutte.tscn" id="2_ur23a"]
+[ext_resource type="PackedScene" uid="uid://b66qroiabbx30" path="res://Scenes/Vegetation/herbe.tscn" id="3_kgmuo"]
+[ext_resource type="PackedScene" uid="uid://4c81vdoxgdgl" path="res://Scenes/Objets/ballon.tscn" id="5_ekvpu"]
+[ext_resource type="PackedScene" uid="uid://cq2pkih0vn1be" path="res://Scenes/Vegetation/palmier.tscn" id="5_uw4dl"]
+
+[node name="CHECK_SCALE_SCENES_ASSETS" type="Node3D" unique_id=1928958976]
+
+[node name="Buisson" parent="." unique_id=2009753542 instance=ExtResource("1_uw4dl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8449755, 0, -1.0963645)
+
+[node name="Arbre_goutte" parent="." unique_id=1699790004 instance=ExtResource("2_ur23a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0963645)
+
+[node name="Herbe" parent="." unique_id=2107220856 instance=ExtResource("3_kgmuo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58740604, 0, -1.0963645)
+
+[node name="Ballon" parent="." unique_id=1873142024 instance=ExtResource("5_ekvpu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1845644, 0, -1.0963645)
+
+[node name="Palmier" parent="." unique_id=1750582748 instance=ExtResource("5_uw4dl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7486122, 0, -1.0898823)

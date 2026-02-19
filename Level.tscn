@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps.tscn" id="9_sypgb"]
 [ext_resource type="PackedScene" uid="uid://b2h1kc5vaqvev" path="res://Scenes/Maps/04_ete.tscn" id="10_dn5x0"]
 [ext_resource type="PackedScene" uid="uid://cm7t2nc7q0cat" path="res://Boid/assets/scenes/volcano.tscn" id="13_sypgb"]
+[ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver.tscn" id="14_dn5x0"]
+[ext_resource type="PackedScene" uid="uid://dbyhagdmbappc" path="res://Scenes/Maps/08_ile_fin.tscn" id="15_esphl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
@@ -662,6 +664,7 @@ visible = false
 
 [node name="02_hiver" parent="." unique_id=428375646 instance=ExtResource("8_d6u53")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 232)
+visible = false
 
 [node name="03_printemps" parent="." unique_id=1598718819 instance=ExtResource("9_sypgb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 142)
@@ -719,6 +722,12 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 
 [node name="Volcano" parent="." unique_id=709399904 instance=ExtResource("13_sypgb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -111.517136)
+
+[node name="02_hiver2" parent="." unique_id=1634229765 instance=ExtResource("14_dn5x0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 232)
+
+[node name="08_ile-fin" parent="." unique_id=39384781 instance=ExtResource("15_esphl")]
+transform = Transform3D(-0.56193894, 0, -0.8271787, 0, 1, 0, 0.8271787, 0, -0.56193894, -0.5332109, 0, -349.52017)
 
 [connection signal="area_entered" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_entered"]
 [connection signal="area_exited" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_exited"]

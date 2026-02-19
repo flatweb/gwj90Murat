@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b66qroiabbx30"]
+
+[ext_resource type="Texture2D" uid="uid://jb38cm865qwu" path="res://res/modeles/vegetation/herbe3.png" id="1_r33m1"]
+
+[node name="Herbe" type="Node3D" unique_id=2107220856]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1983135715]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.08909005, 0)
+billboard = 1
+texture = ExtResource("1_r33m1")

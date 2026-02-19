@@ -1,7 +1,20 @@
 [gd_scene format=3 uid="uid://bdmn1146wi527"]
 
 [ext_resource type="PackedScene" uid="uid://detafjuqrnaqx" path="res://res/modeles/02_hiver.glb" id="1_rw6h6"]
+[ext_resource type="PackedScene" uid="uid://fgjqfugwu3yx" path="res://Scenes/Vegetation/foret_s.tscn" id="2_wsw8x"]
 
 [node name="02_hiver" type="Node3D" unique_id=1634229765]
 
 [node name="02_hiver" parent="." unique_id=428375646 instance=ExtResource("1_rw6h6")]
+
+[node name="Foret_S" parent="02_hiver" unique_id=769466150 instance=ExtResource("2_wsw8x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.646101, 0, 23.066721)
+
+[node name="Foret_S2" parent="02_hiver" unique_id=975981820 instance=ExtResource("2_wsw8x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.927189, 0, 19.190895)
+
+[node name="Foret_S3" parent="02_hiver" unique_id=399921033 instance=ExtResource("2_wsw8x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.072811, 0, 12.190895)
+
+[node name="Foret_S4" parent="02_hiver" unique_id=776846210 instance=ExtResource("2_wsw8x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.552862, 0, 23.640842)
