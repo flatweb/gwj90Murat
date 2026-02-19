@@ -492,7 +492,7 @@ point_count = 4
 [node name="Level" type="Node3D" unique_id=2081723973]
 script = ExtResource("1_86ljf")
 carScene = ExtResource("5_4eo0i")
-carResScript = ExtResource("5_86ljf")
+carScript = ExtResource("5_86ljf")
 
 [node name="game-area-size_v2" parent="." unique_id=660705272 instance=ExtResource("1_bexhn")]
 

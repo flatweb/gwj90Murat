@@ -1,6 +1,6 @@
 extends PathFollow3D
 
-@export var speed: float = 0.1
+var speed: float = 0.1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -10,4 +10,3 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	progress_ratio += fmod(1 , delta * speed)
-	print(progress_ratio)
