@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://dm611xunoe140" path="res://res/modeles/00_game-area-size_Untitled.png" id="2_wkftn"]
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="3_q4iis"]
 [ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="4_m3clv"]
+[ext_resource type="PackedScene" uid="uid://d1lkw7axh4gm6" path="res://res/modeles/Car.tscn" id="5_4eo0i"]
+[ext_resource type="Script" uid="uid://ht17r2jck10x" path="res://roadFollow.gd" id="5_86ljf"]
 [ext_resource type="Script" uid="uid://cxp2pkshliblx" path="res://limites_area_3d.gd" id="5_mxnmf"]
-[ext_resource type="Script" path="res://limite_shape_3d.gd" id="6_m3clv"]
+[ext_resource type="Script" uid="uid://c8h7bwkygvtcg" path="res://limite_shape_3d.gd" id="6_m3clv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
@@ -460,6 +462,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7p74h")
 
+[sub_resource type="Curve3D" id="Curve3D_m3clv"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13.774349, 0, 101.66611, 0, 0, 0, 0, 0, 0, -4.7690277, 0, 180.21805, 0, 0, 0, 0, 0, 0, 13.863747, 0, 261.75635),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ofirr"]
 size = Vector3(1, 50, 70)
 
@@ -636,6 +645,16 @@ mesh = SubResource("ArrayMesh_iprb2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
 visible = false
 
+[node name="Path3D" type="Path3D" parent="." unique_id=1915676836]
+curve = SubResource("Curve3D_m3clv")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1286240492]
+transform = Transform3D(-0.99094623, 0, -0.13425946, 0, 1, 0, 0.13425946, 0, -0.99094623, 3.2471073, 0, 23.966341)
+progress = 24.185314
+script = ExtResource("5_86ljf")
+
+[node name="Car" parent="Path3D/PathFollow3D" unique_id=1471433011 instance=ExtResource("5_4eo0i")]
+
 [node name="LimitesArea3D" type="Area3D" parent="." unique_id=1233205744]
 collision_layer = 8
 collision_mask = 7
@@ -672,6 +691,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 25, -287.45526)
 shape = SubResource("BoxShape3D_4eo0i")
 script = ExtResource("6_m3clv")
 normal = Vector3(-1, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=903870741]
+transform = Transform3D(1, 0, 0, 0, 0.6122311, 0.7906789, 0, -0.7906789, 0.6122311, 0, 20.386269, 43.213737)
 
 [connection signal="area_entered" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_entered"]
 [connection signal="area_exited" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_exited"]
