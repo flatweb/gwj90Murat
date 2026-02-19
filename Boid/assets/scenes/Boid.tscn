@@ -203,7 +203,7 @@ _data = {
 &"Vol_normal": SubResource("Animation_t0h7t")
 }
 
-[node name="Boid" type="Node3D" unique_id=825531383]
+[node name="Boid" type="Node3D" unique_id=825531383 groups=["isBoid"]]
 script = ExtResource("3")
 baseColor = Color(0.870588, 0.415686, 0.964706, 1)
 specialColor = Color(0.372549, 0.121569, 0.815686, 1)
