@@ -1,15 +1,16 @@
 [gd_scene format=4 uid="uid://d4kt47ws03vam"]
 
 [ext_resource type="PackedScene" uid="uid://b8hbde1cvqcck" path="res://res/modeles/game-area-size_v2.glb" id="1_bexhn"]
+[ext_resource type="Script" uid="uid://cvgsxug45u56a" path="res://border.gd" id="2_q4iis"]
 [ext_resource type="Texture2D" uid="uid://dm611xunoe140" path="res://res/modeles/00_game-area-size_Untitled.png" id="2_wkftn"]
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="3_q4iis"]
 [ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="4_m3clv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bexhn"]
-size = Vector3(10, 20, 500)
+size = Vector3(10, 30, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t7iv1"]
-size = Vector3(10, 20, 500)
+size = Vector3(10, 30, 500)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
@@ -469,10 +470,11 @@ shadow_mesh = SubResource("ArrayMesh_7p74h")
 [node name="game-area-size_v2" parent="." unique_id=660705272 instance=ExtResource("1_bexhn")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1894217218]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.0207, 0, 220.72092)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.0207, 4.309334, 220.72092)
 mesh = SubResource("BoxMesh_bexhn")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=867128355 groups=["isBorder"]]
+script = ExtResource("2_q4iis")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" unique_id=495849966]
 shape = SubResource("BoxShape3D_t7iv1")
@@ -482,6 +484,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.157257, 0, 220.72092)
 mesh = SubResource("BoxMesh_bexhn")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D2" unique_id=1270096494 groups=["isBorder"]]
+script = ExtResource("2_q4iis")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Area3D" unique_id=338315515]
 shape = SubResource("BoxShape3D_t7iv1")
@@ -645,3 +648,7 @@ mesh = SubResource("ArrayMesh_iprb2")
 [node name="00_game-area-size2" parent="." unique_id=1191879928 instance=ExtResource("4_m3clv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
 visible = false
+
+[connection signal="area_entered" from="MeshInstance3D/Area3D" to="MeshInstance3D/Area3D" method="_on_area_entered"]
+[connection signal="area_exited" from="MeshInstance3D/Area3D" to="MeshInstance3D/Area3D" method="_on_area_exited"]
+[connection signal="area_entered" from="MeshInstance3D2/Area3D" to="MeshInstance3D/Area3D" method="_on_area_3d_area_entered"]

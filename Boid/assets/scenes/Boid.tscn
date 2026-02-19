@@ -229,7 +229,7 @@ mesh = SubResource("CapsuleMesh_ffqxe")
 transform = Transform3D(-0.017496575, -0.9112353, 0.4115143, 0.9998157, -0.019197399, 0, 0.007900006, 0.41143847, 0.91140324, -0.3, -0.094, 0.1)
 mesh = SubResource("CapsuleMesh_ffqxe")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1576396794]
+[node name="StaticBody3D" type="Area3D" parent="." unique_id=1648128067]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1003833365]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
