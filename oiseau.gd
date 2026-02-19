@@ -34,7 +34,7 @@ func _ready():
 	tailleY=$CollisionShape3D.shape.height
 
 func start_aterri_at(pos : Vector3):
-	anim_repos()
+	_anim_repos()
 	speedVect = Vector3.ZERO
 	self.position = pos
 	enaction = true
@@ -47,7 +47,7 @@ func demarre():
 	startpos = self.position
 	maximumz = startpos.z + MARGE_MAXIMUMZ 
 	en_vol = true
-	anim_start_vol()
+	_anim_start_vol()
 
 func set_limite_x(value):
 	limite_x = value
@@ -166,7 +166,7 @@ func _physics_process(delta: float) -> void:
 	var monte = Input.is_action_pressed("monte")
 	var pique = Input.is_action_pressed("descend")
 	var mouvement :bool = false
-	var mouvementupdown :bool = false
+	var mouvementupdown :bool = false # ne sert à rien ?
 	
 	# Si il y a une action automatique en cours, on privilégie l'action
 	# TODO : déplacer ça en résultat de do_action ?

@@ -109,12 +109,14 @@ func set_timers(timer_change : Timer, timer_attente : Timer):
 		timer_attente_anim.queue_free()
 	timer_attente_anim = timer_attente
 	
-	Timer.new()
-	
 
 # On va gérer notre queue d'animation nous-mêmes TODO
 func queue_next_anim(anim:String):
 	#TODO : il faudra peut-être être plus malin à terme, quoique...
+	if $TimerChangeAnim.time_left > 0 and \
+	   anim == nextanim :
+		# Si on veut poursuivre la même animation, on relance le TimerChange
+		$TimerChangeAnim.start() # redémarre le timer pour ne pas rechanger trop tôt
 	nextanim = anim
 	# Si une animation est déjà en cours, on attend la fin
 	if $OIE/AnimationPlayer.is_playing() : return
@@ -122,6 +124,7 @@ func queue_next_anim(anim:String):
 	if $TimerAttenteAnim.time_left > 0.0 : return
 	# sinon on le redémarre
 	$TimerAttenteAnim.start(1.0)
+	
 	
 func _on_animation_finished(anim_name: StringName) -> void:
 	# Si le timer est en cours, on l'attend
@@ -132,80 +135,80 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		# sinon on le redémarre
 		$TimerAttenteAnim.start(1.0)
 		return
-	change_anim(anim_name)
+	_change_anim(anim_name)
 
 # Pour les animations trop courtes, on préfère activer un timer
 func _on_timer_attente_anim_timeout() -> void:
 	print ("Changement sur timeout vers ", nextanim)
-	change_anim(prevanim)
+	_change_anim(prevanim)
 
 # Changement d'animation avec transition
-func change_anim(anim_name):
+func _change_anim(anim_name):
 	print ("Changement de ",anim_name," à ",nextanim)
 	match anim_name:
 		ANIM_VOL:
 			match nextanim:
 				ANIM_VOL:
-					anim_vol()
+					_anim_vol()
 				ANIM_PLANE:
-					anim_vol_to_plane()
+					_anim_vol_to_plane()
 				_ :
-					anim_vol()
+					_anim_vol()
 		ANIM_PLANE:
 			match nextanim:
 				ANIM_VOL:
-					anim_plane_to_vol()
+					_anim_plane_to_vol()
 				ANIM_PLANE:
-					anim_plane()
+					_anim_plane()
 				ANIM_RESET:
-					anim_reset()
+					_anim_reset()
 				_ :
-					anim_plane()
+					_anim_plane()
 		ANIM_RESET:
 			match nextanim:
 				ANIM_VOL:
-					anim_plane_to_vol()
+					_anim_plane_to_vol()
 				ANIM_PLANE:
-					anim_plane()
+					_anim_plane()
 				ANIM_RESET:
-					anim_reset()
+					_anim_reset()
 				_ :
-					anim_reset()
+					_anim_reset()
 
-func anim_start_vol():
-	anim_vol()
+func _anim_start_vol():
+	_anim_vol()
 	$AudioPlayerAiles.play()
 	
-func anim_vol():
+func _anim_vol():
 	nextanim = ANIM_VOL
 	$OIE/AnimationPlayer.play(nextanim)
 
-func anim_plane_to_vol():
+func _anim_plane_to_vol():
 	nextanim = ANIM_VOL
 	$OIE/AnimationPlayer.play_section(ANIM_VOL, 0.3, -1.0)
 	$AudioPlayerAiles.play()
 
-func anim_vol_to_plane():
+func _anim_vol_to_plane():
 	nextanim = ANIM_PLANE
 	$OIE/AnimationPlayer.play_section(ANIM_PLANE, 0.0, 0.3)
 
-func anim_plane():
+func _anim_plane():
 	$TimerAttenteAnim.start(1.0)
 	nextanim = ANIM_PLANE
 	$OIE/AnimationPlayer.play_section(ANIM_PLANE, 0.29, 0.31)
 
-func anim_reset():
+func _anim_reset():
 	$TimerAttenteAnim.start(1.0)
 	nextanim = ANIM_RESET
 	$OIE/AnimationPlayer.play(ANIM_RESET)
 
-func anim_repos():  # TODO
+func _anim_repos():  # TODO
 	$TimerAttenteAnim.start(1.0)
 	nextanim = ANIM_RESET
 	$OIE/AnimationPlayer.play(ANIM_RESET)
 
-func anim_decollage():  # TODO
-	anim_start_vol()
+func _anim_decollage():  # TODO
+	_anim_start_vol()
 
 
 func anim_autoswitch():
@@ -323,7 +326,8 @@ func plane(delta : float):
 		if speedVect.y < -speeddownslow :
 			speedVect.y = -speeddownslow
 		#print ("altitude=",self.position.y,",vers=",startpos.y)
-	# on ne change pas d'inclinaison
+
+	# on ne change pas d'animation
 	queue_next_anim(ANIM_PLANE)
 
 func remonte(delta : float, rotx = true):
@@ -362,6 +366,8 @@ func remonte(delta : float, rotx = true):
 			$OIE.rotate_x(min(0.1*ROTSPEED*delta,INCLINAISON_MAX_MONTEE - $OIE.rotation.x))
 			#print ("--> rot X=",$OIE.rotation.x)
 
+	# On continue de battre des ailes
+	queue_next_anim(ANIM_VOL)
 
 func decroche(delta : float = 0.0, duree : float = 0.0):
 	if decrochage_duree == 0.0 :
