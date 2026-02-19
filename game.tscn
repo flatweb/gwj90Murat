@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dm611xunoe140" path="res://res/modeles/00_game-area-size_Untitled.png" id="9_hve3p"]
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="10_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="11_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://b8hbde1cvqcck" path="res://res/modeles/game-area-size_v2.glb" id="13_lc2xo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -38,6 +39,9 @@ size = Vector2(25, 200)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eow3j"]
 margin = 0.2
 size = Vector3(25, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iotsf"]
+size = Vector3(38.108, 30, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
@@ -492,9 +496,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7p74h")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_iotsf"]
-size = Vector3(38.108, 30, 5)
-
 [node name="Game" type="Node3D" unique_id=1608575864 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_feb5d")
 camera = NodePath("CameraRig/Camera3D")
@@ -515,6 +516,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="MeshGround" type="MeshInstance3D" parent="Ground" unique_id=1549893151]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049605727, 0)
+visible = false
 mesh = SubResource("PlaneMesh_e2o6t")
 
 [node name="CollisionGround" type="CollisionShape3D" parent="Ground" unique_id=935773675]
@@ -527,7 +529,7 @@ transform = Transform3D(1, 0, 0, 0, 0.29970688, 0.9540313, 0, -0.9540313, 0.2997
 shadow_enabled = true
 
 [node name="Marker3DStart" type="Marker3D" parent="." unique_id=1720991345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8984642, 0.52928734, 83.53765)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529, 83.538)
 gizmo_extents = 4.0
 
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
@@ -553,7 +555,7 @@ fov = 30.0
 far = 1000.0
 
 [node name="OiseauBonus1" parent="." unique_id=1559759492 instance=ExtResource("4_iotsf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67743254, 10, 66.04686)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.194534, 10, 66.04686)
 
 [node name="OiseauBonus2" parent="." unique_id=783500081 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -14.987, 15, -52.213)
@@ -599,6 +601,33 @@ cohesionWeight = 20.0
 separationWeight = 30.0
 alignmentWeight = 3.0
 sizeOfSpawn = Vector2(15, 15)
+
+[node name="Porte1Nuages" type="Node3D" parent="." unique_id=1127743841]
+
+[node name="Area3D" type="Area3D" parent="Porte1Nuages" unique_id=214566935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66999817, -9.40636, -90.43789)
+collision_layer = 130
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Porte1Nuages/Area3D" unique_id=670217028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5556927, 3.4970703, 26.059143)
+shape = SubResource("BoxShape3D_iotsf")
+
+[node name="Nuage1" parent="Porte1Nuages" unique_id=1748426639 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.0308895, 8.362883, -77.881905)
+
+[node name="Nuage2" parent="Porte1Nuages" unique_id=640783606 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0.57259226, 10.288874, -76.58059)
+
+[node name="Nuage4" parent="Porte1Nuages" unique_id=635482864 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.1927428, 6.006893, -76.58059)
+
+[node name="Nuage5" parent="Porte1Nuages" unique_id=91914079 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.6164527, 5.9303303, -76.58059)
+
+[node name="Nuage3" parent="Porte1Nuages" unique_id=1262863318 instance=ExtResource("6_j5wjh")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.667706, 8.363131, -75.707344)
+
+[node name="Porte2Nuages" type="Node3D" parent="." unique_id=933710552]
 
 [node name="00_game-area-size" type="Node3D" parent="." unique_id=720039802]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.22202)
@@ -758,32 +787,9 @@ mesh = SubResource("ArrayMesh_iprb2")
 
 [node name="00_game-area-size2" parent="." unique_id=1131885053 instance=ExtResource("11_mfdv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
+visible = false
 
-[node name="Porte1Nuages" type="Node3D" parent="." unique_id=1127743841]
-
-[node name="Area3D" type="Area3D" parent="Porte1Nuages" unique_id=214566935]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66999817, -9.40636, -90.43789)
-collision_layer = 130
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Porte1Nuages/Area3D" unique_id=670217028]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5556927, 3.4970703, 26.059143)
-shape = SubResource("BoxShape3D_iotsf")
-
-[node name="Nuage1" parent="Porte1Nuages" unique_id=1748426639 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.0308895, 8.362883, -77.881905)
-
-[node name="Nuage2" parent="Porte1Nuages" unique_id=640783606 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0.57259226, 10.288874, -76.58059)
-
-[node name="Nuage4" parent="Porte1Nuages" unique_id=635482864 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.1927428, 6.006893, -76.58059)
-
-[node name="Nuage5" parent="Porte1Nuages" unique_id=91914079 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.6164527, 5.9303303, -76.58059)
-
-[node name="Nuage3" parent="Porte1Nuages" unique_id=1262863318 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.667706, 8.363131, -75.707344)
-
-[node name="Porte2Nuages" type="Node3D" parent="." unique_id=933710552]
+[node name="game-area-size_v2" parent="." unique_id=1550484972 instance=ExtResource("13_lc2xo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -278.25195)
 
 [connection signal="body_entered" from="Porte1Nuages/Area3D" to="." method="_on_area_porte1_body_entered"]
