@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://d1lkw7axh4gm6"]
 
+[ext_resource type="PackedScene" uid="uid://dsnbi66uvakuf" path="res://res/modeles/01_voiture.glb" id="1_llp4f"]
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_mn40h"]
 top_radius = 0.2
 bottom_radius = 0.2
@@ -11,20 +13,24 @@ size = Vector3(1, 1, 2)
 size = Vector3(1, 0.5, 2)
 
 [node name="Car" type="Node3D" unique_id=1471433011]
-transform = Transform3D(-0.99094623, 0, 0.13425946, 0, 1, 0, -0.13425946, 0, -0.99094623, 0, 0, 0)
+transform = Transform3D(-0.2972839, 0, 0.04027784, 0, 0.3, 0, -0.04027784, 0, -0.2972839, 0, 0, 0)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1463283351]
-transform = Transform3D(0.01802556, -0.647913, 0.13304392, 0.99094623, -2.8579926e-08, -0.13425946, 0.13304392, 0.08778322, 0.9819744, -0.10481159, -0.65090024, -0.77359647)
+transform = Transform3D(0.018025562, -0.647913, 0.13304393, 0.99094623, -2.8321177e-08, -0.13425946, 0.13304392, 0.087783225, 0.9819744, -0.10481159, -0.65090024, -0.77359647)
 mesh = SubResource("CylinderMesh_mn40h")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1745950507]
-transform = Transform3D(0.01802556, -0.64791304, 0.13304392, 0.99094623, -2.8579926e-08, -0.13425946, 0.13304392, 0.087783225, 0.9819744, 0.14643255, -0.65090024, 1.0807936)
+transform = Transform3D(0.01802556, -0.6479131, 0.13304392, 0.99094623, -2.8321182e-08, -0.13425946, 0.13304392, 0.08778323, 0.9819744, 0.14643255, -0.65090024, 1.0807936)
 mesh = SubResource("CylinderMesh_mn40h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2106885360]
-transform = Transform3D(0.9937095, 0, 0.11198926, 0, 1, 0, -0.11198926, 0, 0.9937095, -0.046037868, 0, 0.0025859834)
+transform = Transform3D(0.99370956, 0, 0.11198927, 0, 1, 0, -0.11198927, 0, 0.99370956, -0.046037868, 0, 0.0025859834)
 mesh = SubResource("BoxMesh_mn40h")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=191220206]
-transform = Transform3D(0.9937095, 0, 0.11198926, 0, 1, 0, -0.11198926, 0, 0.9937095, 0.04603786, -0.2340393, 0.81959766)
+transform = Transform3D(0.99370956, 0, 0.11198927, 0, 1, 0, -0.11198927, 0, 0.99370956, 0.04603786, -0.2340393, 0.81959766)
 mesh = SubResource("BoxMesh_llp4f")
+
+[node name="01_voiture" parent="." unique_id=632551242 instance=ExtResource("1_llp4f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.5854, 0, 45.525337)
+visible = false

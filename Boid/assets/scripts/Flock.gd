@@ -3,6 +3,8 @@ extends Node3D
 # General configuration
 @export var boidScene: PackedScene
 @export var numberOfBoids: int = 140
+@export var maxDistanceFromSpawn: float = 50
+
 @export var visualRange: float = 300
 @export var separationDistance: float = 80
 @export var predator: NodePath 
@@ -20,7 +22,7 @@ var _predatorRef
 @export var predatorWeight: float = 2000
 @export var repulsorWeight: float = 1000
 @export var sizeOfSpawn: Vector2 = Vector2(10,10)
-@export var maxDistanceFromSpawn: float = 70
+
 var _boids = []
 var _repulsors = []
 # Called when the node enters the scene tree for the first time.
@@ -99,7 +101,6 @@ func _separation():
 func _borders(delta):
 	for boid in _boids:
 		if (boid.isOutOfBorder or boid.get_position().distance_to(Vector3.ZERO) > maxDistanceFromSpawn ):
-			print(boid.get_position().distance_to(self.position))
 			boid.timeOutOfBorders += delta
 			var dir = (- boid.get_position()).normalized()
 			boid.acceleration += dir * boid.timeOutOfBorders * bordersWeight
