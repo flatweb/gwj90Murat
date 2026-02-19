@@ -32,3 +32,19 @@ func _on_limite_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_in
 	elif body.is_in_group("Bonus"):
 		body.queue_free() #TODO : mécanisme à changer
 	pass
+
+
+func _on_area_entered(area: Area3D) -> void:
+	var node = area.get_parent()
+	if node.is_in_group("isBoid"):
+		node.isOutOfBorder = true
+	else:
+		pass
+
+
+func _on_area_exited(area: Area3D) -> void:
+	var node = area.get_parent()
+	if node.is_in_group("isBoid"):
+		node.isOutOfBorder = false
+	else:
+		pass

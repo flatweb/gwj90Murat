@@ -18,7 +18,8 @@ radius = 0.1
 height = 0.4
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pihgk"]
-height = 0.75
+height = 5.3100586
+radius = 3.6308594
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6s105"]
 resource_name = "Material.001"
@@ -232,7 +233,7 @@ mesh = SubResource("CapsuleMesh_ffqxe")
 [node name="StaticBody3D" type="Area3D" parent="." unique_id=1648128067]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1003833365]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4050293, 0)
 shape = SubResource("CylinderShape3D_pihgk")
 
 [node name="OIE_ANIM+TEXTURE_actions" type="Node3D" parent="." unique_id=1966625850]

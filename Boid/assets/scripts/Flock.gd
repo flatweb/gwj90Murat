@@ -97,7 +97,6 @@ func _separation():
 			
 func _borders(delta):
 	for boid in _boids:
-
 		if (boid.isOutOfBorder):
 			boid.timeOutOfBorders += delta
 			var dir = (- boid.get_position()).normalized()

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="3_q4iis"]
 [ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="4_m3clv"]
 [ext_resource type="Script" uid="uid://cxp2pkshliblx" path="res://limites_area_3d.gd" id="5_mxnmf"]
-[ext_resource type="Script" uid="uid://c8h7bwkygvtcg" path="res://limite_shape_3d.gd" id="6_m3clv"]
+[ext_resource type="Script" path="res://limite_shape_3d.gd" id="6_m3clv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
@@ -645,38 +645,34 @@ script = ExtResource("5_mxnmf")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 25, 391.08594)
 shape = SubResource("BoxShape3D_ofirr")
 script = ExtResource("6_m3clv")
-metadata/_custom_type_script = "uid://c8h7bwkygvtcg"
 
 [node name="LimiteFondFin" type="CollisionShape3D" parent="LimitesArea3D" unique_id=1370153661]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 25, -367.4074)
 shape = SubResource("BoxShape3D_ofirr")
 script = ExtResource("6_m3clv")
-metadata/_custom_type_script = "uid://c8h7bwkygvtcg"
 
 [node name="LimiteShape3D" type="CollisionShape3D" parent="LimitesArea3D" unique_id=1360443461]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 25, 181.77882)
 shape = SubResource("BoxShape3D_m3clv")
 script = ExtResource("6_m3clv")
-metadata/_custom_type_script = "uid://c8h7bwkygvtcg"
 
 [node name="LimiteShape3D2" type="CollisionShape3D" parent="LimitesArea3D" unique_id=1660767503]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 25, 181.779)
 shape = SubResource("BoxShape3D_m3clv")
 script = ExtResource("6_m3clv")
 normal = Vector3(-1, 0, 0)
-metadata/_custom_type_script = "uid://c8h7bwkygvtcg"
 
 [node name="LimiteShape3D3" type="CollisionShape3D" parent="LimitesArea3D" unique_id=2145382042]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 25, -287.16107)
 shape = SubResource("BoxShape3D_mxnmf")
 script = ExtResource("6_m3clv")
-metadata/_custom_type_script = "uid://c8h7bwkygvtcg"
 
 [node name="LimiteShape3D4" type="CollisionShape3D" parent="LimitesArea3D" unique_id=530305763]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 25, -287.45526)
 shape = SubResource("BoxShape3D_4eo0i")
 script = ExtResource("6_m3clv")
 normal = Vector3(-1, 0, 0)
-metadata/_custom_type_script = "uid://c8h7bwkygvtcg"
 
+[connection signal="area_entered" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_entered"]
+[connection signal="area_exited" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_exited"]
 [connection signal="body_shape_entered" from="LimitesArea3D" to="LimitesArea3D" method="_on_limite_3d_body_shape_entered"]
