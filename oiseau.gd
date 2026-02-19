@@ -166,6 +166,7 @@ func _physics_process(delta: float) -> void:
 	var monte = Input.is_action_pressed("monte")
 	var pique = Input.is_action_pressed("descend")
 	var mouvement :bool = false
+	var mouvementupdown :bool = false
 	
 	# Si il y a une action automatique en cours, on privilégie l'action
 	# TODO : déplacer ça en résultat de do_action ?
@@ -183,12 +184,14 @@ func _physics_process(delta: float) -> void:
 		if pique :
 			descendre(delta)
 			mouvement = true
+			mouvementupdown = true
 			# on ne combine pas pique et changement de direction
 		elif monte :
 			monter(delta)
 			mouvement = true
+			mouvementupdown = true
 		# on ne combine pas montée et changement de direction ?!?: TODO: a faire
-		elif vire != 0:
+		if vire != 0:
 			# changement de direction
 			virage(vire,delta)
 			mouvement = true
