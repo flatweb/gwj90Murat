@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://ktrp3827wg2f" path="res://oiseau.tscn" id="1_80nbo"]
 [ext_resource type="MeshLibrary" uid="uid://ckdxgi2w3j4m8" path="res://res/meshlib-ground.tres" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://c235fg52wmv15" path="res://game.gd" id="1_feb5d"]
-[ext_resource type="Script" uid="uid://ylyqmprsbdh7" path="res://camera_3d.gd" id="4_7jktm"]
 [ext_resource type="AudioStream" uid="uid://dhnyo55ieglxv" path="res://res/sons/main_amb.mp3" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cia8cfrsqyj1t" path="res://oiseau_bonus.tscn" id="4_iotsf"]
+[ext_resource type="Script" uid="uid://c5np42vulwkd5" path="res://camera_rig.gd" id="4_lc2xo"]
 [ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuage.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
@@ -495,8 +495,9 @@ shadow_mesh = SubResource("ArrayMesh_7p74h")
 [sub_resource type="BoxShape3D" id="BoxShape3D_iotsf"]
 size = Vector3(38.108, 30, 5)
 
-[node name="Game" type="Node3D" unique_id=1608575864]
+[node name="Game" type="Node3D" unique_id=1608575864 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_feb5d")
+camera = NodePath("CameraRig/Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1431831324]
 environment = SubResource("Environment_iotsf")
@@ -532,12 +533,23 @@ gizmo_extents = 4.0
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=295921986]
+[node name="Camera3D_original" type="Camera3D" parent="." unique_id=1159204983]
 transform = Transform3D(0.60181504, 0.6675055, -0.43846914, 0, 0.54902285, 0.83580744, 0.79863554, -0.50300145, 0.33041018, -19.177612, 38.955605, 107.79487)
+visible = false
 current = true
 fov = 30.0
 far = 1000.0
-script = ExtResource("4_7jktm")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=161195959 node_paths=PackedStringArray("joueur")]
+transform = Transform3D(0.8498927, 0, -0.52695584, 0, 1, 0, 0.52695584, 0, 0.8498927, 0, 0, 83.39973)
+script = ExtResource("4_lc2xo")
+joueur = NodePath("../Oiseau")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=783702665]
+transform = Transform3D(1, 0, 0, 0, 0.32226568, 0.94664925, 0, -0.9466493, 0.32226568, 0, 38.956, 14.058273)
+current = true
+fov = 30.0
+far = 1000.0
 
 [node name="OiseauBonus1" parent="." unique_id=1559759492 instance=ExtResource("4_iotsf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67743254, 10, 66.04686)

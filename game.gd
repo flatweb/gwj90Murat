@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var camera : Camera3D
+
 #Par défaut, on considère que le gridmap sera de la même size que le $MeshGround
 var gridmapSize : Vector2
 var game_area_size : AABB
@@ -37,8 +39,8 @@ func start():
 	$Oiseau.start_aterri_at($Marker3DStart.position)
 
 	# Repositionner la camera ?
-	$Camera3D.followed = $Oiseau
-	$Camera3D.make_current()
+	#camera.followed = $Oiseau
+	#camera.make_current()
 	$AudioStreamPlayer.play()
 	
 
