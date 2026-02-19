@@ -34,8 +34,8 @@ func _ready():
 		add_child(instance)
 		_boids.append(instance)
 		
-		var x = randf_range(global_position.x - sizeOfSpawn.x,global_position.x + sizeOfSpawn.x)
-		var z = randf_range(global_position.z - sizeOfSpawn.y, global_position.z + sizeOfSpawn.y)
+		var x = randf_range(- sizeOfSpawn.x,sizeOfSpawn.x)
+		var z = randf_range(- sizeOfSpawn.y,sizeOfSpawn.y)
 		instance.set_position(Vector3(x, _predatorRef.position.y ,z))
 	_repulsors = get_tree().get_nodes_in_group("Repulsor")
 
@@ -100,7 +100,7 @@ func _borders(delta):
 
 		if (boid.isOutOfBorder):
 			boid.timeOutOfBorders += delta
-			var dir = (self.position - boid.get_position()).normalized()
+			var dir = (- boid.get_position()).normalized()
 			boid.acceleration += dir * boid.timeOutOfBorders * bordersWeight
 		else:
 			boid.timeOutOfBorders = 0
