@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cp7flp87nmceg"]
+
+[ext_resource type="Script" uid="uid://c8h7bwkygvtcg" path="res://limite_shape_3d.gd" id="1_ruqc6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x8geh"]
+size = Vector3(0.001, 50, 339.58426)
+
+[node name="LimiteShape3D" type="CollisionShape3D" unique_id=2065459034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+shape = SubResource("BoxShape3D_x8geh")
+script = ExtResource("1_ruqc6")

@@ -121,9 +121,13 @@ func _physics_process(delta: float) -> void:
 				print ("Choc de ",self.name," contre un Static : free de ",obj.name, " dans groupe ", obj.get_groups())
 				queue_free()
 				# on verra le résultat au prochain cycle
-			elif obj.is_in_group("Oiseau") or obj.is_in_group("Bonus"):
+			elif obj.is_in_group("Oiseau") :
 				# on vient de rentrer dans un autre oiseau
 				decroche(delta)
+			elif obj.is_in_group("Bonus"):
+				# collision entre Oiseaux Bonus, on ignore
+				pass
+		
 	elif enaction and actionencours == action.CORRECTION :
 		# plus de collision, on reprend son chemin
 		print ("fin de correction pour Oiseau Bonus")

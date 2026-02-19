@@ -12,7 +12,7 @@ signal fini(score : int)
 
 func _ready():
 	gridmapSize = $Ground/MeshGround.mesh.size
-	game_area_size = get_node_aabb(get_node("00_game-area-size2"))
+	game_area_size = get_node_aabb(get_node("Level/game-area-size_v2"))
 	game_area_size.position.y = 0.0  # TODO constante ou autre ?
 	game_area_size.end.y = 40.0  # TODO constante ou autre ?
 	
@@ -174,24 +174,3 @@ func _on_area_porte1_body_entered(body: Node3D) -> void:
 			if child.is_in_group("Nuage"):
 				child.endestruction = true
 		pass # Replace with function body.
-
-
-func _on_area_limites_body_entered(body: Node3D) -> void:
-	if body is StaticBody3D :
-		# Les statics ne sont pas censés bouger..., on ignore
-		return
-	print ("limites atteinte par ", body.name) # FIXME : on fait quoi ?
-	pass # Replace with function body.
-
-
-func _on_limite_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
-	var limites = $Limites/Area3D
-	if body is StaticBody3D :
-		# Les statics ne sont pas censés bouger..., on ignore
-		return
-	print ("shape limite atteinte par ", body.name) # FIXME : on fait quoi ?
-	var proprietaire_forme_local = limites.shape_find_owner(local_shape_index)
-	var forme_local = limites.shape_owner_get_owner(proprietaire_forme_local)
-	if body.is_in_group("Oiseau"):
-		body.start_correction(forme_local.get_real_normal())
-	pass

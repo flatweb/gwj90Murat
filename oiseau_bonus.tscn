@@ -318,7 +318,7 @@ _data = {
 }
 
 [node name="OiseauBonus" type="CharacterBody3D" unique_id=1559759492 groups=["Bonus"]]
-collision_layer = 7
+collision_layer = 15
 script = ExtResource("1_d5epw")
 metadata/_custom_type_script = "uid://4qnanjp7fwql"
 
