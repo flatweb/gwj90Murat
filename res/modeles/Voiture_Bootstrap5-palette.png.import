@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnoun2t5oj6a8"
-path.s3tc="res://.godot/imported/01_voiture_Bootstrap5-palette.png-449c0f8248ae437a777e9ebb961f00ce.s3tc.ctex"
+uid="uid://c6m7v0yko7lli"
+path.s3tc="res://.godot/imported/Voiture_Bootstrap5-palette.png-780c35a1b5c644a6a7ff57ead5d2aa07.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://res/modeles/01_voiture_Bootstrap5-palette.png"
-dest_files=["res://.godot/imported/01_voiture_Bootstrap5-palette.png-449c0f8248ae437a777e9ebb961f00ce.s3tc.ctex"]
+source_file="res://res/modeles/Voiture_Bootstrap5-palette.png"
+dest_files=["res://.godot/imported/Voiture_Bootstrap5-palette.png-780c35a1b5c644a6a7ff57ead5d2aa07.s3tc.ctex"]
 
 [params]
 

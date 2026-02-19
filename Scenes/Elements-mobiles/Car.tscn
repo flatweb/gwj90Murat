@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d1lkw7axh4gm6"]
+
+[ext_resource type="PackedScene" uid="uid://cumab0g23b66n" path="res://res/modeles/Voiture.glb" id="1_llp4f"]
+
+[node name="Car" type="Node3D" unique_id=1471433011]
+
+[node name="Voiture" parent="." unique_id=1553680861 instance=ExtResource("1_llp4f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14126658, 0)
