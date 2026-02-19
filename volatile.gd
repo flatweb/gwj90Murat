@@ -61,8 +61,13 @@ enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATERRISSAGE, ATERRI, DECOLLA
 # On perd le contrôle tant qu'on est pas revenu dans la zone et de face
 var enaction : bool = false
 var actionencours : action = action.AUCUNE
-var dureedecrochage : float = 0.0
+# Durée restante du décrochage, avant reprise normale du vol
+var decrochage_duree : float = 0.0
+## Durée du décrochage, avant reprise normale du vol
 const DUREE_DECROCHAGE = 0.16
+# pendant une correction, direction cible (a priori la normal de collision)
+var correction_direction : Vector3 = Vector3.ZERO
+
 
 func _init() -> void :
 	pass
@@ -224,26 +229,33 @@ func _on_loop_sound():
 #   GESTION DES MOUVEMENTS
 # -----------------------------------------------------------------
 
+func angle_on_XZ(v1 : Vector3, v2 : Vector3) -> float:
+	var v1h = Vector2(v1.x, v1.z)
+	var v2h = Vector2(v2.x, v2.z)
+	var angle : float = v1h.angle_to(v2h)
+	return angle
+
 func attente():
 	if enaction == false :
 		enaction = true
 		actionencours = action.ATTENTE
-		autorotspeed = calc_rot_speed(actionencours,FACTEUR_ATTENTE)
+		autorotspeed = calc_rot_speed(FACTEUR_ATTENTE)
 
 ## Calcul de l'angle de virage, en fonction de l'action, modulé par un facteur
-func calc_rot_speed(_act : action, facteur : float) -> float :
-		var signx : int
-		if position.x == 0:
-			# si on est vraiment dans l'axe, on choisit le côté au hasard
-			signx = randi_range(0,1)*2-1
-		else :
-			signx = sign(position.x)
-		var signz = -1
-		if speedVect.z != 0 :
-			signz = sign(speedVect.z)
-		var rotspeed : float = -signz*signx*facteur
-		#print ("rotspeed auto=", rotspeed)
-		return rotspeed
+func calc_rot_speed(facteur : float) -> float :
+	return calc_rot_speed_normal(Vector3.FORWARD,facteur) # vers Z négatif, car l'idée c'erst bien de repartir par là
+
+## Calcul de l'angle de virage, en fonction de l'action, modulé par un facteur
+func calc_rot_speed_normal(normal : Vector3, facteur : float) -> float :
+	#var direction = -Vector2(transform.basis.z.x, transform.basis.z.z)
+	#var normalh = Vector2(normal.x, normal.z)
+	#var angley = normalh.angle_to(direction)
+	var angley : float = angle_on_XZ(normal, -transform.basis.z)
+	if angley == 0.0 or angley == PI or angley == -PI:
+		angley = 1.0 if randi_range(0,1) == 0 else -1.0
+	var rotspeed : float = sign(angley)*facteur
+	#print ("rotspeed auto=", rotspeed)
+	return rotspeed
 
 # Effectue un virage début de virage vers la droite ou la gauche
 # Met à jour speedVect en conséquence, et modifie l'inclinaison de l'oie
@@ -254,11 +266,15 @@ func virage(change : float, delta : float):
 	var angle : float = change*ANGLE_VIRAGE*delta
 	if enaction and actionencours == action.CORRECTION:
 		#print (rotation.y)
-		if rotation.y == 0.0:
+		var ecart : float = angle_on_XZ(correction_direction, speedVect)
+		
+		if ecart == 0.0:
 			angle = 0.0
-		elif sign (rotation.y+angle) != sign(rotation.y):
+		elif sign (ecart+angle) != sign(ecart):
 			# on a dépassé la remise dans l'axe
-			angle = -rotation.y
+			angle = -ecart
+			# En fait, on va de sortir de la correction
+			
 	if angle != 0.0: self.rotate_y(angle)
 	speedVect = speedVect.rotated(Vector3.UP, angle)
 	
@@ -278,14 +294,16 @@ func redresse(delta : float, force: float = 1.0):
 	else:
 		$OIE.rotate_z(-sign($OIE.rotation.z)*force*ROTBACKSPEED*delta)
 
-func correction(inverse : bool = false):
+# Note: la correction est nécessairement dans le plan XZ
+# donc on met tous les y à 0 et on travaille en Vector2
+func correction(normal : Vector3 = Vector3.ZERO):
 	if enaction == false :
 		print("Début de correction pour ", self.name)
 		enaction = true
 		actionencours = action.CORRECTION
-		autorotspeed = calc_rot_speed(actionencours,FACTEUR_CORRECTION)
-		if inverse :
-			autorotspeed = -autorotspeed
+		correction_direction = normal
+		autorotspeed = calc_rot_speed_normal(normal,FACTEUR_CORRECTION)
+		#autorotspeed = autorotspeed
 		if get_node_or_null("AudioPlayerCri") != null:
 			$AudioPlayerCri.play(4.0)
 
@@ -335,8 +353,8 @@ func remonte(delta : float, rotx = true):
 
 
 func decroche(delta : float = 0.0, duree : float = 0.0):
-	if dureedecrochage == 0.0 :
-		dureedecrochage = duree if duree != 0 else DUREE_DECROCHAGE
+	if decrochage_duree == 0.0 :
+		decrochage_duree = duree if duree != 0 else DUREE_DECROCHAGE
 	if not enaction or actionencours != action.DECROCHE : #FIXME on peut avoir des cas plus particuliers
 		# perturbation directe unique liée à un contact avec un obstacle
 		var angle = randf_range(-PI/4,PI/4)
@@ -347,10 +365,10 @@ func decroche(delta : float = 0.0, duree : float = 0.0):
 	# on descend 
 	position.y -= speeddown * 2.0 * delta
 	
-	dureedecrochage -= delta
-	if dureedecrochage <= 0.0 :
+	decrochage_duree -= delta
+	if decrochage_duree <= 0.0 :
 		print ("Fin du décrochage pour ", self.name)
-		dureedecrochage = 0.0
+		decrochage_duree = 0.0
 		enaction = false
 
 

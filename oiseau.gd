@@ -4,6 +4,7 @@ extends VolatileBody3D
 # limite en +X ou -X de la position de l'oiseau
 var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
 # de quel côté on a atteint la limite ?
+var acorriger = false
 
 # autre camera 
 var prevcam : Camera3D
@@ -151,6 +152,10 @@ func _process(_delta):
 	if position.z < 0.0 : #(pour l'instant c'est le milieu)
 		fin()
 
+func start_correction(normal):
+	acorriger = true
+	correction_direction = normal
+	
 func do_no_action():
 	pass
 	
@@ -170,7 +175,7 @@ func _physics_process(delta: float) -> void:
 		enaction = false
 		correction()
 	if enaction and actionencours == action.ATERRI \
-		and (Input.is_action_pressed("decolle") or Input.is_action_pressed("monte")):
+		and (Input.is_action_pressed("decolle") or monte):
 			do_decolle()
 	
 	# Si pas d'action automatique, on cherche une commande
@@ -197,7 +202,8 @@ func _physics_process(delta: float) -> void:
 			virage(autorotspeed,delta)
 		if actionencours == action.CORRECTION:
 			#print ("",speedVect.z," angle ",angle_correction)
-			if abs(rotation.y) <= 0.01 :
+			
+			if abs(angle_on_XZ(correction_direction,speedVect)) <= 0.1 : # FIXME : risque d'aller trop loin
 				print("Fin de correction pour ", self.name)
 				enaction = false
 				# on repart tout droit
@@ -212,21 +218,26 @@ func _physics_process(delta: float) -> void:
 		elif actionencours == action.DECOLLAGE:
 			queue_next_anim(ANIM_VOL)
 			remonte(delta)
-			if position.y > tailleY*4 : #TODO pourrait être affiné
+			if position.y > 1.0 :
 				enaction = false
 		elif actionencours == action.ATTENTE:
 			# on laisse tourner
 			pass
 
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
-	if not enaction and \
-		( abs(speedVect.x*1.0 + position.x) > limite_x \
-		   or speedVect.z*1.0 + position.z > maximumz \
-		):
-		# on approche trop du bord
-		# on force un virage
-		correction()
+	if acorriger:
+		correction(correction_direction)
 		virage(autorotspeed,delta)
+		acorriger = false
+
+	#if not enaction and \
+		#( abs(speedVect.x*1.0 + position.x) > limite_x \
+		   #or speedVect.z*1.0 + position.z > maximumz \
+		#):
+		## on approche trop du bord
+		## on force un virage
+		#correction()
+		#virage(autorotspeed,delta)
 
 	# Quand on est en vol régulier
 	if not enaction and not mouvement:
@@ -319,4 +330,10 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 		print("Un oiseau bonus capturé : ", body.name)
 		#body.queue_free() # code pour test
 		body.devient_suiveur_de(self)
+	pass # Replace with function body.
+
+
+func _on_area_influence_area_entered(area: Area3D) -> void:
+	if area.is_in_group("limite"):
+		pass #FIXME : ça sert à quoi ?
 	pass # Replace with function body.

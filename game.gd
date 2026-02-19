@@ -174,3 +174,24 @@ func _on_area_porte1_body_entered(body: Node3D) -> void:
 			if child.is_in_group("Nuage"):
 				child.endestruction = true
 		pass # Replace with function body.
+
+
+func _on_area_limites_body_entered(body: Node3D) -> void:
+	if body is StaticBody3D :
+		# Les statics ne sont pas censés bouger..., on ignore
+		return
+	print ("limites atteinte par ", body.name) # FIXME : on fait quoi ?
+	pass # Replace with function body.
+
+
+func _on_limite_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+	var limites = $Limites/Area3D
+	if body is StaticBody3D :
+		# Les statics ne sont pas censés bouger..., on ignore
+		return
+	print ("shape limite atteinte par ", body.name) # FIXME : on fait quoi ?
+	var proprietaire_forme_local = limites.shape_find_owner(local_shape_index)
+	var forme_local = limites.shape_owner_get_owner(proprietaire_forme_local)
+	if body.is_in_group("Oiseau"):
+		body.start_correction(forme_local.get_real_normal())
+	pass

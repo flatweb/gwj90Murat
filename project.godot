@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 movie_writer/movie_file="C:/Users/Plouf/Documents/GameJam/Export1.avi"
 
+[global_group]
+
+limite=""
+
 [input]
 
 droite={
