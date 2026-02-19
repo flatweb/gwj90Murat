@@ -176,4 +176,40 @@ transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.667706, 8.363131, -7
 [node name="Level" parent="." unique_id=2081723973 instance=ExtResource("10_hve3p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -278.25195)
 
+[node name="UI" type="Control" parent="." unique_id=1142042289]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=92831839]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="LabelCaptures" type="Label" parent="UI/HBoxContainer" unique_id=1043868048]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0/0"
+
+[node name="Label" type="Label" parent="UI/HBoxContainer" unique_id=1016454962]
+layout_mode = 2
+text = "-----"
+
+[node name="LabelIndices" type="Label" parent="UI/HBoxContainer" unique_id=229976647]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "XXX"
+
 [connection signal="body_entered" from="Porte1Nuages/Area3D" to="." method="_on_area_porte1_body_entered"]

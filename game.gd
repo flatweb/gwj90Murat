@@ -7,6 +7,10 @@ var gridmapSize : Vector2
 var game_area_size : AABB
 @export var nbnuages : int = 50
 
+var nbcapture = 0
+var nbcaptureattendu = 8 # calculer en fonction des noeuds OiseauBonus
+var indices = 3
+
 # signal émis à la fin du jeu pour prévenir le noeud off-play
 signal fini(score : int)
 
@@ -37,13 +41,15 @@ func startintro():
 
 func start():
 	$Oiseau.start_aterri_at($Marker3DStart.position)
+	
+	$Oiseau.capture.connect(addcapture.bind())
+	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
 
 	# Repositionner la camera ?
 	#camera.followed = $Oiseau
 	#camera.make_current()
 	$AudioStreamPlayer.play()
 	
-
 func fin(distance,nb):
 	# fin de partie, on renvoie la distance parcourue comme score
 	fini.emit(distance)
@@ -159,6 +165,31 @@ func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_
 	
 	return box
 
+func addcapture():
+	nbcapture += 1
+	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
+
+func _input(event: InputEvent) -> void:
+	if (event.is_action_released("indice")):
+		if indices <= 0 : return
+		var distmin = 100000.0
+		var bonusproche = -1
+		for child in get_children():
+			if child.is_in_group("Bonus"):
+				var bonus = child
+				var dist = (bonus.position - $Oiseau.position).length()
+				if dist < distmin and bonus.leader == null:
+					distmin = dist
+					bonusproche = bonus
+		
+		$Oiseau.show_indice(bonusproche)
+		indices -= 1
+		var txt = ""
+		for i in range(0,indices) :
+			txt = txt + "X"
+		%LabelIndices.text = txt
+	
+	
 func _process(_delta):
 	#print ("vvvvvvv")
 	#print ($Oiseau.rotation.z)
