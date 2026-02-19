@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bdmn1146wi527"]
+
+[ext_resource type="PackedScene" uid="uid://detafjuqrnaqx" path="res://res/modeles/02_hiver.glb" id="1_rw6h6"]
+
+[node name="02_hiver" type="Node3D" unique_id=1634229765]
+
+[node name="02_hiver" parent="." unique_id=428375646 instance=ExtResource("1_rw6h6")]
