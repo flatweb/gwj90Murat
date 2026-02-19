@@ -167,8 +167,8 @@ func _process(_delta):
 
 func _on_area_porte1_body_entered(body: Node3D) -> void:
 	print ("collision avec ", body.name)
-	if body.name == "Oiseau" :
+	if body.is_in_group("Oiseau"):
 		for child in $Porte1Nuages.get_children():
-			if child.name.begins_with("Nuage"):
+			if child.is_in_group("Nuage"):
 				child.endestruction = true
 		pass # Replace with function body.

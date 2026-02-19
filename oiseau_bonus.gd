@@ -24,22 +24,19 @@ func mise_en_attente():
 
 func devient_suiveur_de(_leader : Node3D):
 	if self.leader != null :
+		# on suit déjà un leader
 		return
-		
+	
 	self.leader = _leader
 	speedVect = speedVect.normalized() * speedfront
 	if enaction :
 		if actionencours == action.ATTENTE :
 			enaction = false
-			decroche(0.0)
+			decroche(0.017) # on décroche sur 1/60 s
 	# On désactive les layers 2 et 3? pour ne plus déclencher la capture
 	self.set_collision_layer_value(2, false)
 	self.set_collision_layer_value(3, false)
-		
 	
-	if enaction and actionencours == action.ATTENTE :
-		enaction = false
-		actionencours = action.AUCUNE
 
 func _process(delta: float) -> void:
 	super._process(delta)
@@ -101,7 +98,7 @@ func _physics_process(delta: float) -> void:
 			if obj.get_parent().is_in_group("isBoid"):
 				break
 			print("OiseauBonus collides avec ",obj.name)
-			if obj.name.contains("Ground"):
+			if obj.is_in_group("sol"):
 				if enaction and actionencours == action.DECOLLAGE :
 					#on ignore la collision résiduelle
 					pass
@@ -119,15 +116,14 @@ func _physics_process(delta: float) -> void:
 				print ("Choc contre un Static : free de ",obj.name, " dans ", obj.get_groups())
 				queue_free()
 				# on verra le résultat au prochain cycle
-			elif obj.name.contains("Oiseau"):
+			elif obj.is_in_group("Oiseau") or obj.is_in_group("Bonus"):
 				# on vient de rentrer dans un autre oiseau
-				pass
 				decroche(delta)
 	elif enaction and actionencours == action.CORRECTION :
 		# plus de collision, on reprend son chemin
-		print ("fin des collisions pour Oiseau Bonus")
+		print ("fin de correction pour Oiseau Bonus")
 		enaction = false
 	elif enaction and actionencours == action.DECROCHE :
 		# plus de collision, on reprend son chemin
-		print ("fin des collisions pour Oiseau Bonus")
+		print ("fin du décrochage pour Oiseau Bonus")
 		enaction = false

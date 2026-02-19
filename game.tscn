@@ -510,7 +510,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Ground" type="StaticBody3D" parent="." unique_id=886965380]
+[node name="Ground" type="StaticBody3D" parent="." unique_id=886965380 groups=["sol"]]
 
 [node name="MeshGround" type="MeshInstance3D" parent="Ground" unique_id=1549893151]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049605727, 0)

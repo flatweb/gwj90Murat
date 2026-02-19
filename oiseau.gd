@@ -280,7 +280,7 @@ func _physics_process(delta: float) -> void:
 			if obj.get_parent().is_in_group("isBoid"): #TODO/FIXME : comprendre
 				continue
 			print("Oiseau collides avec ",obj.name)
-			if obj.name.contains("Ground"):
+			if obj.is_in_group("sol"):
 				if enaction and actionencours == action.DECOLLAGE :
 					#on ignore la collision résiduelle
 					pass
@@ -293,7 +293,7 @@ func _physics_process(delta: float) -> void:
 				#correction()
 				#virage(autorotspeed,delta)
 				# on verra le résultat au prochain cycle
-			elif obj.name.contains("Oiseau"):
+			elif obj.is_in_group("Oiseau"):
 				# on est rentré dans un autre oiseau (bonus), on va dévier simplement
 				if not (enaction and actionencours == action.CORRECTION):
 					pass
@@ -315,7 +315,9 @@ func _physics_process(delta: float) -> void:
 
 # Un élément vient de rentrer dans notre zone d'influence
 func _on_area_influence_body_entered(body: Node3D) -> void:
-	if body.name.contains( "OiseauBonus" ) :
+	# si c'est un oiseau bonus
+	if body.is_in_group( "Bonus" ) :
 		print("Un oiseau bonus capturé : ", body.name)
+		#body.queue_free() # code pour test
 		body.devient_suiveur_de(self)
 	pass # Replace with function body.

@@ -500,7 +500,7 @@ data = PackedByteArray("SUQzBAAAAAADP1RYWFgAAAASAAADbWFqb3JfYnJhbmQATTRBIABUWFhY
 height = 2.629399
 radius = 1.6923828
 
-[node name="Oiseau" type="CharacterBody3D" unique_id=1119983689]
+[node name="Oiseau" type="CharacterBody3D" unique_id=1119983689 groups=["Oiseau"]]
 script = ExtResource("1_pmcpw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1303361586]
