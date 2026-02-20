@@ -4,12 +4,12 @@
 [ext_resource type="Script" uid="uid://c235fg52wmv15" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="AudioStream" uid="uid://dhnyo55ieglxv" path="res://res/sons/main_amb.mp3" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cia8cfrsqyj1t" path="res://oiseau_bonus.tscn" id="4_iotsf"]
-[ext_resource type="Script" path="res://camera_rig.gd" id="4_lc2xo"]
+[ext_resource type="Script" uid="uid://c5np42vulwkd5" path="res://camera_rig.gd" id="4_lc2xo"]
 [ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuage.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://bjwjou340xq8n" path="res://Level.tscn" id="10_hve3p"]
-[ext_resource type="Script" uid="uid://0fpuqucyrhnl" path="res://ui.gd" id="11_mfdv2"]
+[ext_resource type="Script" path="res://ui.gd" id="11_mfdv2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,6 +25,7 @@ tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
 glow_enabled = true
+glow_intensity = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eow3j"]
 margin = 0.2
@@ -67,16 +68,16 @@ camera = NodePath("CameraRig/Camera3D")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1431831324]
 environment = SubResource("Environment_iotsf")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2107808653]
+transform = Transform3D(1, 0, 0, 0, 0.2997069, 0.95403135, 0, -0.95403135, 0.2997069, 0, 20.078451, 80.2454)
+shadow_enabled = true
+
 [node name="Ground" type="StaticBody3D" parent="." unique_id=886965380 groups=["sol"]]
 
 [node name="CollisionGround" type="CollisionShape3D" parent="Ground" unique_id=935773675]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_eow3j")
 debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2107808653]
-transform = Transform3D(1, 0, 0, 0, 0.29970688, 0.9540313, 0, -0.9540313, 0.29970688, 0, 20.078451, 80.2454)
-shadow_enabled = true
 
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
