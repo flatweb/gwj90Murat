@@ -411,8 +411,12 @@ libraries/ = SubResource("AnimationLibrary_8iqtq")
 autoplay = &"Vol_normal"
 
 [node name="TimerChangeAnim" type="Timer" parent="." unique_id=1186357729]
-wait_time = 1.5
+wait_time = 5.0
 autostart = true
 
 [node name="TimerAttenteAnim" type="Timer" parent="." unique_id=2027268856]
 one_shot = true
+
+[connection signal="animation_finished" from="OIE/AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="timeout" from="TimerChangeAnim" to="." method="_on_timer_change_anim_timeout"]
+[connection signal="timeout" from="TimerAttenteAnim" to="." method="_on_timer_attente_anim_timeout"]
