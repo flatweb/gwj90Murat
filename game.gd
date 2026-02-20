@@ -51,8 +51,7 @@ func start():
 	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
 	$Oiseau.start_aterri_at($Marker3DStart.position)
 	$Oiseau.msg.connect(pushtext.bind())
-	$AudioStreamPlayer.play()
-	
+
 	$UI.pushtext("It is time to migrate to south !")
 	
 func fin(distance):

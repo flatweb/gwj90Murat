@@ -2,16 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://ktrp3827wg2f" path="res://oiseau.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://c235fg52wmv15" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="AudioStream" uid="uid://dhnyo55ieglxv" path="res://res/sons/main_amb.mp3" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cia8cfrsqyj1t" path="res://oiseau_bonus.tscn" id="4_iotsf"]
 [ext_resource type="Script" uid="uid://c5np42vulwkd5" path="res://camera_rig.gd" id="4_lc2xo"]
 [ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuage.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://bjwjou340xq8n" path="res://Level.tscn" id="10_hve3p"]
-[ext_resource type="Script" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="Script" uid="uid://bfya6qqxqtu08" path="res://audio_player.gd" id="11_iotsf"]
 [ext_resource type="Script" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
+[ext_resource type="AudioStream" uid="uid://c60gx7f86f2ai" path="res://sons/winter theme.mp3" id="13_7sc4i"]
 [ext_resource type="AudioStream" uid="uid://v74b30lhgb3x" path="res://sons/Storm.mp3" id="14_80cx4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
@@ -28,7 +29,6 @@ tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
 glow_enabled = true
-glow_intensity = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eow3j"]
 margin = 0.2
@@ -71,16 +71,16 @@ camera = NodePath("CameraRig/Camera3D")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1431831324]
 environment = SubResource("Environment_iotsf")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2107808653]
-transform = Transform3D(1, 0, 0, 0, 0.2997069, 0.95403135, 0, -0.95403135, 0.2997069, 0, 20.078451, 80.2454)
-shadow_enabled = true
-
 [node name="Ground" type="StaticBody3D" parent="." unique_id=886965380 groups=["sol"]]
 
 [node name="CollisionGround" type="CollisionShape3D" parent="Ground" unique_id=935773675]
 transform = Transform3D(1, 0, -2.9802322e-08, -2.9802322e-08, 1, 0, -1.4901161e-08, 0, 1.0000001, 0, -0.5000038, -194.7178)
 shape = SubResource("BoxShape3D_eow3j")
 debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2107808653]
+transform = Transform3D(1, 0, 0, 0, 0.29970688, 0.9540313, 0, -0.9540313, 0.29970688, 0, 20.078451, 80.2454)
+shadow_enabled = true
 
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
@@ -128,6 +128,9 @@ transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.98023
 [node name="OiseauBonus8" parent="." unique_id=1093410312 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -29.963, 10, -320.3542)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1714319163]
+stream = ExtResource("4_fc0e3")
+
 [node name="Node3D" type="Node3D" parent="." unique_id=1517858812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.593393, 0, -99.15094)
 
@@ -157,8 +160,7 @@ gizmo_extents = 4.0
 
 [node name="Area3D" type="Area3D" parent="Porte1Nuages" unique_id=214566935]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66999817, -9.40636, -90.43789)
-collision_layer = 8
-collision_mask = 2
+collision_layer = 130
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Porte1Nuages/Area3D" unique_id=670217028]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5556927, 3.4970703, 26.059143)
@@ -185,9 +187,7 @@ transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.667706, 8.363131, -7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -623.31134)
 
 [node name="Area3D" type="Area3D" parent="ZoneFin" unique_id=741465811 groups=["fin"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6965332)
-collision_layer = 8
-collision_mask = 2
+collision_layer = 130
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ZoneFin/Area3D" unique_id=1297976245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9329834)
@@ -251,25 +251,25 @@ horizontal_alignment = 1
 [node name="Defilement" type="Timer" parent="UI" unique_id=1497691247]
 wait_time = 0.05
 
-[node name="AudioPlayer" type="Node3D" parent="." unique_id=22574645]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -552.4393)
+[node name="AudioPlayer" type="Node3D" parent="." unique_id=356784903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 70.87207)
 script = ExtResource("11_iotsf")
 music1zPosition = 108.0
+music2zPosition = 77.0
 music3zPosition = -90.0
 music4zPosition = -150.0
 
-[node name="Music1" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=112991512]
+[node name="Music1" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=842344781]
 stream = ExtResource("12_215e1")
+volume_db = -12.401
 
-[node name="Music2" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1268886826]
+[node name="Music2" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=462057821]
+stream = ExtResource("13_7sc4i")
+
+[node name="Music3" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=442342178]
 stream = ExtResource("14_80cx4")
 
-[node name="Music3" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=671492526]
-stream = ExtResource("14_80cx4")
-
-[node name="Music4" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=398372508]
-
-[node name="Music5" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1218043687]
+[node name="Music4" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1299440032]
 
 [connection signal="body_entered" from="Porte1Nuages/Area3D" to="." method="_on_area_porte1_body_entered"]
 [connection signal="body_entered" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_entered"]
