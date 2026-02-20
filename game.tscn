@@ -147,7 +147,7 @@ alignmentWeight = 3.0
 sizeOfSpawn = Vector2(15, 15)
 
 [node name="Marker3DStart" type="Marker3D" parent="." unique_id=1720991345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529, 83.538)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529, -578.69727)
 gizmo_extents = 4.0
 
 [node name="Porte1Nuages" type="Node3D" parent="." unique_id=1127743841]

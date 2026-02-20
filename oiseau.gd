@@ -146,10 +146,6 @@ func mission_remplie(node : Node):
 		print ("Mission 1 terminée")
 		
 	
-# fin de partie
-func fin():
-	aterri.emit(distance,0)
-	
 func _process(_delta):
 	if Input.is_action_just_pressed("attente",true):
 		attente()
@@ -166,10 +162,6 @@ func _process(_delta):
 		anim_autoswitch()
 	
 	refresh_indice()
-
-	# fin de partie ?  FIXME
-	if position.z < 0.0 : #(pour l'instant c'est le milieu)
-		fin()
 
 func start_correction(normal):
 	acorriger = true
@@ -191,6 +183,9 @@ func _physics_process(delta: float) -> void:
 	var mouvement :bool = false
 	var mouvementupdown :bool = false # ne sert à rien ?
 	
+	#pour mettre un point d'arrêt
+	if speedVect.y <= 0 :
+		pass
 	# Si il y a une action automatique en cours, on privilégie l'action
 	# TODO : déplacer ça en résultat de do_action ?
 	if enaction and actionencours == action.ATTENTE \
@@ -241,6 +236,7 @@ func _physics_process(delta: float) -> void:
 				# on est arrêté
 				enaction = true
 				actionencours = action.ATERRI
+				print("Aterrissage réussi")
 				aterri.emit(distance)
 				queue_next_anim(ANIM_REPOS)
 		elif actionencours == action.DECOLLAGE:
@@ -251,6 +247,10 @@ func _physics_process(delta: float) -> void:
 		elif actionencours == action.ATTENTE:
 			# on laisse tourner
 			pass
+
+	#pour mettre un point d'arrêt
+	if speedVect.y <= 0 :
+		pass
 
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
 	if acorriger:
@@ -288,6 +288,9 @@ func _physics_process(delta: float) -> void:
 		if abs(self.position.y - startpos.y) <= ECART_ALTITUDE:
 			speedVect.y = 0.0
 
+	#pour mettre un point d'arrêt
+	if speedVect.y <= 0 :
+		pass
 
 	if $Indicateurs.visible :
 		$Indicateurs/Altitude.text = "\u2191%d" % roundi(position.y)

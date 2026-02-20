@@ -36,5 +36,6 @@ func _process(delta):
 	acceleration.z = 0
 	velocity.y=0
 	position += velocity * delta
-	look_at(global_position + velocity)
+	if velocity != Vector3.ZERO :
+		look_at(global_position + velocity)
 	rotation += rotationOffset
