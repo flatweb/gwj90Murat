@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bnydrvfyel5hm"]
+
+[ext_resource type="Script" uid="uid://dkdpvtgvso6qh" path="res://Boid/assets/scenes/birdTrail.gd" id="1_wgjh0"]
+
+[sub_resource type="Curve3D" id="Curve3D_vqcgn"]
+
+[node name="BirdTrail" type="Node3D" unique_id=1613696045]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=148309959]
+script = ExtResource("1_wgjh0")
+
+[node name="Path3D" type="Path3D" parent="Node3D" unique_id=501578222]
+curve = SubResource("Curve3D_vqcgn")
