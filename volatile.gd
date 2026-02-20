@@ -79,8 +79,8 @@ func _init() -> void :
 	pass
 
 func _ready() -> void:
-	#print ($TimerChangeAnim)
-	#print ($TimerAttenteAnim)
+	$OIE/AnimationPlayer.stop()
+	$TimerAttenteAnim.start(1.0)
 	pass
 
 # -----------------------------------------------------------------
@@ -100,22 +100,10 @@ var en_vol : bool
 var nextanim : String
 var prevanim : String = ANIM_REPOS
 
-# Inutile pour l'instant TODO
-var timer_change_anim : Timer
-var timer_attente_anim : Timer
-
-func set_timers(timer_change : Timer, timer_attente : Timer):
-	if timer_change_anim != null:
-		timer_change_anim.queue_free()
-	timer_change_anim = timer_change
-	if timer_attente_anim != null:
-		timer_attente_anim.queue_free()
-	timer_attente_anim = timer_attente
-	
-
 # On va gérer notre queue d'animation nous-mêmes TODO
 func queue_next_anim(anim:String):
 	#TODO : il faudra peut-être être plus malin à terme, quoique...
+	#print (self.name, " queue ",anim)
 	if $TimerChangeAnim.time_left > 0 and \
 	   anim == nextanim :
 		# Si on veut poursuivre la même animation, on relance le TimerChange
@@ -142,14 +130,14 @@ func _on_animation_finished(anim_name: StringName) -> void:
 
 # Pour les animations trop courtes, on préfère activer un timer
 func _on_timer_attente_anim_timeout() -> void:
-	#print ("Changement sur timeout vers ", nextanim)
+	#print (self.name, " change sur timeout vers ", nextanim)
 	_change_anim(prevanim)
 
 # Changement d'animation avec transition
 func _change_anim(anim_name):
 	if anim_name != nextanim :
-		print ("Changement de ",anim_name," à ",nextanim)
-	match anim_name:
+		print (self.name," change de ",anim_name," à ",nextanim)
+	match anim_name: # état actuel (...ou précédent)
 		ANIM_VOL:
 			match nextanim:
 				ANIM_VOL:
@@ -187,7 +175,8 @@ func _change_anim(anim_name):
 
 func _anim_start_vol():
 	_anim_vol()
-	$AudioPlayerAiles.play()
+	if get_node_or_null("AudioPlayerAiles") != null:
+		$AudioPlayerAiles.play()
 	
 func _anim_vol():
 	nextanim = ANIM_VOL
@@ -196,7 +185,8 @@ func _anim_vol():
 func _anim_plane_to_vol():
 	nextanim = ANIM_VOL
 	$OIE/AnimationPlayer.play_section(ANIM_VOL, 0.3, -1.0)
-	$AudioPlayerAiles.play()
+	if  get_node_or_null("AudioPlayerAiles") != null:
+		$AudioPlayerAiles.play()
 
 func _anim_vol_to_plane():
 	nextanim = ANIM_PLANE
@@ -256,6 +246,7 @@ func attente():
 		enaction = true
 		actionencours = action.ATTENTE
 		autorotspeed = calc_rot_speed(FACTEUR_ATTENTE)
+		queue_next_anim(ANIM_VOL)
 
 ## Calcul de l'angle de virage, en fonction de l'action, modulé par un facteur
 func calc_rot_speed(facteur : float) -> float :

@@ -1,19 +1,19 @@
 [gd_scene format=4 uid="uid://bjwjou340xq8n"]
 
-[ext_resource type="Script" uid="uid://yvithc08xgyk" path="res://Boid/assets/scripts/level.gd" id="1_86ljf"]
+[ext_resource type="Script" path="res://Boid/assets/scripts/level.gd" id="1_86ljf"]
 [ext_resource type="PackedScene" uid="uid://b8hbde1cvqcck" path="res://res/modeles/game-area-size_v2.glb" id="1_bexhn"]
 [ext_resource type="Texture2D" uid="uid://dm611xunoe140" path="res://res/modeles/00_game-area-size_Untitled.png" id="2_wkftn"]
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="3_q4iis"]
 [ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="4_m3clv"]
 [ext_resource type="PackedScene" uid="uid://d1lkw7axh4gm6" path="res://Scenes/Elements-mobiles/Car.tscn" id="5_4eo0i"]
-[ext_resource type="Script" uid="uid://ht17r2jck10x" path="res://Boid/assets/scripts/roadFollow.gd" id="5_86ljf"]
+[ext_resource type="Script" path="res://Boid/assets/scripts/roadFollow.gd" id="5_86ljf"]
 [ext_resource type="Script" uid="uid://cxp2pkshliblx" path="res://limites_area_3d.gd" id="5_mxnmf"]
 [ext_resource type="Script" uid="uid://c8h7bwkygvtcg" path="res://limite_shape_3d.gd" id="6_m3clv"]
 [ext_resource type="PackedScene" uid="uid://detafjuqrnaqx" path="res://res/modeles/02_hiver.glb" id="8_d6u53"]
-[ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps_map.tscn" id="9_sypgb"]
-[ext_resource type="PackedScene" uid="uid://b2h1kc5vaqvev" path="res://Scenes/Maps/04_ete_map.tscn" id="10_dn5x0"]
+[ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver_map.tscn" id="11_jftiw"]
+[ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps_map.tscn" id="12_yye10"]
 [ext_resource type="PackedScene" uid="uid://bl6alt5hdig1t" path="res://Scenes/Maps/06_pre_fin_map.tscn" id="13_5qkpu"]
-[ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver_map.tscn" id="14_dn5x0"]
+[ext_resource type="PackedScene" uid="uid://b2h1kc5vaqvev" path="res://Scenes/Maps/04_ete_map.tscn" id="13_pd0bf"]
 [ext_resource type="PackedScene" uid="uid://dbyhagdmbappc" path="res://Scenes/Maps/08_ile_fin.tscn" id="15_esphl"]
 [ext_resource type="PackedScene" uid="uid://bdom6c2cenqwu" path="res://Scenes/Maps/05_cirque_map.tscn" id="16_5qkpu"]
 [ext_resource type="PackedScene" uid="uid://vcujlpkdt7qn" path="res://Scenes/Maps/00_iceberg_map.tscn" id="17_dcckh"]
@@ -680,13 +680,13 @@ visible = false
 [node name="00_ICEBERG_MAP" parent="." unique_id=395307854 instance=ExtResource("17_dcckh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 362)
 
-[node name="02_HIVER_MAP" parent="." unique_id=1634229765 instance=ExtResource("14_dn5x0")]
+[node name="02_HIVER_MAP" parent="." unique_id=1634229765 instance=ExtResource("11_jftiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 232)
 
-[node name="03_PRINTEMPS_MAP" parent="." unique_id=1598718819 instance=ExtResource("9_sypgb")]
+[node name="03_PRINTEMPS_MAP" parent="." unique_id=1598718819 instance=ExtResource("12_yye10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 142)
 
-[node name="04_ETE_MAP" parent="." unique_id=1008025489 instance=ExtResource("10_dn5x0")]
+[node name="04_ETE_MAP" parent="." unique_id=1008025489 instance=ExtResource("13_pd0bf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
 
 [node name="05_CIRQUE_MAP" parent="." unique_id=996110150 instance=ExtResource("16_5qkpu")]

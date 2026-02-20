@@ -34,5 +34,5 @@ func printTrail(previousPosition: Vector3):
 	return trailPath
 
 		#trailPath.look_at(previousPos)
-func killTrail(trail)
+func killTrail(trail):
 	pass
