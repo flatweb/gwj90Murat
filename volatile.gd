@@ -1,3 +1,4 @@
+@abstract
 extends CharacterBody3D
 class_name VolatileBody3D
 
@@ -369,6 +370,8 @@ func remonte(delta : float, rotx = true):
 	# On continue de battre des ailes
 	queue_next_anim(ANIM_VOL)
 
+@abstract func fin_decrochage() -> void
+
 func decroche(delta : float = 0.0, duree : float = 0.0):
 	if decrochage_duree == 0.0 :
 		decrochage_duree = duree if duree != 0 else DUREE_DECROCHAGE
@@ -386,6 +389,7 @@ func decroche(delta : float = 0.0, duree : float = 0.0):
 	if decrochage_duree <= 0.0 :
 		print ("Fin du décrochage pour ", self.name)
 		decrochage_duree = 0.0
+		fin_decrochage()
 		enaction = false
 
 

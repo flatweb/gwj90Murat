@@ -1,8 +1,5 @@
 extends VolatileBody3D
 
-
-# limite en +X ou -X de la position de l'oiseau
-var limite_x : float = 10.0 # valeur arbitraire à fixer par set_limite_x
 # de quel côté on a atteint la limite ?
 var acorriger = false
 
@@ -52,9 +49,6 @@ func demarre():
 	maximumz = startpos.z + MARGE_MAXIMUMZ 
 	en_vol = true
 	_anim_start_vol()
-
-func set_limite_x(value):
-	limite_x = value
 
 var cibleindice : VolatileBody3D = null
 func hide_indice():
@@ -180,7 +174,11 @@ func _process(_delta):
 func start_correction(normal):
 	acorriger = true
 	correction_direction = normal
-	
+
+# pour surcharger la méthode abstract de VolatileBOdy3D
+func fin_decrochage():
+	pass
+
 func do_no_action():
 	pass
 

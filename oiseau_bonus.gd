@@ -2,8 +2,18 @@ extends VolatileBody3D
 
 # Autre volatile (ou n'importe quoi) qu'on est censé suivre
 var leader : Node3D = null
-# Ecart à conserver derrière le leader
+# Ecart à conserver derrière le leader pour éviter le choc
 const ECART_DERRIERE_LEADER : float = 2.0
+# Ecart où on est bien
+const ECART_PROCHE : float = 5.0
+# Ecart où on comence à être loin du leader
+const ECART_LOIN : float = 10.0
+# Ecart où on est trop loin, et qu'on perd le leader
+const ECART_TROP_LOIN : float = 20.0
+# facteur d'accélération dans certains cas
+var acceleration : float = 1.0
+
+signal perdu
 
 func _ready():
 	nodeoie = $OIE
@@ -37,8 +47,18 @@ func devient_suiveur_de(_leader : Node3D):
 	# On désactive les layers 2 et 3? pour ne plus déclencher la capture
 	self.set_collision_layer_value(2, false)
 	self.set_collision_layer_value(3, false)
-	
 
+func distance_au_leader():
+	if leader == null:
+		return 10000.0
+	else:
+		return (position - leader.position).length()
+
+func fin_decrochage():
+	# accélération pour rattraper le leader
+	if distance_au_leader() > ECART_LOIN : # je pense qu'on ne rentre jamais là
+		acceleration = 1.5
+	
 func _process(delta: float) -> void:
 	super._process(delta)
 
@@ -65,14 +85,21 @@ func _physics_process(delta: float) -> void:
 					# on repart tout droit
 					autorotspeed = 0.0
 	else:
-		# on va rejoindre l'altitude
-		# on va suivre le "leader" à la même vitesse que lui
+		# on va adapter l'accélération
+		if distance_au_leader() <= ECART_PROCHE :
+			acceleration = 1.0
+		elif distance_au_leader() > ECART_LOIN :
+			acceleration = 1.5
+		#entre les 2 on conserve l'accélération actuelle
+		
+		# on va suivre le "leader"
 		var vectdir : Vector3 = leader.position - self.position
-		speedVect = speedVect.normalized() * speedfront
+		speedVect = speedVect.normalized() * speedfront * acceleration
 		# on adapte la vitesse pour ne pas le toucher
 		speedVect *= min(vectdir.length()/ECART_DERRIERE_LEADER, 1.0)
 		# on adapte aussi en Y
 		
+		# on va rejoindre l'altitude
 		if  is_zero_approx(vectdir.y) :
 			# on se stabilise
 			speedVect.y = 0
@@ -114,9 +141,8 @@ func _physics_process(delta: float) -> void:
 			elif obj.name.contains("Static"):
 				# on vient de rentrer dans un mur ou un boids, ce n'est pas normal
 				var groups = obj.get_groups()
-				#self.position -= speedVect
-				#correction()
-				#virage(autorotspeed,delta)
+				correction(normal)
+				virage(autorotspeed,delta)
 				# on le fait plutôt disparaitre
 				print ("Choc de ",self.name," contre un Static : free de ",obj.name, " dans groupe ", obj.get_groups())
 				queue_free()
@@ -127,8 +153,14 @@ func _physics_process(delta: float) -> void:
 			elif obj.is_in_group("Bonus"):
 				# collision entre Oiseaux Bonus, on ignore
 				pass
-		
+	
 	elif enaction and actionencours == action.CORRECTION :
 		# plus de collision, on reprend son chemin
 		print ("fin de correction pour Oiseau Bonus")
 		enaction = false
+
+	if leader != null and distance_au_leader() > ECART_TROP_LOIN:
+		leader = null
+		mise_en_attente()
+		perdu.emit() # à destination du game
+		

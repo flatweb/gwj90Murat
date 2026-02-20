@@ -8,7 +8,7 @@ var game_area_size : AABB
 @export var nbnuages : int = 50
 
 var nbcapture = 0
-var nbcaptureattendu = 8 # calculer en fonction des noeuds OiseauBonus
+var nbcaptureattendu = 0 # sera calculé fonction des noeuds OiseauBonus
 var indices = 3
 
 # signal émis à la fin du jeu pour prévenir le noeud off-play
@@ -16,18 +16,20 @@ signal fini(score : int)
 
 func _ready():
 	gridmapSize = $Ground/MeshGround.mesh.size
-	game_area_size = get_node_aabb(get_node("Level/game-area-size_v2"))
+	game_area_size = get_node_aabb(get_node("Level"))
 	game_area_size.position.y = 0.0  # TODO constante ou autre ?
 	game_area_size.end.y = 40.0  # TODO constante ou autre ?
 	
 	#populategridmap()
 	populatenuages()
 	
-	$Ground/CollisionGround.shape.size.x = gridmapSize.x
-	$Ground/CollisionGround.shape.size.z = gridmapSize.y
-	
-	$Oiseau.set_limite_x(gridmapSize.x*0.75)
-	$Oiseau.arrive.connect(fin.bind())
+	$Ground/CollisionGround.shape.size.x = game_area_size.size.x
+	$Ground/CollisionGround.shape.size.y = 1.0
+	$Ground/CollisionGround.shape.size.z = game_area_size.size.z
+	$Ground.position = $Level.position
+	$Ground.position.x += game_area_size.position.x+game_area_size.size.x/2
+	$Ground.position.y = -0.5
+	$Ground.position.z += game_area_size.position.z+game_area_size.size.z/2
 	
 	startintro()
 	pass
@@ -40,14 +42,16 @@ func startintro():
 	start()
 
 func start():
-	$Oiseau.start_aterri_at($Marker3DStart.position)
-	
+	$Oiseau.arrive.connect(fin.bind())
+	for child in get_children():
+		if child.is_in_group("Bonus"):
+			child.perdu.connect(losebonus.bind())
+			nbcaptureattendu += 1
+
 	$Oiseau.capture.connect(addcapture.bind())
 	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
+	$Oiseau.start_aterri_at($Marker3DStart.position)
 
-	# Repositionner la camera ?
-	#camera.followed = $Oiseau
-	#camera.make_current()
 	$AudioStreamPlayer.play()
 	
 func fin(distance,nb):
@@ -165,9 +169,19 @@ func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_
 	
 	return box
 
+#------------------------------------------------------------
+# Gestion des captures de Bonus
+#------------------------------------------------------------
+func refresh_captures():
+	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
+	
 func addcapture():
 	nbcapture += 1
-	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
+	refresh_captures()
+
+func losebonus():
+	nbcapture -= 1
+	refresh_captures()
 
 func _input(event: InputEvent) -> void:
 	if (event.is_action_released("indice")):
