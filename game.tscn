@@ -82,7 +82,7 @@ transform = Transform3D(1, 0, -2.9802322e-08, -2.9802322e-08, 1, 0, -1.4901161e-
 shape = SubResource("BoxShape3D_eow3j")
 debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
 
-[node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
+[node name="Oiseau" parent="." unique_id=1267771531 groups=["Repulsor"] instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
 
 [node name="Camera3D_original" type="Camera3D" parent="." unique_id=1159204983]
@@ -141,12 +141,12 @@ script = ExtResource("6_eow3j")
 boidScene = ExtResource("7_j5wjh")
 numberOfBoids = 50
 visualRange = 20.0
+separationDistance = 1.0
 predator = NodePath("../Oiseau")
 predatorMinDist = 12.0
 repulsorMinDIst = 3.0
-cohesionWeight = 20.0
-separationWeight = 30.0
-alignmentWeight = 3.0
+separationWeight = 5.0
+repulsorWeight = 2000.0
 sizeOfSpawn = Vector2(15, 15)
 
 [node name="Marker3DStart" type="Marker3D" parent="." unique_id=1720991345]

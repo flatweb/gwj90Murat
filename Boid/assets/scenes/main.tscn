@@ -9,18 +9,6 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_272bh"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vesw4"]
-
-[sub_resource type="Sky" id="Sky_xplbd"]
-sky_material = SubResource("ProceduralSkyMaterial_vesw4")
-
-[sub_resource type="Environment" id="Environment_6rsl6"]
-background_mode = 2
-background_energy_multiplier = 4.05
-sky = SubResource("Sky_xplbd")
-sky_custom_fov = 51.2
-ambient_light_color = Color(0.8732984, 0.8732984, 0.8732984, 1)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_vesw4"]
 
 [node name="Main" type="Node3D" unique_id=282379335]
@@ -54,18 +42,16 @@ mesh = SubResource("BoxMesh_272bh")
 
 [node name="Character2" parent="." unique_id=274740939 instance=ExtResource("2_vesw4")]
 
-[node name="Camera3D" type="Camera3D" parent="Character2" unique_id=137828251]
+[node name="Camera3D2" type="Camera3D" parent="Character2" unique_id=137828251]
 transform = Transform3D(-0.99026805, -0.13044453, 0.048511866, 0, 0.348572, 0.937282, -0.13917318, 0.9281605, -0.34517968, 27.816895, 248.4858, 72.448)
 fov = 43.4
 near = 0.03
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Character2/Camera3D" unique_id=460234282]
-environment = SubResource("Environment_6rsl6")
 
 [node name="Flock" type="Node3D" parent="." unique_id=706107885]
 script = ExtResource("1")
 boidScene = ExtResource("2")
 predator = NodePath("../Character2")
+repulsorWeight = 2000.0
 
 [node name="Cursor" type="Sprite2D" parent="." unique_id=1132925763]
 modulate = Color(1, 0, 0, 1)

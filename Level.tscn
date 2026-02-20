@@ -498,6 +498,13 @@ size = Vector3(1, 50, 192.26414)
 [sub_resource type="BoxShape3D" id="BoxShape3D_4eo0i"]
 size = Vector3(1, 50, 199.96072)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jftiw"]
+albedo_color = Color(0.23529412, 0.4392157, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yye10"]
+material = SubResource("StandardMaterial3D_jftiw")
+size = Vector2(60, 120)
+
 [node name="Level" type="Node3D" unique_id=2081723973]
 script = ExtResource("1_86ljf")
 carScene = ExtResource("5_4eo0i")
@@ -745,6 +752,10 @@ normal = Vector3(-1, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=658722979]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 50, 107)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1925505723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3015137, 332.46774)
+mesh = SubResource("PlaneMesh_yye10")
 
 [connection signal="area_entered" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_entered"]
 [connection signal="area_exited" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_exited"]

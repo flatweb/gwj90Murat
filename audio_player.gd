@@ -29,8 +29,6 @@ func crossFade(delta,from,to,speed):
 		to.play()
 	crossFadeState += clamp(delta * speed, 0, 1)
 	from.volume_db = linear_to_db(1- crossFadeState)
-	print("volume  from " + str(from.volume_db))
 	to.volume_db = linear_to_db(crossFadeState)
-	print("volume  to " + str(to.volume_db))
 	if from.volume_db < -70:
 		from.stop()

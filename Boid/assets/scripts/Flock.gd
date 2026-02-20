@@ -41,15 +41,17 @@ func _ready():
 		var z = randf_range(- sizeOfSpawn.y,sizeOfSpawn.y)
 		instance.set_position(Vector3(x, _predatorRef.position.y ,z))
 	_repulsors = get_tree().get_nodes_in_group("Repulsor")
+	print(_repulsors)
 
 func _process(delta):
 	_detectNeighbors()
 	_cohesion()
 	_separation()
 	_alignment()
-	_borders(delta)
-	_repulsor()
 	_attractor()
+	_repulsor()
+	_borders(delta)
+	
 
 
 func _detectNeighbors():
@@ -69,7 +71,6 @@ func _detectNeighbors():
 func _cohesion():
 	for i in range(_boids.size()):
 		var neighbors = _boids[i].neighbors
-		
 		if (neighbors.is_empty()):
 			continue;
 		
@@ -134,9 +135,9 @@ func _attractor():
 func _repulsor():
 	for boid in _boids:
 		for repulsor in _repulsors:
-			var dist = boid.get_position().distance_to(repulsor.get_position())
+			var dist = boid.get_global_position().distance_to(repulsor.get_global_position())
 			if (dist < repulsorMinDIst):
-				var dir = (boid.get_position() - repulsor.get_position()).normalized()
+				var dir = (boid.get_global_position() - repulsor.get_global_position()).normalized()
 				var multiplier = sqrt( (1 - dist / repulsorMinDIst))
 				boid.acceleration += dir * multiplier * repulsorWeight
 
