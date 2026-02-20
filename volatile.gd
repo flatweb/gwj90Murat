@@ -96,7 +96,7 @@ const ANIM_DECOLLAGE = "Vol_normal"
 var en_vol : bool
 # enchainement des animations
 var nextanim : String
-var prevanim : String
+var prevanim : String = ANIM_REPOS
 
 # Inutile pour l'instant TODO
 var timer_change_anim : Timer
@@ -140,12 +140,13 @@ func _on_animation_finished(anim_name: StringName) -> void:
 
 # Pour les animations trop courtes, on préfère activer un timer
 func _on_timer_attente_anim_timeout() -> void:
-	print ("Changement sur timeout vers ", nextanim)
+	#print ("Changement sur timeout vers ", nextanim)
 	_change_anim(prevanim)
 
 # Changement d'animation avec transition
 func _change_anim(anim_name):
-	print ("Changement de ",anim_name," à ",nextanim)
+	if anim_name != nextanim :
+		print ("Changement de ",anim_name," à ",nextanim)
 	match anim_name:
 		ANIM_VOL:
 			match nextanim:

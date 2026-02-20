@@ -349,9 +349,8 @@ func _physics_process(delta: float) -> void:
 # Un élément vient de rentrer dans notre zone d'influence
 func _on_area_influence_body_entered(body: Node3D) -> void:
 	# si c'est un oiseau bonus
-	if body.is_in_group( "Bonus" ) :
+	if body.is_in_group( "Bonus" ) and body.leader == null :
 		print("Un oiseau bonus capturé : ", body.name)
-		#body.queue_free() # code pour test
 		capture.emit()
 		hide_indice()
 		body.devient_suiveur_de(self)
