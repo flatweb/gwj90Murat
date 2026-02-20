@@ -153,6 +153,8 @@ func _change_anim(anim_name):
 					_anim_vol()
 				ANIM_PLANE:
 					_anim_vol_to_plane()
+				ANIM_REPOS:
+					_anim_repos() #FIXME
 				_ :
 					_anim_vol()
 		ANIM_PLANE:
@@ -161,6 +163,8 @@ func _change_anim(anim_name):
 					_anim_plane_to_vol()
 				ANIM_PLANE:
 					_anim_plane()
+				ANIM_REPOS:
+					_anim_repos() #FIXME
 				ANIM_RESET:
 					_anim_reset()
 				_ :
@@ -171,6 +175,8 @@ func _change_anim(anim_name):
 					_anim_plane_to_vol()
 				ANIM_PLANE:
 					_anim_plane()
+				ANIM_REPOS:
+					_anim_repos()
 				ANIM_RESET:
 					_anim_reset()
 				_ :

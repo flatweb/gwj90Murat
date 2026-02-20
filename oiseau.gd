@@ -135,7 +135,7 @@ func aterrissage():
 	$OIE.rotation.x = 0.0
 	$OIE.rotation.y = 0.0 # FIXME
 	forcefreinage = FORCE_FREINAGE
-	queue_next_anim(ANIM_RESET)
+	queue_next_anim(ANIM_PLANE)
 	$AudioPlayerCri.play(3.0)
 
 #---------------------------------------------------------------
@@ -241,6 +241,7 @@ func _physics_process(delta: float) -> void:
 				# on est arrêté
 				enaction = true
 				actionencours = action.ATERRI
+				queue_next_anim(ANIM_REPOS)
 		elif actionencours == action.DECOLLAGE:
 			queue_next_anim(ANIM_VOL)
 			remonte(delta)
