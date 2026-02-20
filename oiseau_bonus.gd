@@ -145,11 +145,11 @@ func _physics_process(delta: float) -> void:
 				print(self.name," collides avec un static ",obj.name," par ",normal)
 				# on vient de rentrer dans un mur ou un boids, ce n'est pas normal
 				var groups = obj.get_groups()
+				print ("Choc de ",self.name," contre un Static : free de ",obj.name, " dans groupe ", obj.get_groups())
 				correction(normal)
 				virage(autorotspeed,delta)
 				# on le fait plutôt disparaitre
-				print ("Choc de ",self.name," contre un Static : free de ",obj.name, " dans groupe ", obj.get_groups())
-				queue_free()
+				#queue_free()
 				# on verra le résultat au prochain cycle
 			elif obj.is_in_group("Oiseau") :
 				# on vient de rentrer dans un autre oiseau

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://lgwcy0fqbmph"]
+
+[ext_resource type="PackedScene" uid="uid://dpojd1ckyuhmt" path="res://Scenes/Vegetation/arbre_goutte.tscn" id="1_wdm46"]
+[ext_resource type="PackedScene" uid="uid://b66qroiabbx30" path="res://Scenes/Vegetation/herbe.tscn" id="2_kt7jy"]
+
+[node name="foret_route_s" type="Node3D" unique_id=696654316]
+
+[node name="Arbre_goutte" parent="." unique_id=1699790004 instance=ExtResource("1_wdm46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.047759533, 0, 0.06686348)
+
+[node name="Arbre_goutte2" parent="." unique_id=217384612 instance=ExtResource("1_wdm46")]
+transform = Transform3D(0.74904966, 0, 0, 0, 0.74904966, 0, 0, 0, 0.74904966, -0.8354907, 0, 0)
+
+[node name="Arbre_goutte6" parent="." unique_id=2120021054 instance=ExtResource("1_wdm46")]
+transform = Transform3D(0.53293794, 0, 0, 0, 0.53293794, 0, 0, 0, 0.53293794, -0.48207045, 0, 0.4775952)
+
+[node name="Arbre_goutte7" parent="." unique_id=826287869 instance=ExtResource("1_wdm46")]
+transform = Transform3D(0.53293794, 0, 0, 0, 0.53293794, 0, 0, 0, 0.53293794, 1.4569645, 0, 0.28655708)
+
+[node name="Arbre_goutte3" parent="." unique_id=737129117 instance=ExtResource("1_wdm46")]
+transform = Transform3D(1.0260684, 0, 0, 0, 1.0260684, 0, 0, 0, 1.0260684, -1.7142653, 0, -0.057311177)
+
+[node name="Arbre_goutte4" parent="." unique_id=417470854 instance=ExtResource("1_wdm46")]
+transform = Transform3D(1.0959659, 0, 0, 0, 1.0959659, 0, 0, 0, 1.0959659, 0.99847317, 0, -0.13372687)
+metadata/_edit_group_ = true
+
+[node name="Arbre_goutte5" parent="." unique_id=1317342850 instance=ExtResource("1_wdm46")]
+transform = Transform3D(0.73834646, 0, 0, 0, 0.73834646, 0, 0, 0, 0.73834646, 2.182908, 0, 0.10507053)
+metadata/_edit_group_ = true
+
+[node name="Herbe" parent="." unique_id=2107220856 instance=ExtResource("2_kt7jy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0507088, 0, 0.50625086)
+
+[node name="Herbe2" parent="." unique_id=309271445 instance=ExtResource("2_kt7jy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8721714, 0, 0.43938732)
+metadata/_edit_group_ = true
+
+[node name="Herbe3" parent="." unique_id=483574420 instance=ExtResource("2_kt7jy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.337265, 0, 0.67818487)
+metadata/_edit_group_ = true

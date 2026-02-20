@@ -51,8 +51,7 @@ func start():
 	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
 	$Oiseau.start_aterri_at($Marker3DStart.position)
 	$Oiseau.msg.connect(pushtext.bind())
-	$AudioStreamPlayer.play()
-	
+
 	$UI.pushtext("It is time to migrate to south !")
 	
 func fin(distance):
@@ -67,7 +66,6 @@ func fin(distance):
 		else:
 			print("pas assez de bonus")
 			pushtext("Not enough gooses to have a colony ! Go back !")
-			push_error()
 	else:
 		pushtext("You landed somewhere. Don't forget to go to south !")
 		print("pas encore à l'arrivée")
