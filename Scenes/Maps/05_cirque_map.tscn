@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bdom6c2cenqwu"]
+
+[ext_resource type="PackedScene" uid="uid://dhunq3q64jw27" path="res://Scenes/Maps/05_cirque_terrain.tscn" id="1_c2bed"]
+
+[sub_resource type="Curve" id="Curve_c2bed"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4213198, 0.76455367), 0.0, 0.0, 0, 0, Vector2(0.7766497, 0.52069855), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ubm48"]
+curve = SubResource("Curve_c2bed")
+
+[sub_resource type="Gradient" id="Gradient_bmq4x"]
+colors = PackedColorArray(0.4317317, 0.1912773, 0.038060836, 1, 0.5207217, 0.5251239, 0.23663107, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bkoq5"]
+gradient = SubResource("Gradient_bmq4x")
+
+[sub_resource type="Curve" id="Curve_akacf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.54592496), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_obucc"]
+curve = SubResource("Curve_akacf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_127bl"]
+lifetime_randomness = 0.26
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_max = 23.5
+gravity = Vector3(0, 4, 0)
+scale_curve = SubResource("CurveTexture_obucc")
+color_ramp = SubResource("GradientTexture1D_bkoq5")
+alpha_curve = SubResource("CurveTexture_ubm48")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ox770"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_plr8p"]
+material = SubResource("StandardMaterial3D_ox770")
+radius = 3.0
+height = 6.0
+
+[node name="05_CIRQUE_MAP" type="Node3D" unique_id=996110150]
+
+[node name="05_CIRQUE_TERRAIN" parent="." unique_id=1692817317 instance=ExtResource("1_c2bed")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=315021620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.42749, 0)
+amount = 20
+lifetime = 3.74
+process_material = SubResource("ParticleProcessMaterial_127bl")
+draw_pass_1 = SubResource("SphereMesh_plr8p")

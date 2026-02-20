@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dhunq3q64jw27"]
+
+[ext_resource type="PackedScene" uid="uid://dhbs2lfirovw6" path="res://res/modeles/05_cirque.glb" id="1_yoxul"]
+
+[node name="05_CIRQUE_TERRAIN" type="Node3D" unique_id=1692817317]
+
+[node name="05_cirque" parent="." unique_id=1651704876 instance=ExtResource("1_yoxul")]

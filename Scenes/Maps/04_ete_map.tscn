@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b2h1kc5vaqvev"]
+
+[ext_resource type="PackedScene" uid="uid://bkcqdufq1e7xt" path="res://Scenes/Maps/04_ete_terrain.tscn" id="1_6u2mg"]
+
+[node name="04_ETE_MAP" type="Node3D" unique_id=1008025489]
+
+[node name="04_ETE_TERRAIN" parent="." unique_id=1076768329 instance=ExtResource("1_6u2mg")]

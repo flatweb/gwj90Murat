@@ -10,11 +10,11 @@
 [ext_resource type="Script" uid="uid://cxp2pkshliblx" path="res://limites_area_3d.gd" id="5_mxnmf"]
 [ext_resource type="Script" uid="uid://c8h7bwkygvtcg" path="res://limite_shape_3d.gd" id="6_m3clv"]
 [ext_resource type="PackedScene" uid="uid://detafjuqrnaqx" path="res://res/modeles/02_hiver.glb" id="8_d6u53"]
-[ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps.tscn" id="9_sypgb"]
-[ext_resource type="PackedScene" uid="uid://b2h1kc5vaqvev" path="res://Scenes/Maps/04_ete.tscn" id="10_dn5x0"]
-[ext_resource type="PackedScene" uid="uid://cm7t2nc7q0cat" path="res://Boid/assets/scenes/volcano.tscn" id="13_sypgb"]
-[ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver.tscn" id="14_dn5x0"]
+[ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps_map.tscn" id="9_sypgb"]
+[ext_resource type="PackedScene" uid="uid://b2h1kc5vaqvev" path="res://Scenes/Maps/04_ete_map.tscn" id="10_dn5x0"]
+[ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver_map.tscn" id="14_dn5x0"]
 [ext_resource type="PackedScene" uid="uid://dbyhagdmbappc" path="res://Scenes/Maps/08_ile_fin.tscn" id="15_esphl"]
+[ext_resource type="PackedScene" uid="uid://bdom6c2cenqwu" path="res://Scenes/Maps/05_cirque_map.tscn" id="16_5qkpu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
@@ -501,6 +501,7 @@ carScene = ExtResource("5_4eo0i")
 carResScript = ExtResource("5_86ljf")
 
 [node name="game-area-size_v2" parent="." unique_id=660705272 instance=ExtResource("1_bexhn")]
+visible = false
 
 [node name="00_game-area-size" type="Node3D" parent="." unique_id=1918789035]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.22202)
@@ -662,15 +663,21 @@ mesh = SubResource("ArrayMesh_iprb2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
 visible = false
 
-[node name="02_hiver" parent="." unique_id=428375646 instance=ExtResource("8_d6u53")]
+[node name="02_hiver" parent="." unique_id=733462941 instance=ExtResource("8_d6u53")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 232)
 visible = false
 
-[node name="03_printemps" parent="." unique_id=1598718819 instance=ExtResource("9_sypgb")]
+[node name="02_HIVER_MAP" parent="." unique_id=1634229765 instance=ExtResource("14_dn5x0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 232)
+
+[node name="03_PRINTEMPS_MAP" parent="." unique_id=1598718819 instance=ExtResource("9_sypgb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 142)
 
-[node name="04_ete" parent="." unique_id=1008025489 instance=ExtResource("10_dn5x0")]
+[node name="04_ETE_MAP" parent="." unique_id=1008025489 instance=ExtResource("10_dn5x0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
+
+[node name="05_CIRQUE_MAP" parent="." unique_id=996110150 instance=ExtResource("16_5qkpu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -112.99698)
 
 [node name="Path3D2" type="Path3D" parent="." unique_id=1898626518 groups=["isRoad"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.683481, 0, 0)
@@ -719,12 +726,6 @@ normal = Vector3(-1, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=658722979]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 50, 107)
-
-[node name="Volcano" parent="." unique_id=709399904 instance=ExtResource("13_sypgb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -111.517136)
-
-[node name="02_hiver2" parent="." unique_id=1634229765 instance=ExtResource("14_dn5x0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 232)
 
 [node name="08_ile-fin" parent="." unique_id=39384781 instance=ExtResource("15_esphl")]
 transform = Transform3D(-0.56193894, 0, -0.8271787, 0, 1, 0, 0.8271787, 0, -0.56193894, -0.5332109, 0, -349.52017)

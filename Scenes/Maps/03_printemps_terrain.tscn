@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dq7yv4fh62hbc"]
+
+[ext_resource type="PackedScene" uid="uid://bwe0vallgy00t" path="res://res/modeles/03_printemps.glb" id="1_yw0xi"]
+
+[node name="03_PRINTEMPS_TERRAIN" type="Node3D" unique_id=1978125316]
+
+[node name="03_printemps" parent="." unique_id=855549814 instance=ExtResource("1_yw0xi")]

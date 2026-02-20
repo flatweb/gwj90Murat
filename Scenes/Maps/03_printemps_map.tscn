@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d2g6fr8kokti2"]
+
+[ext_resource type="PackedScene" uid="uid://dq7yv4fh62hbc" path="res://Scenes/Maps/03_printemps_terrain.tscn" id="1_gwo1k"]
+
+[node name="03_PRINTEMPS_MAP" type="Node3D" unique_id=1598718819]
+
+[node name="03_PRINTEMPS_TERRAIN" parent="." unique_id=1978125316 instance=ExtResource("1_gwo1k")]
