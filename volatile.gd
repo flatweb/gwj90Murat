@@ -103,7 +103,7 @@ var prevanim : String = ANIM_REPOS
 # On va gérer notre queue d'animation nous-mêmes TODO
 func queue_next_anim(anim:String):
 	#TODO : il faudra peut-être être plus malin à terme, quoique...
-	print (self.name, " queue ",anim)
+	#print (self.name, " queue ",anim)
 	if $TimerChangeAnim.time_left > 0 and \
 	   anim == nextanim :
 		# Si on veut poursuivre la même animation, on relance le TimerChange
@@ -130,7 +130,7 @@ func _on_animation_finished(anim_name: StringName) -> void:
 
 # Pour les animations trop courtes, on préfère activer un timer
 func _on_timer_attente_anim_timeout() -> void:
-	print (self.name, " change sur timeout vers ", nextanim)
+	#print (self.name, " change sur timeout vers ", nextanim)
 	_change_anim(prevanim)
 
 # Changement d'animation avec transition
