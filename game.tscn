@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuage.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://bjwjou340xq8n" path="res://Level.tscn" id="10_hve3p"]
+[ext_resource type="Script" uid="uid://0fpuqucyrhnl" path="res://ui.gd" id="11_mfdv2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -43,6 +44,29 @@ size = Vector3(38.108, 30, 5)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hve3p"]
 height = 3.0
 radius = 9.372
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hve3p"]
+
+[sub_resource type="FontFile" id="FontFile_mfdv2"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
 
 [node name="Game" type="Node3D" unique_id=1608575864 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_feb5d")
@@ -196,41 +220,54 @@ font_size = 64
 [node name="Level" parent="." unique_id=2081723973 instance=ExtResource("10_hve3p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -278.25195)
 
-[node name="UI" type="Control" parent="." unique_id=1142042289]
-layout_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="UI" type="PanelContainer" parent="." unique_id=1335404302]
+offset_right = 1152.0
+offset_bottom = 647.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hve3p")
+script = ExtResource("11_mfdv2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=92831839]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -45.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="HBoxContainerTop" type="HBoxContainer" parent="UI" unique_id=92831839]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
-[node name="LabelCaptures" type="Label" parent="UI/HBoxContainer" unique_id=1043868048]
+[node name="LabelCaptures" type="Label" parent="UI/HBoxContainerTop" unique_id=1043868048]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0/0"
 
-[node name="Label" type="Label" parent="UI/HBoxContainer" unique_id=1016454962]
+[node name="Label" type="Label" parent="UI/HBoxContainerTop" unique_id=1016454962]
 layout_mode = 2
 text = "-----"
 
-[node name="LabelIndices" type="Label" parent="UI/HBoxContainer" unique_id=229976647]
+[node name="LabelIndices" type="Label" parent="UI/HBoxContainerTop" unique_id=229976647]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "XXX"
+
+[node name="HBoxContainerBottom" type="HBoxContainer" parent="UI" unique_id=574969756]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="TextMsg" type="Label" parent="UI/HBoxContainerBottom" unique_id=494611482]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = SubResource("FontFile_mfdv2")
+theme_override_font_sizes/font_size = 32
+text = "xxxxxxs  
+dgdhgdhfhdf"
+horizontal_alignment = 1
+
+[node name="Defilement" type="Timer" parent="UI" unique_id=1497691247]
+wait_time = 0.05
 
 [connection signal="body_entered" from="Porte1Nuages/Area3D" to="." method="_on_area_porte1_body_entered"]
 [connection signal="body_entered" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_entered"]

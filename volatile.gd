@@ -2,6 +2,8 @@
 extends CharacterBody3D
 class_name VolatileBody3D
 
+signal msg(text : String)
+
 # taille de l'oiseau en hauteur (pour gérer l'aterrisage)
 var tailleY : float
 

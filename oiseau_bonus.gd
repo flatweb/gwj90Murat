@@ -129,8 +129,8 @@ func _physics_process(delta: float) -> void:
 			if obj.get_parent().is_in_group("isBoid"):
 				break
 			var normal : Vector3 = collisions.get_normal(i)
-			print("OiseauBonus collides avec ",obj.name," par ",normal)
 			if obj.is_in_group("sol"):
+				print(self.name," en contact avec le sol")
 				if enaction and actionencours == action.DECOLLAGE :
 					#on ignore la collision résiduelle
 					pass
@@ -139,6 +139,7 @@ func _physics_process(delta: float) -> void:
 					#aterrissage()  #TODO : est-ce bien raisonnable
 					pass
 			elif obj.name.contains("Static"):
+				print(self.name," collides avec un static ",obj.name," par ",normal)
 				# on vient de rentrer dans un mur ou un boids, ce n'est pas normal
 				var groups = obj.get_groups()
 				correction(normal)
@@ -151,7 +152,9 @@ func _physics_process(delta: float) -> void:
 				# on vient de rentrer dans un autre oiseau
 				decroche(delta)
 			elif obj.is_in_group("Bonus"):
-				# collision entre Oiseaux Bonus, on ignore
+				#print(self.name," collides avec ",obj.name," par ",normal)
+				# collision entre Oiseaux Bonus
+				# TODO : faire qqchose
 				pass
 	
 	elif enaction and actionencours == action.CORRECTION :

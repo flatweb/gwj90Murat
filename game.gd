@@ -34,6 +34,9 @@ func _ready():
 	startintro()
 	pass
 
+func pushtext(texte : String , delai : float = 3.0):
+	$UI.pushtext(texte)
+	
 func init():
 	pass
 
@@ -51,18 +54,26 @@ func start():
 	$Oiseau.capture.connect(addcapture.bind())
 	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
 	$Oiseau.start_aterri_at($Marker3DStart.position)
-
+	$Oiseau.msg.connect(pushtext.bind())
 	$AudioStreamPlayer.play()
+	
+	$UI.pushtext("It is time to migrate to south !")
 	
 func fin(distance):
 	if inzonefin :
 		print("aterrissage réussi à l'arrivée")
+		pushtext("You reached South !")
+		await get_tree().create_timer(3.0).timeout
+		
 		if nbcapture >= nbcaptureattendu :
 			# fin de partie, on renvoie la distance parcourue comme score
 			fini.emit(distance)
 		else:
 			print("pas assez de bonus")
+			pushtext("Not enough birds to have a colony ! Go back !")
+			push_error()
 	else:
+		pushtext("You landed somewhere. Don't forget to go to south !")
 		print("pas encore à l'arrivée")
 
 func populategridmap():
@@ -228,7 +239,7 @@ func _input(event: InputEvent) -> void:
 				if dist < distmin and bonus.leader == null:
 					distmin = dist
 					bonusproche = bonus
-		
+		pushtext("Follow the arrow to find next bird...")
 		$Oiseau.show_indice(bonusproche)
 		indices -= 1
 		var txt = ""
