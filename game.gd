@@ -42,7 +42,7 @@ func startintro():
 	start()
 
 func start():
-	$Oiseau.arrive.connect(fin.bind())
+	$Oiseau.aterri.connect(fin.bind())
 	for child in get_children():
 		if child.is_in_group("Bonus"):
 			child.perdu.connect(losebonus.bind())
@@ -54,9 +54,16 @@ func start():
 
 	$AudioStreamPlayer.play()
 	
-func fin(distance,nb):
-	# fin de partie, on renvoie la distance parcourue comme score
-	fini.emit(distance)
+func fin(distance):
+	if inzonefin :
+		print("aterrissage réussi à l'arrivée")
+		if nbcapture >= nbcaptureattendu :
+			# fin de partie, on renvoie la distance parcourue comme score
+			fini.emit(distance)
+		else:
+			print("pas assez de bonus")
+	else:
+		print("pas encore à l'arrivée")
 
 func populategridmap():
 	var zones : Dictionary[String,Vector2]
@@ -219,3 +226,17 @@ func _on_area_porte1_body_entered(body: Node3D) -> void:
 			if child.is_in_group("Nuage"):
 				child.endestruction = true
 		pass # Replace with function body.
+
+var inzonefin : bool = false
+func _on_zonefin_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Oiseau"):
+		print("entrée dans la zone fin")
+		inzonefin = true
+	pass # Replace with function body.
+
+
+func _on_zonefin_body_exited(body: Node3D) -> void:
+	if body.is_in_group("Oiseau"):
+		print("sortie de la zone fin")
+		inzonefin = false
+	pass # Replace with function body.

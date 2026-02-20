@@ -40,6 +40,10 @@ size = Vector3(25, 1, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_iotsf"]
 size = Vector3(38.108, 30, 5)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hve3p"]
+height = 3.0
+radius = 9.372
+
 [node name="Game" type="Node3D" unique_id=1608575864 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_feb5d")
 camera = NodePath("CameraRig/Camera3D")
@@ -71,10 +75,6 @@ debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2107808653]
 transform = Transform3D(1, 0, 0, 0, 0.29970688, 0.9540313, 0, -0.9540313, 0.29970688, 0, 20.078451, 80.2454)
 shadow_enabled = true
-
-[node name="Marker3DStart" type="Marker3D" parent="." unique_id=1720991345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529, 83.538)
-gizmo_extents = 4.0
 
 [node name="Oiseau" parent="." unique_id=1267771531 instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
@@ -146,6 +146,10 @@ separationWeight = 30.0
 alignmentWeight = 3.0
 sizeOfSpawn = Vector2(15, 15)
 
+[node name="Marker3DStart" type="Marker3D" parent="." unique_id=1720991345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529, 83.538)
+gizmo_extents = 4.0
+
 [node name="Porte1Nuages" type="Node3D" parent="." unique_id=1127743841]
 
 [node name="Area3D" type="Area3D" parent="Porte1Nuages" unique_id=214566935]
@@ -172,6 +176,20 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.6164527, 5.9303303, -76.58
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.667706, 8.363131, -75.707344)
 
 [node name="Porte2Nuages" type="Node3D" parent="." unique_id=933710552]
+
+[node name="ZoneFin" type="Node3D" parent="." unique_id=2118541230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -623.31134)
+
+[node name="Area3D" type="Area3D" parent="ZoneFin" unique_id=741465811 groups=["fin"]]
+collision_layer = 130
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZoneFin/Area3D" unique_id=1297976245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9329834)
+shape = SubResource("CylinderShape3D_hve3p")
+
+[node name="Label3D" type="Label3D" parent="ZoneFin" unique_id=531387975]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.5, -6.405)
+text = "Landing Zone"
 
 [node name="Level" parent="." unique_id=2081723973 instance=ExtResource("10_hve3p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -278.25195)
@@ -213,3 +231,5 @@ theme_override_font_sizes/font_size = 32
 text = "XXX"
 
 [connection signal="body_entered" from="Porte1Nuages/Area3D" to="." method="_on_area_porte1_body_entered"]
+[connection signal="body_entered" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_entered"]
+[connection signal="body_exited" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_exited"]

@@ -13,7 +13,7 @@ var startpos : Vector3
 # signal quand on fait une capture
 signal capture
 # signal à émettre quand l'oiseau est arrivé, avec nb autres
-signal arrive(dist : float, nb : int)
+signal aterri(dist : float, nb : int)
 # distance parcourue au total
 var distance : float
 
@@ -148,7 +148,7 @@ func mission_remplie(node : Node):
 	
 # fin de partie
 func fin():
-	arrive.emit(distance,0)
+	aterri.emit(distance,0)
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("attente",true):
@@ -241,6 +241,7 @@ func _physics_process(delta: float) -> void:
 				# on est arrêté
 				enaction = true
 				actionencours = action.ATERRI
+				aterri.emit(distance)
 				queue_next_anim(ANIM_REPOS)
 		elif actionencours == action.DECOLLAGE:
 			queue_next_anim(ANIM_VOL)
