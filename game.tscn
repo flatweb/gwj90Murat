@@ -9,9 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://bjwjou340xq8n" path="res://Level.tscn" id="10_hve3p"]
 [ext_resource type="Script" uid="uid://bfya6qqxqtu08" path="res://audio_player.gd" id="11_iotsf"]
-[ext_resource type="Script" path="res://ui.gd" id="11_mfdv2"]
+[ext_resource type="Script" uid="uid://0fpuqucyrhnl" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
-[ext_resource type="AudioStream" uid="uid://v74b30lhgb3x" path="res://sons/Storm.mp3" id="14_80cx4"]
+[ext_resource type="AudioStream" uid="uid://c60gx7f86f2ai" path="res://sons/winter theme.mp3" id="12_lc2xo"]
+[ext_resource type="AudioStream" uid="uid://pfm7vib6kvo3" path="res://sons/journey_title.mp3" id="13_lc2xo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -254,17 +255,19 @@ wait_time = 0.05
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -552.4393)
 script = ExtResource("11_iotsf")
 music1zPosition = 108.0
-music3zPosition = -90.0
+music2zPosition = 25.0
+music3zPosition = -108.0
 music4zPosition = -150.0
 
 [node name="Music1" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=112991512]
 stream = ExtResource("12_215e1")
 
 [node name="Music2" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1268886826]
-stream = ExtResource("14_80cx4")
+stream = ExtResource("12_lc2xo")
 
 [node name="Music3" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=671492526]
-stream = ExtResource("14_80cx4")
+stream = ExtResource("13_lc2xo")
+volume_db = -70.247
 
 [node name="Music4" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=398372508]
 

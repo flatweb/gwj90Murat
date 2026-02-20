@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bb6khv5os1yc4"]
+
+[ext_resource type="PackedScene" uid="uid://bwe0vallgy00t" path="res://res/modeles/03_printemps.glb" id="1_gwo1k"]
+
+[node name="03_printemps" type="Node3D" unique_id=1598718819]
+
+[node name="03_printemps" parent="." unique_id=855549814 instance=ExtResource("1_gwo1k")]

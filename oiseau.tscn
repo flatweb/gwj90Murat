@@ -717,7 +717,8 @@ autoplay = &"Vol_normal"
 
 [node name="AudioPlayerAiles" type="AudioStreamPlayer3D" parent="." unique_id=418128765]
 stream = ExtResource("4_qcvih")
-volume_db = -5.0
+volume_db = 30.654
+max_db = 4.121
 
 [node name="AudioPlayerCri" type="AudioStreamPlayer3D" parent="." unique_id=913554105]
 stream = ExtResource("5_tu30k")
