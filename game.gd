@@ -67,7 +67,6 @@ func fin(distance):
 		else:
 			print("pas assez de bonus")
 			pushtext("Not enough gooses to have a colony ! Go back !")
-			push_error()
 	else:
 		pushtext("You landed somewhere. Don't forget to go to south !")
 		print("pas encore à l'arrivée")

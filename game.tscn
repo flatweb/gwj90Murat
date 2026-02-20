@@ -156,7 +156,8 @@ gizmo_extents = 4.0
 
 [node name="Area3D" type="Area3D" parent="Porte1Nuages" unique_id=214566935]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66999817, -9.40636, -90.43789)
-collision_layer = 130
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Porte1Nuages/Area3D" unique_id=670217028]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5556927, 3.4970703, 26.059143)
@@ -183,7 +184,9 @@ transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.667706, 8.363131, -7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -623.31134)
 
 [node name="Area3D" type="Area3D" parent="ZoneFin" unique_id=741465811 groups=["fin"]]
-collision_layer = 130
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6965332)
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ZoneFin/Area3D" unique_id=1297976245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9329834)
