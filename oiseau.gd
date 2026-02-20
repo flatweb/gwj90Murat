@@ -31,7 +31,7 @@ func _ready():
 	super._ready()
 	demarre()
 	# Par défaut on considère que c'est la taille de la collisionShape
-	tailleY=$CollisionShape3D.shape.height
+	tailleY=$CollisionShape3D.shape.height #FIXME : trop grand, effets de bord
 
 func start_aterri_at(pos : Vector3):
 	_anim_repos()
@@ -48,7 +48,7 @@ func demarre():
 	startpos = self.position
 	maximumz = startpos.z + MARGE_MAXIMUMZ 
 	en_vol = true
-	_anim_start_vol()
+	#_anim_start_vol()
 
 var cibleindice : VolatileBody3D = null
 func hide_indice():

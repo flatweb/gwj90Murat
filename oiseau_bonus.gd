@@ -16,11 +16,13 @@ var acceleration : float = 1.0
 signal perdu
 
 func _ready():
+	print (self.name, " ready")
 	nodeoie = $OIE
 	super._ready()
 	tailleY = 0.8 # TODO
 	
 	# on démarre en se mettant en attente, à vitese réduite
+	en_vol = true  # on considère bien qu'on est en vol puisqu'on démarre dans le ciel
 	mise_en_attente()
 
 func meurt():
@@ -31,6 +33,7 @@ func mise_en_attente():
 	# vitese réduite pour nous
 	speedVect = Vector3(0,0,-speedfront/2)
 	attente()
+
 
 func devient_suiveur_de(_leader : Node3D):
 	if self.leader != null :
