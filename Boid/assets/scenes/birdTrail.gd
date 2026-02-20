@@ -4,18 +4,26 @@ var trailResolution = 1 # plus bas = plus résolu
 var trailDir = Vector3.ZERO
 @export var rotationOffset = Vector3.ZERO
 @onready var previousPos = get_parent().global_position
-
-
+var trailCollection = Array()
+var trailNumber: int = 0
+var trailLength = 50
+func _ready() -> void:
+	trailCollection.resize(trailLength + 1)
+	
 func _physics_process(delta: float) -> void:
-	#printTrail()
 	#print(get_parent().speedVect.length())
 	if $"../../../../..".speedVect.length() > 1 && frameCount > trailResolution:
-		#printTrail(previousPos)
+		if trailNumber == trailLength+1:
+			trailNumber = 0
+		printTrail(previousPos)
 		previousPos = self.global_position
 		frameCount = 0
+		#print(trailNumber)
+		killTrail(trailNumber)
+		trailNumber += 1
 	else:
 		frameCount += 1
-		
+	
 		
 func printTrail(previousPosition: Vector3):
 	var trailPivot = Node3D.new()
@@ -31,8 +39,13 @@ func printTrail(previousPosition: Vector3):
 	trailMesh.section_length = 0.05
 	trailPivot.look_at_from_position(self.get_global_position(), previousPos)
 	trailPath.rotation = rotationOffset
+	trailCollection[trailNumber] = trailPivot
 	return trailPath
 
 		#trailPath.look_at(previousPos)
 func killTrail(trail):
-	pass
+	var trailPastNumber = trailNumber +1
+	if trailPastNumber > trailLength :
+		trailPastNumber = 0
+	if trailCollection[trailPastNumber] != null:
+		trailCollection[trailPastNumber].queue_free()
