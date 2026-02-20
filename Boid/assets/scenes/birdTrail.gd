@@ -10,7 +10,7 @@ func _physics_process(delta: float) -> void:
 	#printTrail()
 	#print(get_parent().speedVect.length())
 	if $"../../../../..".speedVect.length() > 1 && frameCount > trailResolution:
-		printTrail(previousPos)
+		#printTrail(previousPos)
 		previousPos = self.global_position
 		frameCount = 0
 	else:
