@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bq6ajqjiqjalr"]
+
+[ext_resource type="PackedScene" uid="uid://cjkax55i3l7ow" path="res://res/modeles/06_pre-fin.glb" id="1_ihtg5"]
+
+[node name="06_PRE-FIN_TERRAIN" type="Node3D" unique_id=1305770659]
+
+[node name="06_pre-fin" parent="." unique_id=451606014 instance=ExtResource("1_ihtg5")]

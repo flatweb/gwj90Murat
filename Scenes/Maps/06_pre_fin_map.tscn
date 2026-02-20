@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bl6alt5hdig1t"]
+
+[ext_resource type="PackedScene" uid="uid://bq6ajqjiqjalr" path="res://Scenes/Maps/06_pre_fin_terrain.tscn" id="1_0hd2g"]
+
+[node name="06_PRE-FIN_MAP" type="Node3D" unique_id=1957123681]
+
+[node name="06_PRE-FIN_TERRAIN" parent="." unique_id=1305770659 instance=ExtResource("1_0hd2g")]

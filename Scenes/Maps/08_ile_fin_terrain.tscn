@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c32ktdmjjrg4q"]
+
+[ext_resource type="PackedScene" uid="uid://dj1lp5vau46oi" path="res://res/modeles/08_ile-fin.glb" id="1_oa81n"]
+
+[node name="08_ILE-FIN_TERRAIN" type="Node3D" unique_id=1860592447]
+
+[node name="08_ile-fin" parent="." unique_id=1388845812 instance=ExtResource("1_oa81n")]

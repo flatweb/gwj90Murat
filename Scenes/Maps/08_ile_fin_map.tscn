@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bjw25pw234sdm"]
+
+[ext_resource type="PackedScene" uid="uid://c32ktdmjjrg4q" path="res://Scenes/Maps/08_ile_fin_terrain.tscn" id="1_gf3vf"]
+[ext_resource type="PackedScene" uid="uid://cq2pkih0vn1be" path="res://Scenes/Vegetation/palmier.tscn" id="2_w4qhp"]
+[ext_resource type="PackedScene" uid="uid://4c81vdoxgdgl" path="res://Scenes/Objets/ballon.tscn" id="3_x2ikp"]
+
+[node name="08_ILE-FIN_MAP" type="Node3D" unique_id=2040051297]
+
+[node name="08_ILE-FIN_TERRAIN" parent="." unique_id=1860592447 instance=ExtResource("1_gf3vf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5725479, 0, 0.5725446)
+
+[node name="VEGETATION" type="Node3D" parent="." unique_id=1208299410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15267563, 0, 0.6488857)
+
+[node name="Palmier" parent="VEGETATION" unique_id=1750582748 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.8498927, 0, -0.52695584, 0, 1, 0, 0.52695584, 0, -0.8498927, 4.6240635, 0.21264791, 0.4648652)
+
+[node name="Palmier2" parent="VEGETATION" unique_id=1933867182 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.8498927, 0, -0.52695584, 0, 1, 0, 0.52695584, 0, -0.8498927, -5.361993, 0.26994705, -2.812396)
+
+[node name="Palmier7" parent="VEGETATION" unique_id=1236622622 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.8498927, 0, -0.52695584, 0, 1, 0, 0.52695584, 0, -0.8498927, -6.260549, 0.26702887, -3.2290196)
+
+[node name="Palmier8" parent="VEGETATION" unique_id=547562938 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.8498927, 0, -0.52695584, 0, 1, 0, 0.52695584, 0, -0.8498927, -5.6722975, 0.24551624, -3.9206746)
+
+[node name="Palmier9" parent="VEGETATION" unique_id=1463381834 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.8498927, 0, -0.52695584, 0, 1, 0, 0.52695584, 0, -0.8498927, 1.3041302, 0.1915524, 5.33923)
+
+[node name="Palmier10" parent="VEGETATION" unique_id=60993902 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.024309963, 0, -0.9997045, 0, 1, 0, 0.9997045, 0, -0.024309963, -1.6535859, 0.18356323, 2.4666152)
+
+[node name="Palmier11" parent="VEGETATION" unique_id=368240335 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.6988399, 0, 0.71527815, 0, 1, 0, -0.71527815, 0, -0.6988399, 5.15574, 0.25152206, -0.08440614)
+
+[node name="Palmier12" parent="VEGETATION" unique_id=1004394273 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(0.44275826, 0, 0.896641, 0, 1, 0, -0.896641, 0, 0.44275826, 5.582386, 0.22229421, 0.48653245)
+
+[node name="Palmier13" parent="VEGETATION" unique_id=1186384163 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(0.91666293, 0, -0.39966115, 0, 1, 0, 0.39966115, 0, 0.91666293, 6.116105, 0.23283231, 2.2261262)
+
+[node name="Palmier14" parent="VEGETATION" unique_id=405521982 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(0.08934635, 0, -0.9960006, 0, 1, 0, 0.9960006, 0, 0.08934635, 4.8630114, 0.22467482, 4.891965)
+
+[node name="Palmier3" parent="VEGETATION" unique_id=1689989815 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.9982522, 0, -0.05909732, 0, 1, 0, 0.05909732, 0, -0.9982522, 0.16832972, 0.24614948, -7.071327)
+
+[node name="Palmier4" parent="VEGETATION" unique_id=43156486 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.8070943, 0, -0.5904225, 0, 1, 0, 0.5904225, 0, -0.8070943, 0.32371926, -2.3841858e-07, -6.5626206)
+
+[node name="Palmier5" parent="VEGETATION" unique_id=901976979 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.9139496, 0, 0.4058276, 0, 1, 0, -0.4058276, 0, -0.9139496, 0.32069921, 0.23700637, -7.332691)
+
+[node name="Palmier6" parent="VEGETATION" unique_id=802129739 instance=ExtResource("2_w4qhp")]
+transform = Transform3D(-0.01741755, 0, 0.99984837, 0, 1, 0, -0.99984837, 0, -0.01741755, 1.4974217, 0.18412292, -7.113312)
+
+[node name="Ballon" parent="VEGETATION" unique_id=1873142024 instance=ExtResource("3_x2ikp")]
+transform = Transform3D(-0.89506245, -0.4129136, -0.16842064, -0.4188974, 0.90803355, 0, 0.15293148, 0.07055096, -0.98571515, 0.059692174, 0.26324606, -0.153496)

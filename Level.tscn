@@ -12,9 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://detafjuqrnaqx" path="res://res/modeles/02_hiver.glb" id="8_d6u53"]
 [ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps_map.tscn" id="9_sypgb"]
 [ext_resource type="PackedScene" uid="uid://b2h1kc5vaqvev" path="res://Scenes/Maps/04_ete_map.tscn" id="10_dn5x0"]
+[ext_resource type="PackedScene" uid="uid://bl6alt5hdig1t" path="res://Scenes/Maps/06_pre_fin_map.tscn" id="13_5qkpu"]
 [ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver_map.tscn" id="14_dn5x0"]
 [ext_resource type="PackedScene" uid="uid://dbyhagdmbappc" path="res://Scenes/Maps/08_ile_fin.tscn" id="15_esphl"]
 [ext_resource type="PackedScene" uid="uid://bdom6c2cenqwu" path="res://Scenes/Maps/05_cirque_map.tscn" id="16_5qkpu"]
+[ext_resource type="PackedScene" uid="uid://vcujlpkdt7qn" path="res://Scenes/Maps/00_iceberg_map.tscn" id="17_dcckh"]
+[ext_resource type="PackedScene" uid="uid://bjw25pw234sdm" path="res://Scenes/Maps/08_ile_fin_map.tscn" id="18_jftiw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
@@ -500,172 +503,182 @@ script = ExtResource("1_86ljf")
 carScene = ExtResource("5_4eo0i")
 carResScript = ExtResource("5_86ljf")
 
-[node name="game-area-size_v2" parent="." unique_id=660705272 instance=ExtResource("1_bexhn")]
+[node name="old" type="Node3D" parent="." unique_id=1902420516]
 visible = false
 
-[node name="00_game-area-size" type="Node3D" parent="." unique_id=1918789035]
+[node name="game-area-size_v2" parent="old" unique_id=660705272 instance=ExtResource("1_bexhn")]
+visible = false
+
+[node name="00_game-area-size" type="Node3D" parent="old" unique_id=1918789035]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.22202)
 visible = false
 
-[node name="couloir" type="MeshInstance3D" parent="00_game-area-size" unique_id=2068793393]
+[node name="couloir" type="MeshInstance3D" parent="old/00_game-area-size" unique_id=2068793393]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, -236.4315)
 mesh = SubResource("ArrayMesh_a11hs")
 
-[node name="zone_explorable" type="MeshInstance3D" parent="00_game-area-size" unique_id=1366700860]
+[node name="zone_explorable" type="MeshInstance3D" parent="old/00_game-area-size" unique_id=1366700860]
 transform = Transform3D(93.69705, 0, 0, 0, 93.69705, 0, 0, 0, 93.69705, 0, -0.08, -329.17947)
 mesh = SubResource("ArrayMesh_u4jyp")
 
-[node name="SOL_001" type="MeshInstance3D" parent="00_game-area-size" unique_id=1311851330]
+[node name="SOL_001" type="MeshInstance3D" parent="old/00_game-area-size" unique_id=1311851330]
 transform = Transform3D(0, 0, -19.944292, 0, 19.944292, 0, 19.944292, 0, 0, 0.013969898, 0, -28.030342)
 mesh = SubResource("ArrayMesh_r1sov")
 
-[node name="ROUTE_001" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1846082692]
+[node name="ROUTE_001" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1846082692]
 transform = Transform3D(0.017618814, 0, 0, 0, 0.017618814, 0, 0, 0, 0.017618814, 0.2558217, 0.0015042004, 0.9928322)
 mesh = SubResource("ArrayMesh_ov0hh")
 
-[node name="VOITURE_clone_001" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1862627118]
+[node name="VOITURE_clone_001" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1862627118]
 transform = Transform3D(0.007220777, 0.00032175743, 0.002788233, -0.00039330873, 0.0073797703, 0.0005274803, -0.0015522371, -0.0003731319, 0.012836795, 0.06533241, 0.0046501583, -0.0076877633)
 mesh = SubResource("ArrayMesh_f2r8k")
 
-[node name="OIE" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1308450116]
+[node name="OIE" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1308450116]
 transform = Transform3D(0, 0, 0.0050301924, 0, 0.0050301924, 0, -0.0050301924, 0, 0, 0.48092842, 0.4637044, 0.19176285)
 mesh = SubResource("ArrayMesh_e7xmg")
 
-[node name="Cube_022" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=143666899]
+[node name="Cube_022" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=143666899]
 transform = Transform3D(0.014815172, 0, 0, 0, 0.011692718, 0, 0, 0, 0.0022104743, 0.07102537, 0.023358762, -0.1251714)
 mesh = SubResource("ArrayMesh_ynjmq")
 
-[node name="LAC" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=416553338]
+[node name="LAC" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=416553338]
 transform = Transform3D(0.050139662, 0, 0, 0, 0.050139662, 0, 0, 0, 0.050139662, -0.17254758, 0.0010028043, -0.07243738)
 mesh = SubResource("ArrayMesh_b61l6")
 
-[node name="NUAGE" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1860895952]
+[node name="NUAGE" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1860895952]
 transform = Transform3D(0.050139662, -1.4145903e-08, 0, -1.4145903e-08, -0.050139662, 1.4145903e-08, 0, -1.4145903e-08, -0.050139662, 0.38242245, 0.39112094, 0.38259944)
 mesh = SubResource("ArrayMesh_vud8o")
 
-[node name="NUAGE_001" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1635176022]
+[node name="NUAGE_001" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1635176022]
 transform = Transform3D(0.050139662, -1.4145903e-08, 0, -1.4145903e-08, -0.050139662, 1.4145903e-08, 0, -1.4145903e-08, -0.050139662, 0.33665895, 0.61537725, -0.0488432)
 mesh = SubResource("ArrayMesh_6ch2f")
 
-[node name="NUAGE_002" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=790457006]
+[node name="NUAGE_002" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=790457006]
 transform = Transform3D(0.050139662, -1.4145903e-08, 0, -1.4145903e-08, -0.050139662, 1.4145903e-08, 0, -1.4145903e-08, -0.050139662, -0.22274256, 0.61537725, -0.39177102)
 mesh = SubResource("ArrayMesh_2578j")
 
-[node name="NUAGE_003" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=996860011]
+[node name="NUAGE_003" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=996860011]
 transform = Transform3D(0.050139662, -1.4145903e-08, 0, -1.4145903e-08, -0.050139662, 1.4145903e-08, 0, -1.4145903e-08, -0.050139662, -0.25031042, 0.35199112, 0.29511282)
 mesh = SubResource("ArrayMesh_37fqn")
 
-[node name="ARBRE_clone_001" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1053585325]
+[node name="ARBRE_clone_001" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1053585325]
 transform = Transform3D(0.01414158, 0, -1.6858077e-09, 0, 0.01414158, 0, 1.6858077e-09, 0, 0.01414158, -0.043133974, -0.0031163953, 0.10244797)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_002" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=825795863]
+[node name="ARBRE_clone_002" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=825795863]
 transform = Transform3D(0.019388475, 0, 0, 0, 0.019388475, 0, 0, 0, 0.019388475, -0.07126212, -0.0031163953, 0.047597453)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_003" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=670331726]
+[node name="ARBRE_clone_003" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=670331726]
 transform = Transform3D(0.0172574, 0, 0, 0, 0.0172574, 0, 0, 0, 0.0172574, -0.09235859, -0.0031163953, 0.08979014)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_004" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=420706737]
+[node name="ARBRE_clone_004" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=420706737]
 transform = Transform3D(0.0172574, 0, 0, 0, 0.0172574, 0, 0, 0, 0.0172574, -0.10501671, -0.0031163953, -0.008659499)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_005" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=2053653612]
+[node name="ARBRE_clone_005" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=2053653612]
 transform = Transform3D(0.020187635, 0, 0, 0, 0.020187635, 0, 0, 0, 0.020187635, -0.0262568, -0.0031163953, -0.024130156)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_006" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=307749151]
+[node name="ARBRE_clone_006" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=307749151]
 transform = Transform3D(0.0172574, 0, 0, 0, 0.0172574, 0, 0, 0, 0.0172574, 0.121418, -0.0031163953, -0.0381944)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_007" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=60115061]
+[node name="ARBRE_clone_007" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=60115061]
 transform = Transform3D(0.010834749, 0, -1.2916027e-09, 0, 0.010834749, 0, 1.2916027e-09, 0, 0.010834749, 0.10876036, -0.0031163953, -0.00022096193)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_008" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=2054668651]
+[node name="ARBRE_clone_008" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=2054668651]
 transform = Transform3D(0.0172574, 0, 0, 0, 0.0172574, 0, 0, 0, 0.0172574, 0.17626858, -0.0031163953, 0.07010023)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_009" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1064423162]
+[node name="ARBRE_clone_009" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1064423162]
 transform = Transform3D(0.012949128, 0, 0, 0, 0.012949128, 0, 0, 0, 0.012949128, 0.16642332, -0.0031163953, 0.10948008)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_010" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1909753692]
+[node name="ARBRE_clone_010" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1909753692]
 transform = Transform3D(0.024352401, 0, 0, 0, 0.024352401, 0, 0, 0, 0.024352401, 0.038438797, -0.0031163953, 0.17417558)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_011" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1725056319]
+[node name="ARBRE_clone_011" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1725056319]
 transform = Transform3D(0.0172574, 0, 0, 0, 0.0172574, 0, 0, 0, 0.0172574, 0.05390954, -0.0031163953, 0.24027747)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_012" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1708835034]
+[node name="ARBRE_clone_012" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1708835034]
 transform = Transform3D(0.01992076, 0, 0, 0, 0.01992076, 0, 0, 0, 0.01992076, -0.0135986805, -0.0031163953, 0.123544306)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_013" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=193534681]
+[node name="ARBRE_clone_013" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=193534681]
 transform = Transform3D(0.0172574, 0, 0, 0, 0.0172574, 0, 0, 0, 0.0172574, -0.0135986805, -0.0031163953, 0.16433059)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_014" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1837529671]
+[node name="ARBRE_clone_014" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1837529671]
 transform = Transform3D(0.012021543, 0, 0, 0, 0.012021543, 0, 0, 0, 0.012021543, 0.015936136, -0.0031163953, 0.110886484)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_015" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=852096666]
+[node name="ARBRE_clone_015" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=852096666]
 transform = Transform3D(0.014419693, 0, 0, 0, 0.014419693, 0, 0, 0, 0.014419693, -0.099390745, -0.0031163953, -0.13945696)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_016" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=248854843]
+[node name="ARBRE_clone_016" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=248854843]
 transform = Transform3D(0.0172574, 0, 0, 0, 0.0172574, 0, 0, 0, 0.0172574, -0.05860448, -0.0031163953, -0.20837167)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_017" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=805118084]
+[node name="ARBRE_clone_017" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=805118084]
 transform = Transform3D(0.012371191, 0, 0, 0, 0.012371191, 0, 0, 0, 0.012371191, 0.0024745464, -0.0031163953, -0.0076448712)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_018" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=265583427]
+[node name="ARBRE_clone_018" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=265583427]
 transform = Transform3D(0.01457571, 0, -1.73756e-09, 0, 0.01457571, 0, 1.73756e-09, 0, 0.01457571, 0.004359007, -0.0031163953, -0.033550326)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_019" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1523258005]
+[node name="ARBRE_clone_019" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1523258005]
 transform = Transform3D(0.010834749, 0, -1.2916027e-09, 0, 0.010834749, 0, 1.2916027e-09, 0, 0.010834749, 0.09604263, -0.0031163953, -0.026126418)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_020" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1436681288]
+[node name="ARBRE_clone_020" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1436681288]
 transform = Transform3D(0.014452082, 0, 0, 0, 0.014452082, 0, 0, 0, 0.014452082, 0.092274666, -0.0031163953, -0.056741957)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_021" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=2056583075]
+[node name="ARBRE_clone_021" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=2056583075]
 transform = Transform3D(0.0149317, 0, 0, 0, 0.0149317, 0, 0, 0, 0.0149317, 0.1424017, -0.0031163953, 0.07085739)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_022" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=815532961]
+[node name="ARBRE_clone_022" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=815532961]
 transform = Transform3D(0.012021543, 0, 0, 0, 0.012021543, 0, 0, 0, 0.012021543, 0.015390873, -0.0031163953, 0.14414056)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_023" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1078167382]
+[node name="ARBRE_clone_023" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1078167382]
 transform = Transform3D(0.012021543, 0, 0, 0, 0.012021543, 0, 0, 0, 0.012021543, 0.021932602, -0.0031163953, 0.20437948)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_024" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=1605341501]
+[node name="ARBRE_clone_024" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=1605341501]
 transform = Transform3D(0.008889724, 0, 0, 0, 0.008889724, 0, 0, 0, 0.008889724, 0.06200099, -0.0031163953, 0.19511195)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_025" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=907315699]
+[node name="ARBRE_clone_025" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=907315699]
 transform = Transform3D(0.008889724, 0, 0, 0, 0.008889724, 0, 0, 0, 0.008889724, 0.05964613, -0.0031163953, 0.14754008)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="ARBRE_clone_026" type="MeshInstance3D" parent="00_game-area-size/SOL_001" unique_id=165464184]
+[node name="ARBRE_clone_026" type="MeshInstance3D" parent="old/00_game-area-size/SOL_001" unique_id=165464184]
 transform = Transform3D(0.008889724, 0, 0, 0, 0.008889724, 0, 0, 0, 0.008889724, -0.04397583, -0.0031163953, 0.052396357)
 mesh = SubResource("ArrayMesh_iprb2")
 
-[node name="00_game-area-size2" parent="." unique_id=1191879928 instance=ExtResource("4_m3clv")]
+[node name="00_game-area-size2" parent="old" unique_id=1191879928 instance=ExtResource("4_m3clv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 86.29609)
 visible = false
 
-[node name="02_hiver" parent="." unique_id=733462941 instance=ExtResource("8_d6u53")]
+[node name="02_hiver" parent="old" unique_id=733462941 instance=ExtResource("8_d6u53")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 232)
 visible = false
+
+[node name="08_ile-fin" parent="old" unique_id=39384781 instance=ExtResource("15_esphl")]
+transform = Transform3D(-0.56193894, 0, -0.8271787, 0, 1, 0, 0.8271787, 0, -0.56193894, -0.5332109, 0, -349.52017)
+visible = false
+
+[node name="00_ICEBERG_MAP" parent="." unique_id=395307854 instance=ExtResource("17_dcckh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 362)
 
 [node name="02_HIVER_MAP" parent="." unique_id=1634229765 instance=ExtResource("14_dn5x0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 232)
@@ -678,6 +691,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
 
 [node name="05_CIRQUE_MAP" parent="." unique_id=996110150 instance=ExtResource("16_5qkpu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -112.99698)
+
+[node name="06_PRE-FIN_MAP" parent="." unique_id=1957123681 instance=ExtResource("13_5qkpu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -228)
+
+[node name="08_ILE-FIN_MAP" parent="." unique_id=2040051297 instance=ExtResource("18_jftiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -348)
 
 [node name="Path3D2" type="Path3D" parent="." unique_id=1898626518 groups=["isRoad"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.683481, 0, 0)
@@ -726,9 +745,6 @@ normal = Vector3(-1, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=658722979]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 50, 107)
-
-[node name="08_ile-fin" parent="." unique_id=39384781 instance=ExtResource("15_esphl")]
-transform = Transform3D(-0.56193894, 0, -0.8271787, 0, 1, 0, 0.8271787, 0, -0.56193894, -0.5332109, 0, -349.52017)
 
 [connection signal="area_entered" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_entered"]
 [connection signal="area_exited" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_exited"]

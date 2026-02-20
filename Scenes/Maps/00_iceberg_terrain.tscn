@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b8nks5tv3wcif"]
+
+[ext_resource type="PackedScene" uid="uid://d127t166tfwxq" path="res://res/modeles/00_iceberg.glb" id="1_e26a1"]
+
+[node name="00_ICEBERG_TERRAIN" type="Node3D" unique_id=1617655763]
+
+[node name="00_iceberg2" parent="." unique_id=608934899 instance=ExtResource("1_e26a1")]
