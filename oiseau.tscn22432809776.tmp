@@ -250,7 +250,6 @@ bind/8/bone = -1
 bind/8/pose = Transform3D(-0.57311416, -2.4256255e-07, -0.81947553, -0.81947553, 4.3268926e-08, 0.57311416, -1.0355823e-07, 1, -1.4807422e-07, -1.4673439, -1.374805, -2.6514007e-07)
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_7cebm"]
-section_length = 0.001
 
 [sub_resource type="Animation" id="Animation_7cebm"]
 resource_name = "NePasUtiliser"
@@ -696,21 +695,11 @@ bone_idx = 8
 [node name="Trail" type="Node3D" parent="OIE/Armature/Skeleton3D/BoneAttachment3D" unique_id=848135220]
 transform = Transform3D(-0.501134, -0.5439878, -3.2502391, -1.6351491, -2.8133094, 0.72297275, -2.8611643, 1.7030798, 0.15610276, -0.9100759, 2.263513, 0.10603154)
 script = ExtResource("5_7cebm")
-rotationOffset = Vector3(1.571, 0, 0)
+rotationOffset = Vector3(1.571, 1.571, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="OIE/Armature/Skeleton3D/BoneAttachment3D" unique_id=455140108]
 visible = false
 mesh = SubResource("TubeTrailMesh_7cebm")
-
-[node name="BoneAttachment3D2" type="BoneAttachment3D" parent="OIE/Armature/Skeleton3D" unique_id=1433134983]
-transform = Transform3D(-0.5731143, 0.8194755, 1.035582e-07, 0.8194755, 0.5731143, -2.2953452e-07, -2.4744864e-07, -4.6686115e-08, -1, 1.9675748, -0.4145318, 4.360915e-08)
-bone_name = "Wing_tip.R"
-bone_idx = 5
-
-[node name="Trail" type="Node3D" parent="OIE/Armature/Skeleton3D/BoneAttachment3D2" unique_id=504657205]
-transform = Transform3D(-0.501134, -0.5439878, -3.2502394, -1.635149, -2.8133094, 0.72297275, -2.8611639, 1.7030798, 0.15610293, -0.169963, 2.0486372, -0.027375191)
-script = ExtResource("5_7cebm")
-rotationOffset = Vector3(1.571, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OIE" unique_id=1701530717]
 libraries/ = SubResource("AnimationLibrary_hgp2k")

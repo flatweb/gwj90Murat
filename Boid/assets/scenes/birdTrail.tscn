@@ -4,6 +4,8 @@
 
 [sub_resource type="Curve3D" id="Curve3D_vqcgn"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_wgjh0"]
+
 [node name="BirdTrail" type="Node3D" unique_id=1613696045]
 
 [node name="Node3D" type="Node3D" parent="." unique_id=148309959]
@@ -11,3 +13,12 @@ script = ExtResource("1_wgjh0")
 
 [node name="Path3D" type="Path3D" parent="Node3D" unique_id=501578222]
 curve = SubResource("Curve3D_vqcgn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1835817783]
+transform = Transform3D(1, 0, 0, 0, 0.92104274, -0.38946155, 0, 0.38946155, 0.92104274, 0, 0, 0)
+mesh = SubResource("PlaneMesh_wgjh0")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1937501613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=74286877]
