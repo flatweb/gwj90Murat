@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuage.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://bjwjou340xq8n" path="res://Level.tscn" id="10_hve3p"]
-[ext_resource type="Script" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="Script" uid="uid://bfya6qqxqtu08" path="res://audio_player.gd" id="11_iotsf"]
 [ext_resource type="Script" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
