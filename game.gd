@@ -191,6 +191,32 @@ func losebonus():
 	refresh_captures()
 
 func _input(event: InputEvent) -> void:
+	# Pour les tests : triche pour démarrer plus loin
+	if (event.is_action_released("start1")):
+		$Marker3DStart.position.z = -24
+		$Oiseau.start_aterri_at($Marker3DStart.position)
+		pass
+	elif (event.is_action_released("start2")):
+		# Avant la zone centrale
+		$Marker3DStart.position.z = -167
+		$Oiseau.start_aterri_at($Marker3DStart.position)
+		pass
+	elif (event.is_action_released("start3")):
+		# Avant la zone centrale
+		$Marker3DStart.position.z = -288
+		$Oiseau.start_aterri_at($Marker3DStart.position)
+		pass
+	elif (event.is_action_released("start4")):
+		# A la sortie de la zone centrale
+		$Marker3DStart.position.z = -449
+		$Oiseau.start_aterri_at($Marker3DStart.position)
+		pass
+	elif (event.is_action_released("start5")):
+		# Presque à l'arrivée
+		$Marker3DStart.position.z = -591
+		$Oiseau.start_aterri_at($Marker3DStart.position)
+		pass
+	
 	if (event.is_action_released("indice")):
 		if indices <= 0 : return
 		var distmin = 100000.0

@@ -131,7 +131,7 @@ func aterrissage():
 	enaction = true
 	actionencours = action.ATERRISSAGE
 	speedVect.y = 0.0
-	position.y = tailleY/2
+	position.y = 0.5 #tailleY/2
 	$OIE.rotation.x = 0.0
 	$OIE.rotation.y = 0.0 # FIXME
 	forcefreinage = FORCE_FREINAGE
