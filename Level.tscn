@@ -765,9 +765,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 25, -292.38324)
 shape = SubResource("BoxShape3D_s0cgv")
 
 [node name="StaticFumee" type="StaticBody3D" parent="Limites" unique_id=1118635974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -113)
 
 [node name="LimiteFumeeVolcan3D" type="CollisionShape3D" parent="Limites/StaticFumee" unique_id=80765721]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1059227, 20, -112.912285)
 shape = SubResource("CylinderShape3D_jftiw")
 
 [node name="StaticBody3D5" type="StaticBody3D" parent="Limites" unique_id=759450366]
