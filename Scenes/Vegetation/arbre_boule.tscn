@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b03a715pa1lwt"]
+
+[ext_resource type="PackedScene" uid="uid://7oss5opng2ci" path="res://res/modeles/vegetation/ARBRE.boule.glb" id="1_44xpm"]
+
+[node name="Arbre_boule" type="Node3D" unique_id=1010450993]
+
+[node name="ARBRE_boule2" parent="." unique_id=541813060 instance=ExtResource("1_44xpm")]

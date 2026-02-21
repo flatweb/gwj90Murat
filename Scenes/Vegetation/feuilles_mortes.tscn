@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dvnre7p6gae80"]
+
+[ext_resource type="Texture2D" uid="uid://b6oup1gi60ivn" path="res://res/modeles/feuilles_mortes.png" id="1_nblqt"]
+
+[node name="Feuilles_mortes" type="Node3D" unique_id=1123219179]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1636535337]
+transform = Transform3D(0.8, 0, 0, 0, -3.4969112e-08, -0.8, 0, 0.8, -3.4969112e-08, 0, 0.03692627, 0)
+texture = ExtResource("1_nblqt")

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cfn22o18dg3x4"]
+
+[ext_resource type="PackedScene" uid="uid://cmv8ot6jjr62i" path="res://Scenes/Vegetation/arbre_sansfeuilles.tscn" id="1_rl1fj"]
+[ext_resource type="PackedScene" uid="uid://b66qroiabbx30" path="res://Scenes/Vegetation/herbe.tscn" id="2_10lxf"]
+
+[node name="Foret_sans-feuille_xs" type="Node3D" unique_id=728270069]
+
+[node name="Arbre_sans-feuille" parent="." unique_id=189415357 instance=ExtResource("1_rl1fj")]
+
+[node name="Herbe" parent="Arbre_sans-feuille" unique_id=2107220856 instance=ExtResource("2_10lxf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27812815, 0, 0.39865077)
+
+[node name="Herbe2" parent="Arbre_sans-feuille" unique_id=190063210 instance=ExtResource("2_10lxf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42646384, 0, 0.05099024)
+
+[node name="Herbe3" parent="Arbre_sans-feuille" unique_id=1073847159 instance=ExtResource("2_10lxf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315212, 0, -0.21323182)
