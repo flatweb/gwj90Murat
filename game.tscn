@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dpsuf4y4dpoxm" path="res://porte_nuages.tscn" id="8_215e1"]
 [ext_resource type="PackedScene" uid="uid://bjwjou340xq8n" path="res://Level.tscn" id="10_hve3p"]
+[ext_resource type="FontFile" uid="uid://b15viota6rqxo" path="res://res/palettes/NationalPark-VariableVF.ttf" id="11_80cx4"]
 [ext_resource type="Script" uid="uid://bfya6qqxqtu08" path="res://audio_player.gd" id="11_iotsf"]
 [ext_resource type="Script" uid="uid://0fpuqucyrhnl" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
@@ -39,6 +40,9 @@ size = Vector3(25, 1, 100)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hve3p"]
 height = 3.0
 radius = 9.372
+
+[sub_resource type="Theme" id="Theme_e8heu"]
+Label/fonts/font = ExtResource("11_80cx4")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hve3p"]
 
@@ -187,6 +191,7 @@ offset_right = 1152.0
 offset_bottom = 647.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = SubResource("Theme_e8heu")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hve3p")
 script = ExtResource("11_mfdv2")
 
@@ -222,10 +227,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0.3214644, 0.32183927, 1)
 theme_override_fonts/font = SubResource("FontFile_mfdv2")
 theme_override_font_sizes/font_size = 32
-text = "xxxxxxs  
-dgdhgdhfhdf"
+text = "Time to Start"
 horizontal_alignment = 1
 
 [node name="Defilement" type="Timer" parent="UI" unique_id=1497691247]
