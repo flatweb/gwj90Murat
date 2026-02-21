@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://dpsuf4y4dpoxm"]
+
+[ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuagegris.tscn" id="1_73k5k"]
+[ext_resource type="Script" uid="uid://d4vgn0l6yx3c" path="res://porte_nuages.gd" id="1_yhfaf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iotsf"]
+size = Vector3(60, 60, 9.159393)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yhfaf"]
+size = Vector3(60, 50.751343, 9.159393)
+
+[node name="Porte1Nuages" type="Node3D" unique_id=1390979185]
+script = ExtResource("1_yhfaf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1384175770]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=725089734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 29, -4.448532)
+shape = SubResource("BoxShape3D_iotsf")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1819572926]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66999817, -9.40636, 9.562119)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1946133768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.54227, -5.042)
+shape = SubResource("BoxShape3D_yhfaf")
+
+[node name="Nuage1" parent="." unique_id=1496051760 instance=ExtResource("1_73k5k")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -10.67862, 5.5106096, -5.6416855)
+
+[node name="Nuage2" parent="." unique_id=917827017 instance=ExtResource("1_73k5k")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 20.29147, 4.188342, -4.34037)
+
+[node name="Nuage3" parent="." unique_id=1625001405 instance=ExtResource("1_73k5k")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.4582858, 9.062996, -3.467125)
+
+[node name="Nuage4" parent="." unique_id=900555723 instance=ExtResource("1_73k5k")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 12.552629, 6.140291, -4.34037)
+
+[node name="Nuage5" parent="." unique_id=1170460701 instance=ExtResource("1_73k5k")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 1.7061844, 4.0339546, -4.3849792)
+
+[node name="Nuage6" parent="." unique_id=1391952721 instance=ExtResource("1_73k5k")]
+transform = Transform3D(9.961947, 0, 0.87155735, 0, 10, 0, -0.87155735, 0, 9.961947, -10.67862, 15.654617, -5.6416855)
+
+[node name="Nuage7" parent="." unique_id=593072987 instance=ExtResource("1_73k5k")]
+transform = Transform3D(6.973363, 0, 0.61009014, 0, 7, 0, -0.61009014, 0, 6.973363, 20.29147, 14.33235, -4.34037)
+
+[node name="Nuage8" parent="." unique_id=437848747 instance=ExtResource("1_73k5k")]
+transform = Transform3D(4.9809737, 0, 0.43577868, 0, 5, 0, -0.43577868, 0, 4.9809737, -0.4582858, 20.147009, -2.6990967)
+
+[node name="Nuage9" parent="." unique_id=611143664 instance=ExtResource("1_73k5k")]
+transform = Transform3D(9.961947, 0, 0.87155735, 0, 10, 0, -0.87155735, 0, 9.961947, 7.1978016, 16.284298, -4.34037)
+
+[node name="Nuage10" parent="." unique_id=636841728 instance=ExtResource("1_73k5k")]
+transform = Transform3D(6.9733624, 0, 0.61009014, 0, 7, 0, -0.61009014, 0, 6.9733624, -16.89181, 17.867966, -4.7795124)
+
+[node name="Nuage11" parent="." unique_id=1690725204 instance=ExtResource("1_73k5k")]
+transform = Transform3D(9.961947, 0, -0.87155735, 0, 10, 0, 0.87155735, 0, 9.961947, -10.645945, 24.348648, -5.8986034)
+
+[node name="Nuage12" parent="." unique_id=999962560 instance=ExtResource("1_73k5k")]
+transform = Transform3D(6.9733624, 0, -0.61009014, 0, 7, 0, 0.61009014, 0, 6.9733624, 20.287868, 22.846128, -3.9138906)
+
+[node name="Nuage13" parent="." unique_id=1271344635 instance=ExtResource("1_73k5k")]
+transform = Transform3D(4.9809737, 0, -0.43577868, 0, 5, 0, 0.43577868, 0, 4.9809737, -0.4978978, 28.917324, -2.5121837)
+
+[node name="Nuage14" parent="." unique_id=372695807 instance=ExtResource("1_73k5k")]
+transform = Transform3D(9.961947, 0, -0.87155735, 0, 10, 0, 0.87155735, 0, 9.961947, 3.4025068, 25.994617, -4.286753)
+
+[node name="Nuage15" parent="." unique_id=819842266 instance=ExtResource("1_73k5k")]
+transform = Transform3D(6.9733624, 0, -0.61009014, 0, 7, 0, 0.61009014, 0, 6.9733624, 10.188476, 22.79763, -4.3504663)
+
+[node name="Nuage16" parent="." unique_id=1158068819 instance=ExtResource("1_73k5k")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -8.492409, 33.582756, -5.6416855)
+
+[node name="Nuage17" parent="." unique_id=52294059 instance=ExtResource("1_73k5k")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 20.29147, 29.13016, -4.34037)
+
+[node name="Nuage18" parent="." unique_id=14656798 instance=ExtResource("1_73k5k")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 2.1658883, 35.383465, -3.467125)
+
+[node name="Nuage19" parent="." unique_id=1826686799 instance=ExtResource("1_73k5k")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 15.255331, 32.46076, -4.34037)
+
+[node name="Nuage20" parent="." unique_id=1059919922 instance=ExtResource("1_73k5k")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 4.2199345, 30.354424, -4.3849792)
+
+[node name="Nuage21" parent="." unique_id=1987144422 instance=ExtResource("1_73k5k")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 15.420195, 42.241924, -5.6416855)
+
+[node name="Nuage22" parent="." unique_id=549142845 instance=ExtResource("1_73k5k")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, -15.568523, 41.29345, -4.34037)
+
+[node name="Nuage23" parent="." unique_id=2070154455 instance=ExtResource("1_73k5k")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.073961, 42.52253, -8.245468)
+
+[node name="Nuage24" parent="." unique_id=1816310474 instance=ExtResource("1_73k5k")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 5.0847645, 44.376495, -4.34037)
+
+[node name="Nuage25" parent="." unique_id=99897154 instance=ExtResource("1_73k5k")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 1.7084751, 39.01359, -8.541931)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_body_entered"]

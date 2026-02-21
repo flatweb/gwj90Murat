@@ -11,6 +11,7 @@ var indices = 3
 
 # signal émis à la fin du jeu pour prévenir le noeud off-play
 signal fini(score : int)
+signal sendtext(txt : String) # TODO
 
 func _ready():
 	game_area_size = get_node_aabb(get_node("Level"))
@@ -26,6 +27,9 @@ func _ready():
 	$Ground.position.x += game_area_size.position.x+game_area_size.size.x/2
 	$Ground.position.y = -0.5
 	$Ground.position.z += game_area_size.position.z+game_area_size.size.z/2
+	
+	$Porte1Nuages.pushtext.connect(pushtext.bind)
+	#$Porte2Nuages.pushtext.connect(pushtext.bind)
 	
 	startintro()
 	pass
@@ -72,7 +76,7 @@ func fin(distance):
 
 	
 func populatenuages():
-	var scene = preload("res://nuage.tscn") 
+	var scene = preload("res://nuageblanc.tscn") 
 	var instance : Node
 	var vent : Vector3 = Vector3.ZERO
 	
@@ -137,12 +141,13 @@ func addcapture():
 
 func losebonus():
 	nbcapture -= 1
+	$Oiseau.nbcapture -= 1  # C'est pas joli joli !
 	refresh_captures()
 
 func _input(event: InputEvent) -> void:
 	# Pour les tests : triche pour démarrer plus loin
 	if (event.is_action_released("start1")):
-		$Marker3DStart.position.z = -24
+		$Marker3DStart.position.z = -50
 		$Oiseau.start_aterri_at($Marker3DStart.position)
 		pass
 	elif (event.is_action_released("start2")):
@@ -181,7 +186,9 @@ func _input(event: InputEvent) -> void:
 				break
 		
 	if (event.is_action_released("indice")):
-		if indices <= 0 : return
+		if indices <= 0 :
+			pushtext("No more clues :-( ")
+			return
 		var distmin = 100000.0
 		var bonusproche = -1
 		for child in get_children():
@@ -206,14 +213,6 @@ func _process(_delta):
 	#print ("^^^^^^^^")
 	pass
 
-
-func _on_area_porte1_body_entered(body: Node3D) -> void:
-	print ("collision avec ", body.name)
-	if body.is_in_group("Oiseau"):
-		for child in $Porte1Nuages.get_children():
-			if child.is_in_group("Nuage"):
-				child.endestruction = true
-		pass # Replace with function body.
 
 var inzonefin : bool = false
 func _on_zonefin_body_entered(body: Node3D) -> void:

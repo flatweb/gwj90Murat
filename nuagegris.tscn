@@ -1,14 +1,22 @@
 [gd_scene format=3 uid="uid://cfttkqdijd15r"]
 
 [ext_resource type="Script" uid="uid://coritl5gtw7s1" path="res://nuage.gd" id="1_jcwyk"]
-[ext_resource type="Material" uid="uid://dalsu6p60tnr6" path="res://res/palettes/material_nuage.tres" id="1_v1xst"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1xst"]
+albedo_color = Color(0.35010192, 0.37184688, 0.3733209, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_v1xst"]
-material = ExtResource("1_v1xst")
+material = SubResource("StandardMaterial3D_v1xst")
+
+[sub_resource type="SphereMesh" id="SphereMesh_jcwyk"]
+material = SubResource("StandardMaterial3D_v1xst")
+
+[sub_resource type="SphereMesh" id="SphereMesh_hy5j5"]
+material = SubResource("StandardMaterial3D_v1xst")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jcwyk"]
 
-[node name="Nuage" type="Area3D" unique_id=1496051760 groups=["nuage"]]
+[node name="NuageGris" type="Area3D" unique_id=1496051760 groups=["nuage"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_jcwyk")
@@ -19,10 +27,10 @@ mesh = SubResource("SphereMesh_v1xst")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1989228056]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47251678, -0.14930189, 0)
-mesh = SubResource("SphereMesh_v1xst")
+mesh = SubResource("SphereMesh_jcwyk")
 
 [node name="MeshInstance3D1" type="MeshInstance3D" parent="." unique_id=1372693417]
-mesh = SubResource("SphereMesh_v1xst")
+mesh = SubResource("SphereMesh_hy5j5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=197283345]
 transform = Transform3D(-0.19005513, -0.98177344, 0, 0.98177344, -0.19005513, 0, 0, 0, 1, -0.052546144, 0, 0)

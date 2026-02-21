@@ -1,4 +1,5 @@
 extends VolatileBody3D
+class_name Oiseau
 
 # de quel côté on a atteint la limite ?
 var acorriger = false
@@ -9,6 +10,7 @@ var prevcam : Camera3D
 # position de départ, notamment pour remonter à l'altitude Y
 var startpos : Vector3
 
+var nbcapture = 0
 
 # signal quand on fait une capture
 signal capture
@@ -356,6 +358,7 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 	if body.is_in_group( "Bonus" ) and body.leader == null :
 		print("Un oiseau bonus capturé : ", body.name)
 		capture.emit()
+		nbcapture += 1  # Et c'est gam qui nous décrémente si on en perd un
 		hide_indice()
 		var bonus = body as OiseauBonus
 		for i in range(arrfreemarks.size()):
