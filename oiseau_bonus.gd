@@ -210,6 +210,18 @@ func _physics_process(delta: float) -> void:
 		print ("fin de correction pour Oiseau Bonus")
 		enaction = false
 
+	# altitude trop basse du leader, on se met en attente
+	# Ca devrait permettre aussi, d'animer la fin de jeu
+	if leader != null and leader.position.y < 2.0 :
+		print (self.name, " a perdu le leader trop bas")
+		leader = null
+		# On résactive la layer 3 pour réclencher une capture
+		self.set_collision_layer_value(3, true)
+		position.y = 5.0 # FIXME : trop violent
+		mise_en_attente()
+		perdu.emit() # à destination du game
+		
+		
 	if leader != null and distance_au_leader() > ECART_TROP_LOIN:
 		print (self.name, " a perdu le leader")
 		leader = null

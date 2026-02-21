@@ -248,6 +248,9 @@ func _physics_process(delta: float) -> void:
 				print("Aterrissage réussi")
 				aterri.emit(distance)
 				queue_next_anim(ANIM_REPOS)
+				# on va libérer les bonus :
+				
+				
 		elif actionencours == action.DECOLLAGE:
 			queue_next_anim(ANIM_VOL)
 			remonte(delta)
