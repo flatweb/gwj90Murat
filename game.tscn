@@ -66,6 +66,11 @@ cache/0/32/0/descent = 0.0
 cache/0/32/0/underline_position = 0.0
 cache/0/32/0/underline_thickness = 0.0
 cache/0/32/0/scale = 1.0
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
 
 [node name="Game" type="Node3D" unique_id=1608575864 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_feb5d")
@@ -229,7 +234,7 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0.3214644, 0.32183927, 1)
 theme_override_fonts/font = SubResource("FontFile_mfdv2")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 text = "Time to Start"
 horizontal_alignment = 1
 
