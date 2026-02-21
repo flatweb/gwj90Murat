@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://rmt1u3r5ro6g"]
+
+[ext_resource type="PackedScene" uid="uid://8v03pxmd6ydf" path="res://res/modeles/montagnes.glb" id="1_4xk5w"]
+
+[node name="MONTAGNES_TERRAIN" type="Node3D" unique_id=508374464]
+
+[node name="montagnes2" parent="." unique_id=147813132 instance=ExtResource("1_4xk5w")]

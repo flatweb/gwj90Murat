@@ -99,7 +99,7 @@ transform = Transform3D(0.6289406, 0, -0.77745324, 0, 1, 0, 0.77745324, 0, 0.628
 transform = Transform3D(0.5811434, 0, -0.81380105, 0, 1, 0, 0.81380105, 0, 0.5811434, 16.862585, 0, -9.443604)
 
 [node name="foret_route_s4" parent="VEGETATION" unique_id=1694371105 instance=ExtResource("5_isa0j")]
-transform = Transform3D(-0.66380876, 0, 0.7479023, 0, 1, 0, -0.7479023, 0, -0.66380876, 18.366932, 0, -34.484108)
+transform = Transform3D(-0.09209257, 0, 0.9957504, 0, 1, 0, -0.9957504, 0, -0.09209257, 17.224648, 0, -18.365166)
 
 [node name="Foret_l" parent="VEGETATION" unique_id=2139066696 instance=ExtResource("6_jxecv")]
 transform = Transform3D(0.78311855, 0, -0.6218724, 0, 1, 0, 0.6218724, 0, 0.78311855, 11.756989, 0, -15.138317)
@@ -108,7 +108,7 @@ transform = Transform3D(0.78311855, 0, -0.6218724, 0, 1, 0, 0.6218724, 0, 0.7831
 transform = Transform3D(-0.92423314, 0, 0.38182878, 0, 1, 0, -0.38182878, 0, -0.92423314, -3.2273111, 0, -17.82267)
 
 [node name="Foret_l3" parent="VEGETATION" unique_id=603657614 instance=ExtResource("6_jxecv")]
-transform = Transform3D(-0.20722893, 0, -0.97829247, 0, 1, 0, 0.97829247, 0, -0.20722893, -9.223801, 0, -28.90709)
+transform = Transform3D(-0.20722893, 0, -0.97829247, 0, 1, 0, 0.97829247, 0, -0.20722893, -10.239168, 0, -25.98791)
 
 [node name="Foret_l4" parent="VEGETATION" unique_id=51952907 instance=ExtResource("6_jxecv")]
 transform = Transform3D(-0.45023888, 0, -0.89290816, 0, 1, 0, 0.89290816, 0, -0.45023888, -13.447209, 0, -9.189138)
