@@ -104,7 +104,6 @@ far = 1000.0
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 0, 0, 83.39973)
 script = ExtResource("4_lc2xo")
 joueur = NodePath("../Oiseau")
-angle = -70
 camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=783702665]
