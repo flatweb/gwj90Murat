@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7msysgq7jvql"]
 
 [ext_resource type="PackedScene" uid="uid://dpojd1ckyuhmt" path="res://Scenes/Vegetation/arbre_goutte.tscn" id="1_8rfe8"]
-[ext_resource type="Script" uid="uid://ba86w8vi7vxcw" path="res://res/scripts/texture-script.gd" id="1_kadvm"]
+[ext_resource type="Script" uid="uid://ck5rxagrmssj6" path="res://Scenes/Vegetation/foret_texture.gd" id="1_kadvm"]
 [ext_resource type="PackedScene" uid="uid://b66qroiabbx30" path="res://Scenes/Vegetation/herbe.tscn" id="2_8rfe8"]
 
 [node name="Foret_l" type="Node3D" unique_id=2139066696]

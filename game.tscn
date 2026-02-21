@@ -5,10 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://cia8cfrsqyj1t" path="res://oiseau_bonus.tscn" id="4_iotsf"]
 [ext_resource type="Script" path="res://camera_rig.gd" id="4_lc2xo"]
 [ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
-[ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuage.tscn" id="6_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuagegris.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://dpsuf4y4dpoxm" path="res://porte_nuages.tscn" id="8_215e1"]
 [ext_resource type="PackedScene" uid="uid://bjwjou340xq8n" path="res://Level.tscn" id="10_hve3p"]
-[ext_resource type="Script" path="res://audio_player.gd" id="11_iotsf"]
+[ext_resource type="Script" uid="uid://bfya6qqxqtu08" path="res://audio_player.gd" id="11_iotsf"]
 [ext_resource type="Script" uid="uid://0fpuqucyrhnl" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
 [ext_resource type="AudioStream" uid="uid://c60gx7f86f2ai" path="res://sons/winter theme.mp3" id="12_lc2xo"]
@@ -33,9 +34,6 @@ glow_intensity = 0.1
 [sub_resource type="BoxShape3D" id="BoxShape3D_eow3j"]
 margin = 0.2
 size = Vector3(25, 1, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_iotsf"]
-size = Vector3(38.108, 30, 5)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hve3p"]
 height = 3.0
@@ -83,7 +81,7 @@ shape = SubResource("BoxShape3D_eow3j")
 debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
 
 [node name="Oiseau" parent="." unique_id=1267771531 groups=["Repulsor"] instance=ExtResource("1_80nbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.109226, 7.1061783, 100)
 
 [node name="Camera3D_original" type="Camera3D" parent="." unique_id=1159204983]
 transform = Transform3D(0.60181504, 0.6675055, -0.43846914, 0, 0.54902285, 0.83580744, 0.79863554, -0.50300145, 0.33041018, -19.177612, 38.955605, 107.79487)
@@ -155,33 +153,8 @@ gizmo_extents = 4.0
 
 [node name="Marker3DCheatBonus" type="Marker3D" parent="." unique_id=1355017270]
 
-[node name="Porte1Nuages" type="Node3D" parent="." unique_id=1127743841]
-
-[node name="Area3D" type="Area3D" parent="Porte1Nuages" unique_id=214566935]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66999817, -9.40636, -90.43789)
-collision_layer = 8
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Porte1Nuages/Area3D" unique_id=670217028]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5556927, 3.4970703, 26.059143)
-shape = SubResource("BoxShape3D_iotsf")
-
-[node name="Nuage1" parent="Porte1Nuages" unique_id=1748426639 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.0308895, 8.362883, -77.881905)
-
-[node name="Nuage2" parent="Porte1Nuages" unique_id=640783606 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0.57259226, 10.288874, -76.58059)
-
-[node name="Nuage4" parent="Porte1Nuages" unique_id=635482864 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.1927428, 6.006893, -76.58059)
-
-[node name="Nuage5" parent="Porte1Nuages" unique_id=91914079 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.6164527, 5.9303303, -76.58059)
-
-[node name="Nuage3" parent="Porte1Nuages" unique_id=1262863318 instance=ExtResource("6_j5wjh")]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -1.667706, 8.363131, -75.707344)
-
-[node name="Porte2Nuages" type="Node3D" parent="." unique_id=933710552]
+[node name="Porte1Nuages" parent="." unique_id=1390979185 instance=ExtResource("8_215e1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -86.43256)
 
 [node name="ZoneFin" type="Node3D" parent="." unique_id=2118541230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -623.31134)
@@ -275,6 +248,5 @@ volume_db = -70.247
 
 [node name="Music5" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1218043687]
 
-[connection signal="body_entered" from="Porte1Nuages/Area3D" to="." method="_on_area_porte1_body_entered"]
 [connection signal="body_entered" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_entered"]
 [connection signal="body_exited" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_exited"]

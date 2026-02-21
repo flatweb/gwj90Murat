@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://bmjqcrihl6xe6"]
 
+[ext_resource type="Script" uid="uid://ck5rxagrmssj6" path="res://Scenes/Vegetation/foret_texture.gd" id="1_o1cfo"]
 [ext_resource type="PackedScene" uid="uid://dpojd1ckyuhmt" path="res://Scenes/Vegetation/arbre_goutte.tscn" id="2_5qqgk"]
 [ext_resource type="PackedScene" uid="uid://b66qroiabbx30" path="res://Scenes/Vegetation/herbe.tscn" id="3_25vfy"]
 
 [node name="Foret_m" type="Node3D" unique_id=372247596]
+script = ExtResource("1_o1cfo")
 
 [node name="Arbre_goutte" parent="." unique_id=1699790004 instance=ExtResource("2_5qqgk")]
 transform = Transform3D(1.2880354, 0, -0.010363718, 0, 1.2880771, 0, 0.010363718, 0, 1.2880354, 0.04356718, 0, 0.021783262)
