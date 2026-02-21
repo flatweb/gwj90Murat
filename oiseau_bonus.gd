@@ -155,7 +155,7 @@ func _physics_process(delta: float) -> void:
 			speedVect.y = 0
 		
 		var angley = -angle_on_XZ(vectdir,-transform.basis.z)
-		print ("angle=",rad_to_deg(angley))
+		#print ("angle=",rad_to_deg(angley))
 		# on tourne au maximum tant qu'on est au-dessus de 30°
 		virage(min(abs(angley/(PI/6)),1)*(1 if angley<0 else -1),delta)
 	
