@@ -1,0 +1,15 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://bv5g8rtq3khvb"]
+
+[sub_resource type="Curve" id="Curve_yfyex"]
+_data = [Vector2(0.023529418, 0), 0.0, 0.0, 0, 0, Vector2(0.52156866, 0.88162255), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_x547n"]
+curve = SubResource("Curve_yfyex")
+
+[resource]
+spread = 0.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.01
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_x547n")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://481drfr6nbcw"]
+
+[ext_resource type="Material" uid="uid://bv5g8rtq3khvb" path="res://res/shaders/WindParticleProcess.tres" id="1_chure"]
+[ext_resource type="TubeTrailMesh" uid="uid://dnkgw0jt172ik" path="res://res/shaders/WindMaterial.tres" id="2_b1ovg"]
+[ext_resource type="Script" uid="uid://dnaqx056qdmxg" path="res://Boid/assets/scenes/testTrail.gd" id="3_fvcgf"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" unique_id=2036437000]
+amount = 200
+fixed_fps = 0
+transform_align = 2
+trail_lifetime = 5.22
+process_material = ExtResource("1_chure")
+draw_pass_1 = ExtResource("2_b1ovg")
+script = ExtResource("3_fvcgf")

@@ -4,7 +4,6 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(carResScript)
 	#Charge les voitures sur les chemins avec le groupe isRoad
 	var _roads = get_tree().get_nodes_in_group("isRoad")
 	for road in _roads:
@@ -15,6 +14,6 @@ func _ready() -> void:
 		road.add_child(roadPathFollow)
 		var car = carScene.instantiate()
 		roadPathFollow.add_child(car)
-		print("Est ce que le pathCar a un script" + String(roadPathFollow.get_path()))
+		#print("Est ce que le pathCar a un script" + String(roadPathFollow.get_path()))
 		if roadPathFollow.get_script() == carScript :
 			print("oui")

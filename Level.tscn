@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bdom6c2cenqwu" path="res://Scenes/Maps/05_cirque_map.tscn" id="16_5qkpu"]
 [ext_resource type="PackedScene" uid="uid://vcujlpkdt7qn" path="res://Scenes/Maps/00_iceberg_map.tscn" id="17_dcckh"]
 [ext_resource type="PackedScene" uid="uid://bjw25pw234sdm" path="res://Scenes/Maps/08_ile_fin_map.tscn" id="18_jftiw"]
+[ext_resource type="PackedScene" path="res://Boid/assets/scenes/wind_spawner.tscn" id="19_yye10"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
 resource_name = "Material.001"
@@ -521,7 +522,7 @@ albedo_color = Color(0.23529412, 0.4392157, 1, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yye10"]
 material = SubResource("StandardMaterial3D_jftiw")
-size = Vector2(60, 120)
+size = Vector2(400, 400)
 
 [node name="Level" type="Node3D" unique_id=2081723973]
 script = ExtResource("1_86ljf")
@@ -855,8 +856,13 @@ transform = Transform3D(-0.9858149, 0, 0.16783561, 0, 1, 0, -0.16783561, 0, -0.9
 shape = SubResource("BoxShape3D_jftiw")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=658722979]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 50, 107)
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 50, 394.4229)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1925505723]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3015137, 332.46774)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3015137, 465.2969)
 mesh = SubResource("PlaneMesh_yye10")
+
+[node name="WindSpawner" parent="." unique_id=1116647559 instance=ExtResource("19_yye10")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.13211, 0, 338.4333)
+windWidth = 120.0
+windIntensity = 50.0
