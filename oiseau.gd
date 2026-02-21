@@ -324,14 +324,11 @@ func _physics_process(delta: float) -> void:
 				else:
 					# on finit l'aterrissage
 					aterrissage()
-			elif obj.name.contains("Static"):
-				print("Oiseau collides avec ",obj.name," par ",normal)
-				print (obj.get_groups())
-				# on vient de rentrer dans un mur
-				#self.position -= speedVect
-				
-				correction()
-				virage(autorotspeed,delta)
+			elif obj.name.contains("Static") or obj.is_in_group("limite"):
+				if not (enaction and actionencours == action.CORRECTION):
+					print("Oiseau collides avec ",obj.name," par ",normal)
+					# on vient de rentrer dans un mur
+				start_correction(normal)
 				# on verra le résultat au prochain cycle
 			elif obj.is_in_group("Bonus"):
 				# on est rentré dans un autre oiseau (bonus), on va dévier simplement

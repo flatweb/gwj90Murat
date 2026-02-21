@@ -1,6 +1,7 @@
 extends Node3D
 @export var carScene: PackedScene
 @export var carResScript: Script
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print(carResScript)

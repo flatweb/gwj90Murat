@@ -6,9 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="3_q4iis"]
 [ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="4_m3clv"]
 [ext_resource type="PackedScene" uid="uid://d1lkw7axh4gm6" path="res://Scenes/Elements-mobiles/Car.tscn" id="5_4eo0i"]
-[ext_resource type="Script" uid="uid://ht17r2jck10x" path="res://Boid/assets/scripts/roadFollow.gd" id="5_86ljf"]
-[ext_resource type="Script" uid="uid://cxp2pkshliblx" path="res://limites_area_3d.gd" id="5_mxnmf"]
-[ext_resource type="Script" uid="uid://c8h7bwkygvtcg" path="res://limite_shape_3d.gd" id="6_m3clv"]
+[ext_resource type="Script" path="res://Boid/assets/scripts/roadFollow.gd" id="5_86ljf"]
 [ext_resource type="PackedScene" uid="uid://detafjuqrnaqx" path="res://res/modeles/02_hiver.glb" id="8_d6u53"]
 [ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver_map.tscn" id="11_jftiw"]
 [ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps_map.tscn" id="12_yye10"]
@@ -486,17 +484,30 @@ _data = {
 }
 point_count = 4
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ofirr"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_dcckh"]
 size = Vector3(1, 50, 70)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_m3clv"]
-size = Vector3(1, 50, 417.8368)
+[sub_resource type="BoxShape3D" id="BoxShape3D_yye10"]
+size = Vector3(1, 50, 70)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mxnmf"]
-size = Vector3(1, 50, 192.26414)
+[sub_resource type="BoxShape3D" id="BoxShape3D_pd0bf"]
+size = Vector3(1, 50, 418)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4eo0i"]
-size = Vector3(1, 50, 199.96072)
+[sub_resource type="BoxShape3D" id="BoxShape3D_viiqw"]
+size = Vector3(1, 50, 418)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_105nu"]
+size = Vector3(1, 50, 192)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s0cgv"]
+size = Vector3(1, 50, 189)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jftiw"]
+height = 40.0
+radius = 6.2436523
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jftiw"]
+size = Vector3(1, 50, 39.706787)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jftiw"]
 albedo_color = Color(0.23529412, 0.4392157, 1, 1)
@@ -713,42 +724,124 @@ curve = SubResource("Curve3D_86ljf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.453171, 0, 0)
 curve = SubResource("Curve3D_m3clv")
 
-[node name="LimitesArea3D" type="Area3D" parent="." unique_id=1233205744]
-collision_layer = 8
-collision_mask = 7
-script = ExtResource("5_mxnmf")
+[node name="Limites" type="Node3D" parent="." unique_id=1293773004]
 
-[node name="LimiteFondDebut" type="CollisionShape3D" parent="LimitesArea3D" unique_id=954124350]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 25, 391.08594)
-shape = SubResource("BoxShape3D_ofirr")
-script = ExtResource("6_m3clv")
+[node name="StaticBodyDebut" type="StaticBody3D" parent="Limites" unique_id=1332023159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 391)
 
-[node name="LimiteFondFin" type="CollisionShape3D" parent="LimitesArea3D" unique_id=1370153661]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 25, -367.4074)
-shape = SubResource("BoxShape3D_ofirr")
-script = ExtResource("6_m3clv")
+[node name="LimiteFondDebut" type="CollisionShape3D" parent="Limites/StaticBodyDebut" unique_id=1029478977]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_dcckh")
 
-[node name="LimiteShape3D" type="CollisionShape3D" parent="LimitesArea3D" unique_id=1360443461]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 25, 181.77882)
-shape = SubResource("BoxShape3D_m3clv")
-script = ExtResource("6_m3clv")
+[node name="StaticBodyFin" type="StaticBody3D" parent="Limites" unique_id=562633090]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, -383.59967)
 
-[node name="LimiteShape3D2" type="CollisionShape3D" parent="LimitesArea3D" unique_id=1660767503]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 25, 181.779)
-shape = SubResource("BoxShape3D_m3clv")
-script = ExtResource("6_m3clv")
-normal = Vector3(-1, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limites/StaticBodyFin" unique_id=1548571399]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_yye10")
 
-[node name="LimiteShape3D3" type="CollisionShape3D" parent="LimitesArea3D" unique_id=2145382042]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 25, -287.16107)
-shape = SubResource("BoxShape3D_mxnmf")
-script = ExtResource("6_m3clv")
+[node name="StaticBody3D1" type="StaticBody3D" parent="Limites" unique_id=198535672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 25, 182)
 
-[node name="LimiteShape3D4" type="CollisionShape3D" parent="LimitesArea3D" unique_id=530305763]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 25, -287.45526)
-shape = SubResource("BoxShape3D_4eo0i")
-script = ExtResource("6_m3clv")
-normal = Vector3(-1, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limites/StaticBody3D1" unique_id=1214704238]
+shape = SubResource("BoxShape3D_pd0bf")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Limites" unique_id=1722872004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 25, 182)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limites/StaticBody3D2" unique_id=1163197799]
+shape = SubResource("BoxShape3D_viiqw")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Limites" unique_id=320365260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 25, -292)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limites/StaticBody3D3" unique_id=975189769]
+shape = SubResource("BoxShape3D_105nu")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Limites" unique_id=1368547127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 25, -292.38324)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limites/StaticBody3D4" unique_id=1933499305]
+shape = SubResource("BoxShape3D_s0cgv")
+
+[node name="StaticFumee" type="StaticBody3D" parent="Limites" unique_id=1118635974]
+
+[node name="LimiteFumeeVolcan3D" type="CollisionShape3D" parent="Limites/StaticFumee" unique_id=80765721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1059227, 20, -112.912285)
+shape = SubResource("CylinderShape3D_jftiw")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="Limites" unique_id=759450366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 25, -292.7403)
+
+[node name="LimiteShape3D5" type="CollisionShape3D" parent="Limites/StaticBody3D5" unique_id=456646218]
+transform = Transform3D(0.4664021, 0, 0.8845728, 0, 1, 0, -0.8845728, 0, 0.4664021, -76.79102, 0, 255.735)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="Limites" unique_id=951373674]
+
+[node name="LimiteShape3D6" type="CollisionShape3D" parent="Limites/StaticBody3D6" unique_id=641037681]
+transform = Transform3D(0.8567896, 0, 0.51566625, 0, 1, 0, -0.51566625, 0, 0.8567896, -74.34845, 25, -61.32689)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="Limites" unique_id=879576196]
+
+[node name="LimiteShape3D7" type="CollisionShape3D" parent="Limites/StaticBody3D7" unique_id=278737731]
+transform = Transform3D(0.98614126, 0, 0.16590819, 0, 1, 0, -0.16590819, 0, 0.98614126, -86.81734, 25, -96.257385)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D8" type="StaticBody3D" parent="Limites" unique_id=1244969072]
+
+[node name="LimiteShape3D8" type="CollisionShape3D" parent="Limites/StaticBody3D8" unique_id=1119627283]
+transform = Transform3D(0.46182597, 0, -0.88697046, 0, 1, 0, 0.88697046, 0, 0.46182597, -48.209984, 25, -188.02017)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D9" type="StaticBody3D" parent="Limites" unique_id=1730508161]
+
+[node name="LimiteShape3D9" type="CollisionShape3D" parent="Limites/StaticBody3D9" unique_id=1374676464]
+transform = Transform3D(0.85531896, 0, -0.5181016, 0, 1, 0, 0.5181016, 0, 0.85531896, -73.92277, 25, -166.59459)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D10" type="StaticBody3D" parent="Limites" unique_id=953027024]
+
+[node name="LimiteShape3D10" type="CollisionShape3D" parent="Limites/StaticBody3D10" unique_id=1559767611]
+transform = Transform3D(0.98541087, 0, -0.17019235, 0, 1, 0, 0.17019235, 0, 0.98541087, -87.34016, 25, -131.05106)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D11" type="StaticBody3D" parent="Limites" unique_id=985213805]
+
+[node name="LimiteShape3D11" type="CollisionShape3D" parent="Limites/StaticBody3D11" unique_id=1362147992]
+transform = Transform3D(-0.4702573, 0, -0.88252926, 0, 1, 0, 0.88252926, 0, -0.4702573, 47.87445, 25, -188.48717)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D12" type="StaticBody3D" parent="Limites" unique_id=238854675]
+
+[node name="LimiteShape3D12" type="CollisionShape3D" parent="Limites/StaticBody3D12" unique_id=256583159]
+transform = Transform3D(-0.8645381, 0, -0.50256723, 0, 1, 0, 0.50256723, 0, -0.8645381, 74.947075, 25, -163.51743)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D13" type="StaticBody3D" parent="Limites" unique_id=1696081480]
+
+[node name="LimiteShape3D13" type="CollisionShape3D" parent="Limites/StaticBody3D13" unique_id=1221873223]
+transform = Transform3D(-0.9849016, 0, -0.1731153, 0, 1, 0, 0.1731153, 0, -0.9849016, 86.81752, 25, -130.68042)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D14" type="StaticBody3D" parent="Limites" unique_id=1850912081]
+
+[node name="LimiteShape3D14" type="CollisionShape3D" parent="Limites/StaticBody3D14" unique_id=1096984035]
+transform = Transform3D(-0.47287378, 0, 0.8811302, 0, 1, 0, -0.8811302, 0, -0.47287378, 47.628365, 25, -37.13278)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D15" type="StaticBody3D" parent="Limites" unique_id=545760854]
+
+[node name="LimiteShape3D15" type="CollisionShape3D" parent="Limites/StaticBody3D15" unique_id=942307237]
+transform = Transform3D(-0.8602796, 0, 0.5098223, 0, 1, 0, -0.5098223, 0, -0.8602796, 75.3682, 25, -62.67597)
+shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D16" type="StaticBody3D" parent="Limites" unique_id=420921918]
+
+[node name="LimiteShape3D16" type="CollisionShape3D" parent="Limites/StaticBody3D16" unique_id=1830899890]
+transform = Transform3D(-0.9858149, 0, 0.16783561, 0, 1, 0, -0.16783561, 0, -0.9858149, 86.920746, 25, -94.75609)
+shape = SubResource("BoxShape3D_jftiw")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=658722979]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 50, 107)
@@ -756,7 +849,3 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1925505723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3015137, 332.46774)
 mesh = SubResource("PlaneMesh_yye10")
-
-[connection signal="area_entered" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_entered"]
-[connection signal="area_exited" from="LimitesArea3D" to="LimitesArea3D" method="_on_area_exited"]
-[connection signal="body_shape_entered" from="LimitesArea3D" to="LimitesArea3D" method="_on_limite_3d_body_shape_entered"]
