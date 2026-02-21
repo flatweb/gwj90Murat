@@ -11,6 +11,7 @@ var prevcam : Camera3D
 var startpos : Vector3
 
 var nbcapture = 0
+var nbmaxcapture = 0
 
 # signal quand on fait une capture
 signal capture
@@ -26,6 +27,9 @@ var distance : float
 var stepsnoback : Array = [80.0, 60.0, 40.0, 20.0, 10.0] #TODO
 var maximumz : float
 const MARGE_MAXIMUMZ = 5.0
+
+# pour envoyer des messages à game
+signal pushtext(txt : String)
 
 func _init():
 	super._init()
@@ -77,12 +81,22 @@ func show_indice(bonus : VolatileBody3D):
 	$SpriteIndice3D.show()
 	$SpriteIndice3D/Timer.start(10.0)
 	refresh_indice()
-	
+
+func losebonus():
+	nbmaxcapture += 1
+	nbcapture -= 1
+	pass
 
 # -----------------------------------------------------------------
 #   GESTION DES MOUVEMENTS
 # -----------------------------------------------------------------
 
+func do_decolle():
+	enaction = true
+	actionencours = action.DECOLLAGE
+	nbmaxcapture = 0
+	speedVect.z = -speedfront
+	self.rotation = Vector3.ZERO
 
 func looping():
 	pass

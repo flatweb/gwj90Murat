@@ -21,6 +21,8 @@ var acceleration : float = 1.0
 var altitudemin : float = 2.0 # TODO
 
 signal perdu
+# pour envoyer des messages à game
+signal pushtext(txt : String)
 
 func _ready():
 	#print (self.name, " ready")
@@ -55,6 +57,7 @@ func devient_suiveur_de(_leader : Node3D, atmarks : Marker3D) -> bool :
 	self.leader = _leader
 	self.tomarker = atmarks
 	print (self.name, " suit ", atmarks.name)
+	pushtext.emit("A new goose is rejoining you to go to South")
 	speedVect = speedVect.normalized() * speedfront
 	if enaction :
 		if actionencours == action.ATTENTE :
@@ -78,7 +81,10 @@ func distance_au_marker():
 	else:
 		return (global_position - tomarker.global_position).length()
 
-
+func do_decolle():
+	# pour couvrir l'abstract de volatile, mais pas prévu pour bonus
+	pass
+	
 func fin_decrochage():
 	# accélération pour rattraper le leader
 	acceleration = 1.8
@@ -214,6 +220,7 @@ func _physics_process(delta: float) -> void:
 	# Ca devrait permettre aussi, d'animer la fin de jeu
 	if leader != null and leader.position.y < 2.0 :
 		print (self.name, " a perdu le leader trop bas")
+		
 		leader = null
 		# On résactive la layer 3 pour réclencher une capture
 		self.set_collision_layer_value(3, true)

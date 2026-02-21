@@ -34,6 +34,11 @@ func _ready():
 	$Porte2Nuages.withlightning = true
 	$Porte2Nuages.pushtext.connect(pushtext.bind)
 	
+	$Oiseau.pushtext.connect(pushtext.bind())
+	for child in get_children():
+		if child.is_in_group("Bonus"):
+			child.pushtext.connect(pushtext.bind())
+	
 	startintro()
 	pass
 
@@ -67,8 +72,9 @@ func fin(distance):
 		pushtext("You reached South !")
 		await get_tree().create_timer(3.0).timeout
 		
-		if nbcapture >= nbcaptureattendu :
+		if max(nbcapture,$Oiseau.nbmaxcapture) >= nbcaptureattendu  :
 			# fin de partie, on renvoie la distance parcourue comme score
+			# en théorie, il faudrait avoir parcouru le moins possible
 			fini.emit(distance)
 		else:
 			print("pas assez de bonus")
@@ -143,8 +149,8 @@ func addcapture():
 	refresh_captures()
 
 func losebonus():
-	nbcapture -= 1
-	$Oiseau.nbcapture -= 1  # C'est pas joli joli !
+	$Oiseau.losebonus()
+	nbcapture  = $Oiseau.nbcapture
 	refresh_captures()
 
 func _input(event: InputEvent) -> void:

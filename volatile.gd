@@ -394,14 +394,7 @@ func decroche(delta : float = 0.0, duree : float = 0.0):
 		fin_decrochage()
 		enaction = false
 
-
-func do_decolle():
-	enaction = true
-	actionencours = action.DECOLLAGE
-	
-	speedVect.z = -speedfront
-	self.rotation = Vector3.ZERO
-
+@abstract func do_decolle()
 
 func _physics_process(delta: float) -> void:
 	if enaction :
