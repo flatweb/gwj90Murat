@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dwdtiq3m4gtbe" path="res://Scenes/Vegetation/foret_cercle.tscn" id="4_ulc5b"]
 [ext_resource type="PackedScene" uid="uid://lgwcy0fqbmph" path="res://Scenes/Vegetation/foret_route_s.tscn" id="5_isa0j"]
 [ext_resource type="PackedScene" uid="uid://c7msysgq7jvql" path="res://Scenes/Vegetation/foret_l.tscn" id="6_jxecv"]
+[ext_resource type="PackedScene" uid="uid://cfn22o18dg3x4" path="res://Scenes/Vegetation/foret_sansfeuille_xs.tscn" id="7_4i414"]
+[ext_resource type="PackedScene" uid="uid://dpy6lr273buy6" path="res://Scenes/Vegetation/foret_sansfeuille_s.tscn" id="8_3ei8r"]
+[ext_resource type="PackedScene" uid="uid://ljfqdpo8gxdm" path="res://Scenes/Vegetation/foret_sansfeuille_cercle.tscn" id="9_bg7xf"]
+[ext_resource type="PackedScene" uid="uid://b03a715pa1lwt" path="res://Scenes/Vegetation/arbre_boule.tscn" id="10_bg7xf"]
+[ext_resource type="PackedScene" uid="uid://c2blq7xqjnkw0" path="res://Scenes/Vegetation/foret_boule_s.tscn" id="11_7qnw8"]
 
 [node name="02_HIVER_MAP" type="Node3D" unique_id=1634229765]
 
@@ -115,3 +120,36 @@ transform = Transform3D(-0.45153156, 0, 0.8922551, 0, 1, 0, -0.8922551, 0, -0.45
 
 [node name="Foret_l7" parent="VEGETATION" unique_id=156364128 instance=ExtResource("6_jxecv")]
 transform = Transform3D(-0.59803104, 0, -0.8014731, 0, 1, 0, 0.8014731, 0, -0.59803104, 0.6229181, 0, 4.1026177)
+
+[node name="Foret_sans-feuille_xs" parent="VEGETATION" unique_id=728270069 instance=ExtResource("7_4i414")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7267418, 0, 29.872663)
+
+[node name="Foret_sans-feuille_xs2" parent="VEGETATION" unique_id=989783641 instance=ExtResource("7_4i414")]
+transform = Transform3D(-0.573505, 0, 0.81920207, 0, 1, 0, -0.81920207, 0, -0.573505, 8.8063965, 0, 34.103188)
+
+[node name="Foret_sans-feuille_xs3" parent="VEGETATION" unique_id=1026923871 instance=ExtResource("7_4i414")]
+transform = Transform3D(-0.573505, 0, 0.81920207, 0, 1, 0, -0.81920207, 0, -0.573505, 2.3693428, 0, 13.765839)
+
+[node name="Foret_sans-feuille_xs4" parent="VEGETATION" unique_id=22906524 instance=ExtResource("7_4i414")]
+transform = Transform3D(-0.573505, 0, 0.81920207, 0, 1, 0, -0.81920207, 0, -0.573505, -5.560356, 0, 1.0316734)
+
+[node name="Foret_sans-feuille_xs5" parent="VEGETATION" unique_id=609083456 instance=ExtResource("7_4i414")]
+transform = Transform3D(-0.843579, 0, -0.5370052, 0, 1, 0, 0.5370052, 0, -0.843579, -2.9482193, 0, -0.83413947)
+
+[node name="Foret_sansfeuille_s" parent="VEGETATION" unique_id=637727682 instance=ExtResource("8_3ei8r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8788795, 0, 26.473927)
+
+[node name="Foret_sansfeuille_cercle" parent="VEGETATION" unique_id=1371979873 instance=ExtResource("9_bg7xf")]
+transform = Transform3D(0.015079021, 0, -0.9998864, 0, 1, 0, 0.9998864, 0, 0.015079021, 11.113226, 0, 26.619879)
+
+[node name="Foret_sansfeuille_cercle2" parent="VEGETATION" unique_id=897518849 instance=ExtResource("9_bg7xf")]
+transform = Transform3D(0.8637564, 0, -0.50390977, 0, 1, 0, 0.50390977, 0, 0.8637564, -7.602831, 0, 3.4424362)
+
+[node name="Arbre_boule" parent="VEGETATION" unique_id=1010450993 instance=ExtResource("10_bg7xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9857597, 0, 26.93724)
+
+[node name="Foret_boule_s" parent="VEGETATION" unique_id=2053666517 instance=ExtResource("11_7qnw8")]
+transform = Transform3D(0.7737628, 0, 0.6334754, 0, 1, 0, -0.6334754, 0, 0.7737628, 1.4743881, 0, 23.245018)
+
+[node name="Foret_boule_s2" parent="VEGETATION" unique_id=1501196256 instance=ExtResource("11_7qnw8")]
+transform = Transform3D(0.7985725, 0, -0.60189867, 0, 1, 0, 0.60189867, 0, 0.7985725, 5.994198, 0, 21.779135)

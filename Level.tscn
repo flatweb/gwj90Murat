@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ejmf1pnklde4" path="res://res/modeles/00_game-area-size_Bootstrap5-palette.png" id="3_q4iis"]
 [ext_resource type="PackedScene" uid="uid://c27s7t63crat0" path="res://res/modeles/00_game-area-size.glb" id="4_m3clv"]
 [ext_resource type="PackedScene" uid="uid://d1lkw7axh4gm6" path="res://Scenes/Elements-mobiles/Car.tscn" id="5_4eo0i"]
-[ext_resource type="Script" path="res://Boid/assets/scripts/roadFollow.gd" id="5_86ljf"]
+[ext_resource type="Script" uid="uid://ht17r2jck10x" path="res://Boid/assets/scripts/roadFollow.gd" id="5_86ljf"]
 [ext_resource type="PackedScene" uid="uid://detafjuqrnaqx" path="res://res/modeles/02_hiver.glb" id="8_d6u53"]
 [ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver_map.tscn" id="11_jftiw"]
 [ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps_map.tscn" id="12_yye10"]
@@ -484,6 +484,13 @@ _data = {
 }
 point_count = 4
 
+[sub_resource type="Curve3D" id="Curve3D_5qkpu"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.35828972, 0, -0.0789032, 0, 0, 0, 0, 0, 0, 4.225052, 0, -1.59021, 0, 0, 0, 0, 0, 0, 6.1312046, 0, -1.3042755, 0, 0, 0, 0, 0, 0, 9.344431, 0, -2.053131, 0, 0, 0, 0, 0, 0, 10.447275, 0, -2.4071198, 0, 0, 0, 0, 0, 0, 11.590963, 0, -2.706665, 0, 0, 0, 0, 0, 0, 13.508566, 0, -4.121277, 0, 0, 0, 0, 0, 0, 14.924564, 0, -5.673416, 0, 0, 0, 0, 0, 0, 16.58564, 0, -6.24527, 0, 0, 0, 0, 0, 0, 18.570572, 0, -7.9669037, 0, 0, 0, 0, 0, 0, 20.136337, 0, -9.832199, 0, 0, 0, 0, 0, 0, 20.51966, 0, -11.892929, 0, 0, 0, 0, 0, 0, 21.363811, 0, -13.785461, 0, 0, 0, 0, 0, 0, 22.970425, 0, -15.215073, 0, 0, 0, 0, 0, 0, 28.160593, 0, -16.15738, 0, 0, 0, 0, 0, 0, 30.761127, 0, -17.056, 0, 0, 0, 0, 0, 0, 32.45504, 0, -19.430298, 0, 0, 0, 0, 0, 0, 32.786297, 0, -23.215256, 0, 0, 0, 0, 0, 0, 33.548756, 0, -24.168335, 0, 0, 0, 0, 0, 0, 34.09337, 0, -24.808258, 0, 0, 0, 0, 0, 0, 34.62437, 0, -25.380112, 0, 0, 0, 0, 0, 0, 36.888985, 0, -27.623001, 0, 0, 0, 0, 0, 0, 40.852745, 0, -29.665573, 0, 0, 0, 0, 0, 0, 42.45936, 0, -30.741196, 0, 0, 0, 0, 0, 0, 43.63028, 0, -32.15718, 0, 0, 0, 0, 0, 0, 44.83571, 0, -33.0524, 0, 0, 0, 0, 0, 0, 46.115555, 0, -34.345856, 0, 0, 0, 0, 0, 0, 47.12309, 0, -35.84355, 0, 0, 0, 0, 0, 0, 48.435516, 0, -37.4691, 0, 0, 0, 0, 0, 0, 48.762283, 0, -39.62033, 0, 0, 0, 0, 0, 0, 48.15876, 0, -41.061844, 0, 0, 0, 0, 0, 0, 46.02538, 0, -42.922943, 0, 0, 0, 0, 0, 0, 44.709396, 0, -45.064346, 0, 0, 0, 0, 0, 0, 44.627808, -0.0034093857, -48.393417),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 34
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_dcckh"]
 size = Vector3(1, 50, 70)
 
@@ -723,6 +730,10 @@ curve = SubResource("Curve3D_86ljf")
 [node name="Path3D" type="Path3D" parent="." unique_id=1915676836 groups=["isRoad"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.453171, 0, 0)
 curve = SubResource("Curve3D_m3clv")
+
+[node name="Route_hiver" type="Path3D" parent="." unique_id=885153306 groups=["isRoad"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.196047, 0.106833816, 239.5391)
+curve = SubResource("Curve3D_5qkpu")
 
 [node name="Limites" type="Node3D" parent="." unique_id=1293773004]
 
