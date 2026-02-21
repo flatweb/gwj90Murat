@@ -1,10 +1,11 @@
 [gd_scene format=4 uid="uid://dpojd1ckyuhmt"]
 
 [ext_resource type="Texture2D" uid="uid://c5kt6akm238g4" path="res://res/texture/arbre_vert-fonce.png" id="1_dwead"]
+[ext_resource type="Script" uid="uid://d2anrvq3bx0kq" path="res://res/scripts/arbre_texture.gd" id="1_fni41"]
+[ext_resource type="Texture2D" uid="uid://bmowmck16e3wv" path="res://res/texture/arbre_vert-fonce_neige.png" id="2_ackho"]
 [ext_resource type="Texture2D" uid="uid://ddojskfgrw0tl" path="res://res/modeles/vegetation/ARBRE_arbre_vert-fonce_neige.png" id="3_7xhgy"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwead"]
-albedo_texture = ExtResource("1_dwead")
+[ext_resource type="Texture2D" uid="uid://bpn4v44u1ntj0" path="res://res/texture/arbre_vert-fonce_neige2.png" id="3_k1rkn"]
+[ext_resource type="Texture2D" uid="uid://cc4lqo5fc2b5e" path="res://res/texture/arbre_vert-fonce_neige3.png" id="4_ux2c6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fni41"]
 resource_name = "TEXTURE_ARBRE"
@@ -46,9 +47,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ackho")
 
-[node name="Arbre_goutte" type="Node3D" unique_id=1699790004]
+[node name="Arbre_goutte" type="Node3D" unique_id=1699790004 node_paths=PackedStringArray("mesh") groups=["arbre"]]
+script = ExtResource("1_fni41")
+mesh = NodePath("ARBRE_goutte")
+textures_hiver = Array[Texture2D]([ExtResource("2_ackho"), ExtResource("3_k1rkn"), ExtResource("4_ux2c6"), ExtResource("1_dwead")])
 
 [node name="ARBRE_goutte" type="MeshInstance3D" parent="." unique_id=738112788]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_dwead")
 mesh = SubResource("ArrayMesh_k1rkn")
