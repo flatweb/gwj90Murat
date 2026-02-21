@@ -28,13 +28,16 @@ func _ready():
 	$Ground.position.y = -0.5
 	$Ground.position.z += game_area_size.position.z+game_area_size.size.z/2
 	
+	$Porte1Nuages.unlockcount = 2
 	$Porte1Nuages.pushtext.connect(pushtext.bind)
-	#$Porte2Nuages.pushtext.connect(pushtext.bind)
+	$Porte2Nuages.unlockcount = 8
+	$Porte2Nuages.withlightning = true
+	$Porte2Nuages.pushtext.connect(pushtext.bind)
 	
 	startintro()
 	pass
 
-func pushtext(texte : String , delai : float = 3.0):
+func pushtext(texte : String , _delai : float = 3.0):
 	$UI.pushtext(texte)
 	
 func init():
@@ -145,31 +148,41 @@ func losebonus():
 	refresh_captures()
 
 func _input(event: InputEvent) -> void:
-	# Pour les tests : triche pour démarrer plus loin
+	# Pour les tests : CheatMode pour démarrer plus loin
 	if (event.is_action_released("start1")):
 		$Marker3DStart.position.z = -50
+		$Oiseau.nbcapture = 2
 		$Oiseau.start_aterri_at($Marker3DStart.position)
 		pass
 	elif (event.is_action_released("start2")):
 		# Avant la zone centrale
+		nbcapture = 2
+		$Oiseau.nbcapture = 2
 		$Marker3DStart.position.z = -167
 		$Oiseau.start_aterri_at($Marker3DStart.position)
 		pass
 	elif (event.is_action_released("start3")):
-		# Avant la zone centrale
+		# dans la zone centrale
+		nbcapture = 5
+		$Oiseau.nbcapture = 5
 		$Marker3DStart.position.z = -288
 		$Oiseau.start_aterri_at($Marker3DStart.position)
 		pass
 	elif (event.is_action_released("start4")):
 		# A la sortie de la zone centrale
+		nbcapture = 7
+		$Oiseau.nbcapture = 7
 		$Marker3DStart.position.z = -449
 		$Oiseau.start_aterri_at($Marker3DStart.position)
 		pass
 	elif (event.is_action_released("start5")):
 		# Presque à l'arrivée
+		nbcapture = 8
+		$Oiseau.nbcapture = 8
 		$Marker3DStart.position.z = -591
 		$Oiseau.start_aterri_at($Marker3DStart.position)
 		pass
+	refresh_captures()
 	
 	if (event.is_action_released("noboids")):
 		$Flock.queue_free()

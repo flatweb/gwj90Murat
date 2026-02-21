@@ -1,8 +1,15 @@
 extends Area3D
 
-var vitessesurXZ : Vector3
+var vitessesurXZ : Vector3 = Vector3.ZERO # par défaut ne bouge pas
 var limites : AABB
 @export var scalemax : float
+var withlightning : bool = false :
+	set(b):
+		withlightning = b
+		if b : $TimerEclair.start()
+		else : $Timer.stop()
+	get():
+		return withlightning
 
 const DEFAULT_VITESSE : float = 0.2
 const RATIO_X_SUR_Z : float = 4.0
@@ -44,17 +51,27 @@ func ajoutervent(vitesse : Vector3) -> Vector3 :
 	return vitessesurXZ
 
 func _process(delta: float) -> void:
+	# création progressive
 	if encreation :
 		scale = scale + ECHELLE_1 * randf_range(0.5, 3.0) * delta
 		if scale.y >= scalemax :
 			encreation = false
+	# destruction progressive
 	if endestruction :
 		var supscale = ECHELLE_1 * randf_range(0.5, 3.0) * delta
 		if supscale.y >=scale.y :
 			queue_free()
 		else:
 			scale = scale - supscale
+	
+	# Eclairs (fadeout)
+	if get_node_or_null("OmniLight3D") != null:
+		var energy : float = $OmniLight3D.light_energy
+		if energy > 0.0 :
+			energy = max(0.0, energy - 20.0 * delta)
+			$OmniLight3D.light_energy = energy
 
+	# Déplacement du nuage
 	position += vitessesurXZ * delta
 	var x = limites.size.x
 	var p = position
@@ -62,4 +79,11 @@ func _process(delta: float) -> void:
 		if not endestruction:
 			if not limites.has_point(position) :
 				endestruction = true
-		
+	
+
+
+func _on_timer_eclair_timeout() -> void:
+	if randf_range(0,1) <= 0.05 :
+		$OmniLight3D.light_energy = 10.0
+	pass # Replace with function body.
+	

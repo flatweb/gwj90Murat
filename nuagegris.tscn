@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://coritl5gtw7s1" path="res://nuage.gd" id="1_jcwyk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1xst"]
-albedo_color = Color(0.35010192, 0.37184688, 0.3733209, 1)
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.34901962, 0.37254903, 0.37254903, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_v1xst"]
 material = SubResource("StandardMaterial3D_v1xst")
@@ -36,4 +38,13 @@ mesh = SubResource("SphereMesh_hy5j5")
 transform = Transform3D(-0.19005513, -0.98177344, 0, 0.98177344, -0.19005513, 0, 0, 0, 1, -0.052546144, 0, 0)
 shape = SubResource("CapsuleShape3D_jcwyk")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=39296491]
+light_color = Color(1, 1, 0.21568628, 1)
+light_energy = 0.0
+omni_range = 10.0
+
+[node name="TimerEclair" type="Timer" parent="." unique_id=1225299866]
+wait_time = 5.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="TimerEclair" to="." method="_on_timer_eclair_timeout"]
