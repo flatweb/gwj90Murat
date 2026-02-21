@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://detocmacpktpv"]
+
+[ext_resource type="PackedScene" uid="uid://bilxu3oqkt17i" path="res://res/modeles/props/01_petit_iceberg.glb" id="1_7n15n"]
+
+[node name="Iceberg_petit" type="Node3D" unique_id=460933297]
+
+[node name="01_petit_iceberg" parent="." unique_id=1079897426 instance=ExtResource("1_7n15n")]

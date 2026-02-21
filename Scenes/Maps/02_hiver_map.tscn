@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ljfqdpo8gxdm" path="res://Scenes/Vegetation/foret_sansfeuille_cercle.tscn" id="9_bg7xf"]
 [ext_resource type="PackedScene" uid="uid://b03a715pa1lwt" path="res://Scenes/Vegetation/arbre_boule.tscn" id="10_bg7xf"]
 [ext_resource type="PackedScene" uid="uid://c2blq7xqjnkw0" path="res://Scenes/Vegetation/foret_boule_s.tscn" id="11_7qnw8"]
+[ext_resource type="PackedScene" uid="uid://detocmacpktpv" path="res://Scenes/Terrain/iceberg_petit.tscn" id="12_vocj4"]
 
 [node name="02_HIVER_MAP" type="Node3D" unique_id=1634229765]
 
@@ -153,3 +154,47 @@ transform = Transform3D(0.7737628, 0, 0.6334754, 0, 1, 0, -0.6334754, 0, 0.77376
 
 [node name="Foret_boule_s2" parent="VEGETATION" unique_id=1501196256 instance=ExtResource("11_7qnw8")]
 transform = Transform3D(0.7985725, 0, -0.60189867, 0, 1, 0, 0.60189867, 0, 0.7985725, 5.994198, 0, 21.779135)
+
+[node name="ICEBERGS" type="Node3D" parent="." unique_id=1277478604]
+
+[node name="Iceberg_petit" parent="ICEBERGS" unique_id=460933297 instance=ExtResource("12_vocj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7976084, 0, 43.46239)
+
+[node name="Iceberg_petit11" parent="ICEBERGS" unique_id=80773974 instance=ExtResource("12_vocj4")]
+transform = Transform3D(0.5450342, 0, 0.83841383, 0, 1, 0, -0.83841383, 0, 0.5450342, -21.65633, 0, 42.898724)
+
+[node name="Iceberg_petit12" parent="ICEBERGS" unique_id=731241698 instance=ExtResource("12_vocj4")]
+transform = Transform3D(0.43323442, 0, 0.9012813, 0, 1, 0, -0.9012813, 0, 0.43323442, -29.547554, 0, 42.896988)
+
+[node name="Iceberg_petit13" parent="ICEBERGS" unique_id=89594496 instance=ExtResource("12_vocj4")]
+transform = Transform3D(-0.3684733, 0, 0.48759806, 0, 0.6111664, 0, -0.48759806, 0, -0.3684733, -30.9559, 0, 44.677814)
+
+[node name="Iceberg_petit14" parent="ICEBERGS" unique_id=1846478115 instance=ExtResource("12_vocj4")]
+transform = Transform3D(-0.48936105, 0, -0.3661287, 0, 0.6111663, 0, 0.3661287, 0, -0.48936105, -28.925491, 0, 44.80707)
+
+[node name="Iceberg_petit2" parent="ICEBERGS" unique_id=738468302 instance=ExtResource("12_vocj4")]
+transform = Transform3D(0.5545239, 0, -0.26469633, 0, 0.6144599, 0, 0.26469633, 0, 0.5545239, 0.325624, 0, 43.76373)
+
+[node name="Iceberg_petit8" parent="ICEBERGS" unique_id=1907842467 instance=ExtResource("12_vocj4")]
+transform = Transform3D(-0.17470111, 0, 0.5891014, 0, 0.61445993, 0, -0.5891014, 0, -0.17470111, -19.20029, 0, 42.689022)
+
+[node name="Iceberg_petit9" parent="ICEBERGS" unique_id=404050428 instance=ExtResource("12_vocj4")]
+transform = Transform3D(-0.5984541, 0, 0.08827592, 0, 0.60492986, 0, -0.08827592, 0, -0.5984541, -20.368721, 0, 45.949318)
+
+[node name="Iceberg_petit10" parent="ICEBERGS" unique_id=248125739 instance=ExtResource("12_vocj4")]
+transform = Transform3D(-0.35260847, -1.2948471e-10, -0.26287407, -1.3442537e-10, 0.43981317, -3.632727e-11, 0.26287407, 5.1220774e-11, -0.35260847, -21.156155, 0, 46.972935)
+
+[node name="Iceberg_petit3" parent="ICEBERGS" unique_id=556402395 instance=ExtResource("12_vocj4")]
+transform = Transform3D(0.54632187, 0, 0.31910405, 0, 0.6326887, 0, -0.31910405, 0, 0.54632187, -0.34175634, 0, 45.22349)
+
+[node name="Iceberg_petit4" parent="ICEBERGS" unique_id=916432940 instance=ExtResource("12_vocj4")]
+transform = Transform3D(0.5267778, 0, 0.85000306, 0, 1, 0, -0.85000306, 0, 0.5267778, 11.651936, 0, 42.832863)
+
+[node name="Iceberg_petit5" parent="ICEBERGS" unique_id=860778090 instance=ExtResource("12_vocj4")]
+transform = Transform3D(-0.5531108, 0, -0.26320434, 0, 0.61254233, 0, 0.26320434, 0, -0.5531108, 27.668968, 0, 42.982037)
+
+[node name="Iceberg_petit6" parent="ICEBERGS" unique_id=444668138 instance=ExtResource("12_vocj4")]
+transform = Transform3D(-0.08322094, 0, -0.44836468, 0, 0.45602262, 0, 0.44836468, 0, -0.08322094, 27.497503, 0, 44.265488)
+
+[node name="Iceberg_petit7" parent="ICEBERGS" unique_id=1220785245 instance=ExtResource("12_vocj4")]
+transform = Transform3D(0.46442616, 0, 0.019838702, 0, 0.46484974, 0, -0.019838702, 0, 0.46442616, 28.860086, 0, 44.29242)
