@@ -11,7 +11,7 @@ var tailleY : float
 # paramètres du mouvement - à passer en @export var à terme
 #------------------------------------------------------------
 # Vitesse de rotation sur virage
-const  ROTSPEED = 5.0
+const ROTSPEED = 4.0
 # Vitesse de rotation sur retour naturel à la position stable
 const ROTBACKSPEED = 2.0
 # angle de rotation par seconde lors d'un virage
@@ -56,7 +56,7 @@ const VITESSE_Y_MIN = 3.0
 var speedVect : Vector3
 # angle de rotation en virage
 var autorotspeed = 0
-
+# var 
 # node de la forme OIE (ou autre) pour éviter de trop invoquer $OIE
 var nodeoie : Node3D
 
@@ -135,8 +135,7 @@ func _on_timer_attente_anim_timeout() -> void:
 
 # Changement d'animation avec transition
 func _change_anim(anim_name):
-	if anim_name != nextanim :
-		print (self.name," change de ",anim_name," à ",nextanim)
+	#if anim_name != nextanim : print (self.name," change de ",anim_name," à ",nextanim)
 	match anim_name: # état actuel (...ou précédent)
 		ANIM_VOL:
 			match nextanim:
@@ -240,6 +239,9 @@ func angle_on_XZ(v1 : Vector3, v2 : Vector3) -> float:
 	var v2h = Vector2(v2.x, v2.z)
 	var angle : float = v1h.angle_to(v2h)
 	return angle
+
+func dot_on_XZ(v1 : Vector3, v2 : Vector3) -> float:
+	return (v1.x * v2.x) + (v1.z * v2.z)
 
 func attente():
 	if enaction == false :

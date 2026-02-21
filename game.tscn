@@ -153,6 +153,8 @@ sizeOfSpawn = Vector2(15, 15)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529, 84)
 gizmo_extents = 4.0
 
+[node name="Marker3DCheatBonus" type="Marker3D" parent="." unique_id=1355017270]
+
 [node name="Porte1Nuages" type="Node3D" parent="." unique_id=1127743841]
 
 [node name="Area3D" type="Area3D" parent="Porte1Nuages" unique_id=214566935]

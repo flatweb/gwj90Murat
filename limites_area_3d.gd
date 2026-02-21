@@ -24,13 +24,14 @@ func _on_limite_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_in
 	if body is StaticBody3D :
 		# Les statics ne sont pas censés bouger..., on ignore
 		return
-	print ("shape limite atteinte par ", body.name) # FIXME : on fait quoi ?
+	print ("shape limite atteinte par ", body.name)
 	var proprietaire_forme_local = limites.shape_find_owner(local_shape_index)
 	var forme_local = limites.shape_owner_get_owner(proprietaire_forme_local)
 	if body.is_in_group("Oiseau"):
 		body.start_correction(forme_local.get_real_normal())
 	elif body.is_in_group("Bonus"):
-		body.queue_free() #TODO : mécanisme à changer
+		pass # on ignore, puisqu'on est en attente ou on suit le leader
+		#body.queue_free()
 	pass
 
 

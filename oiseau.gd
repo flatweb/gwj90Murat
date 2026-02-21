@@ -12,6 +12,9 @@ var startpos : Vector3
 
 # signal quand on fait une capture
 signal capture
+# tableau des markers et des markers libres
+var arrmarks : Array
+var arrfreemarks : Array
 # signal à émettre quand l'oiseau est arrivé, avec nb autres
 signal aterri(dist : float, nb : int)
 # distance parcourue au total
@@ -32,6 +35,10 @@ func _ready():
 	demarre()
 	# Par défaut on considère que c'est la taille de la collisionShape
 	tailleY=$CollisionShape3D.shape.height #FIXME : trop grand, effets de bord
+
+	for child in $PositionSuiveurs.get_children():
+		arrmarks.append(child)
+		arrfreemarks.append(true)
 
 func start_aterri_at(pos : Vector3):
 	_anim_repos()
@@ -66,7 +73,7 @@ func refresh_indice():
 func show_indice(bonus : VolatileBody3D):
 	cibleindice = bonus
 	$SpriteIndice3D.show()
-	$SpriteIndice3D/Timer.start(5.0)
+	$SpriteIndice3D/Timer.start(10.0)
 	refresh_indice()
 	
 
@@ -353,7 +360,12 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 		print("Un oiseau bonus capturé : ", body.name)
 		capture.emit()
 		hide_indice()
-		body.devient_suiveur_de(self)
+		var bonus = body as OiseauBonus
+		for i in range(arrfreemarks.size()):
+			if arrfreemarks[i] == true:
+				arrfreemarks[i] = false
+				bonus.devient_suiveur_de(self, arrmarks[i]) #TODO : check return
+				break
 	pass # Replace with function body.
 
 

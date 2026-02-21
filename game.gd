@@ -166,6 +166,20 @@ func _input(event: InputEvent) -> void:
 		$Oiseau.start_aterri_at($Marker3DStart.position)
 		pass
 	
+	if (event.is_action_released("noboids")):
+		$Flock.queue_free()
+		
+	if (event.is_action_released("groupbonus")):
+		# Presque à l'arrivée
+		var posbonus1 = $OiseauBonus1.position
+		var decalage = Vector3.ZERO
+		for bonus in get_tree().get_nodes_in_group("Bonus"):
+			if bonus == $OiseauBonus1 : continue
+			if bonus.leader == null :
+				decalage +=  Vector3 (randf_range (-2.0,2.0),0.0,-2.0)
+				bonus.position = posbonus1 + decalage
+				break
+		
 	if (event.is_action_released("indice")):
 		if indices <= 0 : return
 		var distmin = 100000.0
@@ -184,7 +198,6 @@ func _input(event: InputEvent) -> void:
 		for i in range(0,indices) :
 			txt = txt + "X"
 		%LabelIndices.text = txt
-	
 	
 func _process(_delta):
 	#print ("vvvvvvv")
