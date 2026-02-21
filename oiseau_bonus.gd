@@ -1,6 +1,9 @@
 extends VolatileBody3D
 class_name OiseauBonus
 
+@export var texture : Texture2D
+var mesh : MeshInstance3D
+
 # Autre volatile (ou n'importe quoi) qu'on est censé suivre
 var leader : Node3D = null
 var tomarker : Marker3D = null
@@ -28,6 +31,11 @@ func _ready():
 	# on démarre en se mettant en attente, à vitese réduite
 	en_vol = true  # on considère bien qu'on est en vol puisqu'on démarre dans le ciel
 	mise_en_attente()
+	
+	mesh = $OIE/Armature/Skeleton3D/Cube
+	if texture:
+		mesh.material_override = StandardMaterial3D.new()
+		mesh.material_override.albedo_texture = texture
 
 func meurt():
 	queue_free()
