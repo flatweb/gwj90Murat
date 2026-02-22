@@ -27,7 +27,7 @@ var _boids = []
 var _repulsors = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	randomize()
 	_predatorRef = get_node(predator)
