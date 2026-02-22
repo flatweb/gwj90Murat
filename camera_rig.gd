@@ -16,11 +16,11 @@ func _ready() -> void:
 	set_rotation_degrees(Vector3(0, initial_angle, 0)) # initial camera rotation
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$Camera3D/Boussole.rotation.z = -self.rotation.y
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	self.position = joueur.position
 	
-	var zoom = camera_distance
 	if Input.is_action_just_pressed("scroll_down"):
 		# ET REGARDE LE JOUEUR
 		unzoom(zoom_increment)
@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 
 func zoom(increment):
 	var dist = camera_distance
-	dist -= zoom_increment
+	dist -= increment
 	camera_distance = clamp(dist, camera_min_distance, camera_max_distance)
 	update_camera_distance()
 
@@ -51,7 +51,7 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 			# orientation de la boussole
-			$Camera3D/Boussole/SpriteAiguille.rotation.z = -self.rotation.y
+			$Camera3D/Boussole.rotation.z = -self.rotation.y
 
 
 func _unhandled_input(event: InputEvent): 

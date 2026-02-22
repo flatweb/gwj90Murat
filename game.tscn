@@ -117,14 +117,14 @@ fov = 30.0
 far = 1000.0
 
 [node name="Boussole" type="Node3D" parent="CameraRig/Camera3D" unique_id=1960545456]
-transform = Transform3D(1, -2.9802322e-08, 0, 0, 1, 1.4901161e-08, 0, 1.4901161e-08, 1, 4.7533226, 2.6490326, -12.5950165)
+transform = Transform3D(0.8768192, -0.4551684, 0.15495196, 0.45516843, 0.88961196, 0.03757921, -0.15495194, 0.03757918, 0.9872072, 4.7533226, 2.6490326, -12.5950165)
 
-[node name="SpriteBoussole" type="Sprite3D" parent="CameraRig/Camera3D/Boussole" unique_id=2069434260]
+[node name="SpriteCadran" type="Sprite3D" parent="CameraRig/Camera3D/Boussole" unique_id=2069434260]
 texture = ExtResource("4_e36ub")
 
 [node name="SpriteAiguille" type="Sprite3D" parent="CameraRig/Camera3D/Boussole" unique_id=1570284151]
 unique_name_in_owner = true
-transform = Transform3D(0.97122586, -0.22545451, 0.07675098, 0.22545454, 0.9742142, 0.008778163, -0.07675098, 0.008778276, 0.99701166, 0.037994385, -0.05744934, 0.035453796)
+transform = Transform3D(0.9963472, -0.0808434, 0.027521344, 0.08084344, 0.99672663, 0.0011143386, -0.02752136, 0.0011146963, 0.99962085, 0.0014636517, -0.024803162, 0.007774353)
 texture = ExtResource("5_hb5m1")
 
 [node name="OiseauBonus1" parent="." unique_id=1559759492 instance=ExtResource("4_iotsf")]
