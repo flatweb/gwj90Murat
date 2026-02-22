@@ -189,17 +189,24 @@ func _input(event: InputEvent) -> void:
 		pass
 	refresh_captures()
 	
+	# force une fin immédiate pour tests
+	if (event.is_action_released("fin")):
+		inzonefin = true
+		nbcaptureattendu = 0
+		fin(123)
+		return
+	
+	# fait disparaitre les boids
 	if (event.is_action_released("noboids")):
 		$Flock.queue_free()
 		
 	if (event.is_action_released("groupbonus")):
 		# Presque à l'arrivée
-		var posbonus1 = $OiseauBonus1.position
+		var posbonus1 = $Oiseau.position
 		var decalage = Vector3.ZERO
 		for bonus in get_tree().get_nodes_in_group("Bonus"):
-			if bonus == $OiseauBonus1 : continue
 			if bonus.leader == null :
-				decalage +=  Vector3 (randf_range (-2.0,2.0),0.0,-2.0)
+				decalage +=  Vector3 (2.0,0.0,-4.0)
 				bonus.position = posbonus1 + decalage
 				break
 		

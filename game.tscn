@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cia8cfrsqyj1t" path="res://oiseau_bonus.tscn" id="4_iotsf"]
 [ext_resource type="Script" uid="uid://c5np42vulwkd5" path="res://camera_rig.gd" id="4_lc2xo"]
 [ext_resource type="Texture2D" uid="uid://bapvtdy4g7sbi" path="res://res/modeles/oie/oie3.png" id="5_7sc4i"]
+[ext_resource type="Texture2D" uid="uid://dhth33kumpp5q" path="res://res/modeles/oie/oie_2.png" id="6_e8heu"]
 [ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuagegris.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dp5b0utxqij4u" path="res://Boid/assets/scenes/Boid.tscn" id="7_j5wjh"]
@@ -118,24 +119,31 @@ texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus2" parent="." unique_id=783500081 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -14.987, 15, -52.213)
+texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus3" parent="." unique_id=20151608 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0, 4, -134.393)
+texture = ExtResource("6_e8heu")
 
 [node name="OiseauBonus4" parent="." unique_id=692412367 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0, 10, -244.464)
+texture = ExtResource("6_e8heu")
 
 [node name="OiseauBonus5" parent="." unique_id=248780560 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 45.779816, 10, -384.05914)
+texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus6" parent="." unique_id=1456902037 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0.5727024, 10, -428.1245)
+texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus7" parent="." unique_id=1446929511 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -40.314, 10, -363.81927)
+texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus8" parent="." unique_id=1093410312 instance=ExtResource("4_iotsf")]
 transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -38.145508, 10, -320.3542)
+texture = ExtResource("5_7sc4i")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1517858812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.593393, 0, -99.15094)
