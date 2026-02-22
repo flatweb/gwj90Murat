@@ -58,7 +58,6 @@ func devient_suiveur_de(_leader : Node3D, atmarks : Marker3D) -> bool :
 	self.leader = _leader
 	self.tomarker = atmarks
 	print (self.name, " suit ", atmarks.name)
-	pushtext.emit("A new goose is rejoining you")
 	speedVect = speedVect.normalized() * speedfront
 	if enaction :
 		if actionencours == action.ATTENTE :
@@ -110,7 +109,7 @@ func _physics_process(delta: float) -> void:
 			if actionencours == action.CORRECTION:
 				#print ("",speedVect.z," angle ",angle_correction)
 				if abs(rotation.y) <= 0.01 : # FIXME :
-					print ("fin de correction pour ", self.name)
+					print ("un bisou pour", self.name)
 					#Fin de correction
 					enaction = false
 					# on repart tout droit
@@ -214,13 +213,13 @@ func _physics_process(delta: float) -> void:
 	
 	elif enaction and actionencours == action.CORRECTION :
 		# plus de collision, on reprend son chemin
-		print ("fin de correction pour Oiseau Bonus")
+		print ("What !!!!")
 		enaction = false
 
 	# altitude trop basse du leader, on se met en attente
 	# Ca devrait permettre aussi, d'animer la fin de jeu
 	if leader != null and leader.position.y < ALTITUDE_LIBERATION_BONUS :
-		print (self.name, " a perdu le leader trop bas")
+		print (self.name, " a perdu le joueur trop bas")
 		
 		leader = null
 		# On résactive la layer 3 pour réclencher une capture
@@ -231,7 +230,7 @@ func _physics_process(delta: float) -> void:
 		perdu.emit() # à destination du game
 		
 	elif leader != null and distance_au_leader() > ECART_TROP_LOIN:
-		print (self.name, " a perdu le leader")
+		print (self.name, " a perdu le joueur")
 		leader = null
 		# On résactive la layer 3 pour réclencher une capture
 		self.set_collision_layer_value(3, true)

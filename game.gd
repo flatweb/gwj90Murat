@@ -75,7 +75,7 @@ func init():
 
 func start():
 	$UI.show()
-	$UI.pushtext("It is time to migrate bro.")
+	$UI.pushtext("It is time to migrate bro, \n i need to find my friends")
 	
 func fin(distance):
 	if inzonefin :
@@ -85,14 +85,14 @@ func fin(distance):
 		if true : # max(nbcapture,$Oiseau.nbmaxcapture) >= nbcaptureattendu  :
 			# fin de partie, on renvoie la distance parcourue comme score
 			# en théorie, il faudrait avoir parcouru le moins possible
-			print("fin de la partie")
-			pushtext("Great !  You reached south with your colony")			
+			print("fin de la partie ?")
+			pushtext("We arrive !!! ")			
 			endofgame = true
 			await get_tree().create_timer(5.0).timeout
 			fini.emit(distance)
 		else:
 			print("pas assez de bonus")
-			pushtext("Oh where are my other friends")
+			pushtext("Oh ! where are my other friends ?")
 	else:
 		pushtext("Dodo ?")
 
@@ -241,7 +241,7 @@ func _input(event: InputEvent) -> void:
 		
 	if (event.is_action_released("indice")):
 		if indices <= 0 :
-			pushtext("No more clues :-( ")
+			pushtext("No more clues")
 			return
 		
 		var distmin = 100000.0
