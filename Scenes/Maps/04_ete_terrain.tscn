@@ -116,6 +116,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_bs4ju")
 
 [node name="04_ETE_TERRAIN" type="Node3D" unique_id=1076768329]
+metadata/_edit_lock_ = true
 
 [node name="04_ete" type="Node3D" parent="." unique_id=460135884]
 

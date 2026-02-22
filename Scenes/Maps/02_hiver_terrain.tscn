@@ -151,6 +151,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hapv4")
 
 [node name="02_HIVER_TERRAIN" type="Node3D" unique_id=1175858171]
+metadata/_edit_lock_ = true
 
 [node name="02_hiver" type="Node3D" parent="." unique_id=2058459960]
 

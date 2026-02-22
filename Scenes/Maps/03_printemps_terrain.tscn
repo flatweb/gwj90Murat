@@ -116,6 +116,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_68kg8")
 
 [node name="03_PRINTEMPS_TERRAIN" type="Node3D" unique_id=1978125316]
+metadata/_edit_lock_ = true
 
 [node name="03_printemps" type="Node3D" parent="." unique_id=305925209]
 

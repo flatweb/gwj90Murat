@@ -5,3 +5,4 @@
 [node name="00_ICEBERG_MAP" type="Node3D" unique_id=395307854]
 
 [node name="00_ICEBERG_TERRAIN" parent="." unique_id=1617655763 instance=ExtResource("1_ttj7y")]
+metadata/_edit_lock_ = true
