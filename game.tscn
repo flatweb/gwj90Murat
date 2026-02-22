@@ -28,10 +28,9 @@ sky_material = SubResource("ProceduralSkyMaterial_hve3p")
 [sub_resource type="Environment" id="Environment_iotsf"]
 background_mode = 2
 sky = SubResource("Sky_mfdv2")
-tonemap_mode = 2
+tonemap_exposure = 0.8
 ssao_enabled = true
 ssil_enabled = true
-glow_enabled = true
 glow_intensity = 0.1
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_e8heu"]
