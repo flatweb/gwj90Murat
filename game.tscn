@@ -18,7 +18,9 @@
 [ext_resource type="Script" uid="uid://0fpuqucyrhnl" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
 [ext_resource type="AudioStream" uid="uid://c60gx7f86f2ai" path="res://sons/winter theme.mp3" id="12_lc2xo"]
+[ext_resource type="Texture2D" uid="uid://sp5fid7v8jqj" path="res://res/texture/UI_nuage.png" id="16_hb5m1"]
 [ext_resource type="AudioStream" uid="uid://dm1wcuho8fwki" path="res://sons/journey dim.mp3" id="17_e8heu"]
+[ext_resource type="Texture2D" uid="uid://2whso4c138ig" path="res://res/texture/UI_oie.png" id="17_x5p1p"]
 [ext_resource type="AudioStream" uid="uid://btggp5fhto8ad" path="res://sons/title_game.mp3" id="18_rvswv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
@@ -233,13 +235,45 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainerTop" unique_id=1578766217]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("16_hb5m1")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="LabelCaptures" type="Label" parent="UI/HBoxContainerTop/TextureRect" unique_id=1132568332]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 68.0
+offset_top = 14.0
+offset_right = 85.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 32
+text = "2"
+
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainerTop/TextureRect" unique_id=722719319]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30400002
+anchor_top = 0.187
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.47999
+offset_top = 9.78
+offset_right = -3.2399445
+offset_bottom = 20.0
+texture = ExtResource("17_x5p1p")
+expand_mode = 1
+
 [node name="HBoxCaptures" type="HBoxContainer" parent="UI/HBoxContainerTop" unique_id=720345775]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
-[node name="LabelCaptures" type="Label" parent="UI/HBoxContainerTop" unique_id=1043868048]
+[node name="LabelMaxCaptures" type="Label" parent="UI/HBoxContainerTop" unique_id=1043868048]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "/8"
@@ -250,7 +284,9 @@ text = "-----"
 
 [node name="HBoxIndices" type="HBoxContainer" parent="UI/HBoxContainerTop" unique_id=950462970]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="HBoxContainerBottom" type="HBoxContainer" parent="UI" unique_id=574969756]
 clip_contents = true

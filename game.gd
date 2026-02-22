@@ -59,11 +59,13 @@ func init():
 	$Oiseau.start_aterri_at($Marker3DStart.position)
 	$Oiseau.msg.connect(pushtext.bind())
 
+	
 	# remplissage des indices
 	
 	for i in range(0,indices):
 		var clue : TextureRect = TextureRect.new()
-		clue.texture = load("res://res/sprites/direction.png") 
+		clue.texture = load("res://res/texture/UI_fleche.png")
+		
 		var pngsize = clue.texture.get_size()
 		var pngpos : Vector2 = Vector2(pngsize.x*(0.5 + nbcapture), pngsize.y/2)
 		clue.position = pngpos
@@ -156,10 +158,10 @@ func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_
 #------------------------------------------------------------
 func refresh_captures():
 	if nbcapture > 0 :
-		$%LabelCaptures.show()
-		%LabelCaptures.text = "/ %d" % [nbcaptureattendu]
+		%LabelMaxCaptures.show()
+		%LabelMaxCaptures.text = "/ %d" % [nbcaptureattendu]
 	else :
-		$%LabelCaptures.hide()
+		$%LabelMaxCaptures.hide()
 	
 func addcapture():
 	nbcapture = $Oiseau.nbcapture
