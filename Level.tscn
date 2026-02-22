@@ -83,7 +83,6 @@ carResScript = ExtResource("5_86ljf")
 
 [node name="MONTAGNES_TERRAIN" parent="." unique_id=508374464 instance=ExtResource("18_yye10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 362)
-visible = false
 metadata/_edit_lock_ = true
 
 [node name="00_ICEBERG_MAP" parent="." unique_id=395307854 instance=ExtResource("17_dcckh")]
@@ -94,7 +93,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 392.91263)
 metadata/_edit_lock_ = true
 
-[node name="OCEAN" type="MeshInstance3D" parent="." unique_id=1925505723]
+[node name="old_ocean" type="MeshInstance3D" parent="." unique_id=1925505723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 420.70923)
 visible = false
 mesh = SubResource("PlaneMesh_yye10")
