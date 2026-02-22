@@ -169,23 +169,30 @@ script = null
 
 [node name="Flock" type="Node3D" parent="." unique_id=1544621110]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 66.992035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0312157, 12.68815, 45.113945)
 script = ExtResource("6_eow3j")
 boidScene = ExtResource("7_j5wjh")
-numberOfBoids = 50
-maxDistanceFromSpawn = null
-visualRange = 20.0
-separationDistance = 1.0
+numberOfBoids = 100
+maxDistanceFromSpawn = 30.0
+visualRange = 10.0
+separationDistance = 0.5
 predator = NodePath("../Oiseau")
 predatorMinDist = 12.0
-repulsorMinDIst = 3.0
-maxNeighborsColor = null
-cohesionWeight = null
-separationWeight = 5.0
-alignmentWeight = null
-bordersWeight = null
-predatorWeight = null
-repulsorWeight = 2000.0
+repulsorMinDIst = 6.0
+sizeOfSpawn = Vector2(15, 15)
+
+[node name="Flock2" type="Node3D" parent="." unique_id=419185058]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0312157, 12.68815, -238.52063)
+script = ExtResource("6_eow3j")
+boidScene = ExtResource("7_j5wjh")
+numberOfBoids = 100
+maxDistanceFromSpawn = 30.0
+visualRange = 10.0
+separationDistance = 0.5
+predator = NodePath("../Oiseau")
+predatorMinDist = 12.0
+repulsorMinDIst = 6.0
 sizeOfSpawn = Vector2(15, 15)
 
 [node name="Marker3DStart" type="Marker3D" parent="." unique_id=1720991345]

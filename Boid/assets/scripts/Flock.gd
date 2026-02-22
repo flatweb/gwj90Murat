@@ -38,8 +38,10 @@ func _ready():
 		_boids.append(instance)
 		
 		var x = randf_range(- sizeOfSpawn.x,sizeOfSpawn.x)
+		var y = randf_range(5,20)
 		var z = randf_range(- sizeOfSpawn.y,sizeOfSpawn.y)
-		instance.set_position(Vector3(x, _predatorRef.position.y ,z))
+		instance.set_position(Vector3(x, y ,z))
+		instance.spawnPoint = Vector3(x, y ,z)
 	_repulsors = get_tree().get_nodes_in_group("Repulsor")
 	print(_repulsors)
 
@@ -48,9 +50,10 @@ func _process(delta):
 	_cohesion()
 	_separation()
 	_alignment()
+	_borders(delta)
 	_attractor()
 	_repulsor()
-	_borders(delta)
+
 	
 
 
@@ -74,7 +77,7 @@ func _cohesion():
 		if (neighbors.is_empty()):
 			continue;
 		
-		var averagePos = Vector3(0,5, 0)
+		var averagePos = Vector3(0,0, 0)
 		for closeBoid in neighbors:
 			averagePos += closeBoid.get_position()
 		averagePos /= neighbors.size()
@@ -101,9 +104,9 @@ func _separation():
 			
 func _borders(delta):
 	for boid in _boids:
-		if (boid.isOutOfBorder or boid.get_position().distance_to(Vector3.ZERO) > maxDistanceFromSpawn ):
+		if boid.isOutOfBorder or boid.get_position().distance_to(Vector3.ZERO) > maxDistanceFromSpawn:# or boid.get_global_position().y > 3 or 40 > boid.get_global_position().y:
 			boid.timeOutOfBorders += delta
-			var dir = (- boid.get_position()).normalized()
+			var dir = (boid.spawnPoint - boid.get_position()).normalized()
 			boid.acceleration += dir * boid.timeOutOfBorders * bordersWeight
 		else:
 			boid.timeOutOfBorders = 0
@@ -122,7 +125,7 @@ func _alignment():
 			averageVel += neighbors[j].velocity
 		averageVel /= neighbors.size()
 		
-		_boids[i].acceleration += Vector3(averageVel.x,0,averageVel.z) * alignmentWeight
+		_boids[i].acceleration += Vector3(averageVel.x,averageVel.y,averageVel.z) * alignmentWeight
 
 func _attractor():
 	for boid in _boids:

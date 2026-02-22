@@ -75,6 +75,14 @@ radius = 6.2436523
 [sub_resource type="BoxShape3D" id="BoxShape3D_jftiw"]
 size = Vector3(1, 50, 39.706787)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_viiqw"]
+margin = 3.585
+plane = Plane(0, 5, 0, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_105nu"]
+margin = 3.0
+plane = Plane(0, 15, 0, 0)
+
 [sub_resource type="Curve3D" id="Curve3D_jftiw"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.3951015, 0, 406.62662, 3.3182144, 0, 22.064117, -3.3182144, 0, -22.064117, -9.319814, 0, 356.33316, -1.3949137, 0, 20.299011, 1.3949137, 0, -20.299011, -0.09766102, 0, 303.1082, -3.0225992, 0, 21.923828, 3.0225992, 0, -21.923828, -12.566157, 0, 260.4142, -1.6363611, 0, 17.507446, 1.6363611, 0, -17.507446, 2.6118212, 0, 165.77501, -1.3156376, 0, 13.194075, 1.3156376, 0, -13.194075, 5.5076885, 0, 39.454872, 0.47328758, 0, 19.540695, -0.47328758, 0, -19.540695, -16.81293, 0, 9.991709, -10.272278, 0, 14.872341, 10.272278, 0, -14.872341, 19.792784, 0, -60.541294, 1.2125015, 0, 16.660805, -1.2125015, 0, -16.660805, 52.196144, 0, -114.062996, 2.7147694, 0, 23.280685, -2.7147694, 0, -23.280685, 1.3052139, 0, -177.45343, -0.099723816, 0, 18.446808, 0.099723816, 0, -18.446808, -2.2660751, 0, -272.98547, 0, 0, 0, 0, 0, 0, -4.9443293, 0, -517.21075),
@@ -263,6 +271,16 @@ shape = SubResource("BoxShape3D_jftiw")
 [node name="LimiteShape3D16" type="CollisionShape3D" parent="Limites/StaticBody3D16" unique_id=1830899890]
 transform = Transform3D(-0.9858149, 0, 0.16783561, 0, 1, 0, -0.16783561, 0, -0.9858149, 86.920746, 25, -94.75609)
 shape = SubResource("BoxShape3D_jftiw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Limites" unique_id=1500885444 groups=["limite"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limites/StaticBody3D" unique_id=1641485876]
+shape = SubResource("WorldBoundaryShape3D_viiqw")
+
+[node name="StaticBody3D17" type="StaticBody3D" parent="Limites" unique_id=1128008512 groups=["limite"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limites/StaticBody3D17" unique_id=1236584127]
+shape = SubResource("WorldBoundaryShape3D_105nu")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=658722979]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 50, 394.4229)

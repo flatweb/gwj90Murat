@@ -13,7 +13,7 @@ class_name Boid
 @export var syncTrail: bool = true
 @export var trail: NodePath
 
-
+var spawnPoint
 var velocity := Vector3.ZERO
 var acceleration := Vector3.ZERO
 
@@ -26,7 +26,7 @@ func _ready():
 
 	
 	velocity = Vector3(randf_range(-maxVelocity, maxVelocity),
-						0,
+						randf_range(-maxVelocity, maxVelocity),
 						randf_range(-maxVelocity, maxVelocity))
 	
 func _process(delta):
@@ -34,8 +34,17 @@ func _process(delta):
 	velocity = velocity.limit_length(maxVelocity)
 	acceleration.x = 0
 	acceleration.z = 0
-	velocity.y=0
+	acceleration.y = 0
 	position += velocity * delta
 	if velocity != Vector3.ZERO :
 		look_at(global_position + velocity)
+	
 	rotation += rotationOffset
+
+
+func _on_static_body_3d_body_entered(body: Node3D) -> void:
+	isOutOfBorder = true
+
+
+func _on_static_body_3d_body_exited(body: Node3D) -> void:
+	isOutOfBorder = false

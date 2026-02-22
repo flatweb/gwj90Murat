@@ -13,6 +13,9 @@
 
 [node name="Main" type="Node3D" unique_id=282379335]
 
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1341388747]
+transform = Transform3D(1, 0, 0, 0, 0.9488209, 0.31581464, 0, -0.31581464, 0.9488209, 0, 28.284092, 25.758713)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1378754638]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 1946, 1524.0001, 348)
 
@@ -42,14 +45,25 @@ mesh = SubResource("BoxMesh_272bh")
 
 [node name="Character2" parent="." unique_id=274740939 instance=ExtResource("2_vesw4")]
 
-[node name="Camera3D2" type="Camera3D" parent="Character2" unique_id=137828251]
-transform = Transform3D(-0.99026805, -0.13044453, 0.048511866, 0, 0.348572, 0.937282, -0.13917318, 0.9281605, -0.34517968, 27.816895, 248.4858, 72.448)
-fov = 43.4
-near = 0.03
-
-[node name="Flock" type="Node3D" parent="." unique_id=706107885]
+[node name="Flock2" type="Node3D" parent="." unique_id=771518163]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8634186, 0, -4.3727417)
 script = ExtResource("1")
 boidScene = ExtResource("2")
+numberOfBoids = 200
+visualRange = 5.0
+separationDistance = 5.0
+predator = NodePath("../Oiseau")
+predatorMinDist = 10.0
+bordersWeight = 2000.0
+repulsorWeight = 2000.0
+sizeOfSpawn = Vector2(25, 25)
+
+[node name="Flock" type="Node3D" parent="." unique_id=706107885]
+visible = false
+script = ExtResource("1")
+boidScene = ExtResource("2")
+maxDistanceFromSpawn = 20.0
 predator = NodePath("../Character2")
 repulsorWeight = 2000.0
 

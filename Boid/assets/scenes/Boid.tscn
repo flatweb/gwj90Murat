@@ -220,6 +220,7 @@ visible = false
 
 [node name="Corps" type="MeshInstance3D" parent="Forme" unique_id=492219359]
 transform = Transform3D(1, 0, 0, 0, -0.08917245, 0.99601614, 0, -0.99601614, -0.08917245, 0, 0, -0.015925169)
+visible = false
 mesh = SubResource("CapsuleMesh_pihgk")
 
 [node name="AileD" type="MeshInstance3D" parent="Forme" unique_id=906438421]
@@ -228,6 +229,7 @@ mesh = SubResource("CapsuleMesh_ffqxe")
 
 [node name="AileG" type="MeshInstance3D" parent="Forme" unique_id=443649642]
 transform = Transform3D(-0.017496575, -0.9112353, 0.4115143, 0.9998157, -0.019197399, 0, 0.007900006, 0.41143847, 0.91140324, -0.3, -0.094, 0.1)
+visible = false
 mesh = SubResource("CapsuleMesh_ffqxe")
 
 [node name="StaticBody3D" type="Area3D" parent="." unique_id=1648128067]
@@ -321,3 +323,6 @@ autoplay = &"Vol_normal"
 
 [node name="00_petit-oiseau" parent="." unique_id=508736611 instance=ExtResource("3_ffqxe")]
 transform = Transform3D(-8.742278e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.742278e-09, 0, 0, 0)
+
+[connection signal="body_entered" from="StaticBody3D" to="." method="_on_static_body_3d_body_entered"]
+[connection signal="body_exited" from="StaticBody3D" to="." method="_on_static_body_3d_body_exited"]
