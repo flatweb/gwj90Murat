@@ -1,9 +1,9 @@
 extends Node3D
 
 @export var joueur : CharacterBody3D
-@export var initial_angle : int
+@export var initial_angle : int = -45
 @export var camera : Camera3D
-@export var camera_distance_default : float = 35
+@export var camera_distance_default : float = 20 # avant c'etait 35-39
 var camera_distance
 @export var camera_min_distance : int = 7 # moins et on voit trop l'horizon
 @export var camera_max_distance : int = 60
