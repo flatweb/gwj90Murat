@@ -35,7 +35,7 @@ func update_camera_distance():
 	camera.look_at(self.position) # la camera regarde l'orgine du CameraRig (qui a la meme position que le joueur)
 	
 func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("clic_droit"):
+	if Input.is_action_pressed("clic"):
 		if event is InputEventMouseMotion:
 			rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 
