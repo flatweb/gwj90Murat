@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://ympsyus4mahy" path="res://sons/gooz.mp3" id="5_tu30k"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_fk3fv"]
-height = 1.7978821
+height = 1.4565582
 radius = 1.1665039
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6s105"]
@@ -517,8 +517,9 @@ collision_layer = 3
 script = ExtResource("1_pmcpw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1303361586]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08946228, -0.3819831)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2601242, -0.3819831)
 shape = SubResource("CylinderShape3D_fk3fv")
+debug_color = Color(0.80784315, 0.28235295, 0.078431375, 0.41960785)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1608969010]
 transform = Transform3D(-0.34790128, -0.16434732, -0.9230139, -7.662518e-09, 0.9845154, -0.17529798, 0.9375312, -0.060986385, -0.3425142, -4.7073994, 0.3388319, 0)

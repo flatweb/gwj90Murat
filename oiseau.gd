@@ -121,7 +121,7 @@ func descendre(delta : float):
 		# on accélère un peu
 		speedVect.y -= delta * (0.5)*speeddown
 		if speedVect.y < -speeddown :
-			speedVect.y = speeddown
+			speedVect.y = -speeddown
 		# changement progressif d'inclinaison (axe X vers le bas)
 		if abs($OIE.rotation.x) < INCLINAISON_MAX_PIQUE :
 			$OIE.rotate_x(-0.1*ROTSPEED*delta)
@@ -207,8 +207,9 @@ func _physics_process(delta: float) -> void:
 	var mouvementupdown :bool = false # ne sert à rien ?
 	
 	#pour mettre un point d'arrêt
-	if speedVect.y <= 0 :
+	if speedVect.y > 0 and pique :
 		pass
+		
 	# Si il y a une action automatique en cours, on privilégie l'action
 	# TODO : déplacer ça en résultat de do_action ?
 	if enaction and actionencours == action.ATTENTE \
@@ -264,11 +265,10 @@ func _physics_process(delta: float) -> void:
 				aterri.emit(distance)
 				queue_next_anim(ANIM_REPOS)
 				# on va libérer les bonus :
-				
-				
 		elif actionencours == action.DECOLLAGE:
 			queue_next_anim(ANIM_VOL)
 			remonte(delta)
+			mouvement = pique or monte # FIXME à supprimer après test
 			if position.y > 1.0 :
 				enaction = false
 		elif actionencours == action.ATTENTE:
@@ -276,7 +276,7 @@ func _physics_process(delta: float) -> void:
 			pass
 
 	#pour mettre un point d'arrêt
-	if speedVect.y <= 0 :
+	if speedVect.y > 0 and pique:
 		pass
 
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
@@ -316,7 +316,7 @@ func _physics_process(delta: float) -> void:
 			speedVect.y = 0.0
 
 	#pour mettre un point d'arrêt
-	if speedVect.y <= 0 :
+	if speedVect.y > 0 and pique:
 		pass
 
 	if $Indicateurs.visible :
@@ -336,6 +336,7 @@ func _physics_process(delta: float) -> void:
 				continue
 			var normal : Vector3 = collisions.get_normal(i)
 			if obj.is_in_group("sol"):
+				print(self.name, "en collision avec le sol")
 				if enaction and \
 					  (actionencours == action.DECOLLAGE or \
 					   actionencours == action.ATERRI) :
@@ -356,7 +357,12 @@ func _physics_process(delta: float) -> void:
 					pass
 					#correction()
 				#virage(autorotspeed,delta)
-	
+
+	#pour mettre un point d'arrêt
+	if speedVect.y > 0 and pique :
+		pass
+
+
 	# la distance parcourue se cumule
 	distance += (self.position - positionavant).length()
 
