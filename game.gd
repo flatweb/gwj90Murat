@@ -59,7 +59,7 @@ func init():
 	$Oiseau.start_aterri_at($Marker3DStart.position)
 	$Oiseau.msg.connect(pushtext.bind())
 
-	
+		
 	# remplissage des indices
 	
 	for i in range(0,indices):

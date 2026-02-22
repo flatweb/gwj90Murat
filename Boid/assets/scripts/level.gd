@@ -21,7 +21,8 @@ func _ready() -> void:
 			
 		#print("Est ce que le pathCar a un script" + String(roadPathFollow.get_path()))
 			if roadPathFollow.get_script() == carScript :
-				print("oui")
+				pass
+				#print("oui")
 
 func apply_texture(mesh:MeshInstance3D):
 	var randn = randi_range(0, carTextures.size()-1)
