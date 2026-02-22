@@ -54,6 +54,7 @@ func devient_suiveur_de(_leader : Node3D, atmarks : Marker3D) -> bool :
 		# on suit déjà un leader
 		return false # on ne devrait jamais passer là !!!
 	
+	$AudioPlayerCapture.play(2.0)
 	self.leader = _leader
 	self.tomarker = atmarks
 	print (self.name, " suit ", atmarks.name)
@@ -226,15 +227,15 @@ func _physics_process(delta: float) -> void:
 		self.set_collision_layer_value(3, true)
 		position.y = 5.0 # FIXME : trop violent
 		mise_en_attente()
+		$AudioPlayerLost.play(4.0)
 		perdu.emit() # à destination du game
 		
-		
-	if leader != null and distance_au_leader() > ECART_TROP_LOIN:
+	elif leader != null and distance_au_leader() > ECART_TROP_LOIN:
 		print (self.name, " a perdu le leader")
 		leader = null
 		# On résactive la layer 3 pour réclencher une capture
 		self.set_collision_layer_value(3, true)
-
+		$AudioPlayerLost.play()
 		mise_en_attente()
 		perdu.emit() # à destination du game
 		
