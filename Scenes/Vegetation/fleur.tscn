@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://qq3hhqh802wl"]
+
+[ext_resource type="Texture2D" uid="uid://dmdprtvtst7yl" path="res://res/texture/fleur_rose_+.png" id="1_ppj1p"]
+
+[node name="Fleur" type="Node3D" unique_id=2107220856]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1983135715]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.08909005, 0)
+billboard = 1
+texture = ExtResource("1_ppj1p")

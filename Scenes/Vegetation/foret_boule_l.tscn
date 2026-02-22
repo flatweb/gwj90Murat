@@ -1,0 +1,291 @@
+[gd_scene format=3 uid="uid://chwcqb65fs22g"]
+
+[ext_resource type="PackedScene" uid="uid://b03a715pa1lwt" path="res://Scenes/Vegetation/arbre_boule.tscn" id="1_3tkgk"]
+[ext_resource type="Script" uid="uid://ck5rxagrmssj6" path="res://Scenes/Vegetation/foret_texture.gd" id="1_dlamd"]
+[ext_resource type="PackedScene" uid="uid://qq3hhqh802wl" path="res://Scenes/Vegetation/fleur.tscn" id="2_dlamd"]
+
+[node name="Foret_boule_l" type="Node3D" unique_id=2015608561]
+script = ExtResource("1_dlamd")
+saison = "printemps"
+
+[node name="Arbre_boule" parent="." unique_id=1010450993 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81496763, 0, -1.662076)
+
+[node name="Arbre_boule2" parent="." unique_id=1854828180 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.198838, 0, 0, 0, 1.198838, 0, 0, 0, 1.198838, -1.4202538, 0, 0.025540546)
+
+[node name="Arbre_boule3" parent="." unique_id=2009577316 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30264378, 0, 0.49179524)
+
+[node name="Arbre_boule4" parent="." unique_id=1912053363 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.79895073, 0, 0, 0, 0.79895073, 0, 0, 0, 0.79895073, -1.3739257, 0.009765625, -1.8957562)
+
+[node name="Arbre_boule5" parent="." unique_id=626155610 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2144527, 0, 0.11898528)
+
+[node name="Arbre_boule6" parent="." unique_id=1311118247 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.220473, 0, 0, 0, 1.220473, 0, 0, 0, 1.220473, 0.6347046, 0, -0.6369729)
+
+[node name="Arbre_boule7" parent="." unique_id=2020882586 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7245111, 0, -0.9535194)
+
+[node name="Arbre_boule8" parent="." unique_id=1965507020 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.89899766, 0, 0, 0, 0.89899766, 0, 0, 0, 0.89899766, -1.0089898, 0, -2.4219403)
+
+[node name="Arbre_boule9" parent="." unique_id=46072017 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009062767, 0, -1.2605231)
+
+[node name="Arbre_boule10" parent="." unique_id=1176048337 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7237716, 0, 0, 0, 0.7237716, 0, 0, 0, 0.7237716, -1.0870571, 0, -1.1300712)
+
+[node name="Arbre_boule11" parent="." unique_id=1672887237 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9583597, 0, -1.7445596)
+
+[node name="Arbre_boule12" parent="." unique_id=1984195038 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7911427, 0, 0, 0, 0.7911427, 0, 0, 0, 0.7911427, -0.108000755, 0, -1.8887745)
+
+[node name="Arbre_boule13" parent="." unique_id=528842641 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8736839, 0, -0.39265028)
+
+[node name="Arbre_boule14" parent="." unique_id=2079403730 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.2659528, 0, 0, 0, 1.2659528, 0, 0, 0, 1.2659528, 1.3808098, 0, -1.1159987)
+
+[node name="Arbre_boule15" parent="." unique_id=2132297543 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.1530672, 0, 0, 0, 1.1530672, 0, 0, 0, 1.1530672, 2.6544113, 0, -0.22457075)
+
+[node name="Arbre_boule16" parent="." unique_id=1928894745 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3454847, 0, -1.1727439)
+
+[node name="Arbre_boule17" parent="." unique_id=855379802 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7697735, 0, -1.0475093)
+
+[node name="Arbre_boule18" parent="." unique_id=1188303832 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.2859244, 0, 0, 0, 1.2859244, 0, 0, 0, 1.2859244, 3.1020908, 0, -1.5699633)
+
+[node name="Arbre_boule19" parent="." unique_id=746357572 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5724678, 0, 1.0781658)
+
+[node name="Arbre_boule20" parent="." unique_id=341549147 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9671812, 0, 0.41613317)
+
+[node name="Arbre_boule21" parent="." unique_id=1121375936 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.6654625, 0, 0, 0, 0.6654625, 0, 0, 0, 0.6654625, 3.169248, 0, 1.0725167)
+
+[node name="Arbre_boule58" parent="." unique_id=1899225785 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.6654625, 0, 0, 0, 0.6654625, 0, 0, 0, 0.6654625, 3.9867926, 0, 1.4812888)
+
+[node name="Arbre_boule59" parent="." unique_id=1880029653 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.6654625, 0, 0, 0, 0.6654625, 0, 0, 0, 0.6654625, -0.45659828, 0, -2.3134317)
+
+[node name="Arbre_boule60" parent="." unique_id=200664887 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.6654625, 0, 0, 0, 0.6654625, 0, 0, 0, 0.6654625, 0.5583391, 0, -1.3263009)
+
+[node name="Arbre_boule61" parent="." unique_id=491685299 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.54420984, 0, 0, 0, 0.54420984, 0, 0, 0, 0.54420984, 0.33588696, 0, -1.7712051)
+
+[node name="Arbre_boule22" parent="." unique_id=1681803826 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.69033355, 0, 0, 0, 0.69033355, 0, 0, 0, 0.69033355, 2.625277, 0, 0.41048455)
+
+[node name="Arbre_boule23" parent="." unique_id=1466336348 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.407242, 0, 0.4539646)
+
+[node name="Arbre_boule24" parent="." unique_id=929321750 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.2520432, 0, 0, 0, 1.2520432, 0, 0, 0, 1.2520432, 3.524953, 0, -0.2422174)
+
+[node name="Arbre_boule25" parent="." unique_id=1984825398 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8208714, 0, 0.2458967)
+
+[node name="Arbre_boule26" parent="." unique_id=608705558 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.9043766, 0, 0, 0, 0.9043766, 0, 0, 0, 0.9043766, -4.2176104, 0, -0.8332335)
+
+[node name="Arbre_boule27" parent="." unique_id=1724160506 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.2533591, -4.9532367e-10, -0.011331685, 4.9532367e-10, 1.2534103, -2.2402273e-12, 0.011331685, -2.2402273e-12, 1.2533591, -2.8357577, 0, 0.20959044)
+
+[node name="Arbre_boule28" parent="." unique_id=534444399 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.461483, 0, -0.47288108)
+
+[node name="Arbre_boule43" parent="." unique_id=109858740 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2508378, 0, -1.3251702)
+
+[node name="Arbre_boule44" parent="." unique_id=656859497 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.617962, 0, 0, 0, 0.617962, 0, 0, 0, 0.617962, -3.8561244, 0, -1.9872028)
+
+[node name="Arbre_boule45" parent="." unique_id=1641149311 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.1998147, 0, 0, 0, 1.1998147, 0, 0, 0, 1.1998147, -2.0155454, 0, -1.7102698)
+
+[node name="Arbre_boule46" parent="." unique_id=1475200729 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6987176, 0, -1.8256872)
+
+[node name="Arbre_boule47" parent="." unique_id=48392537 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7484939, 0, 0, 0, 0.7484939, 0, 0, 0, 0.7484939, 0.7041402, 0, -2.6267524)
+
+[node name="Arbre_boule48" parent="." unique_id=2033601271 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6688151, 0, -2.6834974)
+
+[node name="Arbre_boule49" parent="." unique_id=218581236 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.787137, 0, 0, 0, 0.787137, 0, 0, 0, 0.787137, -0.8966727, 0, 2.9783003)
+
+[node name="Arbre_boule50" parent="." unique_id=440592379 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7009562, 0, 0, 0, 0.7009562, 0, 0, 0, 0.7009562, -1.7639775, 0, 2.1936364)
+
+[node name="Arbre_boule62" parent="." unique_id=1844778703 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7009562, 0, 0, 0, 0.7009562, 0, 0, 0, 0.7009562, -3.752142, 0, 1.2204086)
+
+[node name="Arbre_boule64" parent="." unique_id=2129139671 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7009562, 0, 0, 0, 0.7009562, 0, 0, 0, 0.7009562, 4.2005196, 0, -0.517498)
+
+[node name="Arbre_boule65" parent="." unique_id=896624873 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7009562, 0, 0, 0, 0.7009562, 0, 0, 0, 0.7009562, 4.2422285, 0, -2.3645625)
+
+[node name="Arbre_boule66" parent="." unique_id=336021598 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7009562, 0, 0, 0, 0.7009562, 0, 0, 0, 0.7009562, 3.9780674, 0, -1.6148208)
+
+[node name="Arbre_boule67" parent="." unique_id=1103732293 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7009562, 0, 0, 0, 0.7009562, 0, 0, 0, 0.7009562, 2.726774, 0, -3.0746622)
+
+[node name="Arbre_boule68" parent="." unique_id=1008080726 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7009562, 0, 0, 0, 0.7009562, 0, 0, 0, 0.7009562, -2.3566453, 0, -2.3388236)
+
+[node name="Arbre_boule63" parent="." unique_id=1256022195 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7009562, 0, 0, 0, 0.7009562, 0, 0, 0, 0.7009562, -2.9874635, 0, 2.4984736)
+
+[node name="Arbre_boule51" parent="." unique_id=1043057207 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48618746, 0, 2.2799616)
+
+[node name="Arbre_boule52" parent="." unique_id=1366891142 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.61114544, 0, 0, 0, 0.61114544, 0, 0, 0, 0.61114544, 5.3691745, 0, 0.07905722)
+
+[node name="Arbre_boule53" parent="." unique_id=475965274 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7725476, 0, 0, 0, 0.7725476, 0, 0, 0, 0.7725476, 2.9755096, 0, -0.85889673)
+
+[node name="Arbre_boule54" parent="." unique_id=1975759513 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.9562144, 0, 0, 0, 0.9562144, 0, 0, 0, 0.9562144, 3.2106795, 0, 0.47915757)
+
+[node name="Arbre_boule55" parent="." unique_id=1678876951 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.9293067, 0, 0.36930886, 0, 1, 0, -0.36930886, 0, 0.9293067, 3.686298, 0, -2.136687)
+
+[node name="Arbre_boule56" parent="." unique_id=1587222034 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.7187936, 0, 0.28565043, 0, 0.77347296, 0, -0.28565043, 0, 0.7187936, 2.8932102, 0, -2.5005744)
+
+[node name="Arbre_boule57" parent="." unique_id=1579494152 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.674743, 0, 0.26814458, 0, 0.72607136, 0, -0.26814458, 0, 0.674743, 2.344565, 0, -1.8336926)
+
+[node name="Arbre_boule29" parent="." unique_id=1330642790 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1668396, 0, -0.2670787)
+
+[node name="Arbre_boule30" parent="." unique_id=895465383 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.83936286, 0, 0, 0, 0.83936286, 0, 0, 0, 0.83936286, -2.3990054, 0, -1.0647458)
+
+[node name="Arbre_boule31" parent="." unique_id=779305611 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.69605947, 0, 0, 0, 0.69605947, 0, 0, 0, 0.69605947, -2.0606136, 0, 0.3738585)
+
+[node name="Arbre_boule32" parent="." unique_id=1359650559 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5637069, 0, 0.8155099)
+
+[node name="Arbre_boule33" parent="." unique_id=1111219880 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0872107, 0, 1.4207978)
+
+[node name="Arbre_boule34" parent="." unique_id=987155210 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3874104, 0, 1.9748626)
+
+[node name="Arbre_boule35" parent="." unique_id=1229896461 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.3819436, 0, 0, 0, 1.3819436, 0, 0, 0, 1.3819436, -1.0025063, 0, 1.0781662)
+
+[node name="Arbre_boule36" parent="." unique_id=1809992896 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6934795, 0, 0.82272565)
+
+[node name="Arbre_boule37" parent="." unique_id=652346578 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2837286, 0, 2.0239263)
+
+[node name="Arbre_boule38" parent="." unique_id=1036245345 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321558, 0, 1.3618935)
+
+[node name="Arbre_boule39" parent="." unique_id=1683171247 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(0.8303374, 0, 0, 0, 0.8303374, 0, 0, 0, 0.8303374, 1.2484035, 0, 1.967181)
+
+[node name="Arbre_boule40" parent="." unique_id=586072189 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64311695, 0, 1.3051484)
+
+[node name="Arbre_boule41" parent="." unique_id=1288199341 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1185026, 0, 1.399725)
+
+[node name="Arbre_boule42" parent="." unique_id=2028037674 instance=ExtResource("1_3tkgk")]
+transform = Transform3D(1.4656966, 0, 0, 0, 1.4656966, 0, 0, 0, 1.4656966, 1.399723, 0, 0.90792894)
+
+[node name="Fleur" parent="." unique_id=2107220856 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58393574, 0, -0.8620019)
+
+[node name="Fleur2" parent="." unique_id=795517024 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31977463, 0, 0.6117432)
+
+[node name="Fleur3" parent="." unique_id=131157857 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9742632, 0, 2.0715847)
+
+[node name="Fleur4" parent="." unique_id=1726435536 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.781685, 0, 0.6673559)
+
+[node name="Fleur5" parent="." unique_id=671858193 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0180397, 0, 0.959324)
+
+[node name="Fleur6" parent="." unique_id=1735051486 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5453289, 0, 1.7935197)
+
+[node name="Fleur7" parent="." unique_id=1497579919 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17660546, 0, 2.821326)
+
+[node name="Fleur8" parent="." unique_id=916150575 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5113175, 0, 1.6395497)
+
+[node name="Fleur9" parent="." unique_id=90425648 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1359303, 0, 2.0427444)
+
+[node name="Fleur10" parent="." unique_id=1451149630 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1637375, 0, 2.3903258)
+
+[node name="Fleur11" parent="." unique_id=635533949 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3882587, 0, 0.708032)
+
+[node name="Fleur12" parent="." unique_id=754605231 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.985065, 0, 1.9026781)
+
+[node name="Fleur13" parent="." unique_id=219571757 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.373322, 0, 2.5422277)
+
+[node name="Fleur14" parent="." unique_id=626071834 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.221421, 0, -0.23842311)
+
+[node name="Fleur15" parent="." unique_id=781329366 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6920629, 0, -1.6426514)
+
+[node name="Fleur16" parent="." unique_id=10679188 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2899027, 0, -1.9763297)
+
+[node name="Fleur17" parent="." unique_id=1838384505 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9423213, 0, -2.1709752)
+
+[node name="Fleur18" parent="." unique_id=114321981 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8717713, 0, -2.435137)
+
+[node name="Fleur19" parent="." unique_id=1840759219 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5380931, 0, -2.6297822)
+
+[node name="Fleur20" parent="." unique_id=1983986843 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35735083, 0, -2.7271047)
+
+[node name="Fleur21" parent="." unique_id=224059937 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37952185, 0, -2.198781)
+
+[node name="Fleur22" parent="." unique_id=1893440807 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1163936, 0, -2.9912663)
+
+[node name="Fleur23" parent="." unique_id=323945528 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2832332, 0, -2.240491)
+
+[node name="Fleur24" parent="." unique_id=1981497969 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.395494, 0, -2.32391)
+
+[node name="Fleur25" parent="." unique_id=1633746558 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3270116, 0, -2.7271047)
+
+[node name="Fleur26" parent="." unique_id=1914375606 instance=ExtResource("2_dlamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3836584, 0, -1.0865207)

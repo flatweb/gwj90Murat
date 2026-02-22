@@ -20,3 +20,5 @@ func texture():
 					node.apply_random_spring_texture()
 				"ete":
 					node.apply_random_spring_texture()
+		if node.is_in_group("fleur"):
+			pass

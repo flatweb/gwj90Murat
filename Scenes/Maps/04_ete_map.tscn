@@ -1,7 +1,18 @@
 [gd_scene format=3 uid="uid://b2h1kc5vaqvev"]
 
 [ext_resource type="PackedScene" uid="uid://bkcqdufq1e7xt" path="res://Scenes/Maps/04_ete_terrain.tscn" id="1_6u2mg"]
+[ext_resource type="PackedScene" uid="uid://chwcqb65fs22g" path="res://Scenes/Vegetation/foret_boule_l.tscn" id="2_n8uaa"]
 
 [node name="04_ETE_MAP" type="Node3D" unique_id=1008025489]
 
 [node name="04_ETE_TERRAIN" parent="." unique_id=1076768329 instance=ExtResource("1_6u2mg")]
+
+[node name="VEGETATION" type="Node3D" parent="." unique_id=145206776]
+
+[node name="Foret_boule_l" parent="VEGETATION" unique_id=2015608561 instance=ExtResource("2_n8uaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6172485, 0, 44.93805)
+saison = "ete"
+
+[node name="Foret_boule_l2" parent="VEGETATION" unique_id=1470836873 instance=ExtResource("2_n8uaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4721184, 0, 37.23995)
+saison = "ete"

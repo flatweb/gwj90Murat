@@ -20,7 +20,7 @@ func apply_texture(texture_to_apply : Texture2D):
 
 func apply_random_texture_from_array(texture_array : Array):
 	var randn = randi_range(0, texture_array.size()-1)
-	print("random number is : ", randn, " -> which is :", texture_array[randn])
+	#print("random number is : ", randn, " -> which is :", texture_array[randn])
 	apply_texture(texture_array[randn])
 	
 func apply_random_winter_texture():

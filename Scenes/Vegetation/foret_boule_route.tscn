@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://c28wrc3161rl6"]
+
+[ext_resource type="Script" uid="uid://ck5rxagrmssj6" path="res://Scenes/Vegetation/foret_texture.gd" id="1_bpbr7"]
+[ext_resource type="PackedScene" uid="uid://b03a715pa1lwt" path="res://Scenes/Vegetation/arbre_boule.tscn" id="1_g3ddu"]
+[ext_resource type="PackedScene" uid="uid://qq3hhqh802wl" path="res://Scenes/Vegetation/fleur.tscn" id="2_bpbr7"]
+
+[node name="Foret_boule_route" type="Node3D" unique_id=1590912378]
+script = ExtResource("1_bpbr7")
+saison = "printemps"
+
+[node name="Arbre_boule" parent="." unique_id=1010450993 instance=ExtResource("1_g3ddu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 0, 0)
+
+[node name="Arbre_boule2" parent="." unique_id=2055530229 instance=ExtResource("1_g3ddu")]
+transform = Transform3D(1.3139908, 0, 0, 0, 1.3139908, 0, 0, 0, 1.3139908, -0.8307457, 0, 0.01287967)
+
+[node name="Arbre_boule3" parent="." unique_id=2021115728 instance=ExtResource("1_g3ddu")]
+transform = Transform3D(0.7451186, 0, 0, 0, 0.7451186, 0, 0, 0, 0.7451186, -1.5520129, 0, -0.21895616)
+
+[node name="Arbre_boule7" parent="." unique_id=1995970376 instance=ExtResource("1_g3ddu")]
+transform = Transform3D(0.7451186, 0, 0, 0, 0.7451186, 0, 0, 0, 0.7451186, -2.0092452, 0, 0.15455733)
+
+[node name="Arbre_boule4" parent="." unique_id=1632519605 instance=ExtResource("1_g3ddu")]
+transform = Transform3D(0.7827893, 0, 0, 0, 0.7827893, 0, 0, 0, 0.7827893, 0.99818206, 0, 0.07727836)
+
+[node name="Arbre_boule6" parent="." unique_id=1183033727 instance=ExtResource("1_g3ddu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5906513, 0, -0.2125165)
+
+[node name="Arbre_boule5" parent="." unique_id=1414995437 instance=ExtResource("1_g3ddu")]
+transform = Transform3D(0.646304, 0, 0, 0, 0.646304, 0, 0, 0, 0.646304, 2.1913788, 0, -0.019319847)
+
+[node name="Fleur" parent="." unique_id=2107220856 instance=ExtResource("2_bpbr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5151911, 0, 0.20607635)
+
+[node name="Fleur2" parent="." unique_id=1400228663 instance=ExtResource("2_bpbr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4940534, 0, 0.2511555)
+
+[node name="Fleur3" parent="." unique_id=462869993 instance=ExtResource("2_bpbr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0561414, 0, -0.32843423)

@@ -2,21 +2,130 @@
 
 [ext_resource type="PackedScene" uid="uid://dq7yv4fh62hbc" path="res://Scenes/Maps/03_printemps_terrain.tscn" id="1_gwo1k"]
 [ext_resource type="PackedScene" uid="uid://c2blq7xqjnkw0" path="res://Scenes/Vegetation/foret_boule_s.tscn" id="2_aibne"]
+[ext_resource type="PackedScene" uid="uid://cfi5dg0ichsqo" path="res://Scenes/Vegetation/foret_boule_m.tscn" id="3_x4vsa"]
+[ext_resource type="PackedScene" uid="uid://chwcqb65fs22g" path="res://Scenes/Vegetation/foret_boule_l.tscn" id="4_wsdps"]
+[ext_resource type="PackedScene" uid="uid://c28wrc3161rl6" path="res://Scenes/Vegetation/foret_boule_route.tscn" id="5_wsdps"]
 
 [node name="03_PRINTEMPS_MAP" type="Node3D" unique_id=1598718819]
 
 [node name="03_PRINTEMPS_TERRAIN" parent="." unique_id=1978125316 instance=ExtResource("1_gwo1k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10283661)
 
 [node name="VEGETATION" type="Node3D" parent="." unique_id=1397570674]
 
 [node name="Foret_boule_s" parent="VEGETATION" unique_id=2053666517 instance=ExtResource("2_aibne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5599327, 0, 13.761268)
 
+[node name="Foret_boule_s11" parent="VEGETATION" unique_id=1990349660 instance=ExtResource("2_aibne")]
+transform = Transform3D(-0.025182396, 0, -0.9996829, 0, 1, 0, 0.9996829, 0, -0.025182396, 7.973917, 0, -0.9466381)
+
 [node name="Foret_boule_s2" parent="VEGETATION" unique_id=850557290 instance=ExtResource("2_aibne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.486477, 0, 38.75559)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.778954, 0, 43.22316)
 
 [node name="Foret_boule_s3" parent="VEGETATION" unique_id=2012895994 instance=ExtResource("2_aibne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8486638, 0, 38.473698)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.094204, 0, 40.700016)
+
+[node name="Foret_boule_s13" parent="VEGETATION" unique_id=1850637694 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.257477, 0, 35.93811)
+
+[node name="Foret_boule_s14" parent="VEGETATION" unique_id=1764114729 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.21666, 0, 31.402958)
+
+[node name="Foret_boule_s15" parent="VEGETATION" unique_id=1423907655 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.862156, 0, 23.315283)
+
+[node name="Foret_boule_s16" parent="VEGETATION" unique_id=398121955 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.59459, 0, 15.152018)
+
+[node name="Foret_boule_s17" parent="VEGETATION" unique_id=1925602525 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.78658, 0, 7.36668)
+
+[node name="Foret_boule_s18" parent="VEGETATION" unique_id=1412129705 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.577206, 0, 2.5291915)
+
+[node name="Foret_boule_s19" parent="VEGETATION" unique_id=169940518 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.722324, 0, -1.7791982)
+
+[node name="Foret_boule_s20" parent="VEGETATION" unique_id=365307457 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.588535, 0, -9.564532)
+
+[node name="Foret_boule_s21" parent="VEGETATION" unique_id=1891953074 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.128971, 0, -14.779951)
+
+[node name="Foret_boule_s22" parent="VEGETATION" unique_id=921705591 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.128971, 0, -22.792044)
+
+[node name="Foret_boule_s23" parent="VEGETATION" unique_id=1625442893 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.797897, 0, -27.024847)
+
+[node name="Foret_boule_s24" parent="VEGETATION" unique_id=603818053 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.9254, 0, -34.170643)
+
+[node name="Foret_boule_s25" parent="VEGETATION" unique_id=1510868019 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.925404, 0, -38.78194)
+
+[node name="Foret_boule_s26" parent="VEGETATION" unique_id=1328460744 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75861, 0, -41.226482)
+
+[node name="Foret_boule_s27" parent="VEGETATION" unique_id=1420987290 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.591568, 0, -41.504272)
+
+[node name="Foret_boule_s28" parent="VEGETATION" unique_id=1970141297 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.646761, 0, -42.948776)
+
+[node name="Foret_boule_s29" parent="VEGETATION" unique_id=631624944 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.669899, 0, -41.775414)
+
+[node name="Foret_boule_s30" parent="VEGETATION" unique_id=662554143 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.44878, 0, -42.02043)
+
+[node name="Foret_boule_s31" parent="VEGETATION" unique_id=209900730 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.472683, 0, -41.162865)
+
+[node name="Foret_boule_s32" parent="VEGETATION" unique_id=324294371 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.148975, 0, -36.670834)
+
+[node name="Foret_boule_s33" parent="VEGETATION" unique_id=1559394182 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.109135, 0, -33.567245)
+
+[node name="Foret_boule_s34" parent="VEGETATION" unique_id=2061664178 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.516506, 0, -25.399916)
+
+[node name="Foret_boule_s35" parent="VEGETATION" unique_id=126299883 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.905409, 0, -11.732696)
+
+[node name="Foret_boule_s36" parent="VEGETATION" unique_id=538734556 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.23876, 0, -3.621253)
+
+[node name="Foret_boule_s37" parent="VEGETATION" unique_id=1736958010 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.516348, 0, 5.4902267)
+
+[node name="Foret_boule_s38" parent="VEGETATION" unique_id=2146546695 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.683023, 0, 9.934851)
+
+[node name="Foret_boule_s39" parent="VEGETATION" unique_id=538402903 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.349756, 0, 14.434832)
+
+[node name="Foret_boule_s40" parent="VEGETATION" unique_id=1452764831 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.312914, 0, 19.42463)
+
+[node name="Foret_boule_s41" parent="VEGETATION" unique_id=2004735151 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.368834, 0, 28.108187)
+
+[node name="Foret_boule_s42" parent="VEGETATION" unique_id=1648291243 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.323107, 0, 32.320366)
+
+[node name="Foret_boule_s43" parent="VEGETATION" unique_id=21277519 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.981323, 0, 36.921356)
+
+[node name="Foret_boule_s44" parent="VEGETATION" unique_id=1270509110 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.880997, 0, 42.753593)
+
+[node name="Foret_boule_s46" parent="VEGETATION" unique_id=263881184 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9559975, 0, 44.56807)
+
+[node name="Foret_boule_s45" parent="VEGETATION" unique_id=1222595963 instance=ExtResource("2_aibne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3155365, 0, 41.06872)
 
 [node name="Foret_boule_s4" parent="VEGETATION" unique_id=1646547676 instance=ExtResource("2_aibne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5736046, 0, 31.426426)
@@ -38,3 +147,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2917175, 0, 21.842138)
 
 [node name="Foret_boule_s10" parent="VEGETATION" unique_id=1450836445 instance=ExtResource("2_aibne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13739, 0, 25.600683)
+
+[node name="Foret_boule_s12" parent="VEGETATION" unique_id=1875524573 instance=ExtResource("2_aibne")]
+transform = Transform3D(0.71084857, 0, 0.70334506, 0, 1, 0, -0.70334506, 0, 0.71084857, 18.743431, 0, 24.211048)
+
+[node name="foret_boule_m" parent="VEGETATION" unique_id=1330023306 instance=ExtResource("3_x4vsa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.04545, 0, 6.686572)
+
+[node name="foret_boule_m2" parent="VEGETATION" unique_id=1468512279 instance=ExtResource("3_x4vsa")]
+transform = Transform3D(-0.06796307, 0, -0.9976878, 0, 1, 0, 0.9976878, 0, -0.06796307, 8.1371155, 0, 3.2947483)
+
+[node name="Foret_boule_l" parent="VEGETATION" unique_id=2015608561 instance=ExtResource("4_wsdps")]
+transform = Transform3D(0.9629652, 0, -0.26962578, 0, 1, 0, 0.26962578, 0, 0.9629652, 1.4388752, 0, -3.2327619)
+
+[node name="Foret_boule_l2" parent="VEGETATION" unique_id=1080869697 instance=ExtResource("4_wsdps")]
+transform = Transform3D(0.9056947, 0, -0.42393073, 0, 1, 0, 0.42393073, 0, 0.9056947, 14.509237, 0, 20.165644)
+
+[node name="Foret_boule_route" parent="VEGETATION" unique_id=1590912378 instance=ExtResource("5_wsdps")]
+transform = Transform3D(0.9490466, 0, -0.31513563, 0, 1, 0, 0.31513563, 0, 0.9490466, -3.3299642, 0, 7.0939193)
+
+[node name="Foret_boule_route2" parent="VEGETATION" unique_id=1227517941 instance=ExtResource("5_wsdps")]
+transform = Transform3D(0.746615, 0, -0.6652565, 0, 1, 0, 0.6652565, 0, 0.746615, 8.203239, 0, 12.02047)
+
+[node name="Foret_boule_route3" parent="VEGETATION" unique_id=470217399 instance=ExtResource("5_wsdps")]
+transform = Transform3D(0.87714607, 0, -0.4802235, 0, 1, 0, 0.4802235, 0, 0.87714607, 9.538895, 0, 15.599021)
+
+[node name="Foret_boule_route4" parent="VEGETATION" unique_id=1729299385 instance=ExtResource("5_wsdps")]
+transform = Transform3D(0.5307627, 0, -0.84752053, 0, 1, 0, 0.84752053, 0, 0.5307627, 21.005375, 0, 19.051567)
+
+[node name="Foret_boule_route5" parent="VEGETATION" unique_id=31885544 instance=ExtResource("5_wsdps")]
+transform = Transform3D(0.07699743, 0, -0.99703133, 0, 1, 0, 0.99703133, 0, 0.07699743, 16.771597, 0, 34.323406)
+
+[node name="Foret_boule_route6" parent="VEGETATION" unique_id=790943568 instance=ExtResource("5_wsdps")]
+transform = Transform3D(0.07699743, 0, -0.99703133, 0, 1, 0, 0.99703133, 0, 0.07699743, 16.771597, 0, 34.323406)
