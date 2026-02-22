@@ -3,7 +3,7 @@ extends Node3D
 @export var camera : Camera3D
 
 var game_area_size : AABB
-@export var nbnuages : int = 50
+@export var nbnuages : int = 100
 
 var nbcapture = 0
 var nbcaptureattendu = 0 # sera calculé fonction des noeuds OiseauBonus
