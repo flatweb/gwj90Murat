@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://0fpuqucyrhnl" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
 [ext_resource type="AudioStream" uid="uid://c60gx7f86f2ai" path="res://sons/winter theme.mp3" id="12_lc2xo"]
-[ext_resource type="AudioStream" uid="uid://pfm7vib6kvo3" path="res://sons/journey_title.mp3" id="13_lc2xo"]
+[ext_resource type="AudioStream" uid="uid://dm1wcuho8fwki" path="res://sons/journey dim.mp3" id="17_e8heu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -267,8 +267,7 @@ stream = ExtResource("12_215e1")
 stream = ExtResource("12_lc2xo")
 
 [node name="Music3" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=671492526]
-stream = ExtResource("13_lc2xo")
-volume_db = -70.247
+stream = ExtResource("17_e8heu")
 
 [node name="Music4" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=398372508]
 
