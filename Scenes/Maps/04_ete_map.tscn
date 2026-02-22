@@ -2,10 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://bkcqdufq1e7xt" path="res://Scenes/Maps/04_ete_terrain.tscn" id="1_6u2mg"]
 [ext_resource type="PackedScene" uid="uid://chwcqb65fs22g" path="res://Scenes/Vegetation/foret_boule_l.tscn" id="2_n8uaa"]
+[ext_resource type="PackedScene" uid="uid://cfi5dg0ichsqo" path="res://Scenes/Vegetation/foret_boule_m.tscn" id="3_kqu6y"]
+[ext_resource type="PackedScene" uid="uid://c2blq7xqjnkw0" path="res://Scenes/Vegetation/foret_boule_s.tscn" id="4_tqw0v"]
+[ext_resource type="PackedScene" uid="uid://c28wrc3161rl6" path="res://Scenes/Vegetation/foret_boule_route.tscn" id="5_iddt8"]
 
 [node name="04_ETE_MAP" type="Node3D" unique_id=1008025489]
 
 [node name="04_ETE_TERRAIN" parent="." unique_id=1076768329 instance=ExtResource("1_6u2mg")]
+metadata/_edit_lock_ = true
 
 [node name="VEGETATION" type="Node3D" parent="." unique_id=145206776]
 
@@ -15,4 +19,84 @@ saison = "ete"
 
 [node name="Foret_boule_l2" parent="VEGETATION" unique_id=1470836873 instance=ExtResource("2_n8uaa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4721184, 0, 37.23995)
+saison = "ete"
+
+[node name="foret_boule_m" parent="VEGETATION" unique_id=1330023306 instance=ExtResource("3_kqu6y")]
+transform = Transform3D(0.9583425, 0, 0.28562146, 0, 1, 0, -0.28562146, 0, 0.9583425, 15.892723, 0, 48.36322)
+saison = "ete"
+
+[node name="foret_boule_m2" parent="VEGETATION" unique_id=90852903 instance=ExtResource("3_kqu6y")]
+transform = Transform3D(0.28120273, 0, 0.9596485, 0, 1, 0, -0.9596485, 0, 0.28120273, 22.681288, 0, 39.86037)
+saison = "ete"
+
+[node name="foret_boule_m3" parent="VEGETATION" unique_id=1216709658 instance=ExtResource("3_kqu6y")]
+transform = Transform3D(0.28120273, 0, 0.9596485, 0, 1, 0, -0.9596485, 0, 0.28120273, 11.906229, 0, 23.025192)
+saison = "ete"
+
+[node name="Foret_boule_s" parent="VEGETATION" unique_id=2053666517 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.742449, 0, 22.856192)
+saison = "ete"
+
+[node name="Foret_boule_s2" parent="VEGETATION" unique_id=931170026 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.197401, 0, 17.165462)
+saison = "ete"
+
+[node name="Foret_boule_s3" parent="VEGETATION" unique_id=687242059 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.844687, 0, 10.961635)
+saison = "ete"
+
+[node name="Foret_boule_s4" parent="VEGETATION" unique_id=1304046495 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.357786, 0, 3.358448)
+saison = "ete"
+
+[node name="Foret_boule_s5" parent="VEGETATION" unique_id=346413426 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.139143, 0, -2.8055077)
+saison = "ete"
+
+[node name="Foret_boule_s6" parent="VEGETATION" unique_id=608093946 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.514383, 0, -7.2208824)
+saison = "ete"
+
+[node name="Foret_boule_s7" parent="VEGETATION" unique_id=726842916 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(-0.10374731, 0, -0.9946037, 0, 1, 0, 0.9946037, 0, -0.10374731, 23.61618, 0, -13.124098)
+saison = "ete"
+
+[node name="Foret_boule_s8" parent="VEGETATION" unique_id=1503013455 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(0.43893573, 0, 0.8985185, 0, 1, 0, -0.8985185, 0, 0.43893573, 23.719036, 0, -16.381239)
+saison = "ete"
+
+[node name="Foret_boule_s9" parent="VEGETATION" unique_id=1445675233 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(0.36107117, 0, 0.9325383, 0, 1, 0, -0.9325383, 0, 0.36107117, 25.464188, 0, -24.741737)
+saison = "ete"
+
+[node name="Foret_boule_s10" parent="VEGETATION" unique_id=616170594 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(0.36107117, 0, 0.9325383, 0, 1, 0, -0.9325383, 0, 0.36107117, 24.403236, 0, -28.191456)
+saison = "ete"
+
+[node name="Foret_boule_s11" parent="VEGETATION" unique_id=1281336047 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(0.36107117, 0, 0.9325383, 0, 1, 0, -0.9325383, 0, 0.36107117, 22.874725, 0, -32.30668)
+saison = "ete"
+
+[node name="Foret_boule_s12" parent="VEGETATION" unique_id=924003081 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(0.36107117, 0, 0.9325383, 0, 1, 0, -0.9325383, 0, 0.36107117, 22.933514, 0, -37.774048)
+saison = "ete"
+
+[node name="Foret_boule_s13" parent="VEGETATION" unique_id=148667504 instance=ExtResource("4_tqw0v")]
+transform = Transform3D(0.36107117, 0, 0.9325383, 0, 1, 0, -0.9325383, 0, 0.36107117, 23.192783, 0, -42.808197)
+saison = "ete"
+
+[node name="Foret_boule_route" parent="VEGETATION" unique_id=1590912378 instance=ExtResource("5_iddt8")]
+transform = Transform3D(0.11604676, 0, 0.9932438, 0, 1, 0, -0.9932438, 0, 0.11604676, 24.265585, 0, -48.748795)
+saison = "ete"
+
+[node name="Foret_boule_route2" parent="VEGETATION" unique_id=866024309 instance=ExtResource("5_iddt8")]
+transform = Transform3D(-0.33947676, 0, 0.9406146, 0, 1, 0, -0.9406146, 0, -0.33947676, 21.545225, 0, -53.046955)
+saison = "ete"
+
+[node name="Foret_boule_route3" parent="VEGETATION" unique_id=1571685689 instance=ExtResource("5_iddt8")]
+transform = Transform3D(-0.9663357, 0, 0.25728473, 0, 1, 0, -0.25728473, 0, -0.9663357, 15.0884495, 0, -55.260956)
+saison = "ete"
+
+[node name="Foret_boule_route4" parent="VEGETATION" unique_id=257306158 instance=ExtResource("5_iddt8")]
+transform = Transform3D(-0.9663357, 0, 0.25728473, 0, 1, 0, -0.25728473, 0, -0.9663357, 7.930084, 0, -56.8206)
 saison = "ete"
