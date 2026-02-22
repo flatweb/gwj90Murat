@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://vcujlpkdt7qn" path="res://Scenes/Maps/00_iceberg_map.tscn" id="17_dcckh"]
 [ext_resource type="PackedScene" uid="uid://bjw25pw234sdm" path="res://Scenes/Maps/08_ile_fin_map.tscn" id="18_jftiw"]
 [ext_resource type="PackedScene" uid="uid://rmt1u3r5ro6g" path="res://Scenes/Maps/montagnes_terrain.tscn" id="18_yye10"]
+[ext_resource type="PackedScene" uid="uid://cucfg5pmo6c3p" path="res://Scenes/Objets/OieEnVPNJ.tscn" id="19_pd0bf"]
 [ext_resource type="PackedScene" uid="uid://rge5wx3nh0c3" path="res://Boid/assets/scenes/wind_spawner.tscn" id="19_yye10"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chllb"]
@@ -525,6 +526,13 @@ albedo_color = Color(0.23529412, 0.4392157, 1, 1)
 material = SubResource("StandardMaterial3D_jftiw")
 size = Vector2(400, 400)
 
+[sub_resource type="Curve3D" id="Curve3D_jftiw"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.3951015, 0, 406.62662, 3.3182144, 0, 22.064117, -3.3182144, 0, -22.064117, -9.319814, 0, 356.33316, -1.3949137, 0, 20.299011, 1.3949137, 0, -20.299011, -0.09766102, 0, 303.1082, -3.0225992, 0, 21.923828, 3.0225992, 0, -21.923828, -12.566157, 0, 260.4142, -1.6363611, 0, 17.507446, 1.6363611, 0, -17.507446, 2.6118212, 0, 165.77501, -1.3156376, 0, 13.194075, 1.3156376, 0, -13.194075, 5.5076885, 0, 39.454872, 0.47328758, 0, 19.540695, -0.47328758, 0, -19.540695, -16.81293, 0, 9.991709, -10.272278, 0, 14.872341, 10.272278, 0, -14.872341, 19.792784, 0, -60.541294, 1.2125015, 0, 16.660805, -1.2125015, 0, -16.660805, 52.196144, 0, -114.062996, 2.7147694, 0, 23.280685, -2.7147694, 0, -23.280685, 1.3052139, 0, -177.45343, -0.099723816, 0, 18.446808, 0.099723816, 0, -18.446808, -2.2660751, 0, -272.98547, 0, 0, 0, 0, 0, 0, -4.9443293, 0, -517.21075),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 12
+
 [node name="Level" type="Node3D" unique_id=2081723973]
 script = ExtResource("1_86ljf")
 carScene = ExtResource("5_4eo0i")
@@ -875,3 +883,14 @@ windIntensity = 200
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 49.55008, 0, 338.4333)
 windWidth = 120.0
 windIntensity = 200
+
+[node name="OieEnV" type="Path3D" parent="." unique_id=812451071 groups=["oieEnV"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+curve = SubResource("Curve3D_jftiw")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="OieEnV" unique_id=633547871]
+transform = Transform3D(0.9869433, 0, 0.16105063, 0, 1, 0, -0.16105063, 0, 0.9869433, -1.3951015, 0, 406.62662)
+script = ExtResource("5_86ljf")
+speed = 0.01
+
+[node name="Node3D" parent="OieEnV/PathFollow3D" unique_id=1361121375 instance=ExtResource("19_pd0bf")]
