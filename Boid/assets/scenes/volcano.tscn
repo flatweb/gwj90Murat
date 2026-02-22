@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cm7t2nc7q0cat"]
 
+[ext_resource type="AudioStream" uid="uid://v74b30lhgb3x" path="res://sons/Storm.mp3" id="1_ubm48"]
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_pcmb5"]
 top_radius = 10.0
 bottom_radius = 30.0
@@ -59,6 +61,14 @@ mesh = SubResource("CylinderMesh_pcmb5")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="MeshInstance3D" unique_id=248062426]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.102829, 0)
 amount = 20
-lifetime = 3.7399999999999998
+lifetime = 3.74
 process_material = SubResource("ParticleProcessMaterial_alc40")
 draw_pass_1 = SubResource("SphereMesh_julfi")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2139333158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.025752, 0)
+stream = ExtResource("1_ubm48")
+volume_db = 10.467
+autoplay = true
+stream_paused = true
+max_distance = 50.0

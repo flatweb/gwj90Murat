@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cfttkqdijd15r"]
 
 [ext_resource type="Script" uid="uid://coritl5gtw7s1" path="res://nuage.gd" id="1_jcwyk"]
+[ext_resource type="AudioStream" uid="uid://v74b30lhgb3x" path="res://sons/Storm.mp3" id="2_b1vhr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1xst"]
 transparency = 1
@@ -45,6 +46,11 @@ omni_range = 10.0
 
 [node name="TimerEclair" type="Timer" parent="." unique_id=1225299866]
 wait_time = 5.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1992911781]
+stream = ExtResource("2_b1vhr")
+autoplay = true
+max_distance = 10.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="TimerEclair" to="." method="_on_timer_eclair_timeout"]
