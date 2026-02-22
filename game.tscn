@@ -48,31 +48,7 @@ Label/fonts/font = ExtResource("11_80cx4")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hve3p"]
 
-[sub_resource type="FontFile" id="FontFile_mfdv2"]
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/32/0/ascent = 0.0
-cache/0/32/0/descent = 0.0
-cache/0/32/0/underline_position = 0.0
-cache/0/32/0/underline_thickness = 0.0
-cache/0/32/0/scale = 1.0
-cache/0/40/0/ascent = 0.0
-cache/0/40/0/descent = 0.0
-cache/0/40/0/underline_position = 0.0
-cache/0/40/0/underline_thickness = 0.0
-cache/0/40/0/scale = 1.0
+[sub_resource type="SystemFont" id="SystemFont_e36ub"]
 
 [node name="Game" type="Node3D" unique_id=1608575864 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_feb5d")
@@ -305,7 +281,7 @@ custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0.3214644, 0.32183927, 1)
-theme_override_fonts/font = SubResource("FontFile_mfdv2")
+theme_override_fonts/font = SubResource("SystemFont_e36ub")
 theme_override_font_sizes/font_size = 40
 text = "Time to Start"
 horizontal_alignment = 1
