@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	if $"../../../../..".speedVect.length() > 1 && frameCount > trailResolution:
 		if trailNumber == trailLength+1:
 			trailNumber = 0
-		printTrail(previousPos)
+		#printTrail(previousPos)
 		previousPos = self.global_position
 		frameCount = 0
 		#print(trailNumber)
@@ -23,6 +23,9 @@ func _physics_process(delta: float) -> void:
 		trailNumber += 1
 	else:
 		frameCount += 1
+		
+		
+		
 	
 		
 func printTrail(previousPosition: Vector3):

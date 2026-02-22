@@ -16,7 +16,7 @@ func _ready() -> void:
 	for i in range(windIntensity):
 		var windPath = Path3D.new()
 		add_child(windPath)
-		print(i)
+		#print(i)
 		var xPos = randf_range(-windWidth,windWidth)
 		var yPos = randf_range(-5,5)
 		windPath.position = Vector3(xPos,0,yPos)

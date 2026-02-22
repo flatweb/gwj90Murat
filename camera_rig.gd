@@ -23,11 +23,12 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("scroll_down"):
 		zoom += zoom_increment# ET REGARDE LE JOUEUR
 		update_camera_distance()
+		camera_distance = clamp(zoom, camera_min_distance, camera_max_distance)
 	if Input.is_action_just_pressed("scroll_up"):
 		zoom -= zoom_increment
 		update_camera_distance()
-	camera_distance = clamp(zoom, camera_min_distance, camera_max_distance)
-	print(camera_distance)
+		camera_distance = clamp(zoom, camera_min_distance, camera_max_distance)
+	#print(camera_distance)
 
 # CHANGE LA DISTANCE ENTRE LA CAMERA ET LE CAMERA RIG (qui a la meme position que le joueur)
 func update_camera_distance():
