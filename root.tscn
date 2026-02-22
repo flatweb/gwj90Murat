@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c7416oskgmhn6" path="res://root.gd" id="1_1h7cp"]
 [ext_resource type="AudioStream" uid="uid://btggp5fhto8ad" path="res://sons/title_game.mp3" id="3_28aoi"]
+[ext_resource type="FontFile" uid="uid://cclp3ihuqe12l" path="res://res/palettes/Butterpop.ttf" id="3_jnlp7"]
 [ext_resource type="Theme" uid="uid://xcmvx0jaunfs" path="res://res/design.tres" id="5_1hc85"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28aoi"]
@@ -55,6 +56,7 @@ theme = ExtResource("5_1hc85")
 [node name="LabelTitre" type="Label" parent="PanelContainer/IntroContainer" unique_id=573328783]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.6423512, 0.6429612, 1)
+theme_override_fonts/font = ExtResource("3_jnlp7")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vvh5c")
 text = "Geese Migration"
