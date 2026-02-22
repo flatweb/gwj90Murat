@@ -68,7 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.54227, -5.042)
 shape = SubResource("BoxShape3D_yhfaf")
 
 [node name="Nuage1" parent="." unique_id=1496051760 instance=ExtResource("1_73k5k")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -10.67862, 5.5106096, -5.6416855)
+transform = Transform3D(9.772089, 0, -2.1228, 0, 10, 0, 2.1228, 0, 9.772089, -10.67862, 5.5106096, -5.6416855)
 
 [node name="Nuage2" parent="." unique_id=917827017 instance=ExtResource("1_73k5k")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 20.29147, 4.188342, -4.34037)
@@ -86,19 +86,19 @@ transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 1.7061844, 4.0339546, -4.3849
 transform = Transform3D(9.961947, 0, 0.87155735, 0, 10, 0, -0.87155735, 0, 9.961947, -10.67862, 15.654617, -5.6416855)
 
 [node name="Nuage7" parent="." unique_id=593072987 instance=ExtResource("1_73k5k")]
-transform = Transform3D(6.973363, 0, 0.61009014, 0, 7, 0, -0.61009014, 0, 6.973363, 20.29147, 14.33235, -4.34037)
+transform = Transform3D(-7.5835795, 0, -4.0397344, -4.0083904, -1.0682884, 7.5247393, -0.5022553, 8.525777, 0.9428573, 20.29147, 14.33235, -4.34037)
 
 [node name="Nuage8" parent="." unique_id=437848747 instance=ExtResource("1_73k5k")]
 transform = Transform3D(4.9809737, 0, 0.43577868, 0, 5, 0, -0.43577868, 0, 4.9809737, -0.4582858, 20.147009, -2.6990967)
 
 [node name="Nuage9" parent="." unique_id=611143664 instance=ExtResource("1_73k5k")]
-transform = Transform3D(9.961947, 0, 0.87155735, 0, 10, 0, -0.87155735, 0, 9.961947, 7.1978016, 16.284298, -4.34037)
+transform = Transform3D(-9.405464, 0.5780802, 3.347101, -0.54462194, -9.983277, 0.19381337, 3.3527076, 0, 9.421219, 7.1978016, 16.284298, -4.34037)
 
 [node name="Nuage10" parent="." unique_id=636841728 instance=ExtResource("1_73k5k")]
 transform = Transform3D(6.9733624, 0, 0.61009014, 0, 7, 0, -0.61009014, 0, 6.9733624, -16.89181, 17.867966, -4.7795124)
 
 [node name="Nuage11" parent="." unique_id=1690725204 instance=ExtResource("1_73k5k")]
-transform = Transform3D(9.961947, 0, -0.87155735, 0, 10, 0, 0.87155735, 0, 9.961947, -10.645945, 24.348648, -5.8986034)
+transform = Transform3D(-6.3611045, 0, -8.322086, 0, 10.474767, 0, 8.322086, 0, -6.3611045, -14.009385, 24.348648, -7.2030735)
 
 [node name="Nuage12" parent="." unique_id=999962560 instance=ExtResource("1_73k5k")]
 transform = Transform3D(6.9733624, 0, -0.61009014, 0, 7, 0, 0.61009014, 0, 6.9733624, 20.287868, 22.846128, -3.9138906)
@@ -113,22 +113,22 @@ transform = Transform3D(9.961947, 0, -0.87155735, 0, 10, 0, 0.87155735, 0, 9.961
 transform = Transform3D(6.9733624, 0, -0.61009014, 0, 7, 0, 0.61009014, 0, 6.9733624, 10.188476, 22.79763, -4.3504663)
 
 [node name="Nuage16" parent="." unique_id=1158068819 instance=ExtResource("1_73k5k")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -8.492409, 33.582756, -5.6416855)
+transform = Transform3D(8.91244, 0, 4.5352383, -1.1863405, 9.651811, 2.3313413, -4.377326, -2.6158276, 8.6021185, -8.492409, 33.582756, -5.6416855)
 
 [node name="Nuage17" parent="." unique_id=52294059 instance=ExtResource("1_73k5k")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 20.29147, 29.13016, -4.34037)
 
 [node name="Nuage18" parent="." unique_id=14656798 instance=ExtResource("1_73k5k")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 2.1658883, 35.383465, -3.467125)
+transform = Transform3D(-5.128685, -1.7154919, 1.6822957, -2.0479305, 5.1949706, -0.9458865, -1.2565873, -1.4648578, -5.324623, 2.1658883, 35.383465, -3.467125)
 
 [node name="Nuage19" parent="." unique_id=1826686799 instance=ExtResource("1_73k5k")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 15.255331, 32.46076, -4.34037)
+transform = Transform3D(-9.79004, 1.8238466, -0.9103235, -1.8314508, -9.830858, 0, -0.89492613, 0.16672127, 9.958479, 15.255331, 32.46076, -4.34037)
 
 [node name="Nuage20" parent="." unique_id=1059919922 instance=ExtResource("1_73k5k")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 4.2199345, 30.354424, -4.3849792)
 
 [node name="Nuage21" parent="." unique_id=1987144422 instance=ExtResource("1_73k5k")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 15.420195, 42.241924, -5.6416855)
+transform = Transform3D(9.577522, 0, -2.8759456, 0, 10, 0, 2.8759456, 0, 9.577522, 15.420195, 42.241924, -5.6416855)
 
 [node name="Nuage22" parent="." unique_id=549142845 instance=ExtResource("1_73k5k")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, -15.568523, 41.29345, -4.34037)
@@ -137,7 +137,7 @@ transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, -15.568523, 41.29345, -4.3403
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.073961, 42.52253, -8.245468)
 
 [node name="Nuage24" parent="." unique_id=1816310474 instance=ExtResource("1_73k5k")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 5.0847645, 44.376495, -4.34037)
+transform = Transform3D(-9.746599, 0, 2.236925, 0, 10.000001, 0, -2.236925, 0, -9.746599, -0.08323097, 44.376495, -5.092081)
 
 [node name="Nuage25" parent="." unique_id=99897154 instance=ExtResource("1_73k5k")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 1.7084751, 39.01359, -8.541931)

@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
 [ext_resource type="AudioStream" uid="uid://c60gx7f86f2ai" path="res://sons/winter theme.mp3" id="12_lc2xo"]
 [ext_resource type="AudioStream" uid="uid://dm1wcuho8fwki" path="res://sons/journey dim.mp3" id="17_e8heu"]
+[ext_resource type="AudioStream" uid="uid://btggp5fhto8ad" path="res://sons/title_game.mp3" id="18_rvswv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -219,21 +220,24 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="LabelCaptures" type="Label" parent="UI/HBoxContainerTop" unique_id=1043868048]
+[node name="HBoxCaptures" type="HBoxContainer" parent="UI/HBoxContainerTop" unique_id=720345775]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="LabelCaptures" type="Label" parent="UI/HBoxContainerTop" unique_id=1043868048]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "0/0"
+text = "/8"
 
 [node name="Label" type="Label" parent="UI/HBoxContainerTop" unique_id=1016454962]
 layout_mode = 2
 text = "-----"
 
-[node name="LabelIndices" type="Label" parent="UI/HBoxContainerTop" unique_id=229976647]
+[node name="HBoxIndices" type="HBoxContainer" parent="UI/HBoxContainerTop" unique_id=950462970]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "XXX"
 
 [node name="HBoxContainerBottom" type="HBoxContainer" parent="UI" unique_id=574969756]
 clip_contents = true
@@ -271,6 +275,9 @@ stream = ExtResource("17_e8heu")
 [node name="Music4" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=398372508]
 
 [node name="Music5" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1218043687]
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=682834339]
+stream = ExtResource("18_rvswv")
 
 [node name="Marker1" type="Marker3D" parent="AudioPlayer" unique_id=718549942]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 549.2958)

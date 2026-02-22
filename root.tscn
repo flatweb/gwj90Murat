@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7rdue6y4yqra"]
 
 [ext_resource type="Script" uid="uid://c7416oskgmhn6" path="res://root.gd" id="1_1h7cp"]
-[ext_resource type="AudioStream" uid="uid://btggp5fhto8ad" path="res://sons/title_game.mp3" id="3_28aoi"]
+[ext_resource type="FontFile" uid="uid://cclp3ihuqe12l" path="res://res/palettes/Butterpop.ttf" id="3_jnlp7"]
 [ext_resource type="Theme" uid="uid://xcmvx0jaunfs" path="res://res/design.tres" id="5_1hc85"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28aoi"]
@@ -11,7 +11,7 @@
 [sub_resource type="Theme" id="Theme_vvh5c"]
 PanelContainer/styles/panel = SubResource("StyleBoxLine_vvh5c")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvh5c"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vvh5c"]
 
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_nyrvt"]
 button_index = 1
@@ -55,12 +55,11 @@ theme = ExtResource("5_1hc85")
 [node name="LabelTitre" type="Label" parent="PanelContainer/IntroContainer" unique_id=573328783]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.6423512, 0.6429612, 1)
+theme_override_fonts/font = ExtResource("3_jnlp7")
 theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxFlat_vvh5c")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vvh5c")
 text = "Geese Migration"
 horizontal_alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PanelContainer/IntroContainer/LabelTitre" unique_id=1574272759]
 
 [node name="RichTextIntro" type="RichTextLabel" parent="PanelContainer/IntroContainer" unique_id=1835608421]
 custom_minimum_size = Vector2(500, 0)
@@ -201,16 +200,12 @@ shortcut = SubResource("Shortcut_ny3mq")
 shortcut_in_tooltip = false
 text = "Restart !"
 
-[node name="Musique" type="AudioStreamPlayer" parent="." unique_id=379982732]
-process_mode = 1
-stream = ExtResource("3_28aoi")
-playback_type = 1
-parameters/looping = true
-
 [node name="TimerInactivite" type="Timer" parent="." unique_id=159619070]
 process_mode = 1
 wait_time = 60.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1574272759]
 
 [node name="Popup" type="Node" parent="." unique_id=613163808]
 

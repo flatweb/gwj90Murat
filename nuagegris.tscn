@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://coritl5gtw7s1" path="res://nuage.gd" id="1_jcwyk"]
 [ext_resource type="AudioStream" uid="uid://v74b30lhgb3x" path="res://sons/Storm.mp3" id="2_b1vhr"]
+[ext_resource type="PackedScene" uid="uid://d23ajkkexx0sb" path="res://res/modeles/nuages/nuage_gris_unit.glb" id="3_iw0eh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1xst"]
 transparency = 1
@@ -26,13 +27,16 @@ script = ExtResource("1_jcwyk")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1128010245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41649175, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_v1xst")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1989228056]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47251678, -0.14930189, 0)
+visible = false
 mesh = SubResource("SphereMesh_jcwyk")
 
 [node name="MeshInstance3D1" type="MeshInstance3D" parent="." unique_id=1372693417]
+visible = false
 mesh = SubResource("SphereMesh_hy5j5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=197283345]
@@ -51,6 +55,9 @@ wait_time = 5.0
 stream = ExtResource("2_b1vhr")
 autoplay = true
 max_distance = 10.0
+
+[node name="nuage_gris_unit" parent="." unique_id=501917889 instance=ExtResource("3_iw0eh")]
+transform = Transform3D(0.29988474, 0, 0, 0, 0.29988474, 0, 0, 0, 0.29988474, 0.13150656, 0.033381224, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="TimerEclair" to="." method="_on_timer_eclair_timeout"]

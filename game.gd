@@ -3,7 +3,7 @@ extends Node3D
 @export var camera : Camera3D
 
 var game_area_size : AABB
-@export var nbnuages : int = 50
+@export var nbnuages : int = 100
 
 var nbcapture = 0
 var nbcaptureattendu = 0 # sera calculé fonction des noeuds OiseauBonus
@@ -55,10 +55,20 @@ func init():
 			nbcaptureattendu += 1
 
 	$Oiseau.capture.connect(addcapture.bind())
-	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
+	refresh_captures()
 	$Oiseau.start_aterri_at($Marker3DStart.position)
 	$Oiseau.msg.connect(pushtext.bind())
+
+	# remplissage des indices
 	
+	for i in range(0,indices):
+		var clue : TextureRect = TextureRect.new()
+		clue.texture = load("res://res/sprites/direction.png") 
+		var pngsize = clue.texture.get_size()
+		var pngpos : Vector2 = Vector2(pngsize.x*(0.5 + nbcapture), pngsize.y/2)
+		clue.position = pngpos
+		%HBoxIndices.add_child(clue)
+
 	if (self.get_parent() == get_node("/root")):
 		# scène lancée en standalone => autostart
 		start()
@@ -144,15 +154,30 @@ func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_
 # Gestion des captures de Bonus
 #------------------------------------------------------------
 func refresh_captures():
-	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
+	if nbcapture > 0 :
+		$%LabelCaptures.show()
+		%LabelCaptures.text = "/ %d" % [nbcaptureattendu]
+	else :
+		$%LabelCaptures.hide()
 	
 func addcapture():
-	nbcapture += 1
+	nbcapture = $Oiseau.nbcapture
+
+	var bird : TextureRect = TextureRect.new()
+	bird.texture = load("res://res/sprites/bird.png")
+	var pngsize = bird.texture.get_size()
+	var pngpos : Vector2 = Vector2(pngsize.x*(0.5 + nbcapture), pngsize.y/2)
+	bird.position = pngpos
+	%HBoxCaptures.add_child(bird)
 	refresh_captures()
 
 func losebonus():
-	$Oiseau.losebonus()
 	nbcapture  = $Oiseau.nbcapture
+	var textrect = %HBoxCaptures.get_child(0)
+	if textrect != null :
+		textrect.queue_free()
+	
+	$Oiseau.losebonus()
 	refresh_captures()
 
 func _input(event: InputEvent) -> void:
@@ -217,6 +242,7 @@ func _input(event: InputEvent) -> void:
 		if indices <= 0 :
 			pushtext("No more clues :-( ")
 			return
+		
 		var distmin = 100000.0
 		var bonusproche = -1
 		for child in get_children():
@@ -229,10 +255,10 @@ func _input(event: InputEvent) -> void:
 		pushtext("Follow the arrow to find next goose...")
 		$Oiseau.show_indice(bonusproche)
 		indices -= 1
-		var txt = ""
-		for i in range(0,indices) :
-			txt = txt + "X"
-		%LabelIndices.text = txt
+		
+		var clue = %HBoxIndices.get_child(0)
+		if clue != null:
+			clue.queue_free()
 	
 func _process(delta):
 	if endofgame : 
