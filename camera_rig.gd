@@ -14,7 +14,8 @@ func _ready() -> void:
 	camera_distance = camera_distance_default
 	update_camera_distance()
 	set_rotation_degrees(Vector3(0, initial_angle, 0)) # initial camera rotation
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _process(delta: float) -> void:
 	self.position = joueur.position
@@ -55,6 +56,10 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent): 
 	if event is InputEventMouseButton:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	elif event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		var evmouse = event as InputEventMouseButton
+		if evmouse.pressed :
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#elif event.is_action_pressed("ui_cancel"):
+		#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
