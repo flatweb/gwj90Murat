@@ -54,11 +54,11 @@ func devient_suiveur_de(_leader : Node3D, atmarks : Marker3D) -> bool :
 		# on suit déjà un leader
 		return false # on ne devrait jamais passer là !!!
 	
-	$AudioPlayerCapture.play(2.0)
+	$AudioPlayerFollow.play(2.0)
 	self.leader = _leader
 	self.tomarker = atmarks
 	print (self.name, " suit ", atmarks.name)
-	pushtext.emit("A new goose is rejoining you to go to South")
+	pushtext.emit("A new goose is rejoining you")
 	speedVect = speedVect.normalized() * speedfront
 	if enaction :
 		if actionencours == action.ATTENTE :
