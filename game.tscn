@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
 [ext_resource type="AudioStream" uid="uid://c60gx7f86f2ai" path="res://sons/winter theme.mp3" id="12_lc2xo"]
 [ext_resource type="AudioStream" uid="uid://dm1wcuho8fwki" path="res://sons/journey dim.mp3" id="17_e8heu"]
+[ext_resource type="AudioStream" uid="uid://btggp5fhto8ad" path="res://sons/title_game.mp3" id="18_rvswv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -274,6 +275,9 @@ stream = ExtResource("17_e8heu")
 [node name="Music4" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=398372508]
 
 [node name="Music5" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1218043687]
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=682834339]
+stream = ExtResource("18_rvswv")
 
 [node name="Marker1" type="Marker3D" parent="AudioPlayer" unique_id=718549942]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 549.2958)
