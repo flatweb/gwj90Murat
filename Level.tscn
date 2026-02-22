@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://bjwjou340xq8n"]
 
 [ext_resource type="Script" uid="uid://yvithc08xgyk" path="res://Boid/assets/scripts/level.gd" id="1_86ljf"]
+[ext_resource type="Texture2D" uid="uid://dfgo7nc35xd21" path="res://res/texture/voiture_bleu.png" id="4_viiqw"]
 [ext_resource type="PackedScene" uid="uid://d1lkw7axh4gm6" path="res://Scenes/Elements-mobiles/Car.tscn" id="5_4eo0i"]
 [ext_resource type="Script" uid="uid://ht17r2jck10x" path="res://Boid/assets/scripts/roadFollow.gd" id="5_86ljf"]
+[ext_resource type="Texture2D" uid="uid://boumhby2yd1ds" path="res://res/texture/voiture_grisclair.png" id="5_105nu"]
 [ext_resource type="PackedScene" uid="uid://dbu53k7bxkl1m" path="res://res/modeles/01_ocean_debut.glb" id="6_esphl"]
+[ext_resource type="Texture2D" uid="uid://dg5cjvviejiy6" path="res://res/texture/voiture_jaune.png" id="6_s0cgv"]
+[ext_resource type="Texture2D" uid="uid://djnkx45b6yqqa" path="res://res/texture/voiture_noire.png" id="7_3ppgv"]
+[ext_resource type="Texture2D" uid="uid://d0111owuwqd8n" path="res://res/texture/voiture_rouge.png" id="8_wesx8"]
+[ext_resource type="Texture2D" uid="uid://dq5wv4gibeyn2" path="res://res/texture/voiture_vert.png" id="9_qqkhr"]
 [ext_resource type="PackedScene" uid="uid://bdmn1146wi527" path="res://Scenes/Maps/02_hiver_map.tscn" id="11_jftiw"]
 [ext_resource type="PackedScene" uid="uid://jc12h3yw7f7" path="res://res/modeles/07_ocean_fin.glb" id="12_5qkpu"]
 [ext_resource type="PackedScene" uid="uid://d2g6fr8kokti2" path="res://Scenes/Maps/03_printemps_map.tscn" id="12_yye10"]
@@ -80,6 +86,7 @@ point_count = 12
 script = ExtResource("1_86ljf")
 carScene = ExtResource("5_4eo0i")
 carResScript = ExtResource("5_86ljf")
+carTextures = Array[Texture2D]([ExtResource("4_viiqw"), ExtResource("5_105nu"), ExtResource("6_s0cgv"), ExtResource("7_3ppgv"), ExtResource("8_wesx8"), ExtResource("9_qqkhr")])
 
 [node name="MONTAGNES_TERRAIN" parent="." unique_id=508374464 instance=ExtResource("18_yye10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 362)
