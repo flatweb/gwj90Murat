@@ -1,5 +1,8 @@
 extends Node3D
 
+@export_enum("hiver", "printemps", "ete") var saison: String
+var children_trees : Array[Node]
+
 func _ready() -> void:
 	texture()
 
@@ -8,6 +11,12 @@ func _ready() -> void:
 	#	texture()
 
 func texture():
-	for node in get_tree().get_nodes_in_group("arbre"):
-		#var randn = randi_range(0, textures.size()-1)
-		node.apply_random_winter_texture()
+	for node in get_children():
+		if node.is_in_group("arbre"):
+			match saison:
+				"hiver":
+					node.apply_random_winter_texture()
+				"printemps":
+					node.apply_random_spring_texture()
+				"ete":
+					node.apply_random_spring_texture()

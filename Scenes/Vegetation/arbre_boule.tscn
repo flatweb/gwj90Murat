@@ -1,7 +1,117 @@
-[gd_scene format=3 uid="uid://b03a715pa1lwt"]
+[gd_scene format=4 uid="uid://b03a715pa1lwt"]
 
-[ext_resource type="PackedScene" uid="uid://7oss5opng2ci" path="res://res/modeles/vegetation/ARBRE.boule.glb" id="1_44xpm"]
+[ext_resource type="Script" uid="uid://d2anrvq3bx0kq" path="res://res/scripts/arbre_texture.gd" id="1_kktdc"]
+[ext_resource type="Texture2D" uid="uid://c5kt6akm238g4" path="res://res/texture/arbre_vert-fonce.png" id="2_ak7nn"]
+[ext_resource type="Texture2D" uid="uid://byfcvpdj5u35p" path="res://res/texture/printemps_arbre_fleuri_01.png" id="2_oy3yw"]
+[ext_resource type="Texture2D" uid="uid://b4hscl0seecjb" path="res://res/texture/printemps_arbre_fleuri_03.png" id="3_0kddk"]
+[ext_resource type="Texture2D" uid="uid://c7e1jttusiw2o" path="res://res/texture/arbre_vert-fonce_fruits.png" id="3_hno2q"]
+[ext_resource type="Texture2D" uid="uid://bpn4v44u1ntj0" path="res://res/texture/arbre_vert-fonce_neige2.png" id="4_8q0ex"]
+[ext_resource type="Texture2D" uid="uid://d1wl2u352t2wu" path="res://res/texture/printemps_arbre_fleuri_04.png" id="4_k4qur"]
+[ext_resource type="Texture2D" uid="uid://deljdy8gxnk4b" path="res://res/texture/printemps_arbre_vert_01.png" id="5_0v812"]
+[ext_resource type="Texture2D" uid="uid://cc4lqo5fc2b5e" path="res://res/texture/arbre_vert-fonce_neige3.png" id="5_ranjw"]
+[ext_resource type="Texture2D" uid="uid://bmowmck16e3wv" path="res://res/texture/arbre_vert-fonce_neige.png" id="6_2htll"]
+[ext_resource type="Texture2D" uid="uid://vh5p4bv26g2m" path="res://res/texture/printemps_arbre_vert_02.png" id="6_ak7nn"]
+[ext_resource type="Texture2D" uid="uid://bh1rohtcbqrst" path="res://res/texture/printemps_arbre_vert_03.png" id="7_hno2q"]
+[ext_resource type="Texture2D" uid="uid://hv4g76fm7jqh" path="res://res/texture/printemps_arbre_vert_04.png" id="8_8q0ex"]
+[ext_resource type="Texture2D" uid="uid://cdu8fc5irnd5o" path="res://res/modeles/vegetation/ARBRE_arbre_vert-fonce_fruits.png" id="14_hno2q"]
+[ext_resource type="Texture2D" uid="uid://inx1cnyclej0" path="res://res/texture/ete_arbre_fleuri_01.png" id="14_y8whe"]
+[ext_resource type="Texture2D" uid="uid://cm87wh6jrvfmq" path="res://res/texture/ete_arbre_rouge_01.png" id="15_6es50"]
+[ext_resource type="Texture2D" uid="uid://cqrhdg34vfwmn" path="res://res/modeles/vegetation/ARBRE_Bootstrap5-palette.png" id="15_8q0ex"]
+[ext_resource type="Texture2D" uid="uid://fbjdj4mjyvmr" path="res://res/texture/ete_arbre_vert_01.png" id="16_kjwst"]
+[ext_resource type="Texture2D" uid="uid://dotrcyjj7eol3" path="res://res/texture/ete_arbre_vert_02.png" id="17_q6ixl"]
+[ext_resource type="Texture2D" uid="uid://cqodwe5hpa4v4" path="res://res/texture/ete_arbre_vert_03.png" id="18_mhsv4"]
+[ext_resource type="Texture2D" uid="uid://dehyjsqn530ee" path="res://res/texture/ete_arbre_vert_04.png" id="19_c36rn"]
 
-[node name="Arbre_boule" type="Node3D" unique_id=1010450993]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4e40"]
+resource_name = "TEXTURE_ARBRE_boule"
+cull_mode = 2
+albedo_texture = ExtResource("14_hno2q")
+roughness = 0.823077
 
-[node name="ARBRE_boule2" parent="." unique_id=541813060 instance=ExtResource("1_44xpm")]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ab5ms"]
+_surfaces = [{
+"aabb": AABB(-0.38770843, 0.3675505, -0.38770843, 0.77541685, 0.64123535, 0.77541685),
+"format": 34896613377,
+"index_count": 240,
+"index_data": PackedByteArray("DAANABYAFgANABcADQAIABcAFgAXAAcADQAYAAgAGQAXAAgAGAAZAAgAFQAHABcAGQAVABcAAgAYAA0ADAACAA0AGAAQABkAAQAVABkAEAABABkADgAQABgAAgAOABgAEAAaAAEAAQAbABUAGgAbAAEAGwAcABUAFQAcAAcAGwAJABwADgAAABAAAAAaABAAGgATABsAEwAJABsAAAARABoAEQATABoAHQAcAAkAEwAdAAkAFAAHABwAHQAUABwAFAAWAAcAAwAdABMAEQADABMAEgAUAB0AAwASAB0ABgAWABQAEgAGABQABgAMABYAHgASAAMAHwAGABIAHgAfABIAHwAgAAYAIAAMAAYAIQAfAB4ACwAgAB8AIQALAB8ABQAhAB4AIgAeAAMABQAeACIAIgADABEAIwAhAAUAIwAFACIAJAALACEAIwAkACEAJQAiABEAIwAiACUAJQARAAAACgAkACMACgAjACUAJAAmAAsACwAmACAADwAlAAAACgAlAA8ADwAAAA4ACgAnACQAJwAKAA8AJwAmACQAKAAPAA4AJwAPACgAKAAOAAIAJwAEACYABAAnACgAJgAEACkABAAoACkAKQAoAAIAJgApACAAKQACAAwAIAApAAwA"),
+"lods": [0.09541256, PackedByteArray("DAACAA0AAgAOAA0AAgAPAA4ADQAOAAgACgAPAAIADwAAAA4ACgAAAA8ADgAAABAADgAQAAgACgAFAAAABAAKAAIABAACAAwABQAKAAsACgAEAAsABQARAAAAAAARABAABQALAAMABQADABEACwAEAAYABAAMAAYACwASAAMACwAGABIAEQADABMAAwASABMAEAARAAEAEQATAAEAEAABAAgAEgAGABQABgAMABQAEwASAAkAEwAJAAEAEgAUAAkAAQAVAAgAAQAJABUACAAVAAcAFQAJAAcAFAAHAAkAFAAMAAcADQAIAAcADAANAAcA"), 0.2584595, PackedByteArray("BgACAAcAAgAIAAcACAAJAAcABgAHAAkAAQAJAAgABAACAAYAAwAJAAEAAwAGAAkAAAABAAgAAAADAAEAAgAAAAgABQADAAAACgAAAAIACgAFAAAABAAKAAIABQALAAMACwAGAAMABQAKAAsACwAEAAYACgAEAAsA"), 0.5759066, PackedByteArray("AAABAAIAAAADAAEABAAAAAIABQADAAAABAAFAAAABQAGAAMABQAEAAYAAwAGAAEABAACAAYABgACAAEA")],
+"name": "TEXTURE_ARBRE_boule",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("/38BXQAAAADQxT7eLjoAAAAAAV3/fwAA//8BXf9/AAAuOn4N0MUAANDFfg0uOgAA/38BXf//AAAuOj7e0MUAAC46Pt4uOgAA0MU+3tDFAAAuOn4NLjoAANDFfg3QxQAA6CIBXRbdAABjBc2p/38AAOgiAV3oIgAA5SZeJuUmAAD/f82pYwUAABbdAV3oIgAAFt0BXRbdAACb+s2p/38AAP9/zamb+gAA/3////9/AADlJrqoGdkAAOEqIun/fwAA5Sa6qOUmAAD/fyLp4SoAABnZuqjlJgAAHdUi6f9/AAD/fyLpHdUAABnZuqgZ2QAAm/rwJf9/AAAZ2V4mGdkAAP9/8CWb+gAAHdUjCf9/AAAZ2V4m5SYAAP9/IwnhKgAA/38AAP9/AAD/f/AlYwUAAP9/Iwkd1QAA4SojCf9/AABjBfAl/38AAOUmXiYZ2QAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mkwyh"]
+resource_name = "ARBRE_boule_Mesh"
+_surfaces = [{
+"aabb": AABB(-0.38770843, 0.3675505, -0.38770843, 0.77541685, 0.64123535, 0.77541685),
+"attribute_data": PackedByteArray("VALkf9VYSVOPgB/+yv7kf4+AqQHQstGzAk/DTOmAlgM1BEqAnf1KgOmA/vxKqH+s9FOfpyutKlhiTTGycLRjTsr+H/6pfZDXVAIf/uQo/nxUAqkBj4DkfzvYy4LK/qkBdoM5KJ39/vyd/ZYDDjfFyDUE/vw1BJYDx8A/xDU8HMBWfSexTU+rfFhAijvqxK0/0rEdg8iDok5WfSexTU+rfOmASoDWf+28jL1dgUZEN3/8gadDhh9Tf/F/reHWf+28bjhvNvyBp0PggecexMrPN0ziQYFjySXK"),
+"format": 34896613399,
+"index_count": 240,
+"index_data": PackedByteArray("EAARAB4AEAACABEAAwAQAB4AAgAfABEAAgASAB8AHgARACAAEQAMACAAEQAfAAwAHgAgAAsAHwAhAAwAAwAeABYAFgAeAAsAFwADABYAHwATACEAEgATAB8AEgAAABMAEwABACEAAAAiABMAEwAiAAEAAAAUACIAFwAWACMABAAXACMAFAAEABgAFAAYACIABAAjABgAGAAjAA0AIwAWACQAIwAkAA0AFgALACQAGAANACUAIgAYACUAJQANACQAIgAlAAEAFQAkAAsAJQAkABUAAQAlABUAFQALACYAAQAVACcAJwAVACYAJwAmAAwADgAoACkAKQAoACoAKQAqAAUADgArACgAKwAsACgAKwAGACwAKAAsAA8AKAAPACoAKwAOABsABgArAC0AKwAbAC0ADgAuABsADgAvAC4ALQAbABwAGwAKABwAGwAuAAoALQAcAAgALgAZAAoABgAtADAAMAAtAAgAMQAGADAAMAAIAB0AMQAwADIAMgAwAB0ADwAxADIAMgAdAAcADwAyADMAMwAyAAcAKgAPADMAMwAHABoAKgAzADQANAAzABoABQAqADQANAAaAAkABQA0ADUANQA0AAkALwAFADUANQAJABkALwA1AC4ALgA1ABkA"),
+"lods": [0.09541256, PackedByteArray("EAACABEAAgASABEAEAARAAsAEQASAAwAEQAMAAsAEgATAAwAEgAAABMAAAAUABMADAAVAAsAEwABAAwAAQAVAAwAEwAUAAEAFQANAAsAAQANABUAFgAQAAsAFgALAA0AAwAQABYAFwADABYAFwAWAA0AFAAYAAEAGAANAAEAGAAXAA0AFAAEABgABAAXABgABQAOAA8ABQAPAAkABQAJABkADwAaAAkABQAZAAoADgAFAAoADwAHABoADgAKABsAGwAKABwACAAbABwADgAbAAgADwAGAAcADgAGAA8ABgAOAAgABgAdAAcABgAIAB0A"), 0.2584595, PackedByteArray("AwACAAsAAgAMAAsAAgAAAAwAAwALAA0ADAANAAsABAADAA0AAAABAAwAAAAEAAEAAQANAAwABAANAAEABQAOAA8ADgAFAAoABQAJAAoABQAPAAkADgAKAAgADwAHAAkABgAOAAgADgAGAA8ABgAIAAcADwAGAAcA"), 0.5759066, PackedByteArray("AAABAAIAAwACAAEAAAAEAAEABAADAAEABQAGAAcABgAIAAcABQAHAAkABgAKAAgABQAJAAoABgAFAAoA")],
+"material": SubResource("StandardMaterial3D_j4e40"),
+"name": "TEXTURE_ARBRE_boule",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 54,
+"vertex_data": PackedByteArray("/38BXQAAgv/QxT7eLjrO7QAAAV3/fzPA/38BXf//Mb3//wFd/3/W/NDFfg0uOn/NLjp+DdDFZLT/fwFd//9KhgAAAV3/fzjT//8BXf9/uNb/fwFdAABV/y46Pt7Qxee9Ljo+3i464NjQxT7e0MVD2i46fg0uOsLN0MV+DdDFMbToIgFdFt3qpmMFzan/f3bA6CIBXegiEOH/f82pYwU39xbdAV3oIq72/3////9/mtP/f82pm/ohxBbdAV0W3bnum/rNqf9/4PMW3QFd6CI19xbdAV0W3Quk5SZeJuUm+OXoIgFd6CLM+OgiAV0W3SSm5Sa6qBnZt7DlJrqo5SYK3uEqIun/f/3H/38i6eEq/uUZ2bqo5Sbm/xnZuqgZ2fjk/38i6R3V7sgd1SLp/3+U4+EqIun/f2zH/38i6eEqT+T/fwAA/3//v/9/IwnhKknPHdUjCf9/WMHhKiMJ/398wf9/Iwkd1bWwYwXwJf9/wsv/f/AlYwXB6/9/IwnhKknP5SZeJhnZv6j/fyMJHdW2sP9/8CWb+raUGdleJhnZcKab+vAl/3/RyRnZXiblJvPjDT5yQlW4k6NTjsL55n74fsO9mXtMCs1lgSFUlO8A0/PuVZmsUSgrLCMJNonGmPmz6ah0woGpkpS0GUSIbxbrXhtstr+4lLTggaCq6cK4Yr2bFWFLzqyXqYGOsI+4ogN3N72ThmcUOEwUSU0RsSlcjDExtpCybNvBMIAzwWWiMtrooaO+37AstDTBwZ4iqDCDTKCWoCm0I5kro1i+jrS/sccAj4GdAAiBEBK/XDQjKZGdAIOBDkUBoWIGAYgCAbGB30qDqwABeYJkBaCaEDT+NZAk8znXEgJT")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ab5ms")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_513wy"]
+resource_name = "TEXTURE"
+cull_mode = 2
+albedo_texture = ExtResource("15_8q0ex")
+roughness = 0.823077
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_inevw"]
+_surfaces = [{
+"aabb": AABB(-0.115889095, 0, -0.0822619, 0.2196584, 0.5176044, 0.1645238),
+"format": 34359742465,
+"index_count": 102,
+"index_data": PackedByteArray("AAALAAgAAAAHAAsABwAAAAEAAQAAAAgABwABAAIAAQAIAAwAAgABAAwABwACAAoABwAKAAsAAgAMAAoACwANAAgACAAOAAwACAANAA4ADAAPAAoADAAOAA8ACgAQAAsACwAQAA0ACgAPABAADQARAA4ADgASAA8ADgARABIADwAJABAADwASAAkAEAATAA0ADQATABEAEAAJABMAEQADABIAEgADAAQAEgAEAAkAEQAFAAMAEwAFABEACQAEAAYAEwAGAAUACQAGABMA"),
+"lods": [0.15770964, PackedByteArray("AAAHAAgABwAAAAEAAQAAAAgABwABAAIACAAFAAEACAAGAAUAAQAFAAMACQAGAAgABwAJAAgACQAEAAYAAwAEAAkACgAJAAcACgADAAkABwACAAoAAQADAAoAAgABAAoA"), 0.23968591, PackedByteArray("AAABAAIAAQADAAIAAgADAAQAAgAEAAAAAQAFAAMAAAAFAAEABAAGAAAAAAAGAAUA")],
+"name": "TEXTURE",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("4PCKvQAAAADg8Io94PCKPQAAAADg8Io94PCKPQAAAADg8Iq9H+gDPLiBBD/e8Iq9QFftvb2h6D7g8Iq9MOgDPLmBBD/h8Io9Q1ftvb+h6D7h8Io94PCKvQAAAADg8Iq9hiKKvdngMT7teKg9hdy3vPwzpT5qFKO9QTLcPByXDz7teKi9HazPvdngMT7vIkm9Tix5PRyXDz7vIkk9a1IuvcLsij7g8Io9fmC4PUEKdD7g8Io9fGC4PUEKdD7f8Iq9b1IuvcLsij7h8Iq9uYCbPVPyvT5fFKM9AoXUPVPyvT6gx1m92fZNvf0zpT6Mx1k9")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8m6cx"]
+resource_name = "ARBRE_boule_Cube_011"
+_surfaces = [{
+"aabb": AABB(-0.115889095, 0, -0.0822619, 0.2196584, 0.5176044, 0.1645238),
+"attribute_data": PackedByteArray("pU0rPTvPBj8AjnM9O88GPwCOcz1AUws/MuedPUBTCz8y5509RtcPPwCOcz1LWxQ/MuedPUtbFD8y5509O88GPwCOcz00SwI/MuedPTRLAj8AjnM9RtcPPzLnnT1LWxQ/MuedPUbXDz8y5509QFMLP6VNKz1AUws/MuedPTRLAj8y5509RtcPPzLnnT1LWxQ/MuedPUbXDz8y5509S1sUPzLnnT1AUws/MuedPUBTCz8y5509O88GPzLnnT07zwY/MuedPTvPBj8y5509NEsCPzLnnT00SwI/"),
+"format": 34359742487,
+"index_count": 102,
+"index_data": PackedByteArray("BQAQAAsAEAARAAsABQAKABAAEAASABEAEgATABEACgANABAADQASABAACgACAA0AEgAMABMADAAGABMADAAEAAYAFAAMABIADQAUABIAFQAEAAwAFAAVAAwAFQADAAQAFgAUAA0AAgAWAA0AFwAVABQAFgAXABQAGAADABUAFwAYABUAGAAHAAMAGQAHABgAGQAJAAcAGgAZABgAGgAYABcADwAaABcADwAXABYAAQAPABYAAgABABYAAQAIAA8ADgABAAIADgAAAAEA"),
+"lods": [0.15770964, PackedByteArray("BQAKAAsACgAMAAsADAAGAAsADAAEAAYAAwAEAAwADQAMAAoADQADAAwACgACAA0AAQADAA0AAgABAA0ADgABAAIADgAAAAEAAQAHAAMADwAHAAEADwAJAAcAAQAIAA8A"), 0.23968591, PackedByteArray("AAABAAIAAQADAAIAAgADAAQAAgAEAAUABAAGAAUAAQAHAAMACAAHAAEACAAJAAcA")],
+"material": SubResource("StandardMaterial3D_513wy"),
+"name": "TEXTURE",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 27,
+"vertex_data": PackedByteArray("4PCKvQAAAADg8Io94PCKPQAAAADg8Io94PCKPQAAAADg8Iq9H+gDPLiBBD/e8Iq9QFftvb2h6D7g8Iq94PCKvQAAAADg8Io9Q1ftvb+h6D7h8Io9MOgDPLmBBD/h8Io94PCKvQAAAADg8Io9Q1ftvb+h6D7h8Io94PCKvQAAAADg8Iq9hiKKvdngMT7teKg9hdy3vPwzpT5qFKO9QTLcPByXDz7teKi94PCKvQAAAADg8Iq9hiKKvdngMT7teKg9HazPvdngMT7vIkm9a1IuvcLsij7g8Io9b1IuvcLsij7h8Iq92fZNvf0zpT6Mx1k9fGC4PUEKdD7f8Iq9AoXUPVPyvT6gx1m9Tix5PRyXDz7vIkk9fmC4PUEKdD7g8Io9uYCbPVPyvT5fFKM92fZNvf0zpT6Mx1k9a1IuvcLsij7g8Io9s1ozUzzGu7EssCRYorXM4inY5ivKvLHsi+SDz////78pG4It////v7NaM1OoYObeWE8UY////z/YrEeZ////P7NaM1MoZinfWE8UY////z8QLdQqvT0K6YNLQog6kE36bAnoJv///7/Z+ukomF8x9xAt1CoY3vWfg0tCiIyOmf6BC6G2YIS68/1MQ43///8/ng4byf///7+3QShy////P/TyZDz///+/Ou/5vP///79SwpF2t4uM94q7wnL///8/9LMNjv///z+3QShy////P/1MQ43///8/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_inevw")
+
+[node name="Arbre_boule" type="Node3D" unique_id=1010450993 node_paths=PackedStringArray("mesh") groups=["arbre"]]
+script = ExtResource("1_kktdc")
+mesh = NodePath("ARBRE_boule")
+textures_hiver = Array[Texture2D]([ExtResource("2_ak7nn"), ExtResource("3_hno2q"), ExtResource("4_8q0ex"), ExtResource("5_ranjw"), ExtResource("6_2htll")])
+textures_printemps = Array[Texture2D]([ExtResource("2_oy3yw"), ExtResource("3_0kddk"), ExtResource("4_k4qur"), ExtResource("5_0v812"), ExtResource("6_ak7nn"), ExtResource("7_hno2q"), ExtResource("8_8q0ex")])
+textures_ete = Array[Texture2D]([ExtResource("14_y8whe"), ExtResource("15_6es50"), ExtResource("16_kjwst"), ExtResource("17_q6ixl"), ExtResource("18_mhsv4"), ExtResource("19_c36rn")])
+
+[node name="ARBRE_boule" type="MeshInstance3D" parent="." unique_id=431344591]
+mesh = SubResource("ArrayMesh_mkwyh")
+
+[node name="ARBRE_boule_tronc" type="MeshInstance3D" parent="ARBRE_boule" unique_id=166305708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33786e-06, -0.0059979856, 6.67572e-06)
+mesh = SubResource("ArrayMesh_8m6cx")

@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://c2blq7xqjnkw0"]
 
+[ext_resource type="Script" uid="uid://ck5rxagrmssj6" path="res://Scenes/Vegetation/foret_texture.gd" id="1_4sexv"]
 [ext_resource type="PackedScene" uid="uid://b03a715pa1lwt" path="res://Scenes/Vegetation/arbre_boule.tscn" id="1_i23ug"]
 [ext_resource type="PackedScene" uid="uid://b66qroiabbx30" path="res://Scenes/Vegetation/herbe.tscn" id="2_4sexv"]
 
 [node name="Foret_boule_s" type="Node3D" unique_id=2053666517]
+script = ExtResource("1_4sexv")
+saison = "printemps"
 
 [node name="Arbre_boule" parent="." unique_id=1010450993 instance=ExtResource("1_i23ug")]
 

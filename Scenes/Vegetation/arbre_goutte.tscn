@@ -6,6 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://ddojskfgrw0tl" path="res://res/modeles/vegetation/ARBRE_arbre_vert-fonce_neige.png" id="3_7xhgy"]
 [ext_resource type="Texture2D" uid="uid://bpn4v44u1ntj0" path="res://res/texture/arbre_vert-fonce_neige2.png" id="3_k1rkn"]
 [ext_resource type="Texture2D" uid="uid://cc4lqo5fc2b5e" path="res://res/texture/arbre_vert-fonce_neige3.png" id="4_ux2c6"]
+[ext_resource type="Texture2D" uid="uid://byfcvpdj5u35p" path="res://res/texture/printemps_arbre_fleuri_01.png" id="6_ggcop"]
+[ext_resource type="Texture2D" uid="uid://b4hscl0seecjb" path="res://res/texture/printemps_arbre_fleuri_03.png" id="7_jfmil"]
+[ext_resource type="Texture2D" uid="uid://d1wl2u352t2wu" path="res://res/texture/printemps_arbre_fleuri_04.png" id="8_cvmn7"]
+[ext_resource type="Texture2D" uid="uid://deljdy8gxnk4b" path="res://res/texture/printemps_arbre_vert_01.png" id="9_u8qt2"]
+[ext_resource type="Texture2D" uid="uid://vh5p4bv26g2m" path="res://res/texture/printemps_arbre_vert_02.png" id="10_yew2a"]
+[ext_resource type="Texture2D" uid="uid://bh1rohtcbqrst" path="res://res/texture/printemps_arbre_vert_03.png" id="11_tqxoa"]
+[ext_resource type="Texture2D" uid="uid://hv4g76fm7jqh" path="res://res/texture/printemps_arbre_vert_04.png" id="12_cf5a3"]
+[ext_resource type="Texture2D" uid="uid://inx1cnyclej0" path="res://res/texture/ete_arbre_fleuri_01.png" id="13_cf5a3"]
+[ext_resource type="Texture2D" uid="uid://cm87wh6jrvfmq" path="res://res/texture/ete_arbre_rouge_01.png" id="14_htk71"]
+[ext_resource type="Texture2D" uid="uid://fbjdj4mjyvmr" path="res://res/texture/ete_arbre_vert_01.png" id="15_atcx1"]
+[ext_resource type="Texture2D" uid="uid://dotrcyjj7eol3" path="res://res/texture/ete_arbre_vert_02.png" id="16_i6mos"]
+[ext_resource type="Texture2D" uid="uid://cqodwe5hpa4v4" path="res://res/texture/ete_arbre_vert_03.png" id="17_jfubs"]
+[ext_resource type="Texture2D" uid="uid://dehyjsqn530ee" path="res://res/texture/ete_arbre_vert_04.png" id="18_ri0sm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fni41"]
 resource_name = "TEXTURE_ARBRE"
@@ -51,6 +64,8 @@ shadow_mesh = SubResource("ArrayMesh_ackho")
 script = ExtResource("1_fni41")
 mesh = NodePath("ARBRE_goutte")
 textures_hiver = Array[Texture2D]([ExtResource("2_ackho"), ExtResource("3_k1rkn"), ExtResource("4_ux2c6"), ExtResource("1_dwead")])
+textures_printemps = Array[Texture2D]([ExtResource("6_ggcop"), ExtResource("7_jfmil"), ExtResource("8_cvmn7"), ExtResource("9_u8qt2"), ExtResource("10_yew2a"), ExtResource("11_tqxoa"), ExtResource("12_cf5a3")])
+textures_ete = Array[Texture2D]([ExtResource("13_cf5a3"), ExtResource("14_htk71"), ExtResource("15_atcx1"), ExtResource("16_i6mos"), ExtResource("17_jfubs"), ExtResource("18_ri0sm")])
 
 [node name="ARBRE_goutte" type="MeshInstance3D" parent="." unique_id=738112788]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)

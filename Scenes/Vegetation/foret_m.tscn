@@ -6,6 +6,7 @@
 
 [node name="Foret_m" type="Node3D" unique_id=372247596]
 script = ExtResource("1_o1cfo")
+saison = "hiver"
 
 [node name="Arbre_goutte" parent="." unique_id=1699790004 instance=ExtResource("2_5qqgk")]
 transform = Transform3D(1.2880354, 0, -0.010363718, 0, 1.2880771, 0, 0.010363718, 0, 1.2880354, 0.04356718, 0, 0.021783262)
