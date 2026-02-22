@@ -5,5 +5,4 @@
 [node name="WindSpawner" type="Node3D" unique_id=1116647559]
 script = ExtResource("1_tsccu")
 windWidth = 40.0
-windIntensity = 10.0
 rotationOffSet = Vector3(0, 1.571, 0)

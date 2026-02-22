@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://botpqctusx3k" path="res://res/modeles/OIE_ANIM+TEXTURE_actions_Cube Base Color.png" id="2_fk3fv"]
 [ext_resource type="Texture2D" uid="uid://ptqnm02t5re5" path="res://res/sprites/direction.png" id="4_nh04i"]
 [ext_resource type="AudioStream" uid="uid://dxlh7grdujg4x" path="res://sons/wing.mp3" id="4_qcvih"]
+[ext_resource type="PackedScene" uid="uid://481drfr6nbcw" path="res://res/shaders/windParticle.tscn" id="4_tu30k"]
 [ext_resource type="Script" uid="uid://dkdpvtgvso6qh" path="res://Boid/assets/scenes/birdTrail.gd" id="5_7cebm"]
 [ext_resource type="AudioStream" uid="uid://ympsyus4mahy" path="res://sons/gooz.mp3" id="5_tu30k"]
 
@@ -707,6 +708,8 @@ transform = Transform3D(-0.501134, -0.5439878, -3.2502391, -1.6351491, -2.813309
 script = ExtResource("5_7cebm")
 rotationOffset = Vector3(1.571, 0, 0)
 
+[node name="GPUParticles3D" parent="OIE/Armature/Skeleton3D/BoneAttachment3D/Trail" unique_id=2036437000 instance=ExtResource("4_tu30k")]
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="OIE/Armature/Skeleton3D/BoneAttachment3D" unique_id=455140108]
 visible = false
 mesh = SubResource("TubeTrailMesh_7cebm")
@@ -720,6 +723,9 @@ bone_idx = 5
 transform = Transform3D(-0.501134, -0.5439878, -3.2502394, -1.635149, -2.8133094, 0.72297275, -2.8611639, 1.7030798, 0.15610293, -0.169963, 2.0486372, -0.027375191)
 script = ExtResource("5_7cebm")
 rotationOffset = Vector3(1.571, 0, 0)
+
+[node name="GPUParticles3D" parent="OIE/Armature/Skeleton3D/BoneAttachment3D2/Trail" unique_id=1842622001 instance=ExtResource("4_tu30k")]
+emitting = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OIE" unique_id=1701530717]
 libraries/ = SubResource("AnimationLibrary_hgp2k")

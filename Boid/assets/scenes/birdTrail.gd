@@ -1,6 +1,5 @@
 extends Node3D
 var frameCount = 0
-var trailResolution = 1 # plus bas = plus résolu
 var trailDir = Vector3.ZERO
 @export var rotationOffset = Vector3.ZERO
 @onready var previousPos = get_parent().global_position
@@ -12,20 +11,14 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	#print(get_parent().speedVect.length())
-	if $"../../../../..".speedVect.length() > 1 && frameCount > trailResolution:
-		if trailNumber == trailLength+1:
-			trailNumber = 0
-		#printTrail(previousPos)
-		previousPos = self.global_position
-		frameCount = 0
-		#print(trailNumber)
-		killTrail(trailNumber)
-		trailNumber += 1
+	if trailNumber == trailLength+1:
+		trailNumber = 0
+	if $"../../../../..".speedVect.length() > 1:
+		$GPUParticles3D.emitting = true
 	else:
-		frameCount += 1
-		
-		
-		
+		$GPUParticles3D.emitting = false
+
+
 	
 		
 func printTrail(previousPosition: Vector3):

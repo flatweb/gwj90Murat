@@ -16,10 +16,10 @@ func _ready() -> void:
 	for i in range(windIntensity):
 		var windPath = Path3D.new()
 		add_child(windPath)
-		#print(i)
 		var xPos = randf_range(-windWidth,windWidth)
-		var yPos = randf_range(-5,5)
-		windPath.position = Vector3(xPos,0,yPos)
+		var zPos = randf_range(-10,10)
+		var yPos = randf_range(0,30)
+		windPath.position = Vector3(xPos,yPos,zPos)
 		windPath.curve = load(winds[randi_range(0,winds.size() -1)])
 		windPath.set_rotation(rotationOffSet)
 		windPath.set_script(windPathScript)

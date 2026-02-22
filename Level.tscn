@@ -867,6 +867,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3015137, 465.2969)
 mesh = SubResource("PlaneMesh_yye10")
 
 [node name="WindSpawner" parent="." unique_id=1116647559 instance=ExtResource("19_yye10")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.13211, 0, 338.4333)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -45.13916, 0, 338.4333)
 windWidth = 120.0
-windIntensity = 50.0
+windIntensity = 200
+
+[node name="WindSpawner2" parent="." unique_id=1096852815 instance=ExtResource("19_yye10")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 49.55008, 0, 338.4333)
+windWidth = 120.0
+windIntensity = 200
