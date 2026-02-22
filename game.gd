@@ -80,8 +80,9 @@ func start():
 func fin(distance):
 	if inzonefin :
 		print("aterrissage réussi")
-		
-		if max(nbcapture,$Oiseau.nbmaxcapture) >= nbcaptureattendu  :
+		# on considère qui si on est arrivé là, c'est qu'on a eu tous les bonus
+		# avant de passer la porte2
+		if true : # max(nbcapture,$Oiseau.nbmaxcapture) >= nbcaptureattendu  :
 			# fin de partie, on renvoie la distance parcourue comme score
 			# en théorie, il faudrait avoir parcouru le moins possible
 			print("fin de la partie")
@@ -221,7 +222,7 @@ func _input(event: InputEvent) -> void:
 	if (event.is_action_released("fin")):
 		inzonefin = true
 		nbcaptureattendu = 0
-		fin(123)
+		fin($Oisau.distance)
 		return
 	
 	# fait disparaitre les boids
