@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqq7gbdootpk6"
-path="res://.godot/imported/rond-vert.png-ada3bedf7c73c98b9711cdf916f61def.ctex"
+uid="uid://2ffjjyjok8lq"
+path="res://.godot/imported/bird.png-87bdd6c3d579f31fd073e2cc9373edbe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/rond-vert.png"
-dest_files=["res://.godot/imported/rond-vert.png-ada3bedf7c73c98b9711cdf916f61def.ctex"]
+source_file="res://res/sprites/bird.png"
+dest_files=["res://.godot/imported/bird.png-87bdd6c3d579f31fd073e2cc9373edbe.ctex"]
 
 [params]
 

@@ -31,7 +31,7 @@ const FACTEUR_ATTENTE = 0.7
 # écart d'altitude toléré par rapport à la position de référence avant de décider de corriger
 const ECART_ALTITUDE = 1.0
 ## altitude maximale au delà de laquelle on ne peut plus monter
-const ALTITUDE_MAX = 50.0
+const ALTITUDE_MAX = 36.0
 
 
 # Vitesse de vol horizontal
@@ -47,7 +47,7 @@ var speedup : float = speedfront / 2
 # Altitude où on commence à freiner le piqué pour aterrir
 var altitudefreinage : float = 5.0
 # Altitude au delà de laquelle on cesse de monter
-var altitudemax : float = 50.0
+var altitudemax : float = ALTITUDE_MAX
 # vitesse de descente sous laquelle on ne passe pas en descente
 const VITESSE_Y_MIN = 3.0
 const ALTITUDE_LIBERATION_BONUS = 2.0
