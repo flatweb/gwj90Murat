@@ -85,5 +85,6 @@ func _process(delta: float) -> void:
 func _on_timer_eclair_timeout() -> void:
 	if randf_range(0,1) <= 0.05 :
 		$OmniLight3D.light_energy = 10.0
+		$AudioStreamPlayer3D.play()
 	pass # Replace with function body.
 	
