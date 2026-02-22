@@ -42,11 +42,11 @@ bbcode_enabled = true
 text = "[b]Your goal[/b] : fly to south, and find partners
 
 [u][b]Commands :[/b][/u]
-- [b]move[/b] :  WASD or arrows, Spacebar or downarrow pour to take off
+- [b]move[/b] :  WASD or arrows, Spacebar or downarrow to take off
     Uparrow to land
 - [b]pause[/b] : Esc
 - [b]clue[/b] : Tab during flight
-- [b]camera[/b] : mouse wheel to zoom
+- [b]camera[/b] : mouse wheel to zoom, clic hold to rotate
 
 [center][b][color=#d36d00][font_size=40]Have a great journey ![/font_size][/color][/b][/center]
 "
