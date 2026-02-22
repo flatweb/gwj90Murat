@@ -15,11 +15,11 @@ func _ready() -> void:
 	oiseau = get_tree().get_nodes_in_group("Oiseau")[0]
 	music1Player.play()
 func _process(delta: float) -> void:
-	if oiseau.get_global_position().z < music2zPosition && crossFadeState < 1:
+	if oiseau.get_global_position().z < music1zPosition && crossFadeState < 1:
 		crossFade(delta,music1Player,music2Player,0.2)
-	elif oiseau.get_global_position().z < music3zPosition && music2Player.is_playing():
+	elif oiseau.get_global_position().z < music2zPosition && music2Player.is_playing():
 		crossFade(delta,music2Player,music3Player,0.2)
-	elif oiseau.get_global_position().z < music4zPosition && music3Player.is_playing():
+	elif oiseau.get_global_position().z < music3zPosition && music3Player.is_playing():
 		crossFade(delta,music3Player,music4Player,0.2)
 	elif oiseau.get_global_position().z < music4zPosition && music3Player.is_playing():
 		crossFade(delta,music4Player,music5Player,0.2)

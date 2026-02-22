@@ -281,10 +281,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 549.2958)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 460.9034)
 
 [node name="Marker3" type="Marker3D" parent="AudioPlayer" unique_id=911076723]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 548.066)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0899658, 0, 361.97513)
 
 [node name="Marker4" type="Marker3D" parent="AudioPlayer" unique_id=486786615]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 548.066)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2737198, -3.0517578e-05, 222.23474)
 
 [connection signal="body_entered" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_entered"]
 [connection signal="body_exited" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_exited"]
