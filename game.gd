@@ -224,7 +224,7 @@ func _input(event: InputEvent) -> void:
 	if (event.is_action_released("fin")):
 		inzonefin = true
 		nbcaptureattendu = 0
-		fin($Oisau.distance)
+		fin(123) # on ne peut pas mettre $Oiseau ici
 		return
 	
 	# fait disparaitre les boids
