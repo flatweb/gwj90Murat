@@ -18,16 +18,17 @@ func _ready() -> void:
 	titleMusicPlayer.play()
 	titleMusicPlayer.stream_paused = false
 	musicPlayed = music1Player
+	musicPlayed.play()
 func _process(delta: float) -> void:
 	if get_tree().paused == true:
 		if musicPlayed.stream_paused == false:
 			crossFade(delta,musicPlayed, titleMusicPlayer,0.5)
 	else:
-		print(musicPlayed)
+		#print(musicPlayed)
 		if titleMusicPlayer.stream_paused == false :
 			crossFade(delta,titleMusicPlayer,musicPlayed,.5)
 		else:
-			print(crossFadeState)
+			#print(crossFadeState)
 			if oiseau.get_global_position().z < music1zPosition && musicPlayed != music2Player:
 				crossFade(delta,musicPlayed,music2Player,0.2)
 			elif oiseau.get_global_position().z < music2zPosition && musicPlayed != music3Player:
@@ -48,7 +49,7 @@ func crossFade(delta,from,to,speed):
 		crossFadeState = 1
 	from.volume_db = linear_to_db(1- crossFadeState)
 	to.volume_db = linear_to_db(crossFadeState)
-	print(from.volume_db)
+	#print(from.volume_db)
 	if from.volume_db < -59:
 		from.set_stream_paused(true)
 		from.volume_db = 0
