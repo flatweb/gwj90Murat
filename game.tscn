@@ -2,9 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://ktrp3827wg2f" path="res://oiseau.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://c235fg52wmv15" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="Texture2D" uid="uid://dj5p7wa7hej3n" path="res://res/sprites/boussole.png" id="4_e36ub"]
 [ext_resource type="PackedScene" uid="uid://cia8cfrsqyj1t" path="res://oiseau_bonus.tscn" id="4_iotsf"]
 [ext_resource type="Script" uid="uid://c5np42vulwkd5" path="res://camera_rig.gd" id="4_lc2xo"]
 [ext_resource type="Texture2D" uid="uid://bapvtdy4g7sbi" path="res://res/modeles/oie/oie3.png" id="5_7sc4i"]
+[ext_resource type="Texture2D" uid="uid://bl86n245oqk48" path="res://res/sprites/aiguille.png" id="5_hb5m1"]
 [ext_resource type="Texture2D" uid="uid://dhth33kumpp5q" path="res://res/modeles/oie/oie_2.png" id="6_e8heu"]
 [ext_resource type="Script" uid="uid://dnltotiqrtdgk" path="res://Boid/assets/scripts/Flock.gd" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cfttkqdijd15r" path="res://nuagegris.tscn" id="6_j5wjh"]
@@ -111,6 +113,17 @@ transform = Transform3D(1, 0, 0, 0, 0.32226568, 0.94664925, 0, -0.9466493, 0.322
 current = true
 fov = 30.0
 far = 1000.0
+
+[node name="Boussole" type="Node3D" parent="CameraRig/Camera3D" unique_id=1960545456]
+transform = Transform3D(1, -2.9802322e-08, 0, 0, 1, 1.4901161e-08, 0, 1.4901161e-08, 1, 4.7533226, 2.6490326, -12.5950165)
+
+[node name="SpriteBoussole" type="Sprite3D" parent="CameraRig/Camera3D/Boussole" unique_id=2069434260]
+texture = ExtResource("4_e36ub")
+
+[node name="SpriteAiguille" type="Sprite3D" parent="CameraRig/Camera3D/Boussole" unique_id=1570284151]
+unique_name_in_owner = true
+transform = Transform3D(0.97122586, -0.22545451, 0.07675098, 0.22545454, 0.9742142, 0.008778163, -0.07675098, 0.008778276, 0.99701166, 0.037994385, -0.05744934, 0.035453796)
+texture = ExtResource("5_hb5m1")
 
 [node name="OiseauBonus1" parent="." unique_id=1559759492 instance=ExtResource("4_iotsf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.194534, 10, 66.04686)
