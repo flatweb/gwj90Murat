@@ -11,7 +11,7 @@
 [sub_resource type="Theme" id="Theme_vvh5c"]
 PanelContainer/styles/panel = SubResource("StyleBoxLine_vvh5c")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvh5c"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vvh5c"]
 
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_nyrvt"]
 button_index = 1
@@ -56,11 +56,9 @@ theme = ExtResource("5_1hc85")
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.6423512, 0.6429612, 1)
 theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxFlat_vvh5c")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vvh5c")
 text = "Geese Migration"
 horizontal_alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PanelContainer/IntroContainer/LabelTitre" unique_id=1574272759]
 
 [node name="RichTextIntro" type="RichTextLabel" parent="PanelContainer/IntroContainer" unique_id=1835608421]
 custom_minimum_size = Vector2(500, 0)
@@ -211,6 +209,8 @@ parameters/looping = true
 process_mode = 1
 wait_time = 60.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1574272759]
 
 [node name="Popup" type="Node" parent="." unique_id=613163808]
 
