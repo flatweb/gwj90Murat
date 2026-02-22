@@ -14,14 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://dpsuf4y4dpoxm" path="res://porte_nuages.tscn" id="8_215e1"]
 [ext_resource type="PackedScene" uid="uid://bjwjou340xq8n" path="res://Level.tscn" id="10_hve3p"]
 [ext_resource type="FontFile" uid="uid://b15viota6rqxo" path="res://res/palettes/NationalPark-VariableVF.ttf" id="11_80cx4"]
-[ext_resource type="Script" uid="uid://bfya6qqxqtu08" path="res://audio_player.gd" id="11_iotsf"]
 [ext_resource type="Script" uid="uid://0fpuqucyrhnl" path="res://ui.gd" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cv8lxpbfge08x" path="res://sons/flying_music.mp3" id="12_215e1"]
-[ext_resource type="AudioStream" uid="uid://c60gx7f86f2ai" path="res://sons/winter theme.mp3" id="12_lc2xo"]
 [ext_resource type="Texture2D" uid="uid://sp5fid7v8jqj" path="res://res/texture/UI_nuage.png" id="16_hb5m1"]
-[ext_resource type="AudioStream" uid="uid://dm1wcuho8fwki" path="res://sons/journey dim.mp3" id="17_e8heu"]
 [ext_resource type="Texture2D" uid="uid://2whso4c138ig" path="res://res/texture/UI_oie.png" id="17_x5p1p"]
-[ext_resource type="AudioStream" uid="uid://btggp5fhto8ad" path="res://sons/title_game.mp3" id="18_rvswv"]
+[ext_resource type="AudioStream" uid="uid://dxlh7grdujg4x" path="res://sons/wing.mp3" id="19_e36ub"]
+[ext_resource type="AudioStream" uid="uid://ji5ujn37mxuw" path="res://sons/end_song.mp3" id="20_hb5m1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -315,37 +313,45 @@ horizontal_alignment = 1
 [node name="Defilement" type="Timer" parent="UI" unique_id=1497691247]
 wait_time = 0.05
 
-[node name="AudioPlayer" type="Node3D" parent="." unique_id=22574645]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -552.4393)
-script = ExtResource("11_iotsf")
-
-[node name="Music1" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=112991512]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=220791130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 82.48894)
 stream = ExtResource("12_215e1")
+volume_db = 14.953
+autoplay = true
+max_distance = 100.0
+attenuation_filter_db = -11.3
 
-[node name="Music2" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1268886826]
-stream = ExtResource("12_lc2xo")
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="." unique_id=673323259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48.511063)
+stream = ExtResource("19_e36ub")
+volume_db = 14.953
+autoplay = true
+max_distance = 50.0
+attenuation_filter_db = -11.3
 
-[node name="Music3" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=671492526]
-stream = ExtResource("17_e8heu")
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="." unique_id=1802926814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -198.21965)
+stream = ExtResource("12_215e1")
+volume_db = 14.953
+autoplay = true
+max_distance = 110.0
+attenuation_filter_db = -11.3
 
-[node name="Music4" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=398372508]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="." unique_id=1879636758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.339615, -395.40063)
+stream = ExtResource("12_215e1")
+volume_db = 14.953
+autoplay = true
+max_distance = 100.0
+attenuation_filter_db = -11.3
 
-[node name="Music5" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1218043687]
-
-[node name="TitleMusic" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=682834339]
-stream = ExtResource("18_rvswv")
-
-[node name="Marker1" type="Marker3D" parent="AudioPlayer" unique_id=718549942]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 549.2958)
-
-[node name="Marker2" type="Marker3D" parent="AudioPlayer" unique_id=1116904932]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 460.9034)
-
-[node name="Marker3" type="Marker3D" parent="AudioPlayer" unique_id=911076723]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0899658, 0, 361.97513)
-
-[node name="Marker4" type="Marker3D" parent="AudioPlayer" unique_id=486786615]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2737198, -3.0517578e-05, 222.23474)
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="." unique_id=1644463161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.339615, -595.4626)
+stream = ExtResource("20_hb5m1")
+volume_db = 14.953
+autoplay = true
+max_distance = 120.0
+attenuation_filter_db = -11.3
 
 [connection signal="body_entered" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_entered"]
 [connection signal="body_exited" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_exited"]
