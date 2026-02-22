@@ -310,7 +310,7 @@ _data = {
 &"Vol_plane": SubResource("Animation_fk3fv")
 }
 
-[node name="Node3D" type="Node3D" unique_id=1361121375]
+[node name="OiesEnV" type="Node3D" unique_id=1361121375]
 
 [node name="OIE8" type="Node3D" parent="." unique_id=574549611]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.01604414, 0, 0.014044285)

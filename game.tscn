@@ -259,10 +259,6 @@ wait_time = 0.05
 [node name="AudioPlayer" type="Node3D" parent="." unique_id=22574645]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -552.4393)
 script = ExtResource("11_iotsf")
-music1zPosition = 108.0
-music2zPosition = 25.0
-music3zPosition = -108.0
-music4zPosition = -150.0
 
 [node name="Music1" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=112991512]
 stream = ExtResource("12_215e1")
@@ -277,6 +273,18 @@ volume_db = -70.247
 [node name="Music4" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=398372508]
 
 [node name="Music5" type="AudioStreamPlayer" parent="AudioPlayer" unique_id=1218043687]
+
+[node name="Marker1" type="Marker3D" parent="AudioPlayer" unique_id=718549942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 549.2958)
+
+[node name="Marker2" type="Marker3D" parent="AudioPlayer" unique_id=1116904932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 460.9034)
+
+[node name="Marker3" type="Marker3D" parent="AudioPlayer" unique_id=911076723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 548.066)
+
+[node name="Marker4" type="Marker3D" parent="AudioPlayer" unique_id=486786615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 548.066)
 
 [connection signal="body_entered" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_entered"]
 [connection signal="body_exited" from="ZoneFin/Area3D" to="." method="_on_zonefin_body_exited"]

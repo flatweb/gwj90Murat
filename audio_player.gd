@@ -1,8 +1,8 @@
 extends Node3D
-@export var music1zPosition: float
-@export var music2zPosition: float
-@export var music3zPosition: float
-@export var music4zPosition: float
+var music1zPosition = $Marker1.global_position.z
+var music2zPosition = $Marker2.global_position.z
+var music3zPosition = $Marker3.global_position.z
+var music4zPosition = $Marker4.global_position.z
 @onready var music1Player = $Music1
 @onready var music2Player = $Music2
 @onready var music3Player = $Music3
