@@ -38,7 +38,7 @@ func _ready():
 		_boids.append(instance)
 		
 		var x = randf_range(- sizeOfSpawn.x,sizeOfSpawn.x)
-		var y = randf_range(5,20)
+		var y = randf_range(5,15)
 		var z = randf_range(- sizeOfSpawn.y,sizeOfSpawn.y)
 		instance.set_position(Vector3(x, y ,z))
 		instance.spawnPoint = Vector3(x, y ,z)
