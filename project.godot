@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GodotWildJam-90"
-run/main_scene="uid://c88tyonahc3cv"
+run/main_scene="uid://c7rdue6y4yqra"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

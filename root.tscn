@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c7416oskgmhn6" path="res://root.gd" id="1_1h7cp"]
 [ext_resource type="AudioStream" uid="uid://bebmk3et38hcd" path="res://res/sons/title_theme2.mp3" id="4_28aoi"]
-[ext_resource type="PackedScene" uid="uid://cwqaf7jby2v2c" path="res://countdown.tscn" id="4_a785y"]
 [ext_resource type="Theme" uid="uid://xcmvx0jaunfs" path="res://res/design.tres" id="5_1hc85"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28aoi"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_vvh5c"]
+
+[sub_resource type="Theme" id="Theme_vvh5c"]
+PanelContainer/styles/panel = SubResource("StyleBoxLine_vvh5c")
 
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_nyrvt"]
 button_index = 1
@@ -29,47 +33,54 @@ script = ExtResource("1_1h7cp")
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=370989890]
 process_mode = 1
 material = SubResource("CanvasItemMaterial_28aoi")
+use_parent_material = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -16.6667
-offset_right = 16.6667
+offset_left = -2.0
+offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_vvh5c")
 
-[node name="TextureRectIntro" type="TextureRect" parent="PanelContainer" unique_id=1736814768]
-texture_filter = 1
+[node name="IntroContainer" type="VBoxContainer" parent="PanelContainer" unique_id=600711197]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-expand_mode = 3
-stretch_mode = 5
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_1hc85")
 
-[node name="TextureRectInter" type="TextureRect" parent="PanelContainer" unique_id=611267640]
-texture_filter = 1
+[node name="RichTextIntro" type="RichTextLabel" parent="PanelContainer/IntroContainer" unique_id=1835608421]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-size_flags_vertical = 3
-expand_mode = 3
-stretch_mode = 5
+theme = ExtResource("5_1hc85")
+bbcode_enabled = true
+text = "[b]You are a goose in a north country.
+Winter is coming and you need to go to south before the winter.
+You will find partners to rejoin you during this journey.[/b]"
+fit_content = true
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1250931122]
-process_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 68.0
-offset_top = 38.0
-offset_right = -55.0
-offset_bottom = -44.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="RichTextDontWait" type="RichTextLabel" parent="PanelContainer/IntroContainer" unique_id=2098347852]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme = ExtResource("5_1hc85")
+text = "
+Don't wait !"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/IntroContainer" unique_id=1250931122]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1223810600]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/IntroContainer/CenterContainer" unique_id=1223810600]
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=582535104]
+[node name="Label" type="Label" parent="PanelContainer/IntroContainer/CenterContainer/VBoxContainer" unique_id=582535104]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.25098, 0, 1)
@@ -77,16 +88,11 @@ theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 
-[node name="Countdown" parent="CenterContainer/VBoxContainer" unique_id=1819120507 instance=ExtResource("4_a785y")]
-unique_name_in_owner = true
-process_mode = 1
-layout_mode = 2
-
-[node name="VBoxScore" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1351871583]
+[node name="VBoxScore" type="VBoxContainer" parent="PanelContainer/IntroContainer/CenterContainer/VBoxContainer" unique_id=1351871583]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LabelScore" type="Label" parent="CenterContainer/VBoxContainer/VBoxScore" unique_id=941215953]
+[node name="LabelScore" type="Label" parent="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/VBoxScore" unique_id=941215953]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -94,14 +100,14 @@ theme_override_colors/font_color = Color(0.588235, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 justification_flags = 160
 
-[node name="AideButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1049223302]
+[node name="AideButton" type="Button" parent="PanelContainer/IntroContainer/CenterContainer/VBoxContainer" unique_id=1049223302]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_1hc85")
 action_mode = 0
-text = "Aide"
+text = "  How to play  "
 
-[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1704628154]
+[node name="StartButton" type="Button" parent="PanelContainer/IntroContainer/CenterContainer/VBoxContainer" unique_id=1704628154]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_1hc85")
@@ -111,7 +117,8 @@ shortcut_in_tooltip = false
 text = "Start !"
 
 [node name="PauseContainer" type="PanelContainer" parent="." unique_id=1583349191]
-process_mode = 3
+unique_name_in_owner = true
+process_mode = 2
 offset_right = 403.0
 offset_bottom = 249.0
 size_flags_horizontal = 4
@@ -130,14 +137,21 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.698039, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
-text = "En pause !
+text = "Pause
 "
+horizontal_alignment = 1
 
 [node name="OutPauseButton" type="Button" parent="PauseContainer/PauseCenterContainer/VBoxContainer" unique_id=829902733]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_1hc85")
-text = "Reprendre"
+text = "  Continue  "
+
+[node name="GiveupButton" type="Button" parent="PauseContainer/PauseCenterContainer/VBoxContainer" unique_id=696176985]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_1hc85")
+text = "  Give up  "
 
 [node name="Musique" type="AudioStreamPlayer" parent="." unique_id=379982732]
 process_mode = 1
@@ -153,11 +167,11 @@ one_shot = true
 
 [node name="Popup" type="Node" parent="." unique_id=613163808]
 
-[connection signal="timeout" from="CenterContainer/VBoxContainer/Countdown" to="." method="_on_countdown_timeout"]
-[connection signal="gui_input" from="CenterContainer/VBoxContainer/AideButton" to="." method="_on_aide_button_gui_input"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/AideButton" to="." method="_on_aide_button_pressed"]
-[connection signal="button_up" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_up"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="gui_input" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/AideButton" to="." method="_on_aide_button_gui_input"]
+[connection signal="pressed" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/AideButton" to="." method="_on_aide_button_pressed"]
+[connection signal="button_up" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_up"]
+[connection signal="pressed" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="button_up" from="PauseContainer/PauseCenterContainer/VBoxContainer/OutPauseButton" to="." method="_on_out_pause_button_up"]
+[connection signal="button_up" from="PauseContainer/PauseCenterContainer/VBoxContainer/GiveupButton" to="." method="_on_giveup_button_up"]
 [connection signal="timeout" from="TimerInactivite" to="." method="_on_timer_inactivite_timeout"]
 [connection signal="child_exiting_tree" from="Popup" to="." method="_on_popup_child_exiting_tree"]

@@ -318,6 +318,7 @@ _data = {
 }
 
 [node name="OiseauBonus" type="CharacterBody3D" unique_id=1559759492 groups=["Bonus"]]
+process_mode = 3
 collision_layer = 132
 collision_mask = 5
 script = ExtResource("1_d5epw")

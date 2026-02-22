@@ -11,7 +11,7 @@ var withlightning : bool = false :
 	get():
 		return withlightning
 
-const DEFAULT_VITESSE : float = 0.2
+const DEFAULT_VITESSE : float = 0.4
 const RATIO_X_SUR_Z : float = 4.0
 const ECHELLE_1 : Vector3 = Vector3(1.0,1.0,1.0)
 

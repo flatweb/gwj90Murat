@@ -1,19 +1,21 @@
 [gd_resource type="Theme" format=3 uid="uid://xcmvx0jaunfs"]
 
+[ext_resource type="FontFile" uid="uid://b15viota6rqxo" path="res://res/palettes/NationalPark-VariableVF.ttf" id="1_nt1nt"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrla3"]
-bg_color = Color(0.0980392, 0.368627, 0.176471, 1)
+bg_color = Color(0.18075946, 0.33184266, 0.39694566, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.942823, 0.942823, 0.942823, 1)
+border_color = Color(0.18039216, 0.7764706, 0.11372549, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjcra"]
-bg_color = Color(0.0980392, 0.368627, 0.176471, 1)
+bg_color = Color(0.18075946, 0.33184266, 0.39694566, 1)
 border_color = Color(0.129558, 0.129559, 0.129558, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -21,6 +23,11 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [resource]
-Button/font_sizes/font_size = 24
+Button/font_sizes/font_size = 48
 Button/styles/focus = SubResource("StyleBoxFlat_rrla3")
 Button/styles/normal = SubResource("StyleBoxFlat_yjcra")
+RichTextLabel/colors/default_color = Color(0, 0.3379902, 0.3389745, 1)
+RichTextLabel/font_sizes/bold_font_size = 32
+RichTextLabel/font_sizes/normal_font_size = 40
+RichTextLabel/fonts/bold_font = ExtResource("1_nt1nt")
+RichTextLabel/fonts/normal_font = ExtResource("1_nt1nt")

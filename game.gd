@@ -12,7 +12,9 @@ var indices = 3
 # signal émis à la fin du jeu pour prévenir le noeud off-play
 signal fini(score : int)
 signal sendtext(txt : String) # TODO
-
+func pushtext(texte : String , _delai : float = 3.0):
+	$UI.pushtext(texte)
+	
 func _ready():
 	game_area_size = get_node_aabb(get_node("Level"))
 	game_area_size.position.y = 0.0  # TODO constante ou autre ?
@@ -39,20 +41,12 @@ func _ready():
 		if child.is_in_group("Bonus"):
 			child.pushtext.connect(pushtext.bind())
 	
-	startintro()
-	pass
+	#Mise en place pour commencer le jeu au début
+	init()
 
-func pushtext(texte : String , _delai : float = 3.0):
-	$UI.pushtext(texte)
-	
+## Mise en place pour commencer le jeu au début
 func init():
-	pass
-
-func startintro():
-	pass
-	start()
-
-func start():
+	$UI.hide()
 	$Oiseau.aterri.connect(fin.bind())
 	for child in get_children():
 		if child.is_in_group("Bonus"):
@@ -63,27 +57,31 @@ func start():
 	%LabelCaptures.text = "%d / %d" % [nbcapture, nbcaptureattendu]
 	$Oiseau.start_aterri_at($Marker3DStart.position)
 	$Oiseau.msg.connect(pushtext.bind())
+	
+	if (self.get_parent() == get_node("/root")):
+		# scène lancée en standalone => autostart
+		start()
 
-	$UI.pushtext("It is time to migrate to south !")
+func start():
+	$UI.show()
+	$UI.pushtext("It is time to migrate to south. Take off !")
 	
 func fin(distance):
 	if inzonefin :
 		print("aterrissage réussi à l'arrivée")
-		pushtext("You reached South !")
-		await get_tree().create_timer(3.0).timeout
 		
 		if max(nbcapture,$Oiseau.nbmaxcapture) >= nbcaptureattendu  :
 			# fin de partie, on renvoie la distance parcourue comme score
 			# en théorie, il faudrait avoir parcouru le moins possible
+			pushtext("Great !  You reached south with your colony")
+			await get_tree().create_timer(5.0).timeout
 			fini.emit(distance)
 		else:
 			print("pas assez de bonus")
-			pushtext("Not enough gooses to have a colony ! Go back !")
+			pushtext("You are at south, but with not enough geeses to have a colony ! Go back !")
 	else:
-		pushtext("You landed somewhere. Don't forget to go to south !")
-		print("pas encore à l'arrivée")
+		pushtext("You landed somewhere to rest. Don't forget to go to south !")
 
-	
 func populatenuages():
 	var scene = preload("res://nuageblanc.tscn") 
 	var instance : Node
@@ -91,10 +89,11 @@ func populatenuages():
 	
 	var nuage_area_size : AABB = game_area_size
 	nuage_area_size.position.y = 5.0  # TODO constante ou réglage
-	nuage_area_size.end.y = 25.0  # TODO constante ou réglage
+	nuage_area_size.end.y = 30.0  # TODO constante ou réglage
 	
 	for i in range(0,100):  #FIXME constante ou réglage
 		instance = scene.instantiate()
+		instance.process_mode = Node.PROCESS_MODE_DISABLED
 		instance.createin(nuage_area_size)
 		vent = instance.ajoutervent(vent)
 		# on va réutilser le vent pour les suivants

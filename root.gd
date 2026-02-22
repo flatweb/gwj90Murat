@@ -9,28 +9,32 @@ var waitingtostart : bool
 @export_range(0, 1, 0.1) var master_volume : float = 1
 @export_range(0, 1, 0.1) var music_volume : float = 0.2
 @export_range(0, 1, 0.1) var SFX_volume : float = 1
-@export var disable_start_countdown : bool = false
 
 var game : Node3D
-var score : int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PauseContainer.hide()
 	resized()
-	intro()
+	loadgame()
 
 func resized():
 	var vp : Viewport = get_viewport()
 	$PanelContainer.size = vp.size
 	$PauseContainer.size = vp.size
 
-func intro():
-	score = 0
-	$CenterContainer.show()
-	$PanelContainer/TextureRectIntro.show()
-	$PanelContainer/TextureRectInter.hide()
-	%Countdown.hide()
+func loadgame():
+	# On vide la partie précédente
+	if game != null :
+		game.queue_free()
+		
+	var gametscn = load("res://game.tscn")
+	game = gametscn.instantiate()
+	game.fini.connect(endofgame.bind())
+	game.process_mode = Node.PROCESS_MODE_ALWAYS
+	$PanelContainer.add_sibling(game)
+	
+	%IntroContainer.show()
 	%Label.hide()
 	%VBoxScore.hide()
 	%StartButton.text = "  Start !  "
@@ -39,6 +43,8 @@ func intro():
 	%StartButton.grab_focus()
 	$TimerInactivite.stop()
 	waitingtostart = true
+	
+	get_tree().paused = true
 
 func _on_aide_button_pressed() -> void:
 	showaide() # Replace with function body.
@@ -48,12 +54,12 @@ func _on_aide_button_gui_input(event: InputEvent) -> void:
 		showaide()
 
 func _on_popup_child_exiting_tree(node: Node) -> void:
-	$CenterContainer.show()
+	%IntroContainer.show()
 	%StartButton.grab_focus()
 
 func showaide():
 	const aideScene = preload("res://aide.tscn")
-	$CenterContainer.hide()
+	%IntroContainer.hide()
 	$Popup.add_child(aideScene.instantiate())
 
 func _on_start_button_pressed() -> void:
@@ -68,63 +74,37 @@ func _on_start_button_up() -> void:
 func start():
 	# Start ou Continue
 	waitingtostart = false
-	if disable_start_countdown:
-		newlevel_timer = 0.0
+	#
 	$TimerInactivite.stop()
 	%VBoxScore.hide()
 	%StartButton.hide()
 	%AideButton.hide()
-	%Label.text = "Niveau %d" % 1
-	%Label.show()
-	startCountdown(newlevel_timer," Prêts ? ")
-
-func startCountdown(timeout, text = ""):
-	%Countdown.start(timeout,text)
-
-func _on_countdown_timeout() -> void:
-	runlevel()
-
-func runlevel():
-	$CenterContainer.hide()
+	%IntroContainer.hide()
 	$PanelContainer.hide()
-	$PanelContainer/TextureRectIntro.hide()
-	$PanelContainer/TextureRectInter.hide()
 	$Musique.stop()
-	var gametscn = load("res://game.tscn")
-	game = gametscn.instantiate()
-	game.init() # FIXME : probablementy inutile ici
-	game.fini.connect(endofgame.bind())
-	game.process_mode = Node.PROCESS_MODE_PAUSABLE
-	$PanelContainer.add_sibling(game)
-
+	get_tree().paused = false
+	
+	game.start()
+	
 func endofgame(_score : int):
 	$Musique.play()
-	game.call_deferred("queue_free")
+	get_tree().paused = true
 	
-	%Label.text = "Distance parcourue : %d" % _score
+	%Label.text = "You flew : %d km" % _score
 	%Label.show()
-	
-	# Ménage dans la VBoxScore FIXME
-	for hbox in %VBoxScore.get_children():
-		if hbox is HBoxContainer :
-			hbox.queue_free()
-	
-	%VBoxScore.show()
 
 	# Fin de partie ?
 	# Il n'y a plus de niveaux - Fin de partie
-	$PanelContainer/TextureRectIntro.show()
-	%VBoxScore/LabelScore.text += "\n-- FIN DE PARTIE --"
 	%StartButton.text = " Restart "
 	%StartButton.show()
 	%StartButton.grab_focus()
 	%AideButton.show()
-	$CenterContainer.show()
+	%IntroContainer.show()
 	$TimerInactivite.start()
 
 func _on_timer_inactivite_timeout() -> void:
 	# Se déclenche quand on a fini une partie et qu'on ne fait par Restart
-	intro()
+	loadgame()
 
 func _input(event : InputEvent):
 	if not waitingtostart: return
@@ -154,6 +134,12 @@ func _on_out_pause_button_up() -> void:
 func outpause():
 	$PauseContainer.hide()
 	get_tree().paused = false
+
+func _on_giveup_button_up() -> void:
+	pass # Replace with function body.
+	$PauseContainer.hide()
+	get_tree().paused = false
+	endofgame(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

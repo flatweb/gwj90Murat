@@ -3,12 +3,16 @@
 [ext_resource type="Theme" uid="uid://xcmvx0jaunfs" path="res://res/design.tres" id="1_u8qen"]
 [ext_resource type="Script" uid="uid://6qqw5fddi6fr" path="res://aide.gd" id="2_birqf"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7apej"]
+bg_color = Color(0.7121294, 0.7121294, 0.71212924, 1)
+
 [node name="Aide" type="PanelContainer" unique_id=1032275009]
 offset_right = 1155.0
 offset_bottom = 647.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_u8qen")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7apej")
 script = ExtResource("2_birqf")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=753074794]
@@ -20,8 +24,8 @@ layout_mode = 2
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer" unique_id=787116715]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0784314, 0.313726, 0.313726, 1)
-theme_override_font_sizes/font_size = 30
-text = "Les règles du jeu"
+theme_override_font_sizes/font_size = 32
+text = "How to play"
 horizontal_alignment = 1
 
 [node name="HBox" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1894233364]
@@ -33,19 +37,18 @@ custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
-text = "[b]Objectif[/b] : Voler
+text = "[b]Your goal[/b] : fly to south, and find partners
 
-A écrire
+[u][b]Commands :[/b][/u]
+- [b]move[/b] :  WASD or arrows, Spacebar or downarrow pour to take off
+    Uparrow to land
+- [b]pause[/b] : Esc
+- [b]clue[/b] : Tab during flight
+- [b]camera[/b] : mouse wheel to zoom
 
-[u][b]Commandes :[/b][/u]
-- [b]se déplacer[/b] :
-    bloc QSZD ou bloc flèches sur le clavier Azerty, le joystick de la manette
-    S ou flèche bas pour descendre
-    Espace pour redécoller
-- [b]pause[/b] : Echap
-
-[center][b][color=#d36d00][font_size=24]Bonne chance ![/font_size][/color][/b][/center]
+[center][b][color=#d36d00][font_size=40]Have a great journey ![/font_size][/color][/b][/center]
 "
 fit_content = true
 scroll_active = false
@@ -53,7 +56,7 @@ scroll_active = false
 [node name="FermerButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=514210484]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Fermer"
+text = "Close"
 
 [connection signal="gui_input" from="CenterContainer/VBoxContainer/FermerButton" to="." method="_on_fermer_button_gui_input"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/FermerButton" to="." method="_on_fermer_pressed"]

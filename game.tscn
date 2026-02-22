@@ -141,10 +141,12 @@ transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.98023
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.593393, 0, -99.15094)
 
 [node name="Nuage" parent="." unique_id=1496051760 instance=ExtResource("6_j5wjh")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.090391, 84.24133)
 script = null
 
 [node name="Flock" type="Node3D" parent="." unique_id=1544621110]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 66.992035)
 script = ExtResource("6_eow3j")
 boidScene = ExtResource("7_j5wjh")

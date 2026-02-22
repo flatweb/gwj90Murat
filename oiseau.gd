@@ -259,6 +259,7 @@ func _physics_process(delta: float) -> void:
 				# on est arrêté
 				enaction = true
 				actionencours = action.ATERRI
+				$OIE.rotation.z = 0.0
 				print("Aterrissage réussi")
 				aterri.emit(distance)
 				queue_next_anim(ANIM_REPOS)
