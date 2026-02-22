@@ -50,7 +50,7 @@ var altitudefreinage : float = 5.0
 var altitudemax : float = 50.0
 # vitesse de descente sous laquelle on ne passe pas en descente
 const VITESSE_Y_MIN = 3.0
-
+const ALTITUDE_LIBERATION_BONUS = 2.0
 
 # Vitesse de croisière
 var speedVect : Vector3
@@ -312,7 +312,6 @@ func correction(normal : Vector3 = Vector3.ZERO):
 		actionencours = action.CORRECTION
 		correction_direction = normal
 		autorotspeed = calc_rot_speed_normal(normal,FACTEUR_CORRECTION)
-		#autorotspeed = autorotspeed
 		if get_node_or_null("AudioPlayerCri") != null:
 			$AudioPlayerCri.play(4.0)
 

@@ -25,7 +25,7 @@ pressed = true
 events = [SubResource("InputEventJoypadButton_nyrvt"), SubResource("InputEventJoypadButton_drmux")]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqx0i"]
-bg_color = Color(0.180392, 0.305882, 0.243137, 0.752941)
+bg_color = Color(0.18039216, 0.30588236, 0.24313726, 0.35686275)
 
 [node name="Root" type="Node" unique_id=1957314274]
 process_mode = 3
@@ -73,8 +73,7 @@ fit_content = true
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme = ExtResource("5_1hc85")
-text = "
-Don't wait !"
+text = "Don't wait !"
 fit_content = true
 horizontal_alignment = 1
 
@@ -96,18 +95,6 @@ theme_override_colors/font_color = Color(0, 0.25098, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
-
-[node name="VBoxScore" type="VBoxContainer" parent="PanelContainer/IntroContainer/CenterContainer/VBoxContainer" unique_id=1351871583]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="LabelScore" type="Label" parent="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/VBoxScore" unique_id=941215953]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(0.588235, 0, 0, 1)
-theme_override_font_sizes/font_size = 24
-justification_flags = 160
 
 [node name="AideButton" type="Button" parent="PanelContainer/IntroContainer/CenterContainer/VBoxContainer" unique_id=1049223302]
 unique_name_in_owner = true
@@ -158,9 +145,58 @@ text = "  Continue  "
 
 [node name="GiveupButton" type="Button" parent="PauseContainer/PauseCenterContainer/VBoxContainer" unique_id=696176985]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme = ExtResource("5_1hc85")
 text = "  Give up  "
+
+[node name="CreditContainer" type="PanelContainer" parent="." unique_id=377605044]
+unique_name_in_owner = true
+process_mode = 2
+offset_right = 403.0
+offset_bottom = 249.0
+size_flags_horizontal = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_wqx0i")
+
+[node name="CreditCenterContainer" type="CenterContainer" parent="CreditContainer" unique_id=1310887791]
+process_mode = 3
+z_index = 2
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditContainer/CreditCenterContainer" unique_id=1533643691]
+layout_mode = 2
+
+[node name="LabelEndOfGame" type="Label" parent="CreditContainer/CreditCenterContainer/VBoxContainer" unique_id=1748100501]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Pause
+"
+horizontal_alignment = 1
+
+[node name="RichTextCredit" type="RichTextLabel" parent="CreditContainer/CreditCenterContainer/VBoxContainer" unique_id=1877346047]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme = ExtResource("5_1hc85")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[b]Thank you for playing with us !
+
+This game was built during Godot Wild Jam #90.
+The team was composed of [url=https://flatweb.itch.io/]flatweb[/url] (Godot dev),[url=https://darkbean.itch.io/]darkbean[/url] (3D models and design),[url=]Sacha[/url] (Godot dev),[url=]Loïc[/url] (Musique),[url=]Julie[/url] (3D models and design).
+
+[/b]"
+fit_content = true
+
+[node name="RestartButton" type="Button" parent="CreditContainer/CreditCenterContainer/VBoxContainer" unique_id=1193172806]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_1hc85")
+action_mode = 0
+shortcut = SubResource("Shortcut_ny3mq")
+shortcut_in_tooltip = false
+text = "Restart !"
 
 [node name="Musique" type="AudioStreamPlayer" parent="." unique_id=379982732]
 process_mode = 1
@@ -182,5 +218,6 @@ one_shot = true
 [connection signal="pressed" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="button_up" from="PauseContainer/PauseCenterContainer/VBoxContainer/OutPauseButton" to="." method="_on_out_pause_button_up"]
 [connection signal="button_up" from="PauseContainer/PauseCenterContainer/VBoxContainer/GiveupButton" to="." method="_on_giveup_button_up"]
+[connection signal="pressed" from="CreditContainer/CreditCenterContainer/VBoxContainer/RestartButton" to="." method="_on_retart_button_pressed"]
 [connection signal="timeout" from="TimerInactivite" to="." method="_on_timer_inactivite_timeout"]
 [connection signal="child_exiting_tree" from="Popup" to="." method="_on_popup_child_exiting_tree"]

@@ -135,6 +135,7 @@ func _attractor():
 func _repulsor():
 	for boid in _boids:
 		for repulsor in _repulsors:
+			if boid == null or repulsor == null : return
 			var dist = boid.get_global_position().distance_to(repulsor.get_global_position())
 			if (dist < repulsorMinDIst):
 				var dir = (boid.get_global_position() - repulsor.get_global_position()).normalized()

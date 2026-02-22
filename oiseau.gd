@@ -136,7 +136,7 @@ func freinage(delta : float):
 	if speedVect.length() <= 0.2 : # TODO : une constante à régler
 		# on s'arrête
 		speedVect = Vector3.ZERO
-		rotation.y = 0.0
+		#rotation.y = 0.0
 		position.y = tailleY # FIXME
 		return
 
@@ -146,7 +146,7 @@ func freinage(delta : float):
 	speedVect.rotated(Vector3.UP,-rotation.y /3)
 	speedVect.x *=  (1-forcefreinage)*(1-delta)
 	speedVect.z *=  (1-forcefreinage)*(1-delta)
-	rotate_y(-rotation.y /2) #FIXME constante à régler
+	#rotate_y(-rotation.y /2) #FIXME constante à régler
 	queue_next_anim(ANIM_RESET)
 	#print("freinage final=",speedVect.length())
 	
@@ -244,7 +244,7 @@ func _physics_process(delta: float) -> void:
 
 	elif enaction:
 		if autorotspeed != 0.0 :
-			virage(autorotspeed,delta)
+			virage(-autorotspeed,delta)
 		if actionencours == action.CORRECTION:
 			#print ("",speedVect.z," angle ",angle_correction)
 			
@@ -282,7 +282,7 @@ func _physics_process(delta: float) -> void:
 	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
 	if acorriger:
 		correction(correction_direction)
-		virage(autorotspeed,delta)
+		virage(-autorotspeed,delta)
 		acorriger = false
 
 	# Quand on est en vol régulier
@@ -380,6 +380,10 @@ func _physics_process(delta: float) -> void:
 func _on_area_influence_body_entered(body: Node3D) -> void:
 	# si c'est un oiseau bonus
 	if body.is_in_group( "Bonus" ) and body.leader == null :
+	# si c'est un oiseau bonus
+		if position.y <= ALTITUDE_LIBERATION_BONUS :
+			# on est trop bas, on ne peut plus accrocher un bonus (cas de fin de partie)
+			return
 		print("Un oiseau bonus capturé : ", body.name)
 		capture.emit()
 		nbcapture += 1  # Et c'est gam qui nous décrémente si on en perd un
@@ -390,7 +394,6 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 				arrfreemarks[i] = false
 				bonus.devient_suiveur_de(self, arrmarks[i]) #TODO : check return
 				break
-	pass # Replace with function body.
 
 
 func _on_area_influence_area_entered(area: Area3D) -> void:

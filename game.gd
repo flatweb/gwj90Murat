@@ -8,6 +8,7 @@ var game_area_size : AABB
 var nbcapture = 0
 var nbcaptureattendu = 0 # sera calculé fonction des noeuds OiseauBonus
 var indices = 3
+var endofgame : bool = false
 
 # signal émis à la fin du jeu pour prévenir le noeud off-play
 signal fini(score : int)
@@ -73,7 +74,9 @@ func fin(distance):
 		if max(nbcapture,$Oiseau.nbmaxcapture) >= nbcaptureattendu  :
 			# fin de partie, on renvoie la distance parcourue comme score
 			# en théorie, il faudrait avoir parcouru le moins possible
-			pushtext("Great !  You reached south with your colony")
+			print("fin de la partie")
+			pushtext("Great !  You reached south with your colony")			
+			endofgame = true
 			await get_tree().create_timer(5.0).timeout
 			fini.emit(distance)
 		else:
@@ -231,7 +234,11 @@ func _input(event: InputEvent) -> void:
 			txt = txt + "X"
 		%LabelIndices.text = txt
 	
-func _process(_delta):
+func _process(delta):
+	if endofgame : 
+		# unzoom
+		$CameraRig.unzoom(delta * 10)
+		
 	#print ("vvvvvvv")
 	#print ($Oiseau.rotation.z)
 	#print ($Camera3D.rotation.z)

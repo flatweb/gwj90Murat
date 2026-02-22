@@ -126,13 +126,13 @@ func _physics_process(delta: float) -> void:
 		# Si on est devant le marker du leader, on va surtout ralentir
 		# il faut que l'angle entre la direction du leader et l'angle 
 		# on va suivre un marker3D du "leader"
-		var tomarkerpos = tomarker.global_position
-		var selfpos = self.global_position
+		var _tomarkerpos = tomarker.global_position
+		var _selfpos = self.global_position
 		var vectdir : Vector3 = tomarker.global_position - self.global_position
 		var vectdironXZ = Vector3(vectdir.x,0,vectdir.z)
 		var vectdirY = Vector3(0,vectdir.y,0)
-		var orientationleader = -leader.transform.basis.z
-		var angleorientation = angle_on_XZ(-leader.transform.basis.z, vectdir)
+		var _orientationleader = -leader.transform.basis.z
+		var _angleorientation = angle_on_XZ(-leader.transform.basis.z, vectdir)
 		pass
 		var freinage
 		# 
@@ -219,7 +219,7 @@ func _physics_process(delta: float) -> void:
 
 	# altitude trop basse du leader, on se met en attente
 	# Ca devrait permettre aussi, d'animer la fin de jeu
-	if leader != null and leader.position.y < 2.0 :
+	if leader != null and leader.position.y < ALTITUDE_LIBERATION_BONUS :
 		print (self.name, " a perdu le leader trop bas")
 		
 		leader = null

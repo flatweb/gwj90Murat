@@ -1,4 +1,4 @@
-tool
+@tool
 extends Path
 
 export var curve_points:PoolVector3Array setget set_points, get_points

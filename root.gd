@@ -15,18 +15,31 @@ var game : Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PauseContainer.hide()
+	$CreditContainer.hide()
 	resized()
 	loadgame()
 
 func resized():
 	var vp : Viewport = get_viewport()
 	$PanelContainer.size = vp.size
-	$PauseContainer.size = vp.size
+	%PauseContainer.size = vp.size
+	%CreditContainer.size = vp.size
 
 func loadgame():
+	$PanelContainer.show()
+	%IntroContainer.show()
+	%Label.text = "Loading..."
+	%Label.show()
+	%StartButton.hide()
+	%AideButton.hide()
+	$PanelContainer/IntroContainer/RichTextDontWait.hide()
+	$PanelContainer/IntroContainer/RichTextIntro.hide()
+	$TimerInactivite.stop()
+	
 	# On vide la partie précédente
 	if game != null :
 		game.queue_free()
+		await get_tree().create_timer(2.0).timeout 
 		
 	var gametscn = load("res://game.tscn")
 	game = gametscn.instantiate()
@@ -34,14 +47,13 @@ func loadgame():
 	game.process_mode = Node.PROCESS_MODE_ALWAYS
 	$PanelContainer.add_sibling(game)
 	
-	%IntroContainer.show()
 	%Label.hide()
-	%VBoxScore.hide()
+	$PanelContainer/IntroContainer/RichTextDontWait.show()
+	$PanelContainer/IntroContainer/RichTextIntro.show()
 	%StartButton.text = "  Start !  "
 	%StartButton.show()
 	%AideButton.show()
 	%StartButton.grab_focus()
-	$TimerInactivite.stop()
 	waitingtostart = true
 	
 	get_tree().paused = true
@@ -76,35 +88,46 @@ func start():
 	waitingtostart = false
 	#
 	$TimerInactivite.stop()
-	%VBoxScore.hide()
 	%StartButton.hide()
 	%AideButton.hide()
 	%IntroContainer.hide()
 	$PanelContainer.hide()
-	$Musique.stop()
+	$PanelContainer/IntroContainer/RichTextDontWait.hide()
+	$PanelContainer/IntroContainer/RichTextIntro.hide()
 	get_tree().paused = false
 	
 	game.start()
 	
-func endofgame(_score : int):
+func endofgame(score : int):
 	$Musique.play()
 	get_tree().paused = true
 	
-	%Label.text = "You flew : %d km" % _score
-	%Label.show()
+	%LabelEndOfGame.text = "You flew : %d km" % score
+	%LabelEndOfGame.show()
+	
+	showcredits()
 
-	# Fin de partie ?
-	# Il n'y a plus de niveaux - Fin de partie
-	%StartButton.text = " Restart "
-	%StartButton.show()
-	%StartButton.grab_focus()
-	%AideButton.show()
-	%IntroContainer.show()
+	# Fin de partie
+	%RestartButton.show()
+	%RestartButton.grab_focus()
 	$TimerInactivite.start()
+
+func showcredits() -> void:
+	$CreditContainer.show()
+	# TODO : animation ....
 
 func _on_timer_inactivite_timeout() -> void:
 	# Se déclenche quand on a fini une partie et qu'on ne fait par Restart
+	%CreditContainer.hide()
+	%PauseContainer.hide()
+	get_tree().paused = false
 	loadgame()
+
+func _on_retart_button_pressed() -> void:
+	%CreditContainer.hide()
+	%PauseContainer.hide()
+	get_tree().paused = false
+	loadgame() # Replace with function body.
 
 func _input(event : InputEvent):
 	if not waitingtostart: return
@@ -112,7 +135,8 @@ func _input(event : InputEvent):
 	if Input.is_action_just_pressed("start"):
 		waitingtostart = false
 		start()
-	
+
+
 func _unhandled_input(event: InputEvent):
 	if (event.is_action_released("ui_cancel")):
 		if not get_tree().paused :
