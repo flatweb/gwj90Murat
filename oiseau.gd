@@ -384,7 +384,7 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 		if position.y <= ALTITUDE_LIBERATION_BONUS :
 			# on est trop bas, on ne peut plus accrocher un bonus (cas de fin de partie)
 			return
-		print("Un oiseau bonus capturé : ", body.name)
+		print("", body.name)
 		capture.emit()
 		nbcapture += 1  # Et c'est gam qui nous décrémente si on en perd un
 		hide_indice()

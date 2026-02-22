@@ -75,11 +75,11 @@ func init():
 
 func start():
 	$UI.show()
-	$UI.pushtext("It is time to migrate to south. Take off !")
+	$UI.pushtext("It is time to migrate bro.")
 	
 func fin(distance):
 	if inzonefin :
-		print("aterrissage réussi à l'arrivée")
+		print("aterrissage réussi")
 		
 		if max(nbcapture,$Oiseau.nbmaxcapture) >= nbcaptureattendu  :
 			# fin de partie, on renvoie la distance parcourue comme score
@@ -91,9 +91,9 @@ func fin(distance):
 			fini.emit(distance)
 		else:
 			print("pas assez de bonus")
-			pushtext("You are at south, but with not enough geeses to have a colony ! Go back !")
+			pushtext("Oh where are my other friends")
 	else:
-		pushtext("You landed somewhere to rest. Don't forget to go to south !")
+		pushtext("Dodo ?")
 
 func populatenuages():
 	var scene = preload("res://nuageblanc.tscn") 
@@ -252,7 +252,7 @@ func _input(event: InputEvent) -> void:
 				if dist < distmin and bonus.leader == null:
 					distmin = dist
 					bonusproche = bonus
-		pushtext("Follow the arrow to find next goose...")
+		pushtext("Maybe that can help you ?")
 		$Oiseau.show_indice(bonusproche)
 		indices -= 1
 		
