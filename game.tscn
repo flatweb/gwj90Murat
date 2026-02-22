@@ -256,7 +256,7 @@ offset_top = 14.0
 offset_right = 85.0
 offset_bottom = 52.0
 theme_override_font_sizes/font_size = 32
-text = "2"
+text = "0"
 
 [node name="TextureRect" type="TextureRect" parent="UI/HBoxContainerTop/TextureRect" unique_id=722719319]
 layout_mode = 1

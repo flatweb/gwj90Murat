@@ -158,6 +158,7 @@ func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_
 #------------------------------------------------------------
 func refresh_captures():
 	if nbcapture > 0 :
+		%LabelCaptures.text = "%d" % nbcapture
 		%LabelMaxCaptures.show()
 		%LabelMaxCaptures.text = "/ %d" % [nbcaptureattendu]
 	else :
