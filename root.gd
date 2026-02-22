@@ -99,7 +99,7 @@ func start():
 	game.start()
 	
 func endofgame(score : int):
-	$Musique.play()
+	#$Musique.play()
 	get_tree().paused = true
 	
 	%LabelEndOfGame.text = "You flew : %d km" % score
