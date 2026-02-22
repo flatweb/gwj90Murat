@@ -98,7 +98,6 @@ carTextures = Array[Texture2D]([ExtResource("4_viiqw"), ExtResource("5_105nu"), 
 
 [node name="MONTAGNES_TERRAIN" parent="." unique_id=508374464 instance=ExtResource("18_yye10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 362)
-metadata/_edit_lock_ = true
 
 [node name="00_ICEBERG_MAP" parent="." unique_id=395307854 instance=ExtResource("17_dcckh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 362)

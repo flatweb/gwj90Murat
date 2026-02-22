@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://qs3c01k3adni" path="res://res/texture/sol_ete_jaune.png" id="1_i8ad2"]
 [ext_resource type="Texture2D" uid="uid://bpq44evj0mvdu" path="res://res/modeles/04_ete_Bootstrap5-palette.png" id="2_50rb0"]
 [ext_resource type="Texture2D" uid="uid://bmctvr3bdbi6f" path="res://res/modeles/04_ete_riviere_gradient_ete.png" id="3_kcj7n"]
+[ext_resource type="PackedScene" uid="uid://xt4xf7ngbush" path="res://res/modeles/04_ete.glb" id="4_50rb0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50rb0"]
 albedo_texture = ExtResource("1_i8ad2")
@@ -119,6 +120,7 @@ shadow_mesh = SubResource("ArrayMesh_bs4ju")
 metadata/_edit_lock_ = true
 
 [node name="04_ete" type="Node3D" parent="." unique_id=460135884]
+visible = false
 
 [node name="04_sol" type="MeshInstance3D" parent="04_ete" unique_id=525597334]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
@@ -132,3 +134,5 @@ mesh = SubResource("ArrayMesh_y7h7c")
 [node name="04_route" type="MeshInstance3D" parent="04_ete/04_sol" unique_id=2078837752]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11.532257, 0.11928215, -1.8669772)
 mesh = SubResource("ArrayMesh_x65ww")
+
+[node name="04_ete2" parent="." unique_id=1710443363 instance=ExtResource("4_50rb0")]
