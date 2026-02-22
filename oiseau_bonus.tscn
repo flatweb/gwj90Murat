@@ -336,6 +336,7 @@ shape = SubResource("CylinderShape3D_uixgx")
 
 [node name="IndicateurAutre" type="MeshInstance3D" parent="." unique_id=1044168676]
 transform = Transform3D(0.29999995, 0, 0, 0, 0.29999995, 0, 0, 0, 0.29999995, 0, 0.23649982, -0.37498954)
+visible = false
 mesh = SubResource("SphereMesh_txqd7")
 
 [node name="OIE" type="Node3D" parent="." unique_id=1863756130]
