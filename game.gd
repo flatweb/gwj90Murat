@@ -22,13 +22,13 @@ func _ready():
 	
 	populatenuages()
 	
-	$Ground/CollisionGround.shape.size.x = game_area_size.size.x
-	$Ground/CollisionGround.shape.size.y = 1.0
-	$Ground/CollisionGround.shape.size.z = game_area_size.size.z
-	$Ground.position = $Level.position
-	$Ground.position.x += game_area_size.position.x+game_area_size.size.x/2
-	$Ground.position.y = -0.5
-	$Ground.position.z += game_area_size.position.z+game_area_size.size.z/2
+	#$Ground/CollisionGround.shape.size.x = game_area_size.size.x
+	#$Ground/CollisionGround.shape.size.y = 1.0
+	#$Ground/CollisionGround.shape.size.z = game_area_size.size.z
+	#$Ground.position = $Level.position
+	#$Ground.position.x += game_area_size.position.x+game_area_size.size.x/2
+	#$Ground.position.y = -0.5
+	#$Ground.position.z += game_area_size.position.z+game_area_size.size.z/2
 	
 	$Porte1Nuages.unlockcount = 2
 	$Porte1Nuages.pushtext.connect(pushtext.bind)

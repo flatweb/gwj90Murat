@@ -34,9 +34,8 @@ ssil_enabled = true
 glow_enabled = true
 glow_intensity = 0.1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_eow3j"]
-margin = 0.2
-size = Vector3(25, 1, 100)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_e8heu"]
+plane = Plane(0, 1, 0, 0.5)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hve3p"]
 height = 3.0
@@ -86,9 +85,9 @@ shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=886965380 groups=["sol"]]
 
-[node name="CollisionGround" type="CollisionShape3D" parent="Ground" unique_id=935773675]
-transform = Transform3D(1, 0, -2.9802322e-08, -2.9802322e-08, 1, 0, -1.4901161e-08, 0, 1.0000001, 0, -0.5000038, -194.7178)
-shape = SubResource("BoxShape3D_eow3j")
+[node name="CollisionGround" type="CollisionShape3D" parent="Ground" unique_id=935773675 groups=["sol"]]
+transform = Transform3D(1, 0, -2.9802322e-08, -2.9802322e-08, 1, 0, -1.4901161e-08, 0, 1.0000001, 0, -0.5, 0)
+shape = SubResource("WorldBoundaryShape3D_e8heu")
 debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
 
 [node name="Oiseau" parent="." unique_id=1267771531 groups=["Repulsor"] instance=ExtResource("1_80nbo")]
