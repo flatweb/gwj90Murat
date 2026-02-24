@@ -102,7 +102,7 @@ transform = Transform3D(0.9963472, -0.0808434, 0.027521344, 0.08084344, 0.996726
 texture = ExtResource("5_hb5m1")
 
 [node name="OiseauBonus1" parent="." unique_id=1559759492 instance=ExtResource("4_iotsf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.689692, 10, -13.833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.946657, 10, -2.6643639)
 texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus2" parent="." unique_id=783500081 instance=ExtResource("4_iotsf")]
@@ -110,7 +110,7 @@ transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.98023
 texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus3" parent="." unique_id=20151608 instance=ExtResource("4_iotsf")]
-transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0, 4, -134.393)
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -2.0783386, 4, -164.70244)
 texture = ExtResource("6_e8heu")
 
 [node name="OiseauBonus4" parent="." unique_id=692412367 instance=ExtResource("4_iotsf")]
@@ -122,15 +122,15 @@ transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.98023
 texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus6" parent="." unique_id=1456902037 instance=ExtResource("4_iotsf")]
-transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0.5727024, 10, -428.1245)
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, 0.5727024, 10, -417.42313)
 texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus7" parent="." unique_id=1446929511 instance=ExtResource("4_iotsf")]
-transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -40.314, 10, -363.81927)
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -40.314, 10, -379.5412)
 texture = ExtResource("5_7sc4i")
 
 [node name="OiseauBonus8" parent="." unique_id=1093410312 instance=ExtResource("4_iotsf")]
-transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -38.145508, 10, -320.3542)
+transform = Transform3D(0.9999999, 0, 1.4901161e-08, -2.9802322e-08, 1, -2.9802322e-08, 5.9604645e-08, 0, 0.99999994, -38.145508, 10, -330.8226)
 texture = ExtResource("5_7sc4i")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1517858812]

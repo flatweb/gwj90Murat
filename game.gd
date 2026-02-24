@@ -7,7 +7,7 @@ var game_area_size : AABB
 
 var nbcapture = 0
 var nbcaptureattendu = 0 # sera calculé fonction des noeuds OiseauBonus
-var indices = 3
+var indices = 4
 var endofgame : bool = false
 
 # signal émis à la fin du jeu pour prévenir le noeud off-play
@@ -184,7 +184,7 @@ func losebonus():
 	$Oiseau.losebonus()
 	refresh_captures()
 
-func _input(event: InputEvent) -> void:
+func cheatmode(event : InputEvent):
 	# Pour les tests : CheatMode pour démarrer plus loin
 	if (event.is_action_released("start1")):
 		$Marker3DStart.position.z = -50
@@ -219,28 +219,31 @@ func _input(event: InputEvent) -> void:
 		$Marker3DStart.position.z = -591
 		$Oiseau.start_aterri_at($Marker3DStart.position)
 		pass
-	refresh_captures()
-	
+
 	# force une fin immédiate pour tests
-	if (event.is_action_released("fin")):
+	if (event.is_action_released("fin")): #Shift+8
 		inzonefin = true
 		nbcaptureattendu = 0
 		fin(123) # on ne peut pas mettre $Oiseau ici
 		return
 	
 	# fait disparaitre les boids
-	if (event.is_action_released("noboids")):
+	if (event.is_action_released("noboids")): #Shift+9
 		$Flock.queue_free()
 		
-	if (event.is_action_released("groupbonus")):
-		# Presque à l'arrivée
-		var posbonus1 = $Oiseau.position
+	if (event.is_action_released("getbonus")): #Shift+0
+		# déplacer l'un des bonus libres juste devant soi
 		var decalage = Vector3.ZERO
 		for bonus in get_tree().get_nodes_in_group("Bonus"):
 			if bonus.leader == null :
 				decalage +=  Vector3 (2.0,0.0,-4.0)
-				bonus.position = posbonus1 + decalage
+				bonus.position = $Oiseau.position + decalage
 				break
+
+func _input(event: InputEvent) -> void:
+	# traitement des touches cheat mode
+	cheatmode(event)
+	refresh_captures()
 		
 	if (event.is_action_released("indice")):
 		if indices <= 0 :

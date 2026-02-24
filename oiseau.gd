@@ -349,11 +349,13 @@ func _physics_process(delta: float) -> void:
 				or obj.is_in_group("limite") \
 				or obj.name.contains("montagne") \
 				:
-				if not (enaction and actionencours == action.CORRECTION):
+				if not (enaction and actionencours == action.CORRECTION) \
+				   and not (enaction and actionencours == action.ATERRI):
 					print("Oiseau collides avec ",obj.name," par ",normal)
 					# on vient de rentrer dans un mur
-				start_correction(normal)
-				# on verra le résultat au prochain cycle
+					
+					start_correction(normal)
+					# on verra le résultat au prochain cycle
 			elif obj.is_in_group("Bonus"):
 				# on est rentré dans un autre oiseau (bonus), on va dévier simplement
 				if not (enaction and actionencours == action.CORRECTION):

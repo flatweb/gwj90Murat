@@ -168,7 +168,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			speedVect.y = 0
 		
-		var angley = -angle_on_XZ(vectdir,-transform.basis.z)
+		var angley = angle_on_XZ(vectdir,-transform.basis.z)
 		#print ("angle=",rad_to_deg(angley))
 		# on tourne au maximum tant qu'on est au-dessus de 30°
 		virage(min(abs(angley/(PI/6)),1)*(1 if angley<0 else -1),delta)
@@ -219,7 +219,7 @@ func _physics_process(delta: float) -> void:
 	# altitude trop basse du leader, on se met en attente
 	# Ca devrait permettre aussi, d'animer la fin de jeu
 	if leader != null and leader.position.y < ALTITUDE_LIBERATION_BONUS :
-		print (self.name, " a perdu le joueur trop bas")
+		print (self.name, " a perdu le leader trop bas")
 		
 		leader = null
 		# On résactive la layer 3 pour réclencher une capture
@@ -230,7 +230,7 @@ func _physics_process(delta: float) -> void:
 		perdu.emit() # à destination du game
 		
 	elif leader != null and distance_au_leader() > ECART_TROP_LOIN:
-		print (self.name, " a perdu le joueur")
+		print (self.name, " a perdu le leader")
 		leader = null
 		# On résactive la layer 3 pour réclencher une capture
 		self.set_collision_layer_value(3, true)

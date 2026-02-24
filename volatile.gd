@@ -237,7 +237,7 @@ func _on_loop_sound():
 func angle_on_XZ(v1 : Vector3, v2 : Vector3) -> float:
 	var v1h = Vector2(v1.x, v1.z)
 	var v2h = Vector2(v2.x, v2.z)
-	var angle : float = v1h.angle_to(v2h)
+	var angle : float = v2h.angle_to(v1h)
 	return angle
 
 func dot_on_XZ(v1 : Vector3, v2 : Vector3) -> float:

@@ -5,6 +5,8 @@ extends Node3D
 @export var carTextures : Array[Texture2D]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$Limites/StaticBody3D17.queue_free()
+	$Limites/StaticBody3D.queue_free()
 	#Charge les voitures sur les chemins avec le groupe isRoad
 	var _roads = get_tree().get_nodes_in_group("isRoad")
 	for road in _roads:
