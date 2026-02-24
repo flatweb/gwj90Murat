@@ -77,7 +77,8 @@ func init():
 
 func start():
 	$UI.show()
-	$UI.pushtext("It is time to migrate bro, \n i need to find my friends")
+	$UI.pushtext("It is time to migrate bro !")
+	$UI.pushtext("I need to find my friends")
 	
 func fin(distance):
 	if inzonefin :
