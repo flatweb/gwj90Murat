@@ -147,10 +147,9 @@ text = "  Continue  "
 
 [node name="GiveupButton" type="Button" parent="PauseContainer/PauseCenterContainer/VBoxContainer" unique_id=696176985]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme = ExtResource("5_1hc85")
-text = "  Give up  "
+text = "Try again"
 
 [node name="CreditContainer" type="PanelContainer" parent="." unique_id=377605044]
 unique_name_in_owner = true

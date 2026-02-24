@@ -89,7 +89,7 @@ func fin(distance):
 			# fin de partie, on renvoie la distance parcourue comme score
 			# en théorie, il faudrait avoir parcouru le moins possible
 			print("fin de la partie ?")
-			pushtext("We arrive !!! ")			
+			pushtext("We are arrived !!! ")			
 			endofgame = true
 			await get_tree().create_timer(5.0).timeout
 			fini.emit(distance)
@@ -167,6 +167,7 @@ func refresh_captures():
 	
 func addcapture():
 	nbcapture = $Oiseau.nbcapture
+	pushtext("Yes ! a new friend goose to go further")
 
 	var bird : TextureRect = TextureRect.new()
 	bird.texture = load("res://res/sprites/bird.png")
@@ -182,8 +183,10 @@ func losebonus():
 	if textrect != null :
 		textrect.queue_free()
 	
-	$Oiseau.losebonus()
-	refresh_captures()
+	if not inzonefin:
+		pushtext("Eh ! why do you leave me ?")
+		$Oiseau.losebonus()
+		refresh_captures()
 
 func cheatmode(event : InputEvent):
 	# Pour les tests : CheatMode pour démarrer plus loin
