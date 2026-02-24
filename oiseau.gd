@@ -345,7 +345,10 @@ func _physics_process(delta: float) -> void:
 				else:
 					# on finit l'aterrissage
 					aterrissage()
-			elif obj.name.contains("Static") or obj.is_in_group("limite"):
+			elif obj.name.contains("Static") \
+				or obj.is_in_group("limite") \
+				or obj.name.contains("montagne") \
+				:
 				if not (enaction and actionencours == action.CORRECTION):
 					print("Oiseau collides avec ",obj.name," par ",normal)
 					# on vient de rentrer dans un mur
