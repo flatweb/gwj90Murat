@@ -158,9 +158,9 @@ func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_
 # Gestion des captures de Bonus
 #------------------------------------------------------------
 func refresh_captures():
+	%LabelCaptures.text = "%d" % nbcapture
+	%LabelMaxCaptures.show()
 	if nbcapture > 0 :
-		%LabelCaptures.text = "%d" % nbcapture
-		%LabelMaxCaptures.show()
 		%LabelMaxCaptures.text = "/ %d" % [nbcaptureattendu]
 	else :
 		$%LabelMaxCaptures.hide()
@@ -174,18 +174,22 @@ func addcapture():
 	var pngsize = bird.texture.get_size()
 	var pngpos : Vector2 = Vector2(pngsize.x*(0.5 + nbcapture), pngsize.y/2)
 	bird.position = pngpos
-	%HBoxCaptures.add_child(bird)
+	if %HBoxCaptures.visible :
+		# utilisé tant que les captures étaient affichées sous forme d'icones
+		%HBoxCaptures.add_child(bird)
 	refresh_captures()
 
 func losebonus():
-	nbcapture  = $Oiseau.nbcapture
-	var textrect = %HBoxCaptures.get_child(0)
-	if textrect != null :
-		textrect.queue_free()
+	if %HBoxCaptures.visible :
+		# utilisé tant que les captures étaient affichées sous forme d'icones
+		var textrect = %HBoxCaptures.get_child(0)
+		if textrect != null :
+			textrect.queue_free()
 	
 	if not inzonefin:
 		pushtext("Eh ! why do you leave me ?")
 		$Oiseau.losebonus()
+		nbcapture  = $Oiseau.nbcapture
 		refresh_captures()
 
 func cheatmode(event : InputEvent):

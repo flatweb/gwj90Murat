@@ -50,7 +50,6 @@ func start_aterri_at(pos : Vector3):
 	_anim_repos()
 	speedVect = Vector3.ZERO
 	self.position = pos
-	enaction = true
 	actionencours = action.ATERRI
 	
 func demarre():
@@ -83,7 +82,6 @@ func show_indice(bonus : VolatileBody3D):
 	refresh_indice()
 
 func losebonus():
-	nbmaxcapture += 1
 	nbcapture -= 1
 	pass
 
@@ -92,11 +90,10 @@ func losebonus():
 # -----------------------------------------------------------------
 
 func do_decolle():
-	enaction = true
 	actionencours = action.DECOLLAGE
 	nbmaxcapture = 0
-	speedVect.z = -speedfront
-	self.rotation = Vector3.ZERO
+	speedVect = -transform.basis.z*speedfront
+	pass
 
 func looping():
 	pass
@@ -136,27 +133,26 @@ func freinage(delta : float):
 	if speedVect.length() <= 0.2 : # TODO : une constante à régler
 		# on s'arrête
 		speedVect = Vector3.ZERO
-		#rotation.y = 0.0
-		position.y = tailleY # FIXME
+		position.y = tailleY/2 # FIXME
+		# le changement d'actionencours se fera au cycle suivant
 		return
 
+	# la force de freinage augmente avec le temps (why not)
 	forcefreinage *= (1+delta)
 	#print("freinage avant=",speedVect.length()," * ",(1-forcefreinage)*(1-delta))
 	speedVect.y =  0.0
 	speedVect.rotated(Vector3.UP,-rotation.y /3)
 	speedVect.x *=  (1-forcefreinage)*(1-delta)
 	speedVect.z *=  (1-forcefreinage)*(1-delta)
-	#rotate_y(-rotation.y /2) #FIXME constante à régler
 	queue_next_anim(ANIM_RESET)
 	#print("freinage final=",speedVect.length())
 	
 func aterrissage():
-	enaction = true
 	actionencours = action.ATERRISSAGE
 	speedVect.y = 0.0
-	position.y = 0.5 #tailleY/2
+	position.y = tailleY/2
 	$OIE.rotation.x = 0.0
-	$OIE.rotation.y = 0.0 # FIXME
+#	$OIE.rotation.y = 0.0 # FIXME
 	forcefreinage = FORCE_FREINAGE
 	queue_next_anim(ANIM_PLANE)
 	$AudioPlayerCri.play(3.0)
@@ -212,17 +208,16 @@ func _physics_process(delta: float) -> void:
 		
 	# Si il y a une action automatique en cours, on privilégie l'action
 	# TODO : déplacer ça en résultat de do_action ?
-	if enaction and actionencours == action.ATTENTE \
+	if actionencours == action.ATTENTE \
 				and (vire != 0 or pique or monte):
 		# sortie du mode attente, pour se remettre dans l'axe
-		enaction = false
-		correction()
-	if enaction and actionencours == action.ATERRI \
+		actionencours = action.AUCUNE
+	elif actionencours == action.ATERRI \
 		and (Input.is_action_pressed("decolle") or monte):
 			do_decolle()
 	
 	# Si pas d'action automatique, on cherche une commande
-	if not enaction:
+	if actionencours == action.AUCUNE:
 		if pique :
 			descendre(delta)
 			mouvement = true
@@ -242,15 +237,17 @@ func _physics_process(delta: float) -> void:
 			# 1. retour naturel à une inclinaison normale latérale sans action
 			redresse(delta)
 
-	elif enaction:
+	else:
+		# si on est déjà dans un virage automatiq
 		if autorotspeed != 0.0 :
 			virage(-autorotspeed,delta)
+		# et si en plus on est en correction
 		if actionencours == action.CORRECTION:
 			#print ("",speedVect.z," angle ",angle_correction)
 			
 			if abs(angle_on_XZ(correction_direction,speedVect)) <= 0.1 : # FIXME : risque d'aller trop loin
 				print("Fin de correction pour ", self.name)
-				enaction = false
+				actionencours = action.AUCUNE
 				# on repart tout droit
 				autorotspeed = 0.0
 		elif actionencours == action.ATERRISSAGE:
@@ -258,9 +255,9 @@ func _physics_process(delta: float) -> void:
 				freinage(delta)
 			else:
 				# on est arrêté
-				enaction = true
 				actionencours = action.ATERRI
-				$OIE.rotation.z = 0.0
+				$OIE.rotation.z = 0.0 # on se remet bien à plat
+				$OIE.rotation.x = 0.0 # on se remet bien à plat
 				print("Aterrissage réussi")
 				aterri.emit(distance)
 				queue_next_anim(ANIM_REPOS)
@@ -268,9 +265,10 @@ func _physics_process(delta: float) -> void:
 		elif actionencours == action.DECOLLAGE:
 			queue_next_anim(ANIM_VOL)
 			remonte(delta)
-			mouvement = pique or monte # FIXME à supprimer après test
-			if position.y > 1.0 :
-				enaction = false
+			mouvement = true
+			if position.y > tailleY*2 :
+				# fin de la phase de décollage si on est suffisamment haut
+				actionencours = action.AUCUNE
 		elif actionencours == action.ATTENTE:
 			# on laisse tourner
 			pass
@@ -279,14 +277,14 @@ func _physics_process(delta: float) -> void:
 	if speedVect.y > 0 and pique:
 		pass
 
-	# S'assurer qu'on ne va pas toucher les limites en X de la zone de vol
+	# S'assurer qu'on ne va pas toucher les limites de la zone de vol ou toucher les murs
 	if acorriger:
 		correction(correction_direction)
 		virage(-autorotspeed,delta)
 		acorriger = false
 
 	# Quand on est en vol régulier
-	if not enaction and not mouvement:
+	if actionencours == action.AUCUNE and not mouvement:
 		# 1. on remonte si on est trop bas
 		if self.position.y < startpos.y - ECART_ALTITUDE:
 			remonte(delta)
@@ -294,7 +292,7 @@ func _physics_process(delta: float) -> void:
 			mouvement = true
 		
 	# Quand on est VRAIMENT en vol régulier
-	if not enaction and not mouvement:
+	if actionencours == action.AUCUNE and not mouvement:
 		# 2. Equilibrage vertical, pour se remettre à plat
 		if $OIE.rotation.x != 0 :
 			# changement d'inclinaison (axe X), un peu lente
@@ -337,28 +335,28 @@ func _physics_process(delta: float) -> void:
 			var normal : Vector3 = collisions.get_normal(i)
 			if obj.is_in_group("sol"):
 				print(self.name, "en collision avec le sol")
-				if enaction and \
-					  (actionencours == action.DECOLLAGE or \
-					   actionencours == action.ATERRI) :
-					#on ignore la collision résiduelle
+				if (actionencours == action.DECOLLAGE or \
+					actionencours == action.ATERRI) :
+					#on ignore la collision résiduelle avec le sol
 					pass
 				else:
-					# on finit l'aterrissage
+					# on fait/finit l'aterrissage
 					aterrissage()
 			elif obj.name.contains("Static") \
 				or obj.is_in_group("limite") \
 				or obj.name.contains("montagne") \
 				:
-				if not (enaction and actionencours == action.CORRECTION) \
-				   and not (enaction and actionencours == action.ATERRI):
+				if not (actionencours == action.CORRECTION) \
+				   and not (actionencours == action.ATERRI):
 					print("Oiseau collides avec ",obj.name," par ",normal)
 					# on vient de rentrer dans un mur
 					
 					start_correction(normal)
 					# on verra le résultat au prochain cycle
 			elif obj.is_in_group("Bonus"):
+				# TODO : clarifier cette situation
 				# on est rentré dans un autre oiseau (bonus), on va dévier simplement
-				if not (enaction and actionencours == action.CORRECTION):
+				if not (actionencours == action.CORRECTION):
 					pass
 					#correction()
 				#virage(autorotspeed,delta)

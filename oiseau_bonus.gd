@@ -30,8 +30,10 @@ func _ready():
 	super._ready()
 	tailleY = 0.8 # TODO
 	
-	# on démarre en se mettant en attente, à vitese réduite
 	en_vol = true  # on considère bien qu'on est en vol puisqu'on démarre dans le ciel
+	# on part en avant...
+	speedVect = Vector3.FORWARD * speedfront
+	# on démarre en se mettant en attente, ce qui va réduire la vitesse
 	mise_en_attente()
 	
 	mesh = $OIE/Armature/Skeleton3D/Cube
@@ -44,8 +46,8 @@ func meurt():
 	pass
 
 func mise_en_attente():
-	# vitese réduite pour nous
-	speedVect = Vector3(0,0,-speedfront/2)
+	# vitese réduite pour nous, mais on ne touche pas à la direction
+	speedVect *= 0.5
 	attente()
 
 
@@ -59,11 +61,9 @@ func devient_suiveur_de(_leader : Node3D, atmarks : Marker3D) -> bool :
 	self.tomarker = atmarks
 	print (self.name, " suit ", atmarks.name)
 	speedVect = speedVect.normalized() * speedfront
-	if enaction :
-		if actionencours == action.ATTENTE :
-			enaction = false
-			print(self.name," en décrochage")
-			decroche() # on décroche
+	if actionencours == action.ATTENTE :
+		print(self.name," en décrochage")
+		decroche() # on décroche
 	# On désactive les layers 2 et 3? pour ne plus déclencher la capture
 	self.set_collision_layer_value(3, false)
 	
@@ -97,8 +97,8 @@ func _physics_process(delta: float) -> void:
 	
 	## On va faire simple :
 	if leader == null :
-		if enaction and actionencours == action.ATERRI:
-			# Si on est posé, on ne fait rien
+		if actionencours == action.ATERRI:
+			# Si on est posé, on ne fait rien, mais pour l'instant on ne sait pas vraiment aterrir : TODO à tester un jour
 			pass
 		else:
 			# sinon on continue le mouvement en cours
@@ -111,7 +111,7 @@ func _physics_process(delta: float) -> void:
 				if abs(rotation.y) <= 0.01 : # FIXME :
 					print ("un bisou pour", self.name)
 					#Fin de correction
-					enaction = false
+					actionencours = action.AUCUNE
 					# on repart tout droit
 					autorotspeed = 0.0
 	else:
@@ -176,6 +176,7 @@ func _physics_process(delta: float) -> void:
 	var collisions : KinematicCollision3D
 	collisions = move_and_collide(speedVect*delta)
 	
+	# si il y a des collisions
 	if (collisions != null ):
 		for i in range(0,collisions.get_collision_count()):
 			var obj : Node3D = collisions.get_collider(i)
@@ -184,7 +185,7 @@ func _physics_process(delta: float) -> void:
 			var normal : Vector3 = collisions.get_normal(i)
 			if obj.is_in_group("sol"):
 				print(self.name," en contact avec le sol")
-				if enaction and actionencours == action.DECOLLAGE :
+				if actionencours == action.DECOLLAGE :
 					#on ignore la collision résiduelle
 					pass
 				else:
@@ -195,7 +196,7 @@ func _physics_process(delta: float) -> void:
 				print(self.name," collides avec un static ",obj.name," par ",normal)
 				# on vient de rentrer dans un mur ou un boids, ce n'est pas normal
 				var groups = obj.get_groups()
-				print ("Choc de ",self.name," contre un Static : free de ",obj.name, " dans groupe ", obj.get_groups())
+				print ("Choc de ",self.name," contre un Static : on opère un virage de correction")
 				correction(normal)
 				virage(autorotspeed,delta)
 				# on le fait plutôt disparaitre
@@ -211,30 +212,22 @@ func _physics_process(delta: float) -> void:
 				# TODO : faire qqchose ?
 				pass
 	
-	elif enaction and actionencours == action.CORRECTION :
-		# plus de collision, on reprend son chemin
-		print ("What !!!!")
-		enaction = false
-
 	# altitude trop basse du leader, on se met en attente
 	# Ca devrait permettre aussi, d'animer la fin de jeu
 	if leader != null and leader.position.y < ALTITUDE_LIBERATION_BONUS :
 		print (self.name, " a perdu le leader trop bas")
-		
-		leader = null
-		# On résactive la layer 3 pour réclencher une capture
-		self.set_collision_layer_value(3, true)
-		position.y = 5.0 # FIXME : trop violent
-		mise_en_attente()
-		$AudioPlayerLost.play(4.0)
-		perdu.emit() # à destination du game
+		position.y = 5.0 # FIXME : un peu trop violent
+		perte_du_leader()
 		
 	elif leader != null and distance_au_leader() > ECART_TROP_LOIN:
 		print (self.name, " a perdu le leader")
-		leader = null
-		# On résactive la layer 3 pour réclencher une capture
-		self.set_collision_layer_value(3, true)
-		$AudioPlayerLost.play()
-		mise_en_attente()
-		perdu.emit() # à destination du game
+		perte_du_leader()
 		
+
+func perte_du_leader() -> void:
+	leader = null
+	# On résactive la layer 3 pour réclencher une capture
+	self.set_collision_layer_value(3, true)
+	$AudioPlayerLost.play()
+	mise_en_attente()
+	perdu.emit() # à destination du game

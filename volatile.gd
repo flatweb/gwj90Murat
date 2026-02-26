@@ -65,7 +65,6 @@ enum action { AUCUNE, CORRECTION, ATTENTE, LOOPING, ATERRISSAGE, ATERRI, DECOLLA
 
 # indicateur de correction de trajectoire.
 # On perd le contrôle tant qu'on est pas revenu dans la zone et de face
-var enaction : bool = false
 var actionencours : action = action.AUCUNE
 # Durée restante du décrochage, avant reprise normale du vol
 var decrochage_duree : float = 0.0
@@ -209,13 +208,17 @@ func _anim_repos():  # TODO
 func _anim_decollage():  # TODO
 	_anim_start_vol()
 
-
+## Fonction de variation aléatoire 
 func anim_autoswitch():
-	if enaction : return
-	if nextanim == ANIM_RESET : return
+	# Si on est déjà dans une phase d'action, on ignore l'autoswitch
+	if actionencours != action.AUCUNE : return
+	# Si on est dans une phase de retour au repos, on ignore l'autoswitch
+	if nextanim == ANIM_RESET or nextanim == ANIM_REPOS : return
+	
 	#FIXME if position.y > startpos.y : return # TODO : pas joli
 	
-	if randf() < 0.25 :
+	# On passe en vol plané dans 50% des cas
+	if randf() < 0.5 :
 		queue_next_anim(ANIM_PLANE)
 	else:
 		queue_next_anim(ANIM_VOL)
@@ -244,11 +247,12 @@ func dot_on_XZ(v1 : Vector3, v2 : Vector3) -> float:
 	return (v1.x * v2.x) + (v1.z * v2.z)
 
 func attente():
-	if enaction == false :
-		enaction = true
+	if actionencours == action.AUCUNE :
 		actionencours = action.ATTENTE
 		autorotspeed = calc_rot_speed(FACTEUR_ATTENTE)
 		queue_next_anim(ANIM_VOL)
+	# sinon on ne passe pas en attente ? TODO/FIXME à creuser
+	
 
 ## Calcul de l'angle de virage, en fonction de l'action, modulé par un facteur
 func calc_rot_speed(facteur : float) -> float :
@@ -273,7 +277,7 @@ func virage(change : float, delta : float):
 		#print ("WARNING ! virage avec change = 0") #FIXME
 		return
 	var angle : float = change*ANGLE_VIRAGE*delta
-	if enaction and actionencours == action.CORRECTION:
+	if actionencours == action.CORRECTION:
 		#print (rotation.y)
 		var ecart : float = angle_on_XZ(correction_direction, speedVect)
 		
@@ -306,14 +310,14 @@ func redresse(delta : float, force: float = 1.0):
 # Note: la correction est nécessairement dans le plan XZ
 # donc on met tous les y à 0 et on travaille en Vector2
 func correction(normal : Vector3 = Vector3.ZERO):
-	if enaction == false :
+	if actionencours == action.AUCUNE :
 		print("Début de correction pour ", self.name)
-		enaction = true
 		actionencours = action.CORRECTION
 		correction_direction = normal
 		autorotspeed = calc_rot_speed_normal(normal,FACTEUR_CORRECTION)
 		if get_node_or_null("AudioPlayerCri") != null:
 			$AudioPlayerCri.play(4.0)
+	#sinon on ne corrige pas ??? donc on va se planter dans le mur FIXME
 
 func plane(delta : float):
 	if speedVect.y > 0:
@@ -375,13 +379,13 @@ func remonte(delta : float, rotx = true):
 
 func decroche(delta : float = 0.0, duree : float = 0.0):
 	if decrochage_duree == 0.0 :
+		# début du décrochage
 		decrochage_duree = duree if duree != 0 else DUREE_DECROCHAGE
-	if not enaction or actionencours != action.DECROCHE : #FIXME on peut avoir des cas plus particuliers
+	if actionencours == action.AUCUNE or actionencours != action.DECROCHE : #FIXME on peut avoir des cas plus particuliers
 		# perturbation directe unique liée à un contact avec un obstacle
 		var angle = randf_range(-PI/4,PI/4)
 		speedVect = speedVect.rotated(Vector3.UP, angle)
 		self.rotate_y(angle)
-	enaction = true
 	actionencours = action.DECROCHE
 	# on descend 
 	position.y -= speeddown * 2.0 * delta
@@ -391,14 +395,13 @@ func decroche(delta : float = 0.0, duree : float = 0.0):
 		print ("Fin du décrochage pour ", self.name)
 		decrochage_duree = 0.0
 		fin_decrochage()
-		enaction = false
+		actionencours = action.AUCUNE
 
 @abstract func do_decolle()
 
 func _physics_process(delta: float) -> void:
-	if enaction :
-		if actionencours == action.DECROCHE :
-			decroche(delta)
+	if actionencours == action.DECROCHE :
+		decroche(delta)
 	
 func _process(delta: float) -> void:
 	pass
