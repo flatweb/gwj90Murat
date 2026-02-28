@@ -29,6 +29,7 @@ var maximumz : float
 const MARGE_MAXIMUMZ = 5.0
 
 # pour envoyer des messages à game
+@warning_ignore("unused_signal")
 signal pushtext(txt : String)
 
 func _init():
@@ -208,7 +209,6 @@ func _physics_process(delta: float) -> void:
 	var monte = Input.is_action_pressed("monte")
 	var pique = Input.is_action_pressed("descend")
 	var mouvement :bool = false
-	var mouvementupdown :bool = false # ne sert à rien ?
 	
 	#pour mettre un point d'arrêt
 	if speedVect.y > 0 and pique :
@@ -229,12 +229,10 @@ func _physics_process(delta: float) -> void:
 		if pique :
 			descendre(delta)
 			mouvement = true
-			mouvementupdown = true
 			# on ne combine pas pique et changement de direction
 		elif monte :
 			monter(delta)
 			mouvement = true
-			mouvementupdown = true
 		# on ne combine pas montée et changement de direction ?!?: TODO: a faire
 		if vire != 0:
 			# changement de direction
