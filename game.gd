@@ -10,6 +10,9 @@ var nbcaptureattendu = 0 # sera calculé fonction des noeuds OiseauBonus
 var indices = 4
 var endofgame : bool = false
 
+# Nombre de nuages que l'on fait aparaitre aléatoirement
+const MAXNUAGES : int = 100
+
 # signal émis à la fin du jeu pour prévenir le noeud off-play
 signal fini(score : int)
 signal sendtext(txt : String) # TODO
@@ -108,7 +111,7 @@ func populatenuages():
 	nuage_area_size.position.y = 5.0  # TODO constante ou réglage
 	nuage_area_size.end.y = 30.0  # TODO constante ou réglage
 	
-	for i in range(0,100):  #FIXME constante ou réglage
+	for i in range(0,MAXNUAGES):  #FIXME constante ou réglage
 		instance = scene.instantiate()
 		instance.process_mode = Node.PROCESS_MODE_DISABLED
 		instance.createin(nuage_area_size)

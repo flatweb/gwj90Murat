@@ -143,7 +143,7 @@ func _change_anim(anim_name):
 				ANIM_PLANE:
 					_anim_vol_to_plane()
 				ANIM_REPOS:
-					_anim_repos() #FIXME
+					_anim_vol_to_repos()
 				_ :
 					_anim_vol()
 		ANIM_PLANE:
@@ -177,33 +177,38 @@ func _anim_start_vol():
 		$AudioPlayerAiles.play()
 	
 func _anim_vol():
-	nextanim = ANIM_VOL
 	$OIE/AnimationPlayer.play(nextanim)
+	nextanim = ANIM_VOL
 
 func _anim_plane_to_vol():
-	nextanim = ANIM_VOL
 	$OIE/AnimationPlayer.play_section(ANIM_VOL, 0.3, -1.0)
+	nextanim = ANIM_VOL
 	if  get_node_or_null("AudioPlayerAiles") != null:
 		$AudioPlayerAiles.play()
 
 func _anim_vol_to_plane():
-	nextanim = ANIM_PLANE
 	$OIE/AnimationPlayer.play_section(ANIM_PLANE, 0.0, 0.3)
+	nextanim = ANIM_PLANE
+
+func _anim_vol_to_repos():
+	_anim_vol_to_plane()
+	nextanim = ANIM_REPOS
+	# TODO
 
 func _anim_plane():
 	$TimerAttenteAnim.start(1.0)
-	nextanim = ANIM_PLANE
 	$OIE/AnimationPlayer.play_section(ANIM_PLANE, 0.29, 0.31)
+	nextanim = ANIM_PLANE
 
 func _anim_reset():
 	$TimerAttenteAnim.start(1.0)
-	nextanim = ANIM_RESET
 	$OIE/AnimationPlayer.play(ANIM_RESET)
+	nextanim = ANIM_RESET
 
 func _anim_repos():  # TODO
 	$TimerAttenteAnim.start(1.0)
-	nextanim = ANIM_RESET
 	$OIE/AnimationPlayer.play(ANIM_RESET)
+	nextanim = ANIM_RESET
 
 func _anim_decollage():  # TODO
 	_anim_start_vol()
@@ -294,16 +299,15 @@ func virage(change : float, delta : float):
 	speedVect = speedVect.rotated(Vector3.UP, angle)
 	
 	# changement d'inclinaison (axe Z)
-	if abs($OIE.rotation.z) < abs(change)*INCLINAISON_MAX_VIRAGE :
+	var inclinaison = min(max(change,-1),1)
+	if abs($OIE.rotation.z) < abs(inclinaison)*INCLINAISON_MAX_VIRAGE :
 		#print("vire from ",$OIE.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
-		$OIE.rotate_z(min(max(change,-1),1)*ROTSPEED*delta)
-	elif abs($OIE.rotation.z) > abs(change)*INCLINAISON_MAX_VIRAGE * 1.2:
+		$OIE.rotate_z(inclinaison*ROTSPEED*delta)
+	elif abs($OIE.rotation.z) > abs(inclinaison)*INCLINAISON_MAX_VIRAGE * 1.2:
 		# on peut commencer à redresser
-		redresse(delta, abs(change))
+		redresse(delta, inclinaison)
 
 func redresse(delta : float, force: float = 1.0):
-	if force != 1.0 :
-		pass
 	if abs($OIE.rotation.z) < ROTBACKSPEED*delta :
 		$OIE.rotation.z = 0
 	else:

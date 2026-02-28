@@ -141,7 +141,7 @@ func freinage(delta : float):
 	if speedVect.length() <= 0.2 : # TODO : une constante à régler
 		# on s'arrête
 		speedVect = Vector3.ZERO
-		position.y = tailleY/2 # FIXME
+		position.y = tailleY/2 # Un peu arbitraire, mais ça marche
 		# le changement d'actionencours se fera au cycle suivant
 		return
 
@@ -160,9 +160,9 @@ func aterrissage():
 	speedVect.y = 0.0
 	position.y = tailleY/2
 	$OIE.rotation.x = 0.0
-#	$OIE.rotation.y = 0.0 # FIXME
+	#$OIE.rotation.z = 0.0
 	forcefreinage = FORCE_FREINAGE
-	queue_next_anim(ANIM_PLANE)
+	queue_next_anim(ANIM_PLANE) # FIXME : c'est tellement rapide, qu'on a pas le temps de passer en plane, qu'on demande déjà le REPOS
 	$AudioPlayerCri.play(3.0)
 
 #---------------------------------------------------------------
@@ -246,7 +246,7 @@ func _physics_process(delta: float) -> void:
 			redresse(delta)
 
 	else:
-		# si on est déjà dans un virage automatiq
+		# si on est déjà dans un virage automatique
 		if autorotspeed != 0.0 :
 			virage(-autorotspeed,delta)
 		# et si en plus on est en correction
@@ -405,13 +405,6 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 				bonus.perdu.connect(losebonus.bind())
 				bonus.devient_suiveur_de(self, arrmarks[i]) #TODO : check return
 				break
-
-
-func _on_area_influence_area_entered(area: Area3D) -> void:
-	if area.is_in_group("limite"):
-		pass #FIXME : ça sert à quoi ?
-	pass # Replace with function body.
-
 
 func _on_timer_timeout() -> void:
 	pass # Replace with function body.
