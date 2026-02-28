@@ -251,6 +251,8 @@ func attente():
 		actionencours = action.ATTENTE
 		autorotspeed = calc_rot_speed(FACTEUR_ATTENTE)
 		queue_next_anim(ANIM_VOL)
+		# on arrête de descendre ou de monter
+		speedVect.y = 0.0
 	# sinon on ne passe pas en attente ? TODO/FIXME à creuser
 	
 

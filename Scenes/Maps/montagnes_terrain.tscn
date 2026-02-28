@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://rmt1u3r5ro6g"]
 
 [ext_resource type="PackedScene" uid="uid://8v03pxmd6ydf" path="res://res/modeles/montagnes.glb" id="1_4xk5w"]
-[ext_resource type="PackedScene" uid="uid://dfibrj1ej8ep0" path="res://res/modeles/montagnes.collisions.glb" id="2_4lko5"]
+[ext_resource type="PackedScene" uid="uid://b1erhcs5kmb62" path="res://Scenes/Maps/montagnes_collisions.tscn" id="2_4lko5"]
 
 [node name="MONTAGNES_TERRAIN" type="Node3D" unique_id=508374464]
 
 [node name="montagnes2" parent="." unique_id=784969209 instance=ExtResource("1_4xk5w")]
 
-[node name="montagnes_collisions" parent="." unique_id=360492484 instance=ExtResource("2_4lko5")]
+[node name="montagnes_collisions" parent="." unique_id=1397803377 instance=ExtResource("2_4lko5")]

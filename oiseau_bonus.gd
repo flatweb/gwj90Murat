@@ -20,7 +20,7 @@ var acceleration : float = 1.0
 # Altitude sous laquelle on repart en attente
 var altitudemin : float = 2.0 # TODO
 
-signal perdu
+signal perdu(me : VolatileBody3D) # appelé avec self
 # pour envoyer des messages à game
 signal pushtext(txt : String)
 
@@ -46,7 +46,7 @@ func meurt():
 	pass
 
 func mise_en_attente():
-	# vitese réduite pour nous, mais on ne touche pas à la direction
+	# vitese réduite pour nous, mais on ne touche pas à la direction ici
 	speedVect *= 0.5
 	attente()
 
@@ -109,7 +109,7 @@ func _physics_process(delta: float) -> void:
 			if actionencours == action.CORRECTION:
 				#print ("",speedVect.z," angle ",angle_correction)
 				if abs(rotation.y) <= 0.01 : # FIXME :
-					print ("un bisou pour", self.name)
+					#print ("un bisou pour", self.name)
 					#Fin de correction
 					actionencours = action.AUCUNE
 					# on repart tout droit
@@ -220,14 +220,15 @@ func _physics_process(delta: float) -> void:
 		perte_du_leader()
 		
 	elif leader != null and distance_au_leader() > ECART_TROP_LOIN:
-		print (self.name, " a perdu le leader")
+		print (self.name, " a perdu le leader trop loin")
 		perte_du_leader()
 		
 
+## action suite à perte du leader
 func perte_du_leader() -> void:
 	leader = null
 	# On résactive la layer 3 pour réclencher une capture
 	self.set_collision_layer_value(3, true)
 	$AudioPlayerLost.play()
 	mise_en_attente()
-	perdu.emit() # à destination du game
+	perdu.emit(self) # à destination de oiseau et du game

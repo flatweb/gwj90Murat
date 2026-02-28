@@ -17,7 +17,7 @@ var nbmaxcapture = 0
 signal capture
 # tableau des markers et des markers libres
 var arrmarks : Array
-var arrfreemarks : Array
+var arrbonusonmarks : Array
 # signal à émettre quand l'oiseau est arrivé, avec nb autres
 signal aterri(dist : float, nb : int)
 # distance parcourue au total
@@ -44,7 +44,7 @@ func _ready():
 
 	for child in $PositionSuiveurs.get_children():
 		arrmarks.append(child)
-		arrfreemarks.append(true)
+		arrbonusonmarks.append(null)
 
 func start_aterri_at(pos : Vector3):
 	_anim_repos()
@@ -81,9 +81,17 @@ func show_indice(bonus : VolatileBody3D):
 	$SpriteIndice3D/Timer.start(10.0)
 	refresh_indice()
 
-func losebonus():
+func losebonus(bonus : Node3D):
+	# décompte
 	nbcapture -= 1
-	pass
+	
+	# il faut aussi libérer le Marker3D occupé
+	bonus.perdu.disconnect(losebonus.bind())
+	var indexmark = arrbonusonmarks.find(bonus)
+	assert(indexmark != -1)
+	if indexmark != -1:
+		arrbonusonmarks[indexmark] = null
+	
 
 # -----------------------------------------------------------------
 #   GESTION DES MOUVEMENTS
@@ -387,13 +395,14 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 		if position.y <= ALTITUDE_LIBERATION_BONUS :
 			# on est trop bas, on ne peut plus accrocher un bonus (cas de fin de partie)
 			return
-		nbcapture += 1  # Et c'est gam qui nous décrémente si on en perd un
+		nbcapture += 1
 		capture.emit()
 		hide_indice()
 		var bonus = body as OiseauBonus
-		for i in range(arrfreemarks.size()):
-			if arrfreemarks[i] == true:
-				arrfreemarks[i] = false
+		for i in range(arrbonusonmarks.size()):
+			if arrbonusonmarks[i] == null:
+				arrbonusonmarks[i] = bonus
+				bonus.perdu.connect(losebonus.bind())
 				bonus.devient_suiveur_de(self, arrmarks[i]) #TODO : check return
 				break
 
@@ -401,4 +410,8 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 func _on_area_influence_area_entered(area: Area3D) -> void:
 	if area.is_in_group("limite"):
 		pass #FIXME : ça sert à quoi ?
+	pass # Replace with function body.
+
+
+func _on_timer_timeout() -> void:
 	pass # Replace with function body.

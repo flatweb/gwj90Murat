@@ -43,7 +43,7 @@ func _ready():
 		instance.set_position(Vector3(x, y ,z))
 		instance.spawnPoint = Vector3(x, y ,z)
 	_repulsors = get_tree().get_nodes_in_group("Repulsor")
-	print(_repulsors)
+	#print(_repulsors)
 
 func _process(delta):
 	_detectNeighbors()

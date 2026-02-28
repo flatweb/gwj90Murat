@@ -94,7 +94,7 @@ func fin(distance):
 			await get_tree().create_timer(5.0).timeout
 			fini.emit(distance)
 		else:
-			print("pas assez de bonus")
+			print("pas assez de bonus à l'arrivée")
 			pushtext("Oh ! where are my other friends ?")
 	else:
 		pushtext("Dodo ?")
@@ -159,37 +159,38 @@ func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_
 #------------------------------------------------------------
 func refresh_captures():
 	%LabelCaptures.text = "%d" % nbcapture
-	%LabelMaxCaptures.show()
 	if nbcapture > 0 :
+		%LabelMaxCaptures.show()
 		%LabelMaxCaptures.text = "/ %d" % [nbcaptureattendu]
 	else :
 		$%LabelMaxCaptures.hide()
 	
 func addcapture():
-	nbcapture = $Oiseau.nbcapture
-	pushtext("Yes ! a new friend goose to go further")
+	if not inzonefin:
+		nbcapture += 1
+		pushtext("Yes ! a new friend goose to go further", nbcapture)
 
-	var bird : TextureRect = TextureRect.new()
-	bird.texture = load("res://res/sprites/bird.png")
-	var pngsize = bird.texture.get_size()
-	var pngpos : Vector2 = Vector2(pngsize.x*(0.5 + nbcapture), pngsize.y/2)
-	bird.position = pngpos
-	if %HBoxCaptures.visible :
-		# utilisé tant que les captures étaient affichées sous forme d'icones
-		%HBoxCaptures.add_child(bird)
-	refresh_captures()
+		if %HBoxCaptures.visible :
+			# utilisé tant que les captures étaient affichées sous forme d'icones
+			var bird : TextureRect = TextureRect.new()
+			bird.texture = load("res://res/sprites/bird.png")
+			var pngsize = bird.texture.get_size()
+			var pngpos : Vector2 = Vector2(pngsize.x*(0.5 + nbcapture), pngsize.y/2)
+			bird.position = pngpos
+			%HBoxCaptures.add_child(bird)
+		refresh_captures()
 
-func losebonus():
-	if %HBoxCaptures.visible :
-		# utilisé tant que les captures étaient affichées sous forme d'icones
-		var textrect = %HBoxCaptures.get_child(0)
-		if textrect != null :
-			textrect.queue_free()
-	
+func losebonus(_bonus : Node3D):
 	if not inzonefin:
 		pushtext("Eh ! why do you leave me ?")
-		$Oiseau.losebonus()
-		nbcapture  = $Oiseau.nbcapture
+		nbcapture -= 1
+
+		if %HBoxCaptures.visible :
+			# utilisé tant que les captures étaient affichées sous forme d'icones
+			var textrect = %HBoxCaptures.get_child(0)
+			if textrect != null :
+				textrect.queue_free()
+		
 		refresh_captures()
 
 func cheatmode(event : InputEvent):
