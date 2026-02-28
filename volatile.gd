@@ -342,7 +342,7 @@ func plane(delta : float):
 	# on ne change pas d'animation
 	queue_next_anim(ANIM_PLANE)
 
-func remonte(delta : float, rotx = true):
+func remonte(delta : float):
 	# 1. changement de la vitesse verticale
 	if speedVect.y < 0:
 		# on est toujours en descente, on commence par freiner, assez fort
