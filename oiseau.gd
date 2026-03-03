@@ -158,6 +158,7 @@ func freinage(delta : float):
 	
 func aterrissage():
 	actionencours = action.ATERRISSAGE
+	autorotspeed = 0.0
 	speedVect.y = 0.0
 	position.y = tailleY/2
 	$OIE.rotation.x = 0.0
@@ -207,7 +208,8 @@ func _physics_process(delta: float) -> void:
 	
 	var vire = Input.get_axis("droite","gauche")
 	var monte = Input.is_action_pressed("monte")
-	var pique = Input.is_action_pressed("descend")
+	# Attention, pour éviter un bug bizarre, on ne peut pas descendre si on monte déjà :
+	var pique = Input.is_action_pressed("descend") if not monte else false
 	var mouvement :bool = false
 	
 	#pour mettre un point d'arrêt
