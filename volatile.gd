@@ -316,7 +316,7 @@ func redresse(delta : float, force: float = 1.0):
 # Note: la correction est nécessairement dans le plan XZ
 # donc on met tous les y à 0 et on travaille en Vector2
 func correction(normal : Vector3 = Vector3.ZERO):
-	if actionencours == action.AUCUNE :
+	if actionencours == action.AUCUNE or actionencours == action.DECOLLAGE :
 		print("Début de correction pour ", self.name)
 		actionencours = action.CORRECTION
 		correction_direction = normal
