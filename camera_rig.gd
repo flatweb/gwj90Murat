@@ -30,6 +30,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("scroll_up"):
 		zoom(zoom_increment)
 	
+	var cam_rot = Input.get_axis("cam_left","cam_right")
+	if cam_rot != 0.0 :
+		rotate_y(+delta*cam_rot)
 
 func zoom(increment):
 	var dist = camera_distance
@@ -55,7 +58,6 @@ func _input(event: InputEvent) -> void:
 			rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 			# orientation de la boussole
 			$Camera3D/Boussole.rotation.z = -self.rotation.y
-
 
 func _unhandled_input(event: InputEvent): 
 	if event is InputEventMouseButton:
