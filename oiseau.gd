@@ -207,9 +207,12 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
 	var vire = Input.get_axis("droite","gauche")
-	var monte = Input.is_action_pressed("monte")
+	var updown = Input.get_axis("descend","monte")
+	var monte = (updown > 0)
+	var pique = (updown < 0)
+	#var monte = Input.is_action_pressed("monte")
 	# Attention, pour éviter un bug bizarre, on ne peut pas descendre si on monte déjà :
-	var pique = Input.is_action_pressed("descend") if not monte else false
+	#var pique = Input.is_action_pressed("descend") if not monte else false
 	var mouvement :bool = false
 	
 	#pour mettre un point d'arrêt
@@ -229,11 +232,11 @@ func _physics_process(delta: float) -> void:
 	# Si pas d'action automatique, on cherche une commande
 	if actionencours == action.AUCUNE:
 		if pique :
-			descendre(delta)
+			descendre(delta*abs(updown))
 			mouvement = true
 			# on ne combine pas pique et changement de direction
 		elif monte :
-			monter(delta)
+			monter(delta*abs(updown))
 			mouvement = true
 		# on ne combine pas montée et changement de direction ?!?: TODO: a faire
 		if vire != 0:
