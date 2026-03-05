@@ -71,13 +71,6 @@ debug_color = Color(0.8875024, 0.23344836, 0.58917964, 0.41960785)
 [node name="Oiseau" parent="." unique_id=1267771531 groups=["Repulsor"] instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.109226, 7.1061783, 100)
 
-[node name="Camera3D_original" type="Camera3D" parent="." unique_id=1159204983]
-transform = Transform3D(0.60181504, 0.6675055, -0.43846914, 0, 0.54902285, 0.83580744, 0.79863554, -0.50300145, 0.33041018, -19.177612, 38.955605, 107.79487)
-visible = false
-current = true
-fov = 30.0
-far = 1000.0
-
 [node name="CameraRig" type="Node3D" parent="." unique_id=161195959 node_paths=PackedStringArray("joueur", "camera")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 0, 0, 83.39973)
 script = ExtResource("4_lc2xo")
