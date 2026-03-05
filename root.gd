@@ -136,7 +136,11 @@ func _input(event : InputEvent):
 		waitingtostart = false
 		start()
 
-
+func _on_start_button_gui_input(event: InputEvent) -> void:
+	if %StartButton.visible and event is InputEventJoypadButton:
+		waitingtostart = false
+		start()
+		
 func _unhandled_input(event: InputEvent):
 	if (event.is_action_released("ui_cancel")):
 		if not get_tree().paused :

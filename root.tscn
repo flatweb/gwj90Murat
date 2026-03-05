@@ -211,6 +211,7 @@ one_shot = true
 [connection signal="gui_input" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/AideButton" to="." method="_on_aide_button_gui_input"]
 [connection signal="pressed" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/AideButton" to="." method="_on_aide_button_pressed"]
 [connection signal="button_up" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_up"]
+[connection signal="gui_input" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_gui_input"]
 [connection signal="pressed" from="PanelContainer/IntroContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="button_up" from="PauseContainer/PauseCenterContainer/VBoxContainer/OutPauseButton" to="." method="_on_out_pause_button_up"]
 [connection signal="button_up" from="PauseContainer/PauseCenterContainer/VBoxContainer/GiveupButton" to="." method="_on_giveup_button_up"]
