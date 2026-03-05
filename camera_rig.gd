@@ -18,9 +18,12 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$Camera3D/Boussole.rotation.z = -self.rotation.y
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	self.position = joueur.position
-	
+	if Input.is_action_pressed("zoom_down"):
+		unzoom(zoom_increment*delta*2)
+	if Input.is_action_pressed("zoom_up"):
+		zoom(zoom_increment*delta*2)
 	if Input.is_action_just_pressed("scroll_down"):
 		# ET REGARDE LE JOUEUR
 		unzoom(zoom_increment)
