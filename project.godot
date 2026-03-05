@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [editor]
 
 movie_writer/movie_file="C:/Users/Plouf/Documents/GameJam/Export1.avi"
-run/main_run_args="--nocol"
 
 [global_group]
 
