@@ -192,6 +192,15 @@ tracks/7/keys = PackedFloat32Array(0, 1, -2.8615483e-08, 3.70105e-08, 0.2002225,
 [sub_resource type="Animation" id="Animation_jx77t"]
 resource_name = "Vol_normal"
 length = 2.0
+markers = [{
+"color": Color(0.1456562, 0.38973492, 0.6797739, 1),
+"name": &"to_plane",
+"time": 0.28977403
+}, {
+"color": Color(0.22669211, 0.5388063, 0.77418256, 1),
+"name": &"to_vol",
+"time": 1.4976741
+}]
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -248,6 +257,65 @@ tracks/7/path = NodePath("Armature/Skeleton3D:Wing_tip.L")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = PackedFloat32Array(0, 1, 0.27162874, 0.15895127, 0.13921729, 0.93892014, 0.03333333, 1, 0.26827127, 0.16482511, 0.13945913, 0.9388367, 0.06666667, 1, 0.26362437, 0.17014617, 0.13993916, 0.93913233, 0.1, 1, 0.25774476, 0.17493667, 0.14064485, 0.9397786, 0.13333333, 1, 0.25033537, 0.1790637, 0.1416298, 0.9408557, 0.16666666, 1, 0.24185254, 0.18271682, 0.14280322, 0.9421938, 0.20000002, 1, 0.23234642, 0.18591076, 0.14415158, 0.94375455, 0.23333335, 1, 0.22186737, 0.18865922, 0.14566098, 0.9454975, 0.26666668, 1, 0.21046609, 0.19097506, 0.14731722, 0.9473807, 0.3, 1, 0.19795322, 0.19275083, 0.1491502, 0.9494292, 0.33333334, 1, 0.18468274, 0.19413391, 0.15108968, 0.9515127, 0.36666667, 1, 0.1707133, 0.19513586, 0.15312067, 0.95358956, 0.4, 1, 0.156106, 0.19576886, 0.15522811, 0.9556201, 0.43333334, 1, 0.14092429, 0.19604541, 0.15739697, 0.957566, 0.4666667, 1, 0.1251232, 0.19589248, 0.15963313, 0.9594205, 0.5, 1, 0.10895546, 0.1954291, 0.16188937, 0.96110773, 0.53333336, 1, 0.092496574, 0.19467166, 0.16415137, 0.96260154, 0.6666667, 1, 0.025488507, 0.1890055, 0.17297524, 0.9662851, 0.7, 1, 0.008970662, 0.18706985, 0.17504941, 0.9665828, 0.73333335, 1, -0.0072713415, 0.18499073, 0.17704794, 0.96663314, 0.76666665, 1, -0.023154484, 0.18279451, 0.17896256, 0.96644837, 0.8, 1, -0.038400885, 0.18050998, 0.18076465, 0.96605676, 0.8333333, 1, -0.05305086, 0.17818828, 0.182461, 0.9654753, 0.8666667, 1, -0.06702792, 0.17585818, 0.18404697, 0.96473205, 0.9, 1, -0.080257356, 0.17354889, 0.18551879, 0.9638581, 0.93333334, 1, -0.092666514, 0.17128985, 0.1868733, 0.96288687, 0.96666664, 1, -0.10384691, 0.16916165, 0.18807283, 0.96188813, 1, 1, -0.114001065, 0.16716668, 0.18914425, 0.9608765, 1.0333333, 1, -0.12306416, 0.16533361, 0.19008607, 0.9598893, 1.0666666, 1, -0.13097234, 0.16369078, 0.19089678, 0.958963, 1.0999999, 1, -0.13766232, 0.16226614, 0.1915747, 0.95813257, 1.1333333, 1, -0.14260262, 0.16118655, 0.19207104, 0.95749265, 1.1666666, 1, -0.14613302, 0.16040267, 0.19242336, 0.9570211, 1.1999999, 1, -0.14818841, 0.15994038, 0.19262761, 0.95674133, 1.2333332, 1, -0.14814235, 0.15977925, 0.1926322, 0.95677453, 1.2666667, 1, -0.14480583, 0.1598514, 0.19233656, 0.9573325, 1.3, 1, -0.13530715, 0.1600465, 0.19148359, 0.9588593, 1.3333333, 1, -0.12173779, 0.1602989, 0.19023609, 0.96088207, 1.3666666, 1, -0.1044592, 0.16057578, 0.18859862, 0.9631897, 1.4, 1, -0.08384146, 0.16084123, 0.18657315, 0.9655523, 1.4333333, 1, -0.060267493, 0.16105871, 0.18416253, 0.96773565, 1.4666666, 1, -0.03358875, 0.16119474, 0.18131311, 0.969543, 1.5, 1, -0.0052368017, 0.16121155, 0.1781443, 0.97069466, 1.5333333, 1, 0.02431111, 0.16108924, 0.17468782, 0.97105277, 1.5999999, 1, 0.08503204, 0.16038905, 0.16709033, 0.969085, 1.6333333, 1, 0.11483762, 0.15982282, 0.16311596, 0.96677923, 1.6666666, 1, 0.14343344, 0.15914033, 0.15914957, 0.9637286, 1.6999999, 1, 0.17038533, 0.15837082, 0.15527213, 0.9600928, 1.7333332, 1, 0.19528648, 0.15754955, 0.1515682, 0.9560693, 1.7666667, 1, 0.21775788, 0.15671614, 0.14812411, 0.9518828, 1.8, 1, 0.23633501, 0.15596014, 0.14520304, 0.9480181, 1.8333333, 1, 0.2514941, 0.15529771, 0.14276923, 0.9445901, 1.8666666, 1, 0.26294085, 0.15477002, 0.14090118, 0.9418361, 1.9, 1, 0.2703753, 0.15441449, 0.13967387, 0.9399706, 1.9333333, 1, 0.27348587, 0.15426274, 0.13915707, 0.9391719)
+
+[sub_resource type="Animation" id="Animation_tu30k"]
+resource_name = "plane"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:Tail")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.055, 0, 0, 0.998)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D:Neck")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.032, -0.003, 0.001, 0.999)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D:Shoulder.R")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.044, -0.121, -0.772, 0.622)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Armature/Skeleton3D:Shoulder.L")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0.052, 0.101, 0.764, 0.635)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Armature/Skeleton3D:Wing.R")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, -0.183, 0.047, 0.224, 0.956)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Armature/Skeleton3D:Wing.L")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, -0.196, -0.048, -0.192, 0.96)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Armature/Skeleton3D:Wing_tip.R")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0.161, 0, -0.099, 0.982)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Armature/Skeleton3D:Wing_tip.L")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0.202, 0.192, 0.149, 0.949)
 
 [sub_resource type="Animation" id="Animation_fk3fv"]
 resource_name = "Vol_plane"
@@ -314,7 +382,8 @@ _data = {
 &"NePasUtiliser": SubResource("Animation_7cebm"),
 &"RESET": SubResource("Animation_qcvih"),
 &"Vol_normal": SubResource("Animation_jx77t"),
-&"Vol_plane": SubResource("Animation_fk3fv")
+&"Vol_plane": SubResource("Animation_tu30k"),
+&"Vol_plane_old": SubResource("Animation_fk3fv")
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ogtt4"]
@@ -328,6 +397,175 @@ albedo_color = Color(0, 0.67367977, 0.19941309, 1)
 material = SubResource("StandardMaterial3D_7cebm")
 radius = 0.3
 height = 0.6
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tu30k"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fh6ga"]
+animation = &"Vol_normal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j7q2b"]
+animation = &"Vol_normal"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_757j2"]
+nodes/output/position = Vector2(600, 120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_j7q2b")
+nodes/Animation/position = Vector2(240, 120)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5s50l"]
+animation = &"Vol_normal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_757j2"]
+animation = &"Vol_plane"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ny1su"]
+animation = &"Vol_normal"
+use_custom_timeline = true
+timeline_length = 0.28977403
+stretch_time_scale = false
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_251ch"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_ny1su")
+nodes/Animation/position = Vector2(60, 120)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_251ch"]
+animation = &"Vol_normal"
+use_custom_timeline = true
+timeline_length = 0.5
+stretch_time_scale = true
+start_offset = 1.5
+loop_mode = 0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fh6ga"]
+nodes/output/position = Vector2(620, 120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_251ch")
+nodes/Animation/position = Vector2(200, 100)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_irthj"]
+animation = &"Vol_normal"
+use_custom_timeline = true
+timeline_length = 0.5023259
+stretch_time_scale = false
+start_offset = 1.4976741
+loop_mode = 0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5s50l"]
+nodes/output/position = Vector2(600, 120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_irthj")
+nodes/Animation/position = Vector2(122, 101)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6xtp3"]
+animation = &"Vol_normal"
+advance_on_start = true
+use_custom_timeline = true
+timeline_length = 0.28977403
+stretch_time_scale = false
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6xtp3"]
+nodes/output/position = Vector2(440, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_6xtp3")
+nodes/Animation/position = Vector2(120, 140)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s4f7a"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"aterrir"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_irthj"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m16ds"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ouy0r"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"to_vol"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yk72q"]
+priority = 3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ny1su"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"to_plane"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lncn8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c7ewh"]
+xfade_time = 1.0
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwoci"]
+priority = 3
+advance_mode = 2
+advance_condition = &"to_vol"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5s50l"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6xtp3"]
+reset = false
+advance_mode = 2
+advance_condition = &"decolle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fd6c7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u523a"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"aterrir"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tu30k"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"aterrir"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j7q2b"]
+priority = 10
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m16ds"]
+states/End/position = Vector2(800, 132)
+states/Idle/node = SubResource("AnimationNodeAnimation_tu30k")
+states/Idle/position = Vector2(179, 161)
+states/Start/position = Vector2(105, 91)
+states/Vol/node = SubResource("AnimationNodeBlendTree_757j2")
+states/Vol/position = Vector2(573, 144)
+"states/Vol repeat/node" = SubResource("AnimationNodeAnimation_fh6ga")
+"states/Vol repeat/position" = Vector2(649, 16)
+states/Vol_normal/node = SubResource("AnimationNodeAnimation_5s50l")
+states/Vol_normal/position = Vector2(390, 91)
+states/Vol_plane/node = SubResource("AnimationNodeAnimation_757j2")
+states/Vol_plane/position = Vector2(566, 352.53836)
+states/aterrissage/node = SubResource("AnimationNodeBlendTree_251ch")
+states/aterrissage/position = Vector2(390, -4)
+states/decollage/node = SubResource("AnimationNodeBlendTree_fh6ga")
+states/decollage/position = Vector2(358, 172)
+states/plane_to_vol/node = SubResource("AnimationNodeBlendTree_5s50l")
+states/plane_to_vol/position = Vector2(612, 223.53836)
+states/vol_to_plane/node = SubResource("AnimationNodeBlendTree_6xtp3")
+states/vol_to_plane/position = Vector2(460, 232.53836)
+transitions = ["Vol", "aterrissage", SubResource("AnimationNodeStateMachineTransition_s4f7a"), "decollage", "Vol_normal", SubResource("AnimationNodeStateMachineTransition_irthj"), "Vol_normal", "Vol", SubResource("AnimationNodeStateMachineTransition_m16ds"), "Vol", "Vol repeat", SubResource("AnimationNodeStateMachineTransition_ouy0r"), "Vol repeat", "Vol", SubResource("AnimationNodeStateMachineTransition_yk72q"), "Vol", "vol_to_plane", SubResource("AnimationNodeStateMachineTransition_ny1su"), "plane_to_vol", "Vol", SubResource("AnimationNodeStateMachineTransition_lncn8"), "vol_to_plane", "Vol_plane", SubResource("AnimationNodeStateMachineTransition_c7ewh"), "Vol_plane", "plane_to_vol", SubResource("AnimationNodeStateMachineTransition_mwoci"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_5s50l"), "Idle", "decollage", SubResource("AnimationNodeStateMachineTransition_6xtp3"), "aterrissage", "Idle", SubResource("AnimationNodeStateMachineTransition_fd6c7"), "Vol_plane", "Idle", SubResource("AnimationNodeStateMachineTransition_u523a"), "Vol repeat", "aterrissage", SubResource("AnimationNodeStateMachineTransition_tu30k"), "Vol", "End", SubResource("AnimationNodeStateMachineTransition_j7q2b")]
+graph_offset = Vector2(50.97418, 6.971962)
 
 [node name="Oiseau" type="CharacterBody3D" unique_id=1119983689 groups=["Oiseau"]]
 process_mode = 1
@@ -466,7 +704,6 @@ emitting = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OIE" unique_id=1701530717]
 libraries/ = SubResource("AnimationLibrary_hgp2k")
-autoplay = &"Vol_normal"
 
 [node name="AudioPlayerAiles" type="AudioStreamPlayer3D" parent="." unique_id=418128765]
 stream = ExtResource("4_qcvih")
@@ -481,10 +718,6 @@ volume_db = -5.0
 process_mode = 1
 wait_time = 3.0
 autostart = true
-
-[node name="TimerAttenteAnim" type="Timer" parent="." unique_id=528398593]
-process_mode = 1
-one_shot = true
 
 [node name="AreaInfluence" type="Area3D" parent="." unique_id=229713495]
 collision_layer = 8
@@ -544,10 +777,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
 [node name="Marker3D10" type="Marker3D" parent="PositionSuiveurs" unique_id=2010447533 groups=["delta"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
 
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=742528109]
+root_node = NodePath("../OIE")
+tree_root = SubResource("AnimationNodeStateMachine_m16ds")
+anim_player = NodePath("../OIE/AnimationPlayer")
+parameters/conditions/aterrir = false
+parameters/conditions/decolle = false
+parameters/conditions/to_plane = false
+parameters/conditions/to_vol = false
+
 [connection signal="animation_finished" from="OIE/AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="finished" from="AudioPlayerAiles" to="." method="_on_loop_sound"]
 [connection signal="finished" from="AudioPlayerCri" to="." method="_on_loop_sound"]
 [connection signal="timeout" from="TimerChangeAnim" to="." method="_on_timer_change_anim_timeout"]
-[connection signal="timeout" from="TimerAttenteAnim" to="." method="_on_timer_attente_anim_timeout"]
 [connection signal="body_entered" from="AreaInfluence" to="." method="_on_area_influence_body_entered"]
 [connection signal="timeout" from="SpriteIndice3D/Timer" to="." method="hide_indice"]
+[connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]

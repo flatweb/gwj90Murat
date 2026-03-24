@@ -38,7 +38,16 @@ func _init():
 	
 func _ready():
 	nodeoie=$OIE
-	super._ready()
+	animtree = $AnimationTree
+	animtree["parameters/conditions/decolle"] = false
+	animtree["parameters/conditions/aterrir"] = false
+	animtree["parameters/conditions/to_vol"] = false
+	animtree["parameters/conditions/to_plane"] = false
+
+	#for x in animtree.get_property_list():
+		#if x.name.begins_with("parameters/") :
+			#for y in x : 
+				#print (x.name,',',y," --> ",animtree.get(y))
 	demarre()
 	# Par défaut on considère que c'est la taille de la collisionShape
 	tailleY=$CollisionShape3D.shape.height #FIXME : trop grand, effets de bord
@@ -47,8 +56,10 @@ func _ready():
 		arrmarks.append(child)
 		arrbonusonmarks.append(null)
 
+	animtree.active = true
+	update_anim()
+
 func start_aterri_at(pos : Vector3):
-	_anim_repos()
 	speedVect = Vector3.ZERO
 	self.position = pos
 	actionencours = action.ATERRI
@@ -61,7 +72,6 @@ func demarre():
 	startpos = self.position
 	maximumz = startpos.z + MARGE_MAXIMUMZ 
 	en_vol = true
-	#_anim_start_vol()
 
 var cibleindice : VolatileBody3D = null
 func hide_indice():
@@ -188,9 +198,11 @@ func _process(_delta):
 			$Camera3D.make_current()
 			$Indicateurs.show()
 	elif Input.is_action_just_pressed("varieanim",true):
-		anim_autoswitch()
+		anim_autoswitch(1.0)
 	
 	refresh_indice()
+	
+	update_anim()
 
 func start_correction(normal):
 	acorriger = true
@@ -345,7 +357,7 @@ func _physics_process(delta: float) -> void:
 				continue
 			var normal : Vector3 = collisions.get_normal(i)
 			if obj.is_in_group("sol"):
-				print(self.name, "en collision avec le sol")
+				print(self.name, " en collision avec le sol")
 				if (actionencours == action.DECOLLAGE or \
 					actionencours == action.ATERRI) :
 					#on ignore la collision résiduelle avec le sol
@@ -410,4 +422,9 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 				break
 
 func _on_timer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_animation_tree_animation_started(anim_name: StringName) -> void:
+	print ("--> Anim ",anim_name)
 	pass # Replace with function body.

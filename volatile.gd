@@ -78,8 +78,6 @@ func _init() -> void :
 	pass
 
 func _ready() -> void:
-	$OIE/AnimationPlayer.stop()
-	$TimerAttenteAnim.start(1.0)
 	pass
 
 # -----------------------------------------------------------------
@@ -97,133 +95,46 @@ const ANIM_DECOLLAGE = "Vol_normal"
 var en_vol : bool
 # enchainement des animations
 var nextanim : String
-var prevanim : String = ANIM_REPOS
+
+var animtree : AnimationTree
 
 # On va gérer notre queue d'animation nous-mêmes TODO
-func queue_next_anim(anim:String):
-	#TODO : il faudra peut-être être plus malin à terme, quoique...
-	#print (self.name, " queue ",anim)
-	if $TimerChangeAnim.time_left > 0 and \
-	   anim == nextanim :
-		# Si on veut poursuivre la même animation, on relance le TimerChange
-		$TimerChangeAnim.start() # redémarre le timer pour ne pas rechanger trop tôt
-	nextanim = anim
-	# Si une animation est déjà en cours, on attend la fin
-	if $OIE/AnimationPlayer.is_playing() : return
-	# Si le timer est en cours, on l'attend
-	if $TimerAttenteAnim.time_left > 0.0 : return
-	# sinon on le redémarre
-	$TimerAttenteAnim.start(1.0)
-	
-	
-func _on_animation_finished(anim_name: StringName) -> void:
-	# Si le timer est en cours, on l'attend
-	if $TimerAttenteAnim.time_left > 0.0 :
-		prevanim = anim_name
-		return
-	if not en_vol : # FIXME : pourquoi ? pour l'aterrissage ?
-		# sinon on le redémarre
-		$TimerAttenteAnim.start(1.0)
-		return
-	_change_anim(anim_name)
-
-# Pour les animations trop courtes, on préfère activer un timer
-func _on_timer_attente_anim_timeout() -> void:
-	#print (self.name, " change sur timeout vers ", nextanim)
-	_change_anim(prevanim)
+func queue_next_anim(next:String):
+	match next:
+		ANIM_PLANE :
+			animtree["parameters/conditions/to_plane"] = true
+			animtree["parameters/conditions/to_vol"] = false
+			animtree["parameters/conditions/aterrir"] = false
+		ANIM_VOL : 
+			#if animtree.get("parameters/plane_to_vol/TimeSeek/seek_request") != null :
+				#animtree["parameters/plane_to_vol/TimeSeek/seek_request"] = 1.3
+			animtree["parameters/conditions/to_vol"] = true
+			animtree["parameters/conditions/to_plane"] = false
+			animtree["parameters/conditions/aterrir"] = false
+	pass
 
 # Changement d'animation avec transition
-func _change_anim(anim_name):
-	#if anim_name != nextanim : print (self.name," change de ",anim_name," à ",nextanim)
-	match anim_name: # état actuel (...ou précédent)
-		ANIM_VOL:
-			match nextanim:
-				ANIM_VOL:
-					_anim_vol()
-				ANIM_PLANE:
-					_anim_vol_to_plane()
-				ANIM_REPOS:
-					_anim_vol_to_repos()
-				_ :
-					_anim_vol()
-		ANIM_PLANE:
-			match nextanim:
-				ANIM_VOL:
-					_anim_plane_to_vol()
-				ANIM_PLANE:
-					_anim_plane()
-				ANIM_REPOS:
-					_anim_repos() #FIXME
-				ANIM_RESET:
-					_anim_reset()
-				_ :
-					_anim_plane()
-		ANIM_RESET:
-			match nextanim:
-				ANIM_VOL:
-					_anim_plane_to_vol()
-				ANIM_PLANE:
-					_anim_plane()
-				ANIM_REPOS:
-					_anim_repos()
-				ANIM_RESET:
-					_anim_reset()
-				_ :
-					_anim_reset()
+func update_anim():
+	animtree["parameters/conditions/decolle"] = (actionencours == action.DECOLLAGE)
+	if actionencours == action.ATERRI :
+		animtree["parameters/conditions/aterrir"] = true
+		animtree["parameters/conditions/to_vol"] = false
+		animtree["parameters/conditions/to_plane"] = false
 
-func _anim_start_vol():
-	_anim_vol()
-	if get_node_or_null("AudioPlayerAiles") != null:
-		$AudioPlayerAiles.play()
-	
-func _anim_vol():
-	$OIE/AnimationPlayer.play(nextanim)
-	nextanim = ANIM_VOL
-
-func _anim_plane_to_vol():
-	$OIE/AnimationPlayer.play_section(ANIM_VOL, 0.3, -1.0)
-	nextanim = ANIM_VOL
-	if  get_node_or_null("AudioPlayerAiles") != null:
-		$AudioPlayerAiles.play()
-
-func _anim_vol_to_plane():
-	$OIE/AnimationPlayer.play_section(ANIM_PLANE, 0.0, 0.3)
-	nextanim = ANIM_PLANE
-
-func _anim_vol_to_repos():
-	_anim_vol_to_plane()
-	nextanim = ANIM_REPOS
-	# TODO
-
-func _anim_plane():
-	$TimerAttenteAnim.start(1.0)
-	$OIE/AnimationPlayer.play_section(ANIM_PLANE, 0.29, 0.31)
-	nextanim = ANIM_PLANE
-
-func _anim_reset():
-	$TimerAttenteAnim.start(1.0)
-	$OIE/AnimationPlayer.play(ANIM_RESET)
-	nextanim = ANIM_RESET
-
-func _anim_repos():  # TODO
-	$TimerAttenteAnim.start(1.0)
-	$OIE/AnimationPlayer.play(ANIM_RESET)
-	nextanim = ANIM_RESET
-
-func _anim_decollage():  # TODO
-	_anim_start_vol()
+#func _anim_start_vol():
+	#update_anim()
+	#if get_node_or_null("AudioPlayerAiles") != null:
+		#$AudioPlayerAiles.play()
 
 ## Fonction de variation aléatoire 
-func anim_autoswitch():
+func anim_autoswitch(proba : float = 0.5):
 	# Si on est déjà dans une phase d'action, on ignore l'autoswitch
 	if actionencours != action.AUCUNE : return
 	# Si on est dans une phase de retour au repos, on ignore l'autoswitch
 	if nextanim == ANIM_RESET or nextanim == ANIM_REPOS : return
 	
-	#FIXME if position.y > startpos.y : return # TODO : pas joli
-	
 	# On passe en vol plané dans 50% des cas
-	if randf() < 0.5 :
+	if randf() < proba :
 		queue_next_anim(ANIM_PLANE)
 	else:
 		queue_next_anim(ANIM_VOL)

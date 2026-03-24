@@ -27,6 +27,7 @@ signal pushtext(txt : String)
 func _ready():
 	#print (self.name, " ready")
 	nodeoie = $OIE
+	animtree = $AnimationTree
 	super._ready()
 	tailleY = 0.8 # TODO
 	
