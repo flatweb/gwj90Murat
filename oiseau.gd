@@ -112,7 +112,7 @@ func do_decolle():
 	actionencours = action.DECOLLAGE
 	nbmaxcapture = 0
 	speedVect = -transform.basis.z*speedfront
-	pass
+	$AudioPlayerCri.play()
 
 func looping():
 	pass
@@ -424,4 +424,5 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 
 func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 	print ("--> Anim ",anim_name)
-	pass # Replace with function body.
+	if anim_name == "Vol_normal" :
+		$AudioPlayerAiles.play()

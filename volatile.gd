@@ -111,7 +111,6 @@ func queue_next_anim(next:String):
 			animtree["parameters/conditions/to_vol"] = true
 			animtree["parameters/conditions/to_plane"] = false
 			animtree["parameters/conditions/aterrir"] = false
-	pass
 
 # Changement d'animation avec transition
 func update_anim():
@@ -120,11 +119,6 @@ func update_anim():
 		animtree["parameters/conditions/aterrir"] = true
 		animtree["parameters/conditions/to_vol"] = false
 		animtree["parameters/conditions/to_plane"] = false
-
-#func _anim_start_vol():
-	#update_anim()
-	#if get_node_or_null("AudioPlayerAiles") != null:
-		#$AudioPlayerAiles.play()
 
 ## Fonction de variation aléatoire 
 func anim_autoswitch(proba : float = 0.5):
