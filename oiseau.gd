@@ -421,9 +421,6 @@ func _on_area_influence_body_entered(body: Node3D) -> void:
 				bonus.devient_suiveur_de(self, arrmarks[i]) #TODO : check return
 				break
 
-func _on_timer_timeout() -> void:
-	pass # Replace with function body.
-
 
 func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 	print ("--> Anim ",anim_name)

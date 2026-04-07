@@ -400,6 +400,11 @@ height = 0.6
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tu30k"]
 animation = &"RESET"
+use_custom_timeline = true
+timeline_length = 0.2
+stretch_time_scale = false
+start_offset = 0.0
+loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fh6ga"]
 animation = &"Vol_normal"
@@ -436,7 +441,7 @@ node_connections = [&"output", 0, &"Animation"]
 animation = &"Vol_normal"
 use_custom_timeline = true
 timeline_length = 0.5
-stretch_time_scale = true
+stretch_time_scale = false
 start_offset = 1.5
 loop_mode = 0
 
@@ -521,7 +526,6 @@ advance_condition = &"to_vol"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6xtp3"]
-reset = false
 advance_mode = 2
 advance_condition = &"decolle"
 

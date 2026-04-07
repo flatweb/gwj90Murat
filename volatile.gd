@@ -319,7 +319,3 @@ func decroche(delta : float = 0.0, duree : float = 0.0):
 func _physics_process(delta: float) -> void:
 	if actionencours == action.DECROCHE :
 		decroche(delta)
-	
-func _process(delta: float) -> void:
-	pass
-	
