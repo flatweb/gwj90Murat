@@ -65,7 +65,7 @@ func _on_aide_button_gui_input(event: InputEvent) -> void:
 	if %AideButton.visible and event is InputEventJoypadButton:
 		showaide()
 
-func _on_popup_child_exiting_tree(node: Node) -> void:
+func _on_popup_child_exiting_tree(_node: Node) -> void:
 	%IntroContainer.show()
 	%StartButton.grab_focus()
 
@@ -178,7 +178,7 @@ func _on_button_gui_input(event: InputEvent) -> void:
 			get_tree().quit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	#AudioServer.set_bus_volume_db(0, linear_to_db(master_volume))
 	#AudioServer.set_bus_volume_db(1, linear_to_db(music_volume))

@@ -42,9 +42,9 @@ func _process(delta):
 	rotation += rotationOffset
 
 
-func _on_static_body_3d_body_entered(body: Node3D) -> void:
+func _on_static_body_3d_body_entered(_body: Node3D) -> void:
 	isOutOfBorder = true
 
 
-func _on_static_body_3d_body_exited(body: Node3D) -> void:
+func _on_static_body_3d_body_exited(_body: Node3D) -> void:
 	isOutOfBorder = false

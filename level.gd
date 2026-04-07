@@ -8,17 +8,6 @@ func _ready() -> void:
 	$Limites/StaticBody3D17.queue_free()
 	$Limites/StaticBody3D.queue_free()
 	
-	#FIXME : introduit pour éviter un crash du Godot sur les PC du fablab
-	# il suffit de passer --nocol en argument pour supprimer les collisions des montagnes
-	for argument in OS.get_cmdline_args():
-		if argument.contains("="):
-			var key_value = argument.split("=")
-			#arguments[key_value[0].trim_prefix("--")] = key_value[1]
-		else:
-			if argument == "--nocol":
-				if OS.is_debug_build():
-					$MONTAGNES_TERRAIN/montagnes_collisions.queue_free()
-	
 	#Charge les voitures sur les chemins avec le groupe isRoad
 	var _roads = get_tree().get_nodes_in_group("isRoad")
 	for road in _roads:

@@ -9,7 +9,7 @@ var trailLength = 50
 func _ready() -> void:
 	trailCollection.resize(trailLength + 1)
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#print(get_parent().speedVect.length())
 	if trailNumber == trailLength+1:
 		trailNumber = 0
@@ -17,31 +17,3 @@ func _physics_process(delta: float) -> void:
 		$GPUParticles3D.emitting = true
 	else:
 		$GPUParticles3D.emitting = false
-
-
-	
-		
-func printTrail(previousPosition: Vector3):
-	var trailPivot = Node3D.new()
-	var trailPath = MeshInstance3D.new()
-	get_tree().root.add_child(trailPivot)
-	trailPivot.add_child(trailPath)
-	var trailMesh = TubeTrailMesh.new()
-	trailPath.mesh = trailMesh
-	var trailMaterial = StandardMaterial3D.new()
-	trailMaterial.albedo_color = Color(1, 1, 1, 1)
-	trailMesh.surface_set_material(0,trailMaterial)
-	trailMesh.radius = 0.02
-	trailMesh.section_length = 0.05
-	trailPivot.look_at_from_position(self.get_global_position(), previousPos)
-	trailPath.rotation = rotationOffset
-	trailCollection[trailNumber] = trailPivot
-	return trailPath
-
-		#trailPath.look_at(previousPos)
-func killTrail(trail):
-	var trailPastNumber = trailNumber +1
-	if trailPastNumber > trailLength :
-		trailPastNumber = 0
-	if trailCollection[trailPastNumber] != null:
-		trailCollection[trailPastNumber].queue_free()

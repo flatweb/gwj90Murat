@@ -74,7 +74,6 @@ func _process(delta: float) -> void:
 	# Déplacement du nuage
 	position += vitessesurXZ * delta
 	var x = limites.size.x
-	var p = position
 	if limites.size.x > 0.0:
 		if not endestruction:
 			if not limites.has_point(position) :

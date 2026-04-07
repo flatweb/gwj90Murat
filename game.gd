@@ -15,7 +15,8 @@ const MAXNUAGES : int = 100
 
 # signal émis à la fin du jeu pour prévenir le noeud off-play
 signal fini(score : int)
-signal sendtext(txt : String) # TODO
+
+# Demande d'affichage d'un texte (mis en file)
 func pushtext(texte : String , _delai : float = 3.0):
 	$UI.pushtext(texte)
 	
@@ -125,19 +126,19 @@ func populatenuages():
 
 func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_transform : Transform3D = Transform3D()) -> AABB:
 	var box : AABB
-	var transform : Transform3D
+	var t : Transform3D
 
 	# we are going down the child chain, we want the aabb of each subsequent node to be on the same axis as the parent
 	if bounds_transform.is_equal_approx(Transform3D()):
-		transform = node.global_transform
+		t = node.global_transform
 	else:
-		transform = bounds_transform
+		t = bounds_transform
 	
 	# no more nodes. return default aabb
 	if node == null:
 		return AABB(Vector3(-0.2, -0.2, -0.2), Vector3(0.4, 0.4, 0.4))
 	# makes sure the transform we get isn't distorted
-	var top_xform : Transform3D = transform.affine_inverse() * node.global_transform
+	var top_xform : Transform3D = t.affine_inverse() * node.global_transform
 
 	# convert the node into visualinstance3D to access get_aabb() function.
 	var visual_result : VisualInstance3D = node as VisualInstance3D
@@ -152,7 +153,7 @@ func get_node_aabb(node : Node3D = null, ignore_top_level : bool = true, bounds_
 	for i : int in range(0,node.get_child_count()):
 		var child : Node3D = node.get_child(i) as Node3D
 		if child && !(ignore_top_level && child.top_level):
-			var child_box : AABB = get_node_aabb(child, ignore_top_level, transform)
+			var child_box : AABB = get_node_aabb(child, ignore_top_level, t)
 			box = box.merge(child_box)
 	
 	return box

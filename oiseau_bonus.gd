@@ -89,9 +89,6 @@ func do_decolle():
 func fin_decrochage():
 	# accélération pour rattraper le leader
 	acceleration = 1.8
-	
-func _process(delta: float) -> void:
-	super._process(delta)
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -148,11 +145,10 @@ func _physics_process(delta: float) -> void:
 		
 		if (vectdironXZ.length() < ECART_DERRIERE_MARKER):
 			# on est tout près
-			var anglevectleader = angle_on_XZ(vectdironXZ,leader.transform.basis.z)
+			#var anglevectleader = angle_on_XZ(vectdironXZ,leader.transform.basis.z)
 			if abs(angle_on_XZ(vectdironXZ,leader.transform.basis.z)) < PI/10 :
 				position.x = tomarker.global_position.x
 				position.z = tomarker.global_position.z
-				pass
 		
 		
 		# on va rejoindre l'altitude
@@ -196,7 +192,6 @@ func _physics_process(delta: float) -> void:
 			elif obj.name.contains("Static"):
 				print(self.name," collides avec un static ",obj.name," par ",normal)
 				# on vient de rentrer dans un mur ou un boids, ce n'est pas normal
-				var groups = obj.get_groups()
 				print ("Choc de ",self.name," contre un Static : on opère un virage de correction")
 				correction(normal)
 				virage(autorotspeed,delta)

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cucfg5pmo6c3p"]
 
 [ext_resource type="Texture2D" uid="uid://botpqctusx3k" path="res://res/modeles/OIE_ANIM+TEXTURE_actions_Cube Base Color.png" id="1_2u17g"]
-[ext_resource type="Script" uid="uid://dyfhc11ju0l7f" path="res://Scenes/Objets/oiePNJ.gd" id="2_2u17g"]
+[ext_resource type="Script" uid="uid://rr8u0ysa0rfn" path="res://Scenes/Objets/oiePNJ.gd" id="2_2u17g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fk3fv"]
 resource_name = "Material.001"
