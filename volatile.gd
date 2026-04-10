@@ -186,7 +186,7 @@ func calc_rot_speed_normal(normal : Vector3, facteur : float) -> float :
 # Met à jour speedVect en conséquence, et modifie l'inclinaison de l'oie
 func virage(change : float, delta : float):
 	if change == 0:
-		#print ("WARNING ! virage avec change = 0") #FIXME
+		print ("WARNING ! virage avec change = 0") #FIXME
 		return
 	var angle : float = change*ANGLE_VIRAGE*delta
 	if actionencours == action.CORRECTION:
@@ -204,15 +204,17 @@ func virage(change : float, delta : float):
 	speedVect = speedVect.rotated(Vector3.UP, angle)
 	
 	# changement d'inclinaison (axe Z)
-	var inclinaison = min(max(change,-1),1)
+	var inclinaison = clampf(change,-1.0,1.0)
 	if abs($OIE.rotation.z) < abs(inclinaison)*INCLINAISON_MAX_VIRAGE :
 		#print("vire from ",$OIE.rotation.z, " for ",rad_to_deg(change*ROTSPEED*delta))
 		$OIE.rotate_z(inclinaison*ROTSPEED*delta)
 	elif abs($OIE.rotation.z) > abs(inclinaison)*INCLINAISON_MAX_VIRAGE * 1.2:
 		# on peut commencer à redresser
-		redresse(delta, inclinaison)
+		#print ("redresse ",rad_to_deg($OIE.rotation.z)," avec incl=", inclinaison)
+		redresse(delta, abs(inclinaison))
 
 func redresse(delta : float, force: float = 1.0):
+	assert(force >= 0.0, "force de redresse doit être >= 0")
 	if abs($OIE.rotation.z) < ROTBACKSPEED*delta :
 		$OIE.rotation.z = 0
 	else:
